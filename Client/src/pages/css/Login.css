@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+#root{
+    height: 100vh !important;
+    font-family: 'Inter', sans-serif;
+}
+
+.login-container{
+    height: 100% !important;
+    margin: 0 !important;
+   
+}
+
+.login-container h1{
+    margin: 0vw 7vw;
+    font-weight: bold;
+    color: #5A3092;
+}
+
+.submit-btn{
+    background-color: #5A3092 !important;
+    color: white;
+    padding: 10px 30px !important;
+    margin: 8px 6vw;
+    border: none;
+    border-color: #5A3092   !important;
+    border-radius: 400px !important;
+    cursor: pointer;
+    width: 50%;
+}
+
+.submit-btn:hover{
+    background-color: #FF615A !important;
+    border-color: #FF615A !important;
+    transition: 0.5s;
+
+}
+
+.logo {
+    width: 40vh;
+    height: 40vh;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.login-form input{
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.login-form label{
+    color: #5A3092;
+    font-weight: bold;
+}
+
+.login-left{
+    width: 32vw;
+    margin-top: 50px;
+    margin-left: 200px;
+}
