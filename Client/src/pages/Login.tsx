@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Button, Container, Row, Col, Image } from "react-bootstrap";
-import "./css/Login.css"; // import background image CSS file
+import "../css/Login.css"; // import background image CSS file
 import { BsArrowRightCircle } from "react-icons/bs";
 
 const Login: React.FC = () => {
