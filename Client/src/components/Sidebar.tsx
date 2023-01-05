@@ -26,6 +26,7 @@ import "../css/Sidebar.css"; // import background image CSS file
 //     </Navbar>
 //   );
 // };
+
 const items = [
   { label: "Home", link: "/", icon: FaHome },
   { label: "About", link: "/about", icon: FaInfoCircle },
@@ -42,6 +43,8 @@ const Sidebar: React.FC = () => {
       <div className="sidebar-nav-padding"></div>
 
       <Nav className="sidebar-nav flex-column">
+      
+
         {items.map((item) => (
           <NavItem key={item.link}>
             <NavLink className="side-link" href={item.link}>

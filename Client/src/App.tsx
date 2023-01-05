@@ -10,7 +10,10 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
+
         <Route path="/" element={<Home />} />
+
+        {/* Temporary routes */}
         <Route path="/nav" element={<Navbar />} />
         <Route path="/side" element={<Sidebar />} />
 
