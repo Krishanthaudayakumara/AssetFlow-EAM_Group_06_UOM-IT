@@ -1,0 +1,31 @@
+.sidebar{
+    height: 100vh;
+    display: block !important;
+}
+
+.sidebar-nav{
+    margin: 0px;
+}
+
+
+
+a.side-link{
+    padding-inline: 100px !important;
+    padding-block: 15px !important;
+    border-radius: 0px 20px 20px 0px;
+
+}
+
+a.side-link:hover{
+    background-color: blueviolet;
+    color: white;
+    border-radius: 0px 20px 20px 0px;
+}
+
+.sidebar-col{
+    color: white;
+    padding: 0px !important;
+    border-radius: 0px 20px 20px 0px;
+
+}
+
