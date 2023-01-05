@@ -4,7 +4,7 @@ import { FaHome, FaInfoCircle, FaCogs, FaUser } from "react-icons/fa";
 
 import "../css/Sidebar.css"; // import background image CSS file
 
-// interface SidebarProps {
+//sd interface SidebarProps {
 //   title: string;
 //   items: {
 //     label: string;

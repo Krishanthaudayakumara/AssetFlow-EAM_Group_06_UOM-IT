@@ -23,7 +23,7 @@ const MyNavbar: React.FC = () => {
 
   return (
     <Navbar bg="light" expand="lg">
-      <h1>Krishantha udaya</h1>
+      <h1>Krishantha udaya kumara</h1>
       <Navbar.Brand href="#">Enterprise Asset Management</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
