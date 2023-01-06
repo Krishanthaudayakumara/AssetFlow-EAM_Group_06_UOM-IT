@@ -1,10 +1,12 @@
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Form, Button, Container, Row, Col, Image } from "react-bootstrap";
+
 const ReportFilter: React.FC = () => {
   return (
     
-    <Form>
+    <Form >
+  
       <Row>
         <Col xs><Dropdown className="d-inline mx-2">
         <Dropdown.Toggle id="dropdown-autoclose-true">
@@ -26,7 +28,7 @@ const ReportFilter: React.FC = () => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+        <Dropdown.Item href="#">dd Item</Dropdown.Item>
         <Dropdown.Item href="#">Menu Item</Dropdown.Item>
         <Dropdown.Item href="#">Menu Item</Dropdown.Item>
       </Dropdown.Menu>
@@ -50,7 +52,7 @@ const ReportFilter: React.FC = () => {
     
     </Col>
       </Row>
-    
+      
 </Form>
 
   ); 
