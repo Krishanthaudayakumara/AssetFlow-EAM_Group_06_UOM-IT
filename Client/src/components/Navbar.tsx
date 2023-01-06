@@ -8,7 +8,11 @@ import {
   NavDropdown,
   Badge,
 } from "react-bootstrap";
+<<<<<<< HEAD
 import { FaBell } from "react-icons/fa";
+=======
+import { FaRegBell } from "react-icons/fa";
+>>>>>>> dev
 import "../css/Navbar.css"; // import background image CSS file
 
 
@@ -22,9 +26,15 @@ const MyNavbar: React.FC = () => {
   const [notificationCount, setNotificationCount] = useState(2);
 
   return (
+<<<<<<< HEAD
     <Navbar bg="light" expand="lg">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
+=======
+    <Navbar  expand="lg">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav" className="as-nav" >
+>>>>>>> dev
         <Nav className="mr-auto">
           <Form className="form-inline">
             <FormControl type="text" placeholder="Search" className="mr-2 searchbar" />
@@ -50,11 +60,18 @@ const MyNavbar: React.FC = () => {
             <NavDropdown.Item href="#">Settings</NavDropdown.Item>
             <NavDropdown.Item href="#">Logout</NavDropdown.Item>
           </NavDropdown>
+<<<<<<< HEAD
           <NavDropdown title={
             <><FaBell fontSize={"1.5em"} className="mr-2" />
             <Badge>{notificationCount}</Badge></>
           }>
             <NavDropdown.Item href="#">Notifications</NavDropdown.Item>
+=======
+          <NavDropdown className="notification" title={
+            <><FaRegBell color="#482890" fontSize={"1.8em"} className="mr-2" />
+            <Badge>{notificationCount}</Badge></>
+          }>
+>>>>>>> dev
             {notifications.map((notification) => (
               <NavDropdown.Item key={notification.id}>
                 {notification.message}
