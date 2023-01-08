@@ -1,0 +1,18 @@
+.form-inline{
+    width: 50vw;
+    margin: 0vw 5vw;
+}
+
+.dropdown-toggle::after{
+    display: none !important;
+}
+
+img.rounded-circle{
+    width: 45px;
+    height: 45px;
+    border: 1px solid black;
+}
+
+.dropdown-toggle svg{
+    margin-top: 10px;
+}
