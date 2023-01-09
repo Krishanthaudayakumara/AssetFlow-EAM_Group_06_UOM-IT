@@ -1,19 +1,50 @@
 const Agents = [
     {
-        id:"1",
-        name:"Vidath Chamikara",
-        age:"23",
-        d:"1",
-        ame:"Vidath Chamikara",
-        ge:"23"
+        agent_id:"1",
+        agent_name:"Vidath Chamikara",
+        agent_position:"Manager",
+        agent_department:"Support",
+        agent_email:"abc@gmail.com",
+        agent_pending:"5",
+        agent_completed:"10",
+        agent_available:"Available"
+        
     },{
-        id:"2",
-        name:"Kamal Perera",
-        age:"25"
+        agent_id:"2",
+        agent_name:"Kamal Perera",
+        agent_position:"Manager",
+        agent_department:"Support",
+        agent_email:"abc@gmail.com",
+        agent_pending:"5",
+        agent_completed:"10",
+        agent_available:"Available"
     },{
-        id:"3",
-        name:"Nimal Perera",
-        age:"28"
+        agent_id:"3",
+        agent_name:"Nimal Perera",
+        agent_position:"Manager",
+        agent_department:"Support",
+        agent_email:"abc@gmail.com",
+        agent_pending:"5",
+        agent_completed:"10",
+        agent_available:"Available"
+    },{
+        agent_id:"4",
+        agent_name:"Sadun Perera",
+        agent_position:"Manager",
+        agent_department:"Support",
+        agent_email:"abc@gmail.com",
+        agent_pending:"5",
+        agent_completed:"10",
+        agent_available:"Available"
+    },{
+        agent_id:"5",
+        agent_name:"Namal Perera",
+        agent_position:"Manager",
+        agent_department:"Support",
+        agent_email:"abc@gmail.com",
+        agent_pending:"5",
+        agent_completed:"10",
+        agent_available:"Available"
     }
 ]
 

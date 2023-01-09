@@ -12,23 +12,30 @@ function Agent_Table(){
                 <thead>
                     <tr>
                         <th>
-                            Name
+                            Agent Name
                         </th>
                         <th>
-                            Age
+                            Position
+                        </th>
+                        <th>
+                            Department
+                        </th>
+                        <th>
+                            E mail
+                        </th>
+                        <th>
+                            Pending
+                        </th>
+                        <th>
+                            Completed
+                        </th>
+                        <th>
+                            Status
                         </th>
                         <th>
                             Action
                         </th>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Age
-                        </th>
-                        <th>
-                            Action
-                        </th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -39,22 +46,32 @@ function Agent_Table(){
                         return(
                             <tr>
                                 <td>
-                                    {item.name}
+                                    {item.agent_name}
                                 </td>
                                 <td>
-                                    {item.age}
+                                    {item.agent_position}
                                 </td>
                                 <td>
-                                    <Button onClick={() => alert(item.id)}>UPDATE</Button>
+                                    {item.agent_department}
+                                </td>
+                                <td>
+                                    {item.agent_email}
+                                </td>
+                                <td>
+                                    {item.agent_pending}
+                                </td>
+                                <td>
+                                    {item.agent_completed}
+                                </td>
+                                <td>
+                                    {item.agent_available}
+                                </td>
+                                <td>
+                                    <Button onClick={() => alert(item.agent_id)}>UPDATE</Button>
                                     &nbsp;
-                                    <Button onClick={() => alert(item.id)}>DELETE</Button>
+                                    <Button onClick={() => alert(item.agent_id)}>DELETE</Button>
                                 </td>
-                                <td>
-                                    {item.ame}
-                                </td>
-                                <td>
-                                    {item.ge}
-                                </td>
+                               
                             </tr>
                         )
                        })
