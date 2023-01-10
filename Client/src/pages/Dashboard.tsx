@@ -1,9 +1,13 @@
 import React from "react";
-import { Form, Button, Container, Row, Col, Image, Table } from "react-bootstrap";
+import {  Container, Row, Col,  Table } from "react-bootstrap";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import PieChart from "../components/Dashboard/PieChart";
-import "../css/Home.css";    
+import BarChart from "../components/Dashboard/BarChart";
+import LineChart from "../components/Dashboard/LineChart";
+import Card from "../components/Dashboard/Card";
+import "../css/Home.css"; 
+   
   const data = [
     { id: "1", User: "Krish", UserName: "@mark", Role: "krish",Department: "Krish", Email: "Krish",JoinedDate: "Krish",Actions: "Krish"},
     { id: "2", User: "Vidath",UserName : "@Sam",Role : "krish",Department: "Krish", Email: "Krish",JoinedDate: "Krish",Actions: "Krish" },
@@ -24,13 +28,25 @@ const Dashboard: React.FC = () => {
       <Col md={9}>
         <div>
           <Navbar />
+          <Card/>
+            <h1>Asset Summary</h1>
 
-          <h1>Asset Summary</h1>
+         <div>
+         <BarChart />
+         </div>
+         <h4 className='second'style={
+          {
+            textAlign:"center"
 
-          
-          {/*<ReportFilter/>*/}
-          {/*<PieChart />*/}
-
+          }
+         }>Data in Chart</h4>
+         <div ><PieChart />
+           <LineChart />
+         </div>
+         
+          <hr/>
+         
+         <div >
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -60,6 +76,8 @@ const Dashboard: React.FC = () => {
               ))}
             </tbody>
           </Table>
+          </div>
+          
         </div>
       </Col>
     </Row>

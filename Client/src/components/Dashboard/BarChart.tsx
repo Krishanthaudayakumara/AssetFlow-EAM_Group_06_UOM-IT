@@ -1,0 +1,61 @@
+import React from 'react';
+import {Chart as ChartJs,BarElement,CategoryScale,LinearScale,Tooltip,Legend} from "chart.js/auto";
+import { Bar} from 'react-chartjs-2';
+
+ChartJs.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Tooltip,
+    Legend
+  );
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart',
+      },
+    },
+  };
+  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: [12, 19, 3, 5, 2, 3,1],
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+      {
+        label: 'Dataset 2',
+        data: [20, 10, 2, 5, 2, 3,8],
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  };
+
+const BarChart: React.FC = () => {
+     return (
+      <>
+     <div   style={
+      {padding: "20px",
+      width:"90%"
+      }
+}>
+
+   
+      <Bar
+      data={data} 
+      options={options}  
+      /> ;
+      </div>
+    </>
+  
+    ); 
+  };
+  
+  export default BarChart;

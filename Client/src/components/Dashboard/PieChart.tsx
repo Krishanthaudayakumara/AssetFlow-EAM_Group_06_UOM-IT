@@ -1,7 +1,11 @@
 import React from 'react';
-import Chart from "chart.js/auto";
-
+import {Chart as  ChartJs,Tooltip,Title,ArcElement,Legend} from "chart.js/auto";
 import { Pie } from 'react-chartjs-2';
+ChartJs.register(
+
+  Tooltip,Title,ArcElement,Legend
+);
+
 const data = {
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [
@@ -24,17 +28,15 @@ const data = {
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)',
         ],
-        borderWidth: 1,
       },
     ],
   };
-
-
 const PieChart: React.FC = () => {
   return (
     <>
-    
-    <Pie data={data}  />
+    <div className="class1" style={{width:"80%",height:"50%",display:"flex",alignItems:"right",justifyContent:"space-around"}}>
+    <Pie data={data} />
+    </div>
   </>
 
   ); 
