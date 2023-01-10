@@ -2,8 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import Facility from "./pages/Facility";
-
+import Facility from "./pages/facility";
 
 const App: React.FC = () => {
   return (
