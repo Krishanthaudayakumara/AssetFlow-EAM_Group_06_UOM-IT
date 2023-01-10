@@ -2,7 +2,7 @@ import React from 'react';
 import { Button} from 'react-bootstrap';
 
 
-const Facility: React.FC = () => {
+const Facbutton: React.FC = () => {
     return(
         <div>
      
@@ -13,4 +13,4 @@ const Facility: React.FC = () => {
         </div>
     )
 }
-export default Facility;
+export default Facbutton;
