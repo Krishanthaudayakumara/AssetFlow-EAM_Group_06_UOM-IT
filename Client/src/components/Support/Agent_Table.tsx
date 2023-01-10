@@ -12,7 +12,7 @@ function Agent_Table(){
                 <thead>
                     <tr>
                         <th>
-                            Agent name
+                            Agent Name
                         </th>
                         <th>
                             Position
