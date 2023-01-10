@@ -7,7 +7,7 @@ import Agents from './Agents';
 function Agent_Table(){
     return(
        <Fragment>
-        <div style={{margin:"10rem"}}>
+        <div style={{margin:"1rem"}}>
             <Table   hover > 
                 <thead>
                     <tr>
