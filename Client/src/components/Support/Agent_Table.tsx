@@ -8,7 +8,7 @@ function Agent_Table(){
     return(
        <Fragment>
         <div style={{margin:"10rem"}}>
-            <Table striped bordered hover size="sm">
+            <Table   hover > 
                 <thead>
                     <tr>
                         <th>
@@ -69,7 +69,7 @@ function Agent_Table(){
                                 <td>
                                     <Button onClick={() => alert(item.agent_id)}>UPDATE</Button>
                                     &nbsp;
-                                    <Button onClick={() => alert(item.agent_id)}>DELETE</Button>
+                                    <Button onClick={() => alert(item.agent_id)} variant="danger">DELETE</Button>
                                 </td>
                                
                             </tr>
