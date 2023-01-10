@@ -8,19 +8,6 @@ import {
   NavDropdown,
   Badge,
 } from "react-bootstrap";
-import { FaBell } from "react-icons/fa";
-import "../css/Navbar.css"; // import background image CSS file
-
-import React, { useState } from "react";
-import {
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-  NavDropdown,
-  Badge,
-} from "react-bootstrap";
 import { FaRegBell } from "react-icons/fa";
 import "../css/Navbar.css"; // import background image CSS file
 
@@ -34,13 +21,7 @@ const MyNavbar: React.FC = () => {
 
   const [notificationCount, setNotificationCount] = useState(2);
 
-  const notifications = [
-    { id: 1, message: "Notification 1" },
-    { id: 2, message: "Notification 2" },
-    { id: 3, message: "Notification 3" },
-  ];
-
-  const [notificationCount, setNotificationCount] = useState(2);
+  
 
   return (
     <Navbar  expand="lg">
