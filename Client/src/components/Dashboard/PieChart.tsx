@@ -34,7 +34,7 @@ const data = {
 const PieChart: React.FC = () => {
   return (
     <>
-    <div className="class1" style={{width:"80%",height:"50%",display:"flex",alignItems:"right",justifyContent:"space-around"}}>
+    <div className="class1" >
     <Pie data={data} />
     </div>
   </>

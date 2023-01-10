@@ -57,12 +57,7 @@ const options = {
   const LineChart: React.FC = () => {
     return (
      <>
-    <div   style={
-     {padding: "20px",
-     width:"90%",
-    
-     }
-}>
+    <div>
 
   
      <Line
