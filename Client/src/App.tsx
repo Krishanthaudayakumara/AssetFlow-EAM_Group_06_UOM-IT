@@ -29,7 +29,7 @@ const App: React.FC = () => {
         <Route path="/Report" element={<Report/>}></Route>
         
 
-        <Route path = '/Support_Agent' element = {<Support_Agent/>}/>
+        <Route path = '/Support' element = {<Support_Agent/>}/>
       </Routes>
     </Router>
   );
