@@ -1,25 +1,22 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
-import { Button } from 'react-bootstrap';
 
-
-const BuildingFloor_table: React.FC = () => {
+const AvailableItems_table: React.FC = () => {
     return(
         <div style={{margin:"1rem"}}>
-            <h4 className='building'>Building & Spaces</h4>
+            <h4 className='item'>Available items</h4>
             
              <Table striped bordered hover>
                 <thead>
                                             
                     <tr>
                         <th> ID</th>
-                        <th>Space</th>
-                        <th>Floor</th>
-                        <th>Building name</th>
-                        <th>Description</th>
-                        <th>Category_Id</th>
-                        <th>Status</th>
-                                            
+                        <th>Items</th>
+                        <th>Category_id</th>
+                        <th>categorycount</th>
+                        <th>date</th>
+                       
+                           
                     </tr>
                 </thead>
                 <tbody>
@@ -29,8 +26,8 @@ const BuildingFloor_table: React.FC = () => {
                         <td>2</td>
                         <td>Sumanadasa building</td>
                         <td>mouse</td>
-                        <td>1</td>
-                        <td><button  >Available</button></td>
+                      
+                    
 
                                               
                     </tr>
@@ -40,8 +37,8 @@ const BuildingFloor_table: React.FC = () => {
                         <td>1</td>
                         <td>Lotus building</td>
                         <td>Key board</td>
-                        <td>2</td>
-                        <td><button >damged</button></td>
+                        
+                       
                     </tr>
                     <tr>
                         <td>#126C</td>
@@ -49,8 +46,8 @@ const BuildingFloor_table: React.FC = () => {
                         <td>3</td>
                         <td>Neelson building</td>
                         <td>Chair</td>
-                        <td>6</td>
-                        <td>Available</td>
+                      
+                      
                     </tr>
                     <tr>
                         <td>#127C</td>
@@ -58,8 +55,8 @@ const BuildingFloor_table: React.FC = () => {
                         <td>1</td>
                         <td>Sumanadasa building</td>
                         <td>mouse</td>
-                        <td>1</td>
-                        <td><button>available</button></td>
+                       
+                       
                     </tr>
                      
                 </tbody>
@@ -70,5 +67,5 @@ const BuildingFloor_table: React.FC = () => {
      
     )
 }
-export default BuildingFloor_table;
+export default AvailableItems_table;
 
