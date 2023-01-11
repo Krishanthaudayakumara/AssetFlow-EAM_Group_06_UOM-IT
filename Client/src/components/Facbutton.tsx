@@ -6,10 +6,10 @@ const Facbutton: React.FC = () => {
     return(
         <div>
      
-            <Button variant="primary">Import Facilities</Button>
-            <Button variant="outlined">export to excel</Button>
-            <Button variant="contained">+ New Building</Button>
-            <Button variant="contained">+new Floor</Button>
+            <Button variant="outline-primary">Import Facilities</Button>
+            <Button variant="outline-primary">export to excel</Button>
+            <Button variant="primary">+ New Building</Button>
+            <Button variant="danger">+new Floor</Button>
         </div>
     )
 }
