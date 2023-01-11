@@ -16,7 +16,7 @@ const App: React.FC = () => {
       <Routes>
 
 
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Dashboard />} />
 
         {/* Temporary routes */}
         <Route path="/nav" element={<Navbar />} />
@@ -26,7 +26,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
         <Route path="/Report" element={<Report/>}></Route>
-        <Route path="/Dashboard" element={<Dashboard/>}></Route>
+        
 
       </Routes>
     </Router>
