@@ -16,7 +16,7 @@
     position: relative;
     text-align: center;
     text-transform: none;
- 
+    text-shadow:0px 1px 0px #ffffff;
     touch-action: manipulation;
     width: 100%;
   }
@@ -39,13 +39,13 @@
        
 
   
-  h4{
+  .facility{
     
     padding-top: 10px;
     padding-right: 20px;
     position: relative;
     right: 120px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;    
     font-size: 20px;
     
     

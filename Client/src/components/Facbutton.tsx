@@ -11,7 +11,7 @@ const Facbutton: React.FC = () => {
             <Row>
                 <Col md={3}></Col>
                 <Col md={1}>
-                <h4 >Facility</h4>
+                <h4 className='facility'>Facility</h4>
                 </Col>
                 <Col md={8}>
                 <div className='buttn'>
