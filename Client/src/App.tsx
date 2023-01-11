@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import User from "./pages/User";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-
+import BasicExample from "./components/Inventory/Category_table";
 const App: React.FC = () => {
   return (
     <Router>
@@ -16,9 +16,10 @@ const App: React.FC = () => {
         {/* Temporary routes */}
         <Route path="/nav" element={<Navbar />} />
         <Route path="/side" element={<Sidebar />} />
-
+<Route path="/category_table"element={<BasicExample />} />
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
+      
       </Routes>
     </Router>
   );
