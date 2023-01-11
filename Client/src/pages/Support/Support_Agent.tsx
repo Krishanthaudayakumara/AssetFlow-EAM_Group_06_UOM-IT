@@ -3,6 +3,7 @@ import { Container, Row, Col, Nav, Table } from "react-bootstrap";
 import Agent_Table from '../../components/Support/Agent_Table';
 import Sidebar from '../../components/Sidebar';
 import MyNavbar from '../../components/Navbar';
+import Chatbot from '../../components/Support/Chatbot';
 
 
 const Support_Agent: React.FC = () => {
@@ -22,6 +23,7 @@ const Support_Agent: React.FC = () => {
         </div>
       </Col>
     </Row>
+    <Chatbot/>
   </Container>
   );
 };
