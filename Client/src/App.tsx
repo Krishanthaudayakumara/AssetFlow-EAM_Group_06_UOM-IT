@@ -10,6 +10,7 @@ import Report from "./pages/Report";
 import Dashboard from  "./pages/Dashboard";
 import Support_Agent from "./pages/Support/Support_Agent";
 
+import BasicExample from "./components/Inventory/Category_table";
 const App: React.FC = () => {
   
   return (
@@ -30,6 +31,10 @@ const App: React.FC = () => {
         
 
         <Route path = '/Support' element = {<Support_Agent/>}/>
+<Route path="/category_table"element={<BasicExample />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/user" element={<User />} />
+      
       </Routes>
     </Router>
   );
