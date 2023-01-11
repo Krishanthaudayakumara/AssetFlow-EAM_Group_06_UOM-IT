@@ -9,6 +9,11 @@ import PieChart from "./components/Dashboard/PieChart";
 import Report from "./pages/Report";
 import Dashboard from  "./pages/Dashboard";
 import Support_Agent from "./pages/Support/Support_Agent";
+import FacilityDashboard from "./pages/FacilityDashboard";
+import BuildingFloor from "./pages/BuildingFloor";
+
+
+
 
 import BasicExample from "./components/Inventory/Category_table";
 const App: React.FC = () => {
@@ -26,15 +31,20 @@ const App: React.FC = () => {
         <Route path="/PieChart" element={<PieChart />} />
 
         <Route path="/login" element={<Login />} />
-        <Route path="/user" element={<User />} />
         <Route path="/Report" element={<Report/>}></Route>
         
 
         <Route path = '/Support' element = {<Support_Agent/>}/>
 <Route path="/category_table"element={<BasicExample />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
       
+        <Route path="/FacilityDashboard" element={<FacilityDashboard />} />
+        <Route path="/BuildingFloor" element={<BuildingFloor />} />
+      
+      
+       
+        
+
       </Routes>
     </Router>
   );
