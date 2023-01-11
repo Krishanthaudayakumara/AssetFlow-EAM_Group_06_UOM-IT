@@ -5,7 +5,7 @@ import { Button} from 'react-bootstrap';
 const BuildingFloor_table: React.FC = () => {
     return(
         <div style={{margin:"1rem"}}>
-            <h1>Building & Spaces</h1>
+            <h3>Building & Spaces</h3>
             
              <Table striped bordered hover>
                 <thead>

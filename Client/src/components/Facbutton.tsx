@@ -16,10 +16,10 @@ const Facbutton: React.FC = () => {
                 <Col md={8}>
                 <div className='buttn'>
                     
-                    <Button variant="outline-primary"className='button1'>Import Facilities</Button>
-                    <Button variant="outline-primary" className='button2'>export to excel</Button>
-                    <Button variant="primary" className='button3'>+ New Building</Button>
-                    <Button variant="danger" className='button4'>+new Floor</Button>
+                    <Button  variant="outline-primary"type="button" className='import-btn'>ImportFacilities</Button>
+                    <Button variant="outline-primary"className='button2'>export Excel</Button>
+                    <Button variant="primary" className='button3'>+NewBuilding</Button>
+                    <Button  variant="danger"className='button4'>+NewFloor</Button>
                          
                 </div>
                 </Col>
