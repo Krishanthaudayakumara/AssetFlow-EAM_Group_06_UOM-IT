@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar";
 import PieChart from "./components/Dashboard/PieChart";
 import Report from "./pages/Report";
 import Dashboard from  "./pages/Dashboard";
+import Support_Agent from "./pages/Support/Support_Agent";
 
 const App: React.FC = () => {
   
@@ -28,6 +29,7 @@ const App: React.FC = () => {
         <Route path="/Report" element={<Report/>}></Route>
         
 
+        <Route path = '/Support_Agent' element = {<Support_Agent/>}/>
       </Routes>
     </Router>
   );

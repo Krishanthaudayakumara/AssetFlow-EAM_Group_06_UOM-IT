@@ -3,6 +3,7 @@ import { Container, Row, Col, Nav, Table } from "react-bootstrap";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import "../css/Home.css"; // import background image CSS file
+import Chatbot from "../components/Support/Chatbot";
 
 const data = [
   { id: "1", fname: "Krish", lname: "FaHome", uname: "krish" },
@@ -47,6 +48,7 @@ const Home: React.FC = () => {
           </div>
         </Col>
       </Row>
+      <Chatbot/>
     </Container>
   );
 };
