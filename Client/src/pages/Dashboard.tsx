@@ -64,10 +64,12 @@ const Dashboard: React.FC = () => {
         <Col md={9}>
           <div>
             <Navbar />
+            <div className="shadow p-3 mb-5 bg-white rounded">
             <Card />
-            <h1>Asset Summary</h1>
+            </div>
+            <h1>Inventory Summary</h1>
 
-            <div>
+            <div  className="shadow p-3 mb-5 bg-white rounded">
               <BarChart />
             </div>
             <h4
@@ -81,16 +83,19 @@ const Dashboard: React.FC = () => {
             <div>
               <Row>
                 <Col md={6}>
-                  <div
+                  <div className="shadow p-3 mb-5 bg-white rounded" 
                     style={{
                       paddingTop: "100px",
+                      height:"400px",
                     }}
                   >
                     <LineChart />
                   </div>
                 </Col>
                 <Col md={6}>
+                <div className="shadow p-3 mb-5 bg-white rounded" >
                   <PieChart />
+                  </div>
                 </Col>
               </Row>
             </div>

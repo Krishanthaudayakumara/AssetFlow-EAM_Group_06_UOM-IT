@@ -30,7 +30,7 @@ const options = {
       },
       title: {
         display: true,
-        text: 'Chart.js Line Chart',
+        text: "Support Tickets ",
       },
     },
   };
@@ -41,17 +41,12 @@ const options = {
     labels,
     datasets: [
       {
-        label: 'Dataset 1',
+        label: "Support tickets for each month",
         data: [1200, 1900, 300, 500, 2000, 305,100],
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: "#482890",
+        backgroundColor: "#482890",
       },
-      {
-        label: 'Dataset 2',
-        data: [1300, 100, 3000, 500, 2000, 300,105],
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
-      },
+      
     ],
   };
   const LineChart: React.FC = () => {

@@ -17,23 +17,23 @@ ChartJs.register(
       },
       title: {
         display: true,
-        text: 'Chart.js Bar Chart',
+       
       },
     },
   };
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July','Augut'];
   const data = {
     labels,
     datasets: [
       {
-        label: 'Dataset 1',
-        data: [12, 19, 3, 5, 2, 3,1],
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        label: 'Issued',
+        data: [12, 19, 3, 5, 2, 3,1,5],
+        backgroundColor: "#482890",
       },
       {
-        label: 'Dataset 2',
-        data: [20, 10, 2, 5, 2, 3,8],
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        label: 'Returned',
+        data: [20, 10, 2, 5, 2, 3,8,9],
+        backgroundColor: "#ff615a",
       },
     ],
   };
@@ -46,9 +46,7 @@ const BarChart: React.FC = () => {
       width:"90%"
       }
 }>
-
-   
-      <Bar
+    <Bar
       data={data} 
       options={options}  
       /> ;
