@@ -13,6 +13,8 @@ import AvailableItems_table from '../components/Facility/AvailableItems_table';
 
 const BuildingFloor: React.FC = () => {
     return (
+            
+
         <Container>
             <Row>
                 <Col md={3} className="sidebar-col">
@@ -24,7 +26,14 @@ const BuildingFloor: React.FC = () => {
                 <Col md={9} className="Navbar">
                     <div>
                         <Navbar/>
-                        <Facbutton/>                     
+                        <Facbutton/>
+                        <h5 style={{
+                            color :"purple",
+                            marginLeft:120,
+                            paddingTop:40,
+                            fontWeight:'bold'
+                        }}
+                        >Building & Spaces</h5>                  
                         <BuildingFloor_table/>
                         <AssignedItems_table/>
                         <AvailableItems_table/>

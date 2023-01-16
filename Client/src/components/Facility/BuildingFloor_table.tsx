@@ -5,10 +5,10 @@ import { Button } from 'react-bootstrap';
 
 const BuildingFloor_table: React.FC = () => {
     return(
-        <div style={{margin:"1rem"}}>
-            <h4 className='building'>Building & Spaces</h4>
-            
-             <Table striped bordered hover>
+        <div style={{margin:"5rem"}}>
+        
+            <div className='shadow p-3 mb-5 bg-white rounded'>
+            <Table  hover>
                 <thead>
                                             
                     <tr>
@@ -64,6 +64,9 @@ const BuildingFloor_table: React.FC = () => {
                      
                 </tbody>
              </Table>
+        
+           
+            </div>
 
             
         </div>

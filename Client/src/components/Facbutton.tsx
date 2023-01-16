@@ -17,9 +17,9 @@ const Facbutton: React.FC = () => {
                 <div className='buttn'>
                     
                     <Button  variant="outline-primary"type="button" className='import-btn'>ImportFacilities</Button>
-                    <Button variant="outline-primary"className='button2'>export Excel</Button>
-                    <Button variant="primary" className='button3'>+NewBuilding</Button>
-                    <Button  variant="danger"className='button4'>+NewFloor</Button>
+                    <Button variant ="outlinr-primary" type ="button"className='button2'>export Excel</Button>
+                    <Button className='button3'>+NewBuilding</Button>
+                    <Button className='button4'>+NewFloor</Button>
                          
                 </div>
                 </Col>
