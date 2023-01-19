@@ -50,7 +50,7 @@ const items = [
     icon: FaBox,
     dropdownItems: [
       { label: "Add Items", link: "/facility/building1" },
-      { label: "Item Requests", link: "/facility/building2" },
+      { label: "Item", link: "/facility/building2" },
     ],
   },
   {
