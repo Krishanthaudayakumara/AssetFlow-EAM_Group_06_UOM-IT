@@ -10,15 +10,15 @@
   margin: 0px;
 }
 
-a.side-link {
+.side-link {
   padding-inline: 92px !important;
   padding-block: 15px !important;
   border-radius: 0px 10px 10px 0px;
 }
 
-a.side-link:hover {
-  background-color: #482890;
-  color: white;
+.side-link:hover {
+  background-color: #6954FA;
+  color: white !important;
   border-radius: 0px 10px 10px 0px;
 }
 
@@ -36,4 +36,22 @@ a.side-link:hover {
 .logo-img {
   display: block;
   margin: 40px auto 40px auto;
+}
+
+.side-link.active{
+  background-color: #482890 !important;
+  color: white !important;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.dropdown-item{
+  padding-inline: 92px !important;
+  padding-block: 15px !important;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.dropdown-item:hover{
+  background-color: #99A1B2 !important;
+  color: white !important;
+  border-radius: 0px 10px 10px 0px;
 }

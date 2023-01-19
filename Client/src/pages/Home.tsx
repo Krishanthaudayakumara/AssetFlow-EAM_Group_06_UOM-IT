@@ -17,7 +17,7 @@ const Home: React.FC = () => {
       <Row>
         <Col md={3} className="sidebar-col">
           <div>
-            <Sidebar />
+            <Sidebar active="/" />
           </div>
         </Col>
         <Col md={9}>
