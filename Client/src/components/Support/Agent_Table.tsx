@@ -1,17 +1,33 @@
-import React , { Fragment } from 'react';
-import {Button , Table} from 'react-bootstrap';
+import React , { Fragment, useState } from 'react';
+import {Badge, Button, Modal, Table} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Agents from './Agents';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons/faPen';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import AddAgent from './AddAgent';
 
 
 function Agent_Table(){
+    const [show, setShow] = useState(false);
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
     return(
+     <div>
+     <div>
+      
+     <button onClick={handleShow} type="button" className="btn btn-primary" style={{margin:"20px 0 0 800px"}}>+ Add New Agent</button>
+    </div>   
+    
+    <p style={{margin:"10px 0 30px 70px",color:'#482890',fontSize: '25px'}}>Avaliable Agents</p>  
+    <div className="shadow p-3 bg-white rounded" style={{margin:"30px 0 0 65px"}}> 
        <Fragment>
-        <div style={{margin:"1rem"}}>
-            <Table   hover > 
+            <div>
+           
+            <Table className="table  w-100 small text-center table-borderless " hover align='center' style={{fontSize: '14px'}}> 
                 <thead>
-                    <tr>
-                        <th>
+                    <tr style={{color:'#482890'}}>
+                        <th >
                             Agent Name
                         </th>
                         <th>
@@ -37,6 +53,7 @@ function Agent_Table(){
                         </th>
                         
                     </tr>
+                    
                 </thead>
                 <tbody>
                     {
@@ -64,12 +81,14 @@ function Agent_Table(){
                                     {item.agent_completed}
                                 </td>
                                 <td>
-                                    {item.agent_available}
+                                <Badge bg="success">Available</Badge>
                                 </td>
                                 <td>
-                                    <Button onClick={() => alert(item.agent_id)}>UPDATE</Button>
+                                <FontAwesomeIcon icon={faPen} style={{color:'#482890'}}/>
                                     &nbsp;
-                                    <Button onClick={() => alert(item.agent_id)} variant="danger">DELETE</Button>
+                                    &nbsp;
+                                    &nbsp;
+                                <FontAwesomeIcon icon={faTrash} style={{color:'#FF615A'}}/>
                                 </td>
                                
                             </tr>
@@ -80,9 +99,33 @@ function Agent_Table(){
                     }
                 </tbody>
             </Table>
+
+            <Modal show={show} onHide={handleClose}>
+            <Modal.Header>
+                <Modal.Title>
+                    Add Agent
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <AddAgent/>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant='secondary' onClick={handleClose}>
+                    Close
+                </Button>
+            </Modal.Footer>
+        </Modal>
+
         </div>
-       </Fragment>
+        </Fragment>
+        </div>
+        </div>
+        
     )
 }
 
 export default Agent_Table;
+
+function setShow(arg0: boolean) {
+    throw new Error('Function not implemented.');
+}
