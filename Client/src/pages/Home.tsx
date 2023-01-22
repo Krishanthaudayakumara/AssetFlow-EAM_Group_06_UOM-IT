@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Nav, Table } from "react-bootstrap";
+import SidebarNav from "../components/SidebarNav";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import "../css/Home.css"; // import background image CSS file
@@ -17,7 +18,7 @@ const Home: React.FC = () => {
       <Row>
         <Col md={3} className="sidebar-col">
           <div>
-            <Sidebar active="/" />
+            <SidebarNav active="/" />
           </div>
         </Col>
         <Col md={9}>

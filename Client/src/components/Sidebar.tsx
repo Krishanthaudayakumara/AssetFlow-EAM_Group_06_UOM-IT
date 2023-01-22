@@ -6,6 +6,8 @@ import {
   NavItem,
   NavLink,
   Dropdown,
+  Row,
+  Col
 } from "react-bootstrap";
 import {
   FaThLarge,
@@ -16,7 +18,10 @@ import {
   FaShippingFast,
   FaComments,
   FaCalendarAlt,
+  FaAngleLeft,
+  FaAngleRight
 } from "react-icons/fa";
+
 
 import "../css/Sidebar.css"; // import background image CSS file
 
@@ -86,64 +91,78 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
     setOpenKey(openKey === key ? null : key);
   };
 
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
-    <Navbar bg="light" expand="lg" className="sidebar">
-      <div className="sidebar-logo">
-        <img
-          className="logo-img"
-          src="/img/favicon.png"
-          alt="Logo"
-          width="100"
-        />
-      </div>
-      <div className="sidebar-nav-padding"></div>
-      <Nav className="sidebar-nav flex-column">
-        {items.map((item) => {
-          if (item.dropdownItems) {
-            return (
-              <div className="nav-item" key={item.label}>
-                <div
-                  className={`side-link nav-link ${
-                    props.active === item.link ? "active" : ""
-                  }`}
-                  onClick={() => toggle(item.label)}
-                >
-                  <item.icon fontSize="1.2em" className="side-item mr-2" />
-                  {item.label}
-                </div>
-                {openKey === item.label && (
-                  <div className="">
-                    {item.dropdownItems.map((dropdownItem) => (
-                      <a
-                        key={dropdownItem.link}
-                        href={dropdownItem.link}
-                        className="nav-link dropdown-item"
-                      >
-                        {dropdownItem.label}
-                      </a>
-                    ))}
+    <Row>
+      <Col md={10}>
+        <Navbar bg="light" expand="lg" className="sidebar">
+          <div className="sidebar-logo">
+            <img
+              className="logo-img"
+              src="/img/favicon.png"
+              alt="Logo"
+              width="100"
+            />
+          </div>
+          <div className="sidebar-nav-padding"></div>
+          <Nav className="sidebar-nav flex-column">
+            {items.map((item) => {
+              if (item.dropdownItems) {
+                return (
+                  <div className="nav-item" key={item.label}>
+                    <div
+                      className={`side-link nav-link ${props.active === item.link ? "active" : ""
+                        }`}
+                      onClick={() => toggle(item.label)}
+                    >
+                      <item.icon fontSize="1.2em" className="side-item mr-2" />
+                      {item.label}
+                    </div>
+                    {openKey === item.label && (
+                      <div className="">
+                        {item.dropdownItems.map((dropdownItem) => (
+                          <a
+                            key={dropdownItem.link}
+                            href={dropdownItem.link}
+                            className="nav-link dropdown-item"
+                          >
+                            {dropdownItem.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            );
-          } else {
-            return (
-              <NavItem key={item.link}>
-                <NavLink
-                  className={`side-link ${
-                    props.active === item.link ? "active" : ""
-                  }`}
-                  href={item.link}
-                >
-                  <item.icon fontSize="1.2em" className="side-item mr-2" />
-                  {item.label}
-                </NavLink>
-              </NavItem>
-            );
-          }
-        })}
-      </Nav>
-    </Navbar>
+                );
+              } else {
+                return (
+                  <NavItem key={item.link}>
+                    <NavLink
+                      className={`side-link ${props.active === item.link ? "active" : ""
+                        }`}
+                      href={item.link}
+                    >
+                      <item.icon fontSize="1.2em" className="side-item mr-2" />
+                      {item.label}
+                    </NavLink>
+                  </NavItem>
+                );
+              }
+            })}
+          </Nav>
+        </Navbar>
+      </Col>
+      <Col md={2}><button
+        className="collapse-button"
+        onClick={() => setCollapsed(!collapsed)}
+      >
+        {collapsed ? <FaAngleRight /> : <FaAngleLeft />}
+
+      </button>
+      </Col>
+    </Row>
+
+
   );
 };
 
