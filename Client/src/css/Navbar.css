@@ -3,7 +3,7 @@
 }
 
 .form-inline {
-  width: 50vw;
+  width: 40vw;
   margin: 0vw 5vw;
 }
 
@@ -28,4 +28,8 @@ img.rounded-circle {
 
 .searchbar{
     padding: 0.6em 1em !important;
+}
+
+.top-bar{
+  margin-bottom: 6vh;
 }

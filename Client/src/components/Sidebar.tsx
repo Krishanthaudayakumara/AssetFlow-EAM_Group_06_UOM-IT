@@ -10,6 +10,7 @@ import {
   Col,
 } from "react-bootstrap";
 import {
+  FaAngleDown,
   FaThLarge,
   FaBox,
   FaBuilding,
@@ -51,15 +52,17 @@ const items = [
   { label: "Dashboard", link: "/", icon: FaThLarge },
   {
     label: "Inventory",
+    link : "/inventory",
     icon: FaBox,
     dropdownItems: [
-      { label: "Add Items", link: "/facility/building1" },
-      { label: "Item", link: "/facility/building2" },
+      { label: "Add Items", link: "/inventory/building1" },
+      { label: "Item", link: "/inventory/building2" },
     ],
   },
   {
     label: "Facility",
     icon: FaBuilding,
+    link : "/facility",
     dropdownItems: [
       { label: "Building 1", link: "/facility/building1" },
       { label: "Building 2", link: "/facility/building2" },
@@ -68,6 +71,8 @@ const items = [
   { label: "Reports", link: "/report", icon: FaFileAlt },
   {
     label: "Users",
+    link : "/user",
+
     icon: FaUsers,
     dropdownItems: [
       { label: "All Users", link: "/user" },
@@ -102,13 +107,13 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
       document.getElementsByClassName("comp-collapse-col")[0];
     const contentCol = document.getElementsByClassName("content-col")[0];
     if (collapsed) {
-      sidebarCol.className = "sidebar-col col-4";
+      sidebarCol.className = "sidebar-col col-3";
       contentCol.className = "content-col col-8";
       comp_sidebar_col.className = "comp-sidebar-col col-10";
       comp_collapse_col.className = "comp-collapse-col col-2";
     } else {
       sidebarCol.className = "sidebar-col col-1";
-      contentCol.className = "content-col col-11";
+      contentCol.className = "content-col col-10";
       comp_sidebar_col.className = "comp-sidebar-col col-8";
       comp_collapse_col.className = "comp-collapse-col col-4";
     }
@@ -144,14 +149,15 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                       <span className={collapsed || isMobile() ? "hidden" : ""}>
                         {item.label}
                       </span>
+                      <FaAngleDown className="dropdown-icon" style={{float: "right"}}/>
                     </div>
                     {openKey === item.label && (
-                      <div className="">
+                      <div className="dropdown-collection">
                         {item.dropdownItems.map((dropdownItem) => (
                           <a
                             key={dropdownItem.link}
                             href={dropdownItem.link}
-                            className="nav-link dropdown-item"
+                            className="nav-link sidenav dropdown-item"
                           >
                             {dropdownItem.label}
                           </a>

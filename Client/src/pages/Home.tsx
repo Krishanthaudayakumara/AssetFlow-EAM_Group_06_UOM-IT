@@ -1,9 +1,5 @@
 import React from "react";
 import { Container, Row, Col, Nav, Table } from "react-bootstrap";
-import SidebarNav from "../components/SidebarNav";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
-import Wrapper from "../components/DashWrapper";
 import "../css/Home.css"; // import background image CSS file
 
 const data = [

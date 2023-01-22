@@ -2,18 +2,24 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import { useLocation } from "react-router-dom";
 
 const isMobile = () => {
   return window.innerWidth < 768;
 };
 
 const Wrapper: React.FC<React.PropsWithChildren<{}>> = ({children}) => {
+  const match = useLocation().pathname;
+  let active = match ? match.split("/")[1] : "";
+  active = "/" + active;
+  console.log(active)
+
   return (
-    <Container>
+    <Container fluid="xxxl">
       <Row>
-        <Col className={`sidebar-col ${ isMobile() ? "col-2": "col-4"}`}>
+        <Col className={`sidebar-col ${ isMobile() ? "col-2": "col-3"}`}>
           <div>
-            <Sidebar active="/" />
+            <Sidebar active={active} />
           </div>
         </Col>
         <Col className={`content-col ${isMobile() ? "col-10": "col-8"}`}>
