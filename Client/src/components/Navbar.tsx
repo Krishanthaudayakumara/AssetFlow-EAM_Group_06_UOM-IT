@@ -23,8 +23,6 @@ const MyNavbar: React.FC = () => {
 
   return (
     <Navbar  expand="lg">
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav" className="as-nav" >
         <Nav className="mr-auto">
           <Form className="form-inline">
             <FormControl type="text" placeholder="Search" className="mr-2 searchbar" />
@@ -62,7 +60,6 @@ const MyNavbar: React.FC = () => {
           </NavDropdown>
           
         </Nav>
-      </Navbar.Collapse>
     </Navbar>
   );
 };

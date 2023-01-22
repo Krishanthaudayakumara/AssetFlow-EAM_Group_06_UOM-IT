@@ -4,22 +4,23 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import User from "./pages/User";
 import Navbar from "./components/Navbar";
+import Wrapper from "./components/DashWrapper";
 import Sidebar from "./components/Sidebar";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
+    
+    <Wrapper><Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
 
-        <Route path="/" element={<Home />} />
+      {/* Temporary routes */}
+      <Route path="/nav" element={<Navbar />} />
 
-        {/* Temporary routes */}
-        <Route path="/nav" element={<Navbar />} />
-
-        <Route path="/login" element={<Login />} />
-        <Route path="/user" element={<User />} />
-      </Routes>
-    </Router>
+      <Route path="/login" element={<Login />} />
+      <Route path="/user" element={<User />} />
+    </Routes>
+  </Router></Wrapper>
   );
 };
 
