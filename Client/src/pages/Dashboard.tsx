@@ -51,7 +51,35 @@ const data = [
   },
 ];
 
+
+
+const options = {
+  title: {
+    display: true,
+    text: 'My Chart Title',
+  },
+  
+};
+
 const Dashboard: React.FC = () => {
+
+  /*const dataForBarChart = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+      {
+          label: 'Issued',
+          data: [40, 20, 30, 50, 90, 10, 20],
+          backgroundColor: "#482890",
+      },
+      {
+        label: 'Returned',
+        data: [20, 10, 2, 5, 2, 3,8,9],
+        backgroundColor: "#ff615a",
+      }
+    ],
+  };*/
+  
+
   return (
     <Container>
       <Row>
@@ -64,13 +92,32 @@ const Dashboard: React.FC = () => {
         <Col md={9}>
           <div>
             <Navbar />
-            <div className="shadow p-3 mb-5 bg-white rounded">
+            <div style={{margin:"0px 0 0 65px"}}>
             <Card />
             </div>
-            <h1>Inventory Summary</h1>
+            <h1 style={{margin:"0px 0 0 65px"}}>Inventory Summary</h1>
 
-            <div  className="shadow p-3 mb-5 bg-white rounded">
-              <BarChart />
+            <div  className="shadow p-3 mb-5 bg-white rounded"style={{margin:"0px 2px 2px 65px"}}>
+              <BarChart 
+              data = {{
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [
+                  {
+                    label: 'Issued',
+                    data: [40, 20, 30, 50, 90, 10, 20],
+                    backgroundColor:  "#482890",
+                  },
+                  {
+                    label: 'Returned',
+                    data: [20, 10, 2, 5, 2, 3,8,9],
+                    backgroundColor: "#ff615a",
+                  },
+                ],
+              }}
+              
+               options = {options}
+               
+               />
             </div>
             <h4
               className="second"
@@ -87,6 +134,8 @@ const Dashboard: React.FC = () => {
                     style={{
                       paddingTop: "100px",
                       height:"400px",
+                      margin:"0px 0 0 65px",
+                     alignContent:"center",
                     }}
                   >
                     <LineChart />

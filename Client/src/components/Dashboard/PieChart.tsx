@@ -13,14 +13,14 @@ const data = {
         label: 'Assets Types',
         data: [1200, 600, 300, 1000],
         backgroundColor: [
-          "#482890",
+          "#EA5F89",
           '#e2a9e5',
           '#632c65',
           '#4b384c',
           
         ],
         borderColor: [
-          "#482890" ,
+          "#EA5F89" ,
           '#e2a9e5' ,
           '#632c65',
           '#4b384c' ,
