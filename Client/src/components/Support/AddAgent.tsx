@@ -57,8 +57,8 @@ const AddAgent = () => {
             <Form.Group>
             <Form.Select aria-label="Default select example">
                 
-                <option value="1">Not Available</option>
-                <option value="2">Available</option>
+                <option value="1">Available</option>
+                <option value="2">Not Available</option>
             </Form.Select>
             </Form.Group><br/>
 
