@@ -1,14 +1,14 @@
 import React , { Fragment, useState } from 'react';
-import {Badge, Button, Modal, Table} from 'react-bootstrap';
+import {Button, Modal, Table} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Agents from './Agents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons/faPen';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import AddAgent from './AddAgent';
+import AgentStatus from './AgentStatus';
 
-
-function Agent_Table(){
+function AgentTable(){
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
@@ -81,7 +81,7 @@ function Agent_Table(){
                                     {item.agent_completed}
                                 </td>
                                 <td>
-                                <Badge bg="success">Available</Badge>
+                                <AgentStatus></AgentStatus>
                                 </td>
                                 <td>
                                 <FontAwesomeIcon icon={faPen} style={{color:'#482890'}}/>
@@ -124,7 +124,7 @@ function Agent_Table(){
     )
 }
 
-export default Agent_Table;
+export default AgentTable;
 
 function setShow(arg0: boolean) {
     throw new Error('Function not implemented.');
