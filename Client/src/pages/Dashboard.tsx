@@ -1,5 +1,7 @@
 import React from "react";
-import { Container, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col, Table, } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBox, faTicket, faUser, faWarehouse } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import PieChart from "../components/Dashboard/PieChart";
@@ -92,8 +94,14 @@ const Dashboard: React.FC = () => {
         <Col md={9}>
           <div>
             <Navbar />
-            <div style={{margin:"0px 0 0 65px"}}>
-            <Card />
+            
+            <div className="row mb-3" style={{margin:"0px 0 0 65px"}}>
+           
+            <Card  name="Available userss" quantity={87}  icon={faUser} />
+            <Card  name="Toatal Inventory" quantity={67}  icon={faBox}  />
+            <Card  name="Asign assets" quantity={57}  icon={faWarehouse} />
+            <Card  name="Toatal Inventory" quantity={87}  icon={faTicket}  />
+            
             </div>
             <h1 style={{margin:"0px 0 0 65px"}}>Inventory Summary</h1>
 

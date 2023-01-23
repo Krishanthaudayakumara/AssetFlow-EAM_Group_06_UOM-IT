@@ -1,28 +1,36 @@
+
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBox, faTicket, faUser, faWarehouse } from "@fortawesome/free-solid-svg-icons";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+interface IPROPS{
 
+    name :String;
+    quantity:Number;
+    icon:any;
+    
+}
 
-const Card: React.FC = () => {
+const Card: React.FC <IPROPS>= ({name,quantity,icon}) => {
   return (
-    <>
-    <div className="row mb-3" >
-    <div className="col-xl-3 col-sm-6 py-2">
-        <div className="card  text-white h-40 "style={{borderRadius:"10px"}}>
+    
+    
+    <div className="col-xl-3 col-sm- py-2">
+        <div className="card  text-white h-100 "style={{borderRadius:"10px"}}>
         
             <div className="card-body " style={{backgroundColor:"#482890",borderRadius:"10px"}}>
             <div className="rotate">
-                <FontAwesomeIcon icon={faUser} />
+                <FontAwesomeIcon icon={icon} />
                 </div>
                
-                <h6 className="text-uppercase">Available Users</h6>
-                <h1 className="display-4">134</h1>
+                <h6 className="text-uppercase">{name}</h6>
+                <h1 className="display-4"><>{quantity}</></h1>
             </div>
             
         </div>
     </div>
-    <div className="col-xl-3 col-sm-6 py-2">
+    
+   /* <div className="col-xl-3 col-sm-6 py-2">
         <div className="card text-white  h-40"style={{borderRadius:"10px"}}>
             <div className="card-body " style={{backgroundColor:"#482890",borderRadius:"10px"}}>
             <div className="rotate">
@@ -60,7 +68,7 @@ const Card: React.FC = () => {
     </div>
 </div>
 
-</>
+</>*/
   );
 };
 
