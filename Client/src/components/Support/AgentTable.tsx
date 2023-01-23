@@ -16,7 +16,7 @@ function AgentTable(){
      <div>
      <div>
       
-     <button onClick={handleShow} type="button" className="btn btn-primary" style={{margin:"20px 0 0 800px"}}>+ Add New Agent</button>
+     <button onClick={handleShow} type="button" className="btn  btn-outline-light" style={{margin:"20px 0 0 800px",backgroundColor:'#482890'}}>+ Add New Agent</button>
     </div>   
     
     <p style={{margin:"10px 0 30px 70px",color:'#482890',fontSize: '25px'}}>Avaliable Agents</p>  
@@ -27,6 +27,7 @@ function AgentTable(){
             <Table className="table  w-100 small text-center table-borderless " hover align='center' style={{fontSize: '14px'}}> 
                 <thead>
                     <tr style={{color:'#482890'}}>
+                        <th></th>
                         <th >
                             Agent Name
                         </th>
@@ -62,7 +63,14 @@ function AgentTable(){
                        Agents.map((item) =>{
                         return(
                             <tr>
+                                <td><img
+                src="/img/krish.png"
+                alt="User profile"
+                className="rounded-circle"
+               
+              /></td>
                                 <td>
+                                
                                     {item.agent_name}
                                 </td>
                                 <td>
