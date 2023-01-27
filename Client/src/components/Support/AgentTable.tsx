@@ -1,30 +1,26 @@
-import React , { Fragment, useState } from 'react';
-import {Button, Modal, Table} from 'react-bootstrap';
+import { Fragment} from 'react';
+import {Table} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Agents from './Agents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons/faPen';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import AddAgent from './AddAgent';
+import SupportButton from './SupportButton';
 import AgentStatus from './AgentStatus';
 
 function AgentTable(){
-    const [show, setShow] = useState(false);
-    const handleShow = () => setShow(true);
-    const handleClose = () => setShow(false);
-    return(
-     <div>
-     <div>
-      
-     <button onClick={handleShow} type="button" className="btn  btn-outline-light" style={{margin:"20px 0 0 800px",backgroundColor:'#482890'}}>+ Add New Agent</button>
-    </div>   
     
-    <p style={{margin:"10px 0 30px 70px",color:'#482890',fontSize: '25px'}}>Avaliable Agents</p>  
+    return(
+    <div>
+     <SupportButton/>
+     <br/>
+     <hr style={{margin:'0 0 0 250px',color:'blue'}}/> 
+    <p style={{margin:"30px 0 30px 70px",color:'#482890',fontSize: '18px',fontWeight:'bold'}}>Avaliable Agents</p>  
     <div className="shadow p-3 bg-white rounded" style={{margin:"30px 0 0 65px"}}> 
        <Fragment>
             <div>
            
-            <Table className="table  w-100 small text-center table-borderless " hover align='center' style={{fontSize: '14px'}}> 
+            <Table className="table  w-100 small  table-borderless text-secondary" hover  style={{fontSize: '14px'}}> 
                 <thead>
                     <tr style={{color:'#482890'}}>
                         <th></th>
@@ -63,13 +59,8 @@ function AgentTable(){
                        Agents.map((item) =>{
                         return(
                             <tr>
-                                <td><img
-                src="/img/krish.png"
-                alt="User profile"
-                className="rounded-circle"
-               
-              /></td>
-                                <td>
+                                <td></td>
+                                <td  className="text-right">
                                 
                                     {item.agent_name}
                                 </td>
@@ -83,9 +74,11 @@ function AgentTable(){
                                     {item.agent_email}
                                 </td>
                                 <td>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
                                     {item.agent_pending}
                                 </td>
                                 <td>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     {item.agent_completed}
                                 </td>
                                 <td>
@@ -108,21 +101,7 @@ function AgentTable(){
                 </tbody>
             </Table>
 
-            <Modal show={show} onHide={handleClose}>
-            <Modal.Header>
-                <Modal.Title>
-                    Add Agent
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <AddAgent/>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant='secondary' onClick={handleClose}>
-                    Close
-                </Button>
-            </Modal.Footer>
-        </Modal>
+            
 
         </div>
         </Fragment>
@@ -134,6 +113,3 @@ function AgentTable(){
 
 export default AgentTable;
 
-function setShow(arg0: boolean) {
-    throw new Error('Function not implemented.');
-}
