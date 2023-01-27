@@ -12,9 +12,8 @@ function AgentTable(){
     
     return(
     <div>
-     <SupportButton/>
-     <br/>
-     <hr style={{margin:'0 0 0 250px',color:'blue'}}/> 
+     
+      
     <p style={{margin:"30px 0 30px 70px",color:'#482890',fontSize: '18px',fontWeight:'bold'}}>Avaliable Agents</p>  
     <div className="shadow p-3 bg-white rounded" style={{margin:"30px 0 0 65px"}}> 
        <Fragment>

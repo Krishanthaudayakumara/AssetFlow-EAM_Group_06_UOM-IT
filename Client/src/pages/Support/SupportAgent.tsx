@@ -4,7 +4,7 @@ import AgentTable from '../../components/Support/AgentTable';
 import Sidebar from '../../components/Sidebar';
 import MyNavbar from '../../components/Navbar';
 import Chatbot from '../../components/Support/Chatbot';
-
+import SupportButton from '../../components/Support/SupportButton';
 
 const Support_Agent: React.FC = () => {
   return (
@@ -19,6 +19,9 @@ const Support_Agent: React.FC = () => {
       <Col md={9}>
         <div>
           <MyNavbar />
+          <SupportButton/>
+          <br/>
+          <hr style={{margin:'0 0 0 250px',color:'blue'}}/>
           <AgentTable/>          
         </div>
       </Col>
