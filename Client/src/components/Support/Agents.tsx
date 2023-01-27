@@ -5,7 +5,7 @@ const Agents = [
         agent_position:"Manager",
         agent_department:"Support",
         agent_email:"abc@gmail.com",
-        agent_pending:"5",
+        agent_pending:"50",
         agent_completed:"10",
         
         
@@ -15,7 +15,7 @@ const Agents = [
         agent_position:"Manager",
         agent_department:"Support",
         agent_email:"abc@gmail.com",
-        agent_pending:"5",
+        agent_pending:"50",
         agent_completed:"10",
         
     },{
@@ -24,7 +24,7 @@ const Agents = [
         agent_position:"Manager",
         agent_department:"Support",
         agent_email:"abc@gmail.com",
-        agent_pending:"5",
+        agent_pending:"50",
         agent_completed:"10",
         
     },{
@@ -33,7 +33,7 @@ const Agents = [
         agent_position:"Manager",
         agent_department:"Support",
         agent_email:"abc@gmail.com",
-        agent_pending:"5",
+        agent_pending:"50",
         agent_completed:"10",
        
     },{
@@ -42,7 +42,7 @@ const Agents = [
         agent_position:"Manager",
         agent_department:"Support",
         agent_email:"abc@gmail.com",
-        agent_pending:"5",
+        agent_pending:"50",
         agent_completed:"10",
         
     }
