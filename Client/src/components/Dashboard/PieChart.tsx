@@ -1,43 +1,29 @@
 import React from 'react';
-import {Chart as  ChartJs,Tooltip,Title,ArcElement,Legend} from "chart.js/auto";
-import { Pie } from 'react-chartjs-2';
-ChartJs.register(
+import { Pie} from 'react-chartjs-2';
 
-  Tooltip,Title,ArcElement,Legend
-);
-
-const data = {
-    labels: ['Table', 'Chair', 'Monitor', 'Mouse'],
+interface PieChartProps {
+  data: {
+    labels: string[];
     datasets: [
       {
-        label: 'Assets Types',
-        data: [1200, 600, 300, 1000],
-        backgroundColor: [
-          "#EA5F89",
-          '#e2a9e5',
-          '#632c65',
-          '#4b384c',
-          
-        ],
-        borderColor: [
-          "#EA5F89" ,
-          '#e2a9e5' ,
-          '#632c65',
-          '#4b384c' ,
-          
-        ],
+        label: string;
+        data: number[];
+        borderColor:string[];
+        backgroundColor: string[];
       },
-    ],
+      
+    ];
   };
-const PieChart: React.FC = () => {
-  return (
-    <>
-    <div className="class1" >
-    <Pie data={data} />
-    </div>
-  </>
+ 
+}
 
-  ); 
-};
+const PieChart: React.FC<PieChartProps > = (props) => {
+    return (
+        <div>
+            <Pie data={props.data}  />
+        </div>
+    );
+}
 
 export default PieChart;
+

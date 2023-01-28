@@ -21,7 +21,6 @@ const App: React.FC = () => {
         {/* Temporary routes */}
         <Route path="/nav" element={<Navbar />} />
         <Route path="/side" element={<Sidebar />} />
-        <Route path="/PieChart" element={<PieChart />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
