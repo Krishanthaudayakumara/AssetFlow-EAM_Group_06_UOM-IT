@@ -6,6 +6,7 @@ import User from "./pages/User";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import SupportAgent from "./pages/Support/SupportAgent";
+import AgentTable from "./components/Support/AgentTable";
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
         <Route path = '/SupportAgent' element = {<SupportAgent/>}/>
+        <Route path = '/AgentTable' element = {<AgentTable/>}/>
       </Routes>
     </Router>
   );

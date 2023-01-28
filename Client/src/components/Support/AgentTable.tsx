@@ -5,7 +5,6 @@ import Agents from './Agents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons/faPen';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import SupportButton from './SupportButton';
 import AgentStatus from './AgentStatus';
 
 function AgentTable(){
@@ -19,11 +18,11 @@ function AgentTable(){
        <Fragment>
             <div>
            
-            <Table className="table  w-100 small  table-borderless text-secondary" hover  style={{fontSize: '14px'}}> 
-                <thead>
+            <Table className="table w-100 small table-borderless table-responsiv align-middle align-left" hover style={{fontSize: '14px'}}> 
+                <thead className="thead-dark">
                     <tr style={{color:'#482890'}}>
-                        <th></th>
-                        <th >
+                       
+                        <th style={{padding:'0 0 10px 60px'}}>
                             Agent Name
                         </th>
                         <th>
@@ -58,25 +57,30 @@ function AgentTable(){
                        Agents.map((item) =>{
                         return(
                             <tr>
-                                <td></td>
-                                <td  className="text-right">
                                 
+                                <td >
+                                <img
+                src="/img/krish.png"
+                alt="User profile"
+                className="rounded-circle"
+                style={{width:'45px',height:'45px'}}
+                />   &nbsp;                             
                                     {item.agent_name}
                                 </td>
-                                <td>
+                                <td className="text-secondary">
                                     {item.agent_position}
-                                </td>
-                                <td>
+                                </td >
+                                <td className="text-secondary">
                                     {item.agent_department}
                                 </td>
-                                <td>
+                                <td className="text-secondary">
                                     {item.agent_email}
                                 </td>
-                                <td>
+                                <td className="text-secondary">
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                     {item.agent_pending}
                                 </td>
-                                <td>
+                                <td className="text-secondary">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     {item.agent_completed}
                                 </td>
