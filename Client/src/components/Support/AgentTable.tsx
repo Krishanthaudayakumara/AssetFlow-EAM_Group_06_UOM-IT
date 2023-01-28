@@ -19,10 +19,11 @@ function AgentTable(){
             <div>
            
             <Table className="table w-100 small table-borderless table-responsiv align-middle align-left" hover style={{fontSize: '14px'}}> 
-                <thead className="thead-dark">
+                <thead className="thead-light">
                     <tr style={{color:'#482890'}}>
                        
-                        <th style={{padding:'0 0 10px 60px'}}>
+                        <th></th>
+                        <th >
                             Agent Name
                         </th>
                         <th>
@@ -57,14 +58,17 @@ function AgentTable(){
                        Agents.map((item) =>{
                         return(
                             <tr>
-                                
-                                <td >
+                                <td>
                                 <img
                 src="/img/krish.png"
                 alt="User profile"
                 className="rounded-circle"
                 style={{width:'45px',height:'45px'}}
-                />   &nbsp;                             
+                />
+                                </td>
+                                
+                                <td >
+                                                               
                                     {item.agent_name}
                                 </td>
                                 <td className="text-secondary">
