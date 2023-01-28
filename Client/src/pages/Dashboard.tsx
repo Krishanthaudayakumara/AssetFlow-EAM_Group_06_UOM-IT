@@ -63,6 +63,7 @@ const options = {
   
 };
 
+
 const Dashboard: React.FC = () => {
 
   /*const dataForBarChart = {
@@ -146,12 +147,69 @@ const Dashboard: React.FC = () => {
                      alignContent:"center",
                     }}
                   >
-                    <LineChart />
-                  </div>
+                    <LineChart 
+                    data = {{
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July',],
+
+             datasets: [
+                  {
+                    label: "Support tickets for each month",
+                    data: [1200, 1900, 300, 500, 2000, 305,100],
+                    borderColor: "#482890",
+                    backgroundColor: "#482890",
+                  },
+
+                ],
+              }}
+      
+              options = {{
+                responsive: true,
+                plugins: {
+                  legend: {
+                    position: 'top' as const,
+                  },
+                  title: {
+                    display: true,
+                    text: "Support Tickets ",
+                  },
+                }}
+              }
+      
+      />
+                 
+      
+      </div>
                 </Col>
                 <Col md={6}>
                 <div className="shadow p-3 mb-5 bg-white rounded" >
-                  <PieChart />
+                  <PieChart data = {{
+                labels: ['Table', 'Chair', 'Monitor', 'Mouse'],
+                datasets: [
+            {
+        
+                label: 'Assets Types',
+                data: [1200, 600, 300, 1000],
+                backgroundColor: [
+                  "#EA5F89",
+                  '#e2a9e5',
+                  '#632c65',
+                  '#4b384c',
+                  
+                ],
+                borderColor: [
+                  "#EA5F89" ,
+                  '#e2a9e5' ,
+                  '#632c65',
+                  '#4b384c' ,
+                  
+                ]
+              }
+            ]
+  }}  
+  
+  
+  
+  />
                   </div>
                 </Col>
               </Row>

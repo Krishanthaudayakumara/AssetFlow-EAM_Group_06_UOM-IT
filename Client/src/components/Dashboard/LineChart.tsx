@@ -1,68 +1,29 @@
-
 import React from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-  );
+import { Line} from 'react-chartjs-2';
 
-
-const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top' as const,
-      },
-      title: {
-        display: true,
-        text: "Support Tickets ",
-      },
-    },
-  };
-   
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-  const data = {
-    labels,
+interface LineChartProps {
+  data: {
+    labels: string[];
     datasets: [
       {
-        label: "Support tickets for each month",
-        data: [1200, 1900, 300, 500, 2000, 305,100],
-        borderColor: "#482890",
-        backgroundColor: "#482890",
+        label: string;
+        data: number[];
+        borderColor:string;
+        backgroundColor: string;
       },
       
-    ],
+    ];
   };
-  const LineChart: React.FC = () => {
-    return (
-     <>
-    <div>
+  options?: object;
+}
 
-  
-     <Line
-     data={data} 
-     options={options}  
-     /> ;
-     </div>
-   </>
- 
-   ); 
- };
- 
- export default LineChart;
+const LineChart: React.FC<LineChartProps > = (props) => {
+    return (
+        <div>
+            <Line data={props.data} options={props.options} />
+        </div>
+    );
+}
+
+export default LineChart;
+
