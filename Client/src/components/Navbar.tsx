@@ -6,7 +6,7 @@ import {
   FormControl,
   Button,
   NavDropdown,
-  Badge,
+  Badge
 } from "react-bootstrap";
 import { FaRegBell } from "react-icons/fa";
 import "../css/Navbar.css"; // import background image CSS file
