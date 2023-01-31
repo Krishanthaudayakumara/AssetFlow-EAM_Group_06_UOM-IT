@@ -4,63 +4,27 @@ import Table from 'react-bootstrap/Table';
 const AssignedItems_table: React.FC = () => {
     return(
         <div style={{margin:"1rem"}}>
-            <h4 className='item'>Assigned items</h4>
-            
-             <Table striped bordered hover>
-                <thead>
-                                            
-                    <tr>
-                        <th> ID</th>
-                        <th>Items</th>
-                        <th>Assigned to</th>
-                        <th></th>
-                        <th>Building</th>
-                        <th>Category_Id</th>
-                           
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#123A</td>
-                        <td>meeting room</td>
-                        <td>2</td>
-                        <td>Sumanadasa building</td>
-                        <td>mouse</td>
-                        <td>1</td>
-                    
+            <div className='shadow p-2 mb- bg-white rounded'style={{width:'800px'}}>
+                <Table  className="table w-auto small text-center " hover align='center' style={{fontSize:'14px',width:'500px'}}>
+                    <thead>
+                        <tr  style={{color:'#482890',fontWeight:'bold'}}>
+                            <th>Asset_id</th>
+                            <th>Item_name</th>
+                            <th>Assign to</th>
+                            <th colSpan={2}>b_name</th>
+                            <th>floor No</th>
+                            <th>Category_Id</th>
+                            <th>Assign count</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            
+                        </tr>
+                    </thead>
 
-                                              
-                    </tr>
-                    <tr>
-                        <td>#124B</td>
-                        <td>board room</td>
-                        <td>1</td>
-                        <td>Lotus building</td>
-                        <td>Key board</td>
-                        <td>2</td>
-                       
-                    </tr>
-                    <tr>
-                        <td>#126C</td>
-                        <td>resting room</td>
-                        <td>3</td>
-                        <td>Neelson building</td>
-                        <td>Chair</td>
-                        <td>6</td>
-                      
-                    </tr>
-                    <tr>
-                        <td>#127C</td>
-                        <td>meeting room</td>
-                        <td>1</td>
-                        <td>Sumanadasa building</td>
-                        <td>mouse</td>
-                        <td>1</td>
-                       
-                    </tr>
-                     
-                </tbody>
-             </Table>
+                </Table>
+
+            </div>
+           
 
             
         </div>

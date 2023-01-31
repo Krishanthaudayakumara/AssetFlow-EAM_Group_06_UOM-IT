@@ -1,0 +1,83 @@
+.ws-card{
+  width: 200px; 
+  height: 200px; 
+  background-color: #CBC3E3;
+  margin: 10px;
+  box-sizing: border-box;
+  justify-content: space-around;
+  margin-top: 20px;
+  scroll-snap-type: mandatory;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 10px;
+   
+  
+}
+::-webkit-scrollbar{
+  width: 10px;
+  
+}
+::-webkit-scrollbar-track{
+  background: #c3c7e3;
+  border-radius: 15px;
+
+ 
+
+}
+::-webkit-scrollbar-thumb{
+  background: #c3c7e3;
+  border-radius: 15px;
+  background-clip: padding-box;  
+}
+
+
+
+
+.card1{
+  box-sizing: border-box;
+  width: 175px;
+  background-color: #EBECF0;
+  height: 60px;
+  border-radius: 10px;
+  margin: 20px 15px 0px 0px;
+
+  /* top: 60px; */
+
+}
+.card2{
+  box-sizing: border-box;
+  width: 175px;
+  background-color: #EBECF0;
+  height: 60px;
+  border-radius: 10px;
+  margin: 20px 15px 0px 0px;
+
+
+}
+
+.workstation{
+  text-align: center;
+  color: #482890;
+  padding-top: 10px;
+  font-weight: bold;
+}
+
+.sp1{
+  display: flex;
+  left: 120px;
+  position: relative;
+  margin-top: -28px;
+  font-size: 30px !important;
+}
+
+.card3{
+  box-sizing: border-box;
+  width: 175px;
+  background-color: #EBECF0;
+  height: 60px;
+  border-radius: 10px;
+  margin: 20px 15px 0px 0px;
+
+
+}
+

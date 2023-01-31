@@ -11,7 +11,7 @@ import AvailableItems_table from '../components/Facility/AvailableItems_table';
 
 
 
-const BuildingFloor: React.FC = () => {
+const Assignitems: React.FC = () => {
     return (
             
 
@@ -33,12 +33,11 @@ const BuildingFloor: React.FC = () => {
                             paddingTop:40,
                             fontWeight:'bold'
                         }}
-                        >Building & Spaces</h5> 
+                        >Assigned Iems</h5> 
                         <div className=''>               
-                        <BuildingFloor_table/>
-                        </div>  
                         <AssignedItems_table/>
-                        <AvailableItems_table/>
+                        </div>  
+                        
                        
                     </div>
                 </Col>
@@ -50,5 +49,5 @@ const BuildingFloor: React.FC = () => {
     );
   };
   
-  export default  BuildingFloor;
+  export default  Assignitems;
   
