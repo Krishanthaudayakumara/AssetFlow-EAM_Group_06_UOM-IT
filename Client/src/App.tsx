@@ -11,6 +11,7 @@ import User from "./pages/User";
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/DashWrapper";
 import Sidebar from "./components/Sidebar";
+import AssignItems from "./components/Facility/Assigneditemdata";
 
 const App: React.FC = () => {
   return (
@@ -19,11 +20,14 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
 
-          {/* Temporary routes */}
-          <Route path="/nav" element={<Navbar />} />
-
           <Route path="/login" element={<Login />} />
-          <Route path="/user" element={<User />} />
+          <Route path="/BuildingFloor" element={<BuildingFloor />} />
+          <Route path="/FacilityDashboard" element={<FacilityDashboard />} />
+          
+
+
+
+
         </Routes>
       </Wrapper>
     </Router>
