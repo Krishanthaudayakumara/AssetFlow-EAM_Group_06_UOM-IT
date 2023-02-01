@@ -6,6 +6,7 @@ import ReportFilter from "../components/Report/ReportFilter";
 import ITTable from "../components/Report/ITTable";
 import "../css/Home.css"; 
 import ReportButton from '../components/Report/ReportButton';
+import FacilityTable from '../components/Report/FacilityTable';
 
 
 interface Props {
@@ -42,13 +43,14 @@ interface Props {
       <Col md={9}>
         <div>
           <Navbar />
-          <h1 style={{margin:"0px 0 0 65px"}}>Report</h1>
-          <div className="shadow p-3 mb-5 bg-white rounded"style={{margin:"0px 0 0 65px"}} >
+          <h1 style={{margin:"0px 0 20px 65px"}}>Reports</h1>
+          <div className="shadow p-3 mb-5 bg-white rounded"style={{margin:"0 0 0 65px"}} >
           <ReportFilter/>
          
           </div>
-          <ReportButton/>
-          <div style={{margin:"0px 0 0 65px"}}> 
+          <div style={{margin:"0 0 0 65px",width:"100%"}}><ReportButton/></div>
+          
+          <div > 
             <ITTable/>
             </div>
             
