@@ -33,7 +33,7 @@ const items = [
   { label: "Facility", link: "/facility", icon: FaBuilding },
   { label: "Reports", link: "/report", icon: FaFileAlt },
   { label: "Users", link: "/user", icon: FaUsers },
-  { label: "Suppliers", link: "/supplier", icon: FaShippingFast },
+  { label: "Suppliers", link: "/SupportAgent", icon: FaShippingFast },
   { label: "Support", link: "/support", icon: FaComments },
   { label: "Calendar", link: "/calendar", icon: FaCalendarAlt },
 

@@ -7,22 +7,27 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import SupportAgent from "./pages/Support/SupportAgent";
 import AgentTable from "./components/Support/AgentTable";
+import MyAssignmentsTable from "./components/Support/MyAssignmentsTable";
+import ViewAgent from "./components/Support/ViewAgent";
+import AgentTeam from "./pages/Support/AgentTeam";
 
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-
         <Route path="/" element={<Home />} />
 
         {/* Temporary routes */}
         <Route path="/nav" element={<Navbar />} />
         <Route path="/side" element={<Sidebar />} />
+        <Route path="/AgentTable" element={<AgentTable />} />
+        <Route path="/MyAssignmentsTable" element={<MyAssignmentsTable />} />
+        <Route path="/ViewAgent" element={<ViewAgent />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
-        <Route path = '/SupportAgent' element = {<SupportAgent/>}/>
-        <Route path = '/AgentTable' element = {<AgentTable/>}/>
+        <Route path="/SupportAgent" element={<SupportAgent />} />
+        <Route path="/AgentTeam" element={<AgentTeam />} />
       </Routes>
     </Router>
   );

@@ -43,7 +43,7 @@ const Agents = [
         agent_department:"Support",
         agent_email:"abc@gmail.com",
         agent_pending:"50",
-        agent_completed:"10",
+         agent_completed:"10",
         
     }
 ]
