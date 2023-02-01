@@ -7,21 +7,25 @@ import BuildingFloor from "./pages/BuildingFloor";
 
 
 
+import User from "./pages/User";
+import Navbar from "./components/Navbar";
+import Wrapper from "./components/DashWrapper";
+import Sidebar from "./components/Sidebar";
 
 const App: React.FC = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/FacilityDashboard" element={<FacilityDashboard />} />
-        <Route path="/BuildingFloor" element={<BuildingFloor />} />
-      
-      
-       
-        
+      <Wrapper>
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-      </Routes>
+          {/* Temporary routes */}
+          <Route path="/nav" element={<Navbar />} />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/user" element={<User />} />
+        </Routes>
+      </Wrapper>
     </Router>
   );
 };
