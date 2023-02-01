@@ -34,8 +34,19 @@ export default function Work1() {
 
     return (
         <div>
-            <Button type="button" className='add-worstation-btn' onClick={handleAddWorkstation} data-toggle='modal'>+Worstation</Button>
-            <Button type="button" className='assign-item-btn' onClick={handleAssignItem}>Assign Item</Button>
+            <div className="container">
+                <div className="row">
+                    <div className="col-9" style={{padding:'0 0 10px 500px'}}>
+                    <Button type="button" className='add-worstation-btn' onClick={handleAddWorkstation} data-toggle='modal'>+Worstation</Button>
+
+                    </div>
+                    <div className="col-3">
+                    <Button type="button" className='assign-item-btn' onClick={handleAssignItem}>Assign Item</Button>
+
+                    </div>
+                </div>
+
+            </div>
 
             <div className="mainContainer">
                 <div className="row">

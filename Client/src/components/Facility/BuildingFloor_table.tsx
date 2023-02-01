@@ -14,10 +14,10 @@ function BuildingFloor_table ()  {
         <div style={{margin:"5rem"}}>
         
             <div className='shadow p-2 mb- bg-white rounded'style={{width:'800px'}}>
-            <Table   className="table w-auto small text-center " hover align='center' style={{fontSize:'14px',width:'500px'}}>
+            <Table   className="table w-100 small text-center " hover align='center' style={{fontSize:'14px',width:'500px'}}>
                 <thead >
                                             
-                    <tr style={{color:'#482890',fontWeight:'bold'}}>
+                    <tr style={{color:'#482890'}}>
                         <th>b_id</th>
                         <th>Floor_no</th>
                         <th>b_space</th>
@@ -35,7 +35,7 @@ function BuildingFloor_table ()  {
                        ?
                        BuildingFloor.map((a) =>{
                         return(
-                            <tr style={{textAlign:"center",fontWeight:"bold"}}>
+                            <tr style={{textAlign:"center"}}>
                                 <td>
                                     {a. b_id}
                                 </td>

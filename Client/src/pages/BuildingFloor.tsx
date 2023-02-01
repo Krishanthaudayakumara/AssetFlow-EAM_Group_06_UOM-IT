@@ -5,8 +5,7 @@ import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Facbutton from "../components/Facbutton";
 import  "../css/Facilitycss/Topbutton.css"; 
-import AssignedItems_table from '../components/Facility/AssignedItems_table';
-import AvailableItems_table from '../components/Facility/AvailableItems_table';
+
 
 
 
@@ -37,8 +36,7 @@ const BuildingFloor: React.FC = () => {
                         <div className=''>               
                         <BuildingFloor_table/>
                         </div>  
-                        <AssignedItems_table/>
-                        <AvailableItems_table/>
+                        
                        
                     </div>
                 </Col>
