@@ -9,6 +9,8 @@ import BarChart from "../components/Dashboard/BarChart";
 import LineChart from "../components/Dashboard/LineChart";
 import Card from "../components/Dashboard/Card";
 import "../css/Home.css";
+import { title } from "process";
+
 
 const data = [
   {
@@ -55,14 +57,41 @@ const data = [
 
 
 
-const options = {
-  title: {
-    display: true,
-    text: 'My Chart Title',
+
+const Linedata = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: "Line Chart Data",
+      data: [1200, 1900, 300, 500, 2000, 305, 100],
+      borderColor: "#482890",
+      backgroundColor: "#482890",
+    },
+  ],
+};
+const Lineoptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+    },
+    title: {
+      display: true,
+      text: "Line Chart",
+    },
   },
-  
 };
 
+const options= {
+   
+   
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart',
+      },
+    }
+  
+  
 
 const Dashboard: React.FC = () => {
 
@@ -84,8 +113,9 @@ const Dashboard: React.FC = () => {
   
 
   return (
-    <Container>
-      <Row>
+    <div>
+          <Container>
+     <Row>
         <Col md={3} className="sidebar-col">
           <div>
             <Sidebar />
@@ -96,33 +126,32 @@ const Dashboard: React.FC = () => {
           <div>
             <Navbar />
             
-            <div className="row mb-3" style={{margin:"0px 0 0 65px"}}>
+          <div className="row mb-3" style={{margin:"0px 0 0 65px"}}>
            
             <Card  name="Available userss" quantity={87}  icon={faUser} />
             <Card  name="Toatal Inventory" quantity={67}  icon={faBox}  />
             <Card  name="Asign assets" quantity={57}  icon={faWarehouse} />
             <Card  name="Toatal Inventory" quantity={87}  icon={faTicket}  />
             
-            </div>
+  </div>
             <h1 style={{margin:"0px 0 0 65px"}}>Inventory Summary</h1>
-
+            
             <div  className="shadow p-3 mb-5 bg-white rounded"style={{margin:"0px 2px 2px 65px"}}>
-              <BarChart 
-              data = {{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [
-                  {
-                    label: 'Issued',
-                    data: [40, 20, 30, 50, 90, 10, 20],
-                    backgroundColor:  "#482890",
-                  },
-                  {
-                    label: 'Returned',
-                    data: [20, 10, 2, 5, 2, 3,8,9],
-                    backgroundColor: "#ff615a",
-                  },
-                ],
-              }}
+            <BarChart data= {{
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'Issued',
+      data: [40, 20, 30, 50, 90, 10, 20],
+      backgroundColor:  "#482890",
+    },
+    {
+      label: 'Returned',
+      data: [20, 10, 2, 5, 2, 3,8,9],
+      backgroundColor: "#ff615a",
+    },
+  ],
+}}
               
                options = {options}
                
@@ -147,69 +176,18 @@ const Dashboard: React.FC = () => {
                      alignContent:"center",
                     }}
                   >
-                    <LineChart 
-                    data = {{
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July',],
-
-             datasets: [
-                  {
-                    label: "Support tickets for each month",
-                    data: [1200, 1900, 300, 500, 2000, 305,100],
-                    borderColor: "#482890",
-                    backgroundColor: "#482890",
-                  },
-
-                ],
-              }}
-      
-              options = {{
-                responsive: true,
-                plugins: {
-                  legend: {
-                    position: 'top' as const,
-                  },
-                  title: {
-                    display: true,
-                    text: "Support Tickets ",
-                  },
-                }}
-              }
-      
-      />
+                    <LineChart Linedata = {Linedata}
+                     Lineoptions ={Lineoptions }
+    
+                      
+                      />
                  
       
       </div>
                 </Col>
                 <Col md={6}>
                 <div className="shadow p-3 mb-5 bg-white rounded" >
-                  <PieChart data = {{
-                labels: ['Table', 'Chair', 'Monitor', 'Mouse'],
-                datasets: [
-            {
-        
-                label: 'Assets Types',
-                data: [1200, 600, 300, 1000],
-                backgroundColor: [
-                  "#EA5F89",
-                  '#e2a9e5',
-                  '#632c65',
-                  '#4b384c',
-                  
-                ],
-                borderColor: [
-                  "#EA5F89" ,
-                  '#e2a9e5' ,
-                  '#632c65',
-                  '#4b384c' ,
-                  
-                ]
-              }
-            ]
-  }}  
-  
-  
-  
-  />
+                  <PieChart />
                   </div>
                 </Col>
               </Row>
@@ -249,9 +227,14 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </Col>
-      </Row>
-    </Container>
-  );
-};
+  </Row> 
+                  </Container>
+
+
+
+    </div>
+
+  )
+}
 
 export default Dashboard;
