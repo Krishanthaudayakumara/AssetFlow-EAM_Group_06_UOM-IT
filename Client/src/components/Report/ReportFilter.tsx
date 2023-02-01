@@ -1,49 +1,59 @@
-import React from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
-import { Form, Row, Col } from "react-bootstrap";
+import React from 'react'
+import Dropdown from 'react-bootstrap/Dropdown'
+import { Form, Row, Col } from 'react-bootstrap'
 
-
-const ReportFilter: React.FC = () =>{
+const ReportFilter: React.FC = () => {
   return (
-    
-    <Form >
+    <Form className="form-horizontal" role="form">
       <Row>
-        <Col xs><Dropdown className="d-inline mx-2">
-        <Dropdown.Toggle id="dropdown-autoclose-true">
-        Departments
-        </Dropdown.Toggle>
+        <Col xs>
+          <Dropdown className="d-inline mx-2">
+            <Dropdown.Toggle id="dropdown-autoclose-true">
+              Departments
+            </Dropdown.Toggle>
 
-        < Dropdown.Menu>
-        <Dropdown.Item href="#">IT Support</Dropdown.Item>
-        <Dropdown.Item href="#">Facility</Dropdown.Item>
-        <Dropdown.Item href="#">Inventory</Dropdown.Item>
-        </Dropdown.Menu>
-        </Dropdown>
+            <Dropdown.Menu>
+              <Dropdown.Item href="#">IT Support</Dropdown.Item>
+              <Dropdown.Item href="#">Facility</Dropdown.Item>
+              <Dropdown.Item href="#">Inventory</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Col>
-        <Col xs={{ order:12}}>
-        <div className="row">
-                    <div className="col-md-8"style={{margin:"5px 100px 0 0"}}>
-                        <Form.Group controlId="dob">
-                            <Form.Label>From Date</Form.Label>
-                            <Form.Control type="date" name="dob" placeholder="Date of Birth" />
-                        </Form.Group>
-                    </div>
-                    </div>
-          </Col> 
-          <Col xs={{ order:12}}>
-        <div className="row">
-                    <div className="col-md-8"style={{margin:"5px 100px 0 0"}}>
-                        <Form.Group controlId="dob">
-                            <Form.Label>To Date</Form.Label>
-                            <Form.Control type="date" name="dob" placeholder="Date of Birth" />
-                        </Form.Group>
-                    </div>
-                    </div>
-          </Col> 
-          </Row>   
-</Form>
+        <Col xs={{ order: 12 }}>
+          <div className="row">
+            <div className="col-md-8" style={{ margin: '5px 100px 0 0' }}>
+              <Form.Group controlId="dob">
+                <div className="col-sm-15">
+                  <Form.Label >From Date</Form.Label>
+                </div>
+                <div className="col-sm-15">
+                  <Form.Control
+                    type="date"
+                    name="dob"
+                    placeholder="Date of Birth"
+                  />
+                </div>
+              </Form.Group>
+            </div>
+          </div>
+        </Col>
+        <Col xs={{ order: 12 }}>
+          <div className="row">
+            <div className="col-md-8" style={{ margin: '5px 100px 0 0' }}>
+              <Form.Group controlId="dob">
+                <Form.Label>To Date</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="dob"
+                  placeholder="Date of Birth"
+                />
+              </Form.Group>
+            </div>
+          </div>
+        </Col>
+      </Row>
+    </Form>
+  )
+}
 
-  ); 
-};
-
-export default ReportFilter;
+export default ReportFilter
