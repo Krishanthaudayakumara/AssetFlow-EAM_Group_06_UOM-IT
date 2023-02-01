@@ -1,51 +1,92 @@
-import React, { Fragment } from "react";
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Badge ,Table} from 'react-bootstrap';
+import BuildingFloordata from './BuildingFloordata';
+import BuildingFloor from './BuildingFloordata';
+import {FaTrashAlt}from "react-icons/fa";
+import{FaPen} from "react-icons/fa";
 
-import {  Table } from "react-bootstrap";
 
 
-const data = [
-    { id: "1", User: "Krish", UserName: "@mark", Role: "krish",Department: "Krish", Email: "Krish",JoinedDate: "Krish",Actions: "Krish"},
-    { id: "2", User: "Vidath",UserName : "@Sam",Role : "krish",Department: "Krish", Email: "Krish",JoinedDate: "Krish",Actions: "Krish" },
-    { id: "3", User: "Chamudi",UserName : "@jane", Role: "krish",Department: "Krish", Email: "Krish",JoinedDate: "Krish",Actions: "Krish" },
-    { id: "1", User: "Krish",UserName : "@mark",Role : "krish",Department: "Krish", Email: "Krish",JoinedDate: "Krish",Actions: "Krish" },
-  ];
-const FacilityTable: React.FC = () => {
-  return (
-    <Fragment>
-    <div style = {{margin:"1.8rem"}}>
-             <Table striped bordered hover>
-            <thead>
-              <tr>
-              <th>id</th>
-              <th>User</th>
-              <th>User Name</th>
-              <th>Role</th>
-              <th>Department</th>
-              <th>Email</th>
-              <th>Joined date</th>
-              <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item) => (
-                <tr>
-                  <td>{item.id}</td>
-                  <td>{item.User}</td>
-                  <td>{item.UserName}</td>
-                   <td>{item.Role}</td>
-                  <td>{item.Department}</td>
-                  <td>{item.Email}</td>
-                  <td>{item.JoinedDate}</td>
-                  <td>{item.Actions}</td>
-                  
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+
+function FacilityTable()  {
+    return( 
+        <div style={{margin:"5rem"}}>
+        
+            <div className='shadow p-2 mb- bg-white rounded'style={{width:'800px'}}>
+            <Table   className="table w-auto small text-center " hover align='center' style={{fontSize:'14px',width:'500px'}}>
+                <thead >
+                                            
+                    <tr style={{color:'#482890',fontWeight:'bold'}}>
+                        <th>b_id</th>
+                        <th>Floor_no</th>
+                        <th>b_space</th>
+                        <th colSpan={2}>b_name</th>
+                        <th>Description</th>
+                        <th>Category_Id</th>
+                        
+                        <th>Action</th>
+                                            
+                    </tr>
+                </thead>
+                <tbody >
+                {
+                       BuildingFloor && BuildingFloor.length > 0 
+                       ?
+                       BuildingFloor.map((a) =>{
+                        return(
+                            <tr style={{textAlign:"center",fontWeight:"bold"}}>
+                                <td>
+                                    {a. b_id}
+                                </td>
+                                <td>
+                                    {a.floor_no}
+                                </td>
+                                <td>
+                                    {a.b_space}
+                                </td>
+                                <td colSpan={2}>
+                                    {a.b_name}
+                                </td>
+                                <td>
+                                    {a.description}
+                                </td>
+                                <td>
+                                    {a.category_id}
+                                </td>
+                              
+                                                             
+                                
+                                <td>
+                                   <FaTrashAlt
+                                   style={{color:" #ff615a "}}
+                                   />
+                                                               
+                                   
+                                    <FaPen
+                                    style={{color:" #482890",marginLeft:"10px"
+                                    }}
+                                    />
+                                
+                                </td>
+                               
+                            </tr>
+                        )
+                       })
+                       :
+                       "No data available"
+                    }
+                </tbody>
+             </Table>
+
+             
+        
+           
+            </div>
+
+            
+        </div>
      
-    </div>
-    </Fragment>
-  );
-};
-
-export default FacilityTable;
+    )
+}
+export default FacilityTable
