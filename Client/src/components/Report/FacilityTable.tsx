@@ -24,7 +24,6 @@ function FacilityTable()  {
                         <th colSpan={2}>b_name</th>
                         <th>Description</th>
                         <th>Category_Id</th>
-                        
                         <th>Action</th>
                                             
                     </tr>
