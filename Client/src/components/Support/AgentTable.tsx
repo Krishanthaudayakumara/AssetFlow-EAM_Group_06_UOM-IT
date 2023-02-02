@@ -57,13 +57,14 @@ function AgentTable() {
                 {Agents && Agents.length > 0
                   ? Agents.map((agent) => {
                       return (
-                        <tr>
+                        <tr >
                           <td>
                             <img
                               src="/img/krish.png"
                               alt="User profile"
                               className="rounded-circle"
                               style={{ width: "45px", height: "45px" }}
+                              onClick={handleShow}
                             />
                           </td>
 
