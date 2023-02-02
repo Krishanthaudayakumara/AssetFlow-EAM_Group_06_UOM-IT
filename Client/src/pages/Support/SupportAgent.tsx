@@ -11,20 +11,20 @@ const Support_Agent: React.FC = () => {
     
     <Container>
     <Row>
-      <Col md={3} className="sidebar-col">
+
         <div>
-          <Sidebar />
+          
         </div>
-      </Col>
-      <Col md={9}>
+      
+     
         <div>
-          <MyNavbar />
+         
           <SupportButton/>
           <br/>
           <hr style={{margin:'0 0 0 250px',color:'blue'}}/>
           <AgentTable/>          
         </div>
-      </Col>
+      
     </Row>
     <Chatbot/>
   </Container>
