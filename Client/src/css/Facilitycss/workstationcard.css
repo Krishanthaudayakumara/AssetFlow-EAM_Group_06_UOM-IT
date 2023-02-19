@@ -2,7 +2,6 @@
   width: 200px; 
   height: 200px; 
   background-color: #CBC3E3;
-  margin: 10px;
   box-sizing: border-box;
   justify-content: space-around;
   margin-top: 20px;
@@ -10,6 +9,8 @@
   overflow-y: scroll;
   overflow-x: hidden;
   border-radius: 10px;
+  margin-inline: 0px !important ;
+
    
   
 }
@@ -33,27 +34,18 @@
 
 
 
-.card1{
+.card-in{
   box-sizing: border-box;
   width: 175px;
   background-color: #EBECF0;
   height: 60px;
   border-radius: 10px;
-  margin: 20px 15px 0px 0px;
+  margin: 20px 15px;
 
   /* top: 60px; */
 
 }
-.card2{
-  box-sizing: border-box;
-  width: 175px;
-  background-color: #EBECF0;
-  height: 60px;
-  border-radius: 10px;
-  margin: 20px 15px 0px 0px;
 
-
-}
 
 .workstation{
   text-align: center;
@@ -70,14 +62,8 @@
   font-size: 30px !important;
 }
 
-.card3{
-  box-sizing: border-box;
-  width: 175px;
-  background-color: #EBECF0;
-  height: 60px;
-  border-radius: 10px;
-  margin: 20px 15px 0px 0px;
 
-
+.card-container{
+  padding-inline: 40px 0px !important;
+  padding-block: 20px;
 }
-

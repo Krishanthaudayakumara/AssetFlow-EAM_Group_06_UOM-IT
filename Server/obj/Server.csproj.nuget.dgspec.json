@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {}
+    "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {
+    "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+        "projectUniqueName": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+        "projectPath": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj",
         "packagesPath": "C:\\Users\\janit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
+        "outputPath": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\janit\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -39,6 +39,16 @@
           "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[7.0.2, )"
             },
