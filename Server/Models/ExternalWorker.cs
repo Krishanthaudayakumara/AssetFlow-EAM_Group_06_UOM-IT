@@ -2,16 +2,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Server.Models
 {
-    public class Employee
+    public class ExternalWorker 
     {
-        public int Id { get; set; }
+         public int Id { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
         public string? MiddleName { get; set; }
-        [Required]
-        public string Email { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -19,7 +17,5 @@ namespace Server.Models
         public string? JobTitle { get; set; }
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
-        public string UserId { get; set; }
-        public User User { get; set; }
     }
 }

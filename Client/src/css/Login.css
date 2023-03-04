@@ -56,7 +56,17 @@
 }
 
 .login-left{
-    width: 32vw;
+    width: 450px;
     margin-top: 50px;
     margin-left: 200px;
+}
+
+@media screen and (max-width: 768px) {
+    .login-left-col{
+        display: none;
+    }
+
+    .col-lg-4{
+        padding-top: 20px;
+    }
 }

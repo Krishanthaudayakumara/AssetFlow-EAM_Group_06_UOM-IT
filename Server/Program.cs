@@ -9,8 +9,13 @@ using Microsoft.IdentityModel.Tokens;
 using Server.Data;
 using Server.Models;
 using System.Text;
+using Microsoft.AspNetCore.Cors;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var secretKey = "very_secret_key_for_jwt_token";
+var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
 // Add services to the container.
 
@@ -26,8 +31,6 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-var secretKey = "very_secret_key_for_jwt_token";
-var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
 builder.Services.AddAuthentication(options =>
 {
@@ -48,6 +51,16 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+});
+
+builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.IgnoreReadOnlyProperties = true);
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -57,6 +70,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowAll");
+
 app.UseHttpsRedirection();
 
 
@@ -64,6 +79,35 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.Use(async (context, next) =>
+{
+    var jwtToken = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+    var tokenHandler = new JwtSecurityTokenHandler();
+    var validationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = signingKey,
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+    SecurityToken validatedToken;
+    try
+    {
+        tokenHandler.ValidateToken(jwtToken, validationParameters, out validatedToken);
+    }
+    catch (Exception)
+    {
+        context.Response.StatusCode = 401;
+        await context.Response.WriteAsync("Unauthorized");
+        return;
+    }
+
+    await next();
+});
+
 app.MapControllers();
+
+
 
 app.Run();

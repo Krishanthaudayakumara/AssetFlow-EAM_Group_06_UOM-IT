@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -42,7 +43,7 @@ namespace Server.Controllers
                 return BadRequest(result.Errors);
             }
 
-            return Ok();
+            return Ok(user);
         }
 
         [HttpPost("login")]
@@ -64,25 +65,50 @@ namespace Server.Controllers
             var token = GenerateJwtToken(user);
 
 
-            return Ok(new { user, roles, token });
-        }
-
-
-        [HttpGet("user")]
-        [Authorize]
-        public async Task<ActionResult<User>> GetUserDetails()
-        {
-            // Get the current user from the user manager
-            var user = await _userManager.GetUserAsync(User);
-
-            // Return the user details in a UserDetailsDto
-            return Ok(new User
+            var response = new
             {
-                Id = user.Id,
-                Email = user.Email,
-                // Add any other properties you want to return here
-            });
+                user = user,
+                role = roles,
+                token = token
+            };
+
+            Console.WriteLine(response);
+
+
+            return Ok(response.user);
         }
+
+        [HttpGet("me")]
+        public IActionResult GetCurrentUser()
+        {
+            var username = User.Identity.Name;
+            var roles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
+
+            var response = new
+            {
+                Username = username,
+                Roles = roles
+            };
+            Console.Write(response);
+            return Ok(response.Username);
+        }
+
+        [HttpGet("authorized")]
+        [Authorize]
+        public IActionResult Authorized()
+        {
+            var username = User.Identity.Name;
+            var roles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
+
+            var response = new
+            {
+                Username = username,
+                Roles = roles
+            };
+
+            return Ok(response);
+        }
+
 
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
