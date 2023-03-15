@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -92,7 +93,26 @@ namespace Server.Controllers
         [Authorize]
         public IActionResult Test()
         {
-            return Ok(new { message = "Authorized" });
+            var currentUser = HttpContext.User;
+            var userId = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
+            var userEmail = currentUser.FindFirst(ClaimTypes.Email)?.Value;
+            var userRole = currentUser.FindFirst(ClaimTypes.Role)?.Value;
+
+            return Ok(new { message = "Authorized", userId, userName, userEmail, userRole });
+        }
+
+        [HttpGet("test2")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult Test2()
+        {
+            var currentUser = HttpContext.User;
+            var userId = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
+            var userEmail = currentUser.FindFirst(ClaimTypes.Email)?.Value;
+            var userRole = currentUser.FindFirst(ClaimTypes.Role)?.Value;
+
+            return Ok("autherized");
         }
     }
 }
