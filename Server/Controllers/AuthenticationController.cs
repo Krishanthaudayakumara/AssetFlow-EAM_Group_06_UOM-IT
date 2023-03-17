@@ -60,13 +60,13 @@ namespace Server.Controllers
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null)
             {
-                return BadRequest("Invalid username or password");
+                return BadRequest(new AuthResponseDto { Message = "Invalid username or password", IsSuccess = false });
             }
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
             if (!result.Succeeded)
             {
-                return BadRequest("Invalid username or password");
+                return BadRequest(new AuthResponseDto { Message = "Invalid username or password", IsSuccess = false });
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -75,9 +75,9 @@ namespace Server.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.Role)
+            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, user.Role)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -85,9 +85,23 @@ namespace Server.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
 
-            Console.WriteLine(tokenString);
-            return Ok(new AuthResponseDto { Token = tokenString });
+            var authResponse = new AuthResponseDto
+            {
+                Token = tokenString,
+                IsSuccess = true,
+                Expiration = token.ValidTo,
+                User = new UserDto
+                {
+                    Id = user.Id,
+                    Username = user.UserName,
+                    Email = user.Email,
+                    Role = user.Role
+                }
+            };
+
+            return Ok(authResponse);
         }
+
 
         [HttpGet("test")]
         [Authorize]
