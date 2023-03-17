@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {}
+    "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {
+    "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+        "projectPath": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
+        "outputPath": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -44,6 +44,16 @@
               "target": "Package",
               "version": "[7.0.2, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -68,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }
