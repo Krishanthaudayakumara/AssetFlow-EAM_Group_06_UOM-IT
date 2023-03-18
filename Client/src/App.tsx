@@ -19,7 +19,7 @@ const App: React.FC = () => {
     <Router>
       <Wrapper>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Dashboard />} />
 
           {/* Temporary routes */}
 
