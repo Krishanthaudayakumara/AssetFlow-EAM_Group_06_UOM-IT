@@ -2,32 +2,49 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Col, Image } from "react-bootstrap";
 import "../css/Login.css"; // import background image CSS file
 import { BsArrowRightCircle } from "react-icons/bs";
+import { login } from "../services/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:5087/api/Authentication/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      if (response.status === 200) {
-        setIsValid(true);
-        console.log(response.body);
-        
-      } else {
-        setIsValid(false);
-      }
+      const data = await login(username, password);
+      setIsValid(true);
+      localStorage.setItem("token", data.token); // store the token in local storage
+      navigate("/"); // redirect to home page
+    } catch (e: any) {
+      setIsValid(false);
+      setError(e.message); // set the error message to display in the component
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    const userId = "123"; // replace with the actual user ID
+    try {
+      const response = await fetch(
+        `http://localhost:5087/api/auth/users/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            accept: "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      // handle successful deletion
     } catch (error) {
       console.error(error);
+      // handle error
     }
   };
 
@@ -40,9 +57,7 @@ const Login: React.FC = () => {
         backgroundSize: "cover",
       }}
     >
-
       <Row className="justify-content-center">
-
         <Col lg={8} className="login-left-col">
           <Image src={"/img/login-left.png"} className="login-left" />
           <h1>Efficient Asset Management Equals Success</h1>
@@ -82,14 +97,15 @@ const Login: React.FC = () => {
                 }}
               />
             </Button>
-            {isValid === true && <p>Valid User</p>}
-            {isValid === false && <p>Invalid User</p> }
-            
+            {isLoading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
+            {isValid === false && <p>Invalid User</p>}
           </Form>
+          <Button variant="danger" onClick={handleDeleteUser}>
+            Delete User
+          </Button>
         </Col>
-
       </Row>
-
     </Container>
   );
 };

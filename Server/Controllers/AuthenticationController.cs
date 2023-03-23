@@ -1,145 +1,194 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Server.Data;
+using Server.Dtos;
 using Server.DTOs;
 using Server.Models;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IConfiguration _config;
+        private readonly ApplicationDbContext _context;
 
-
-        public AuthenticationController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration config)
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _config = config;
+            _context = context;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto model)
+        public async Task<IActionResult> Register(RegisterDto model)
         {
-            if (!ModelState.IsValid)
+            var userExists = await _userManager.FindByNameAsync(model.Username);
+            if (userExists != null)
             {
-                return BadRequest(ModelState);
+                return BadRequest("Username already exists");
             }
 
-            var user = new User { UserName = model.Username, Email = model.Email, Role = model.Role };
+            var user = new User
+            {
+                Email = model.Email,
+                UserName = model.Username,
+                Role = model.Role
+            };
+
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
                 return BadRequest(result.Errors);
             }
 
-            return Ok(user);
+            return Ok(new AuthResponseDto { Message = "Registration successful" });
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto model)
+        public async Task<IActionResult> Login(LoginDto model)
         {
-            if (!ModelState.IsValid)
+            var user = await _userManager.FindByNameAsync(model.Username);
+            if (user == null)
             {
-                return BadRequest(ModelState);
+                return BadRequest(new AuthResponseDto { Message = "Invalid username or password", IsSuccess = false });
             }
 
-            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
             if (!result.Succeeded)
             {
-                return Unauthorized();
+                return BadRequest(new AuthResponseDto { Message = "Invalid username or password", IsSuccess = false });
             }
 
-            var user = await _userManager.FindByNameAsync(model.Username);
-            var roles = await _userManager.GetRolesAsync(user);
-            var token = GenerateJwtToken(user);
-
-
-            var response = new
-            {
-                user = user,
-                role = roles,
-                token = token
-            };
-
-            Console.WriteLine(response);
-
-
-            return Ok(response.user);
-        }
-
-        [HttpGet("me")]
-        public IActionResult GetCurrentUser()
-        {
-            var username = User.Identity.Name;
-            var roles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
-
-            var response = new
-            {
-                Username = username,
-                Roles = roles
-            };
-            Console.Write(response);
-            return Ok(response.Username);
-        }
-
-        [HttpGet("authorized")]
-        [Authorize]
-        public IActionResult Authorized()
-        {
-            var username = User.Identity.Name;
-            var roles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
-
-            var response = new
-            {
-                Username = username,
-                Roles = roles
-            };
-
-            return Ok(response);
-        }
-
-
-        [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return NoContent();
-        }
-
-        private string GenerateJwtToken(User user)
-        {
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Role, user.Role)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("very_secret_key_for_jwt_token");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = creds
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, user.Role)
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            var authResponse = new AuthResponseDto
+            {
+                Token = tokenString,
+                IsSuccess = true,
+                Expiration = token.ValidTo,
+                User = new UserDto
+                {
+                    Id = user.Id,
+                    Username = user.UserName,
+                    Email = user.Email,
+                    Role = user.Role
+                }
             };
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return tokenHandler.WriteToken(token);
+            return Ok(authResponse);
         }
+
+
+        [HttpGet("test")]
+        [Authorize]
+        public IActionResult Test()
+        {
+            var currentUser = HttpContext.User;
+            var userId = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
+            var userEmail = currentUser.FindFirst(ClaimTypes.Email)?.Value;
+            var userRole = currentUser.FindFirst(ClaimTypes.Role)?.Value;
+
+            return Ok(new { message = "Authorized", userId, userName, userEmail, userRole });
+        }
+
+        [HttpGet("test2")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult Test2()
+        {
+            var currentUser = HttpContext.User;
+            var userId = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
+            var userEmail = currentUser.FindFirst(ClaimTypes.Email)?.Value;
+            var userRole = currentUser.FindFirst(ClaimTypes.Role)?.Value;
+
+            return Ok("autherized");
+        }
+
+        [HttpGet("users")]
+        // [Authorize(Roles = "admin")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await _userManager.Users.Select(u => new UserDto
+            {
+                Id = u.Id,
+                Username = u.UserName,
+                Email = u.Email,
+                Role = u.Role
+            }).ToListAsync();
+
+            return Ok(users);
+        }
+
+
+        [HttpDelete("users/{userId}")]
+        // [Authorize(Roles = "admin")]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok();
+        }
+
+        [HttpPut("users/{userId}")]
+        // [Authorize(Roles = "admin")]
+        public async Task<IActionResult> UpdateUser(string userId, UpdateUserDto model)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.UserName = model.Username;
+            user.Email = model.Email;
+            user.Role = model.Role;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok();
+        }
+
+
+
     }
 }

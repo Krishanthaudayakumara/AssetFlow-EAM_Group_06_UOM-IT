@@ -2,10 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import User from "./pages/User";
+import User from "./pages/User/User";
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/DashWrapper";
 import Sidebar from "./components/Sidebar";
+import PrivateRoute from "./PrivateRoute";
 
 const App: React.FC = () => {
   return (
@@ -15,7 +16,7 @@ const App: React.FC = () => {
           path="/"
           element={
             <Wrapper>
-              <Home />
+              <PrivateRoute />
             </Wrapper>
           }
         />
@@ -32,14 +33,16 @@ const App: React.FC = () => {
 
         <Route path="/login" element={<Login />} />
 
-        <Route
-          path="/user"
-          element={
-            <Wrapper>
-              <User />
-            </Wrapper>
-          }
-        />
+        <Route path="/user" element={<PrivateRoute />}>
+          <Route
+            path="/user"
+            element={
+              <Wrapper>
+                <User />
+              </Wrapper>
+            }
+          />
+        </Route>
       </Routes>
     </Router>
   );
