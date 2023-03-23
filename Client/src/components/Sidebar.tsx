@@ -21,6 +21,8 @@ import {
   FaCalendarAlt,
   FaAngleLeft,
   FaAngleRight,
+  FaUserTie,
+  FaSuitcase
 } from "react-icons/fa";
 
 import "../css/Sidebar.css"; // import background image CSS file
@@ -73,12 +75,12 @@ const items = [
     label: "Users",
     link : "/user",
 
-    icon: FaUsers,
-    dropdownItems: [
-      { label: "All Users", link: "/user" },
-      { label: "Add User", link: "/user/add" },
-    ],
+    icon: FaUsers
   },
+  { label: "Employees", link: "/employee", icon: FaUserTie },
+  { label: "Departments", link: "/department", icon: FaSuitcase },
+
+
   { label: "Suppliers", link: "/supplier", icon: FaShippingFast },
   { label: "Support", link: "/support", icon: FaComments },
   { label: "Calendar", link: "/calendar", icon: FaCalendarAlt },

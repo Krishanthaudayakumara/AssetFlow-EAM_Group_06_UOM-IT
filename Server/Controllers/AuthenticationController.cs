@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Server.Data;
 using Server.Dtos;
@@ -128,5 +129,66 @@ namespace Server.Controllers
 
             return Ok("autherized");
         }
+
+        [HttpGet("users")]
+        // [Authorize(Roles = "admin")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await _userManager.Users.Select(u => new UserDto
+            {
+                Id = u.Id,
+                Username = u.UserName,
+                Email = u.Email,
+                Role = u.Role
+            }).ToListAsync();
+
+            return Ok(users);
+        }
+
+
+        [HttpDelete("users/{userId}")]
+        // [Authorize(Roles = "admin")]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok();
+        }
+
+        [HttpPut("users/{userId}")]
+        // [Authorize(Roles = "admin")]
+        public async Task<IActionResult> UpdateUser(string userId, UpdateUserDto model)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.UserName = model.Username;
+            user.Email = model.Email;
+            user.Role = model.Role;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok();
+        }
+
+
+
     }
 }

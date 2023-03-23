@@ -27,6 +27,27 @@ const Login: React.FC = () => {
     }
   };
 
+  const handleDeleteUser = async () => {
+    const userId = "123"; // replace with the actual user ID
+    try {
+      const response = await fetch(
+        `http://localhost:5087/api/auth/users/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            accept: "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      // handle successful deletion
+    } catch (error) {
+      console.error(error);
+      // handle error
+    }
+  };
+
   return (
     <Container
       className="login-container"
@@ -80,6 +101,9 @@ const Login: React.FC = () => {
             {error && <p>{error}</p>}
             {isValid === false && <p>Invalid User</p>}
           </Form>
+          <Button variant="danger" onClick={handleDeleteUser}>
+            Delete User
+          </Button>
         </Col>
       </Row>
     </Container>
