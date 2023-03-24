@@ -12,6 +12,7 @@ namespace Server.Models.Support
         public int TeamId { get; set; }
         public Team Team { get; set; }
         public string AgentStatus { get; set; }
+        public string ProfileImage { get; set; }
         public ICollection<Ticket> Tickets { get; set; }
     }
 }

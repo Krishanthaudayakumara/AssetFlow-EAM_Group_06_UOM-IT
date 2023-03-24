@@ -11,9 +11,12 @@ namespace Server.Controllers.Support
     public class TeamController : ControllerBase
     {
         private readonly DataContext _context;
-        public TeamController(DataContext context)
+        private readonly IWebHostEnvironment WebHostEnvironment;
+        public TeamController(DataContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+             WebHostEnvironment = webHostEnvironment;
+
         }
 
         /*[HttpGet("{search}")]
@@ -47,7 +50,7 @@ namespace Server.Controllers.Support
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTeam([FromBody] TeamToInsert teamToInsert)
+        public async Task<IActionResult> AddTeam([FromForm] TeamToInsert teamToInsert)
         {
             if (teamToInsert is null)
             {
@@ -57,9 +60,22 @@ namespace Server.Controllers.Support
             {
                 Name = teamToInsert.Name,
                 Description = teamToInsert.Description,
+                //CreateDate = teamToInsert.CreateDate,
                 IssueTypeId = teamToInsert.IssueTypeId
 
             };
+            if (teamToInsert.ProfileImage != null){
+                string fileName = teamToInsert.ProfileImage.FileName ;
+
+                string directory = Path.Combine(WebHostEnvironment.ContentRootPath, "ProfileImages");
+                Directory.CreateDirectory(directory);
+                string filePath = Path.Combine(directory, fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await teamToInsert.ProfileImage.CopyToAsync(stream);
+                }
+                tm.ProfileImage = fileName;
+            }
             try
             {
                 await _context.Teams.AddAsync(tm);

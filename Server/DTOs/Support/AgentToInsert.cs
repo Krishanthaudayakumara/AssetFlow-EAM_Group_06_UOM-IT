@@ -9,7 +9,9 @@ namespace Server.DTOs.Support
         public string Email { get; set; }
         public DateTime JoinDate { get; set; }
         public int TeamId { get; set; }
-        public string AgentStatus { get; set; }        
-        
+        public string AgentStatus { get; set; }
+        public IFormFile ProfileImage { get; set; }       
+     
+
     }
 }

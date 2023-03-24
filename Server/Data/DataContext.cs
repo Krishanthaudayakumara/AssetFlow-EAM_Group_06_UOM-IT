@@ -16,5 +16,6 @@ namespace Server.Data
         public DbSet<Reply> Replys {get; set;}
 
         public DbSet<Employee> Employees {get; set;}
+        public DbSet<ImageUpload> ImageUploads {get; set;}
     }
 }

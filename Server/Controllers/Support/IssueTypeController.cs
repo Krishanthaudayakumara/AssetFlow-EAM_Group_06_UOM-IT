@@ -47,5 +47,19 @@ namespace Server.Controllers.Support
             }
             return Ok(issue);
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteIssueType(int id)
+        {
+            var deleteIssueType = await _context.IssueTypes.FirstOrDefaultAsync(x => x.Id == id);
+            if (deleteIssueType is null)
+            {
+                return NotFound();
+            }
+            _context.IssueTypes.Remove(deleteIssueType);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+
+        }
     }
 }

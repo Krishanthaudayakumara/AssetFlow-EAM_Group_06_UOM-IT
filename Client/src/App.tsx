@@ -11,9 +11,10 @@ import AgentTable from "./components/Support/AgentTable";
 import MyAssignmentsTable from "./components/Support/MyAssignmentsTable";
 import ViewAgent from "./components/Support/ViewAgent";
 import AgentTeam from "./pages/Support/AgentTeam";
-import AddIssueType from "./components/Support/AddIssueType";
+import IssueTypeTable from "./components/Support/IssueTypeTable";
 import TeamTable from "./components/Support/TeamTable";
 import NewTeamForm from "./components/Support/NewTeamForm";
+import ProfileImage from "./components/Support/ProfileImage";
 
 const App: React.FC = () => {
   return (
@@ -33,9 +34,10 @@ const App: React.FC = () => {
         <Route path="/user" element={<User />} />
         <Route path="/SupportAgent" element={<SupportAgent />} />
         <Route path="/AgentTeam" element={<AgentTeam />} />
-        <Route path="/AddIssueType" element={<AddIssueType />} />
+        <Route path="/IssueTypeTable" element={<IssueTypeTable />} />
         <Route path="/TeamTable" element={<TeamTable />} />
         <Route path="/NewTeamForm" element={<NewTeamForm />} />
+        
       </Routes>
       
        

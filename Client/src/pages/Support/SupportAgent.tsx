@@ -1,8 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Nav, Table } from "react-bootstrap";
 import AgentTable from '../../components/Support/AgentTable';
-import Sidebar from '../../components/Sidebar';
-import MyNavbar from '../../components/Navbar';
+
 import Chatbot from '../../components/Support/Chatbot';
 import SupportButton from '../../components/Support/SupportButton';
 

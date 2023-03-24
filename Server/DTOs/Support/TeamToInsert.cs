@@ -4,6 +4,8 @@ namespace Server.DTOs.Support
     {
         public string Name { get; set; }
         public string Description { get; set;}
+         //public DateTime CreateDate { get; set; }
         public int IssueTypeId { get; set; }
+        public IFormFile ProfileImage { get; set; } 
     }
 }

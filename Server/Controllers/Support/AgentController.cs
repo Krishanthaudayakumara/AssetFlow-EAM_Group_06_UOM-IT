@@ -11,11 +11,13 @@ namespace Server.Controllers.Support
     public class AgentController : ControllerBase
     {
         private readonly DataContext _context;
-        private int id;
+        private readonly IWebHostEnvironment WebHostEnvironment;
 
-        public AgentController(DataContext context)
+
+        public AgentController(DataContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            WebHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -50,12 +52,13 @@ namespace Server.Controllers.Support
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAgent([FromBody] AgentToInsert agentToInsert)
+        public async Task<IActionResult> AddAgent([FromForm] AgentToInsert agentToInsert)
         {
             if (agentToInsert is null)
             {
                 return BadRequest();
             }
+
             var agent = new Agent
             {
                 FirstName = agentToInsert.FirstName,
@@ -65,10 +68,29 @@ namespace Server.Controllers.Support
                 Email = agentToInsert.Email,
                 JoinDate = agentToInsert.JoinDate,
                 TeamId = agentToInsert.TeamId,
-                AgentStatus = agentToInsert.AgentStatus
-
-
+                AgentStatus = agentToInsert.AgentStatus,
             };
+
+            if (agentToInsert.ProfileImage != null)
+            {
+                // generate a unique filename for the image
+                string fileName = agentToInsert.ProfileImage.FileName ;
+
+                // create a new directory to store the uploaded image
+                string directory = Path.Combine(WebHostEnvironment.ContentRootPath, "ProfileImages");
+                Directory.CreateDirectory(directory);
+
+                // copy the uploaded image file to the new directory
+                string filePath = Path.Combine(directory, fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await agentToInsert.ProfileImage.CopyToAsync(stream);
+                }
+
+                // set the ProfileImage property of the Agent object to the filename of the uploaded image
+                agent.ProfileImage = fileName;
+            }
+
             try
             {
                 await _context.Agents.AddAsync(agent);
@@ -76,12 +98,15 @@ namespace Server.Controllers.Support
             }
             catch (System.Exception ex)
             {
-
                 Console.Write(ex.Message);
                 return StatusCode(500);
             }
+
             return Ok(agent);
         }
+
+
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAgent(int id, [FromBody] AgentToUpdate agentToUpdate)
