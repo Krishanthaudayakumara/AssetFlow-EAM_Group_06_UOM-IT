@@ -9,6 +9,9 @@ namespace Server.DTOs
         public int ItemCount{get; set;}
         public string Status {get; set;}
         public int WorkstationId{get; set;}
+        public string Manufacturer { get; set; }
+        public DateTime AssignedDate { get; set; }
+        public DateTime StartDate{get;set;}
 
         
     }

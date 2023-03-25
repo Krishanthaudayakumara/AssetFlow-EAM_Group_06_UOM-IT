@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj": {}
+    "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj": {
+    "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj",
+        "projectUniqueName": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj",
+        "projectPath": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\janit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\server\\obj\\",
+        "outputPath": "C:\\Users\\janit\\OneDrive\\Documents\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\janit\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,6 +38,14 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "AutoMapper.Extensions.ExpressionMapping": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.2, )"

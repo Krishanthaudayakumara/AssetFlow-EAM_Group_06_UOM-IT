@@ -2,16 +2,16 @@ const BuildingFloor = [
     {
         b_id: "#120A",
         floor_no:"2",
-        b_space:"meeting room",
+      
         b_name:"nelson building",
-        description :"mouse",
+      
         
         
         
         
     },
     {
-        b_id: "#121B",
+      
         floor_no:"2",
         b_space:"board room",
         b_name:"lotus  building",

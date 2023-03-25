@@ -1,6 +1,7 @@
 
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs;
 using Server.Models.Facility;
@@ -9,7 +10,8 @@ namespace Server.Controllers.Facility
 {
     
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
+    
     public class WorkstationController :ControllerBase
     {
         private readonly DataContext _context;
@@ -40,6 +42,70 @@ namespace Server.Controllers.Facility
             return Ok(ws);
 
          }
+
+         
+          [HttpGet("{id}")]
+        public async Task <IActionResult> GetWorkstation(int id){
+        var w= await _context.Workstations.Include(x=>x.FacilityAssets).FirstOrDefaultAsync(x => x.Id==id);
+        if(w is null){
+            return NotFound();
+        }
+
+        var workstationToReturn = new WorkstationToReturn{
+            Id= w.Id,   
+            type=w.type
+                            
+
+
+        };
+
+        return Ok(w);
+
+    }
+
+    [HttpDelete("delete-asset-by-id/{id}")]
+
+           public async Task <IActionResult> DeleteWorkstation(int id){
+        var deleteWorkstation= await _context.Workstations .FindAsync(id);
+        if(deleteWorkstation is null){
+            return NotFound();
+        }
+
+        _context.Workstations.Remove(deleteWorkstation);
+        await _context.SaveChangesAsync();
+        
+
+        
+        return NoContent();
+
+    }
+
+    [HttpPut("{id}")]
+
+     
+
+        public async Task <IActionResult> UpdateWorkstation(int id, WorkstationToInsert WorkstationToUpdate){
+        var updateWorkstation= await _context.Workstations .FirstOrDefaultAsync(x => x.Id==id);
+        if(updateWorkstation is null){
+            return NotFound();
+        }
+
+        updateWorkstation.type=WorkstationToUpdate.type;
+        
+        
+        await _context.SaveChangesAsync();
+        
+
+        
+        return Ok(updateWorkstation);
+
+    }
+
+    
+
+
+
+            
 
 
 

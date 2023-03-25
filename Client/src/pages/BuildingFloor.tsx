@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import BuildingFloor_table from "../components/Facility/BuildingFloor_table";
+
 import Navbar from "../components/Navbar";
 
 import Facbutton from "../components/Facbutton";
@@ -21,7 +22,7 @@ const BuildingFloor: React.FC = () => {
         Building & Spaces
       </h5>
       <div className="">
-        <BuildingFloor_table />
+        <BuildingFloor_table/>
       </div>
     </div>
   );
