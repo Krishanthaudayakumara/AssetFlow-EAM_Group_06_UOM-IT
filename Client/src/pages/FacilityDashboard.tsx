@@ -1,16 +1,15 @@
-import React from 'react';
+import React from "react";
 import Facbutton from "../components/Facbutton";
-import  "../css/Facilitycss/Topbutton.css"; 
+import WorkstationCard from "../components/Facility/WorkstationCard";
+import "../css/Facilitycss/Topbutton.css";
+import { Container, Row, Col } from "react-bootstrap";
 
+import Work1 from "../components/Work1";
 
 const FacilityDashboard: React.FC = () => {
-    return (
-        <div>
-               <Facbutton />
-        </div>
-     
-    );
-  };
-  
-  export default FacilityDashboard;
-  
+  return (
+      <Work1 />
+  );
+};
+
+export default FacilityDashboard;

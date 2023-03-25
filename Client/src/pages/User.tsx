@@ -7,7 +7,6 @@ import { BsArrowRightCircle } from "react-icons/bs";
 const User: React.FC = () => {
   return (
     <div>
-      <Navbar />
      
     </div>
   );
