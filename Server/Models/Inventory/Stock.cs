@@ -12,7 +12,7 @@ namespace Server.Models.Inventory
         public int Cost { get; set; }
         public DateTime WarrantyExpiring { get; set; }
         public int SupplierId { get; set; }
-        public Supplier Supplier{get;set;}
+        // public Supplier Supplier{get;set;}
         public int Amount { get; set; }
         public ICollection<Asset> Assets { get; set; }
         

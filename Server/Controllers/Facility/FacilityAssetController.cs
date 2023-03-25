@@ -1,234 +1,61 @@
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs;
 using Server.Models.Facility;
 using Server.Models.Inventory;
-using AutoMapper
-;
-
-
-
-
-
-
-
 
 namespace Server.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-
-
-
+    [ApiController]
     public class FacilityAssetController : ControllerBase
     {
-        
-
         private readonly DataContext _context;
 
-        public FacilityAssetController(DataContext context )
+        public FacilityAssetController(DataContext context)
         {
-            
             _context = context;
-
         }
 
-       /* [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsset(int id)
+        // POST: api/FacilityAsset
+        [HttpPost]
+        public async Task<ActionResult<FacilityAssetDTO>> PostFacilityAsset(CreateFacilityAssetDTO createFacilityAssetDTO)
         {
-            var asset = await _context.FacilityAssets.FirstOrDefaultAsync(x => x.Id == id);
-            if (asset is null)
+            var asset = await _context.Assets.FindAsync(createFacilityAssetDTO.AssetId);
+
+            if (asset == null)
             {
-                return NotFound();
+                return NotFound("Asset not found");
             }
 
-            var facAssetToReturn = new FacAssetToReturn
-            {
-                Id = asset.Id,
-                
-                
-               // ItemCount = asset.Itemount,
+            asset.Status = "assigned to facility";
 
-
-
-            };
-
-            return Ok(facAssetToReturn);
-
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> GetAllbuildings ()
-        {
-            var allbuildings = await _context.Buildings.ToListAsync();
-            return Ok(allbuildings);
-        }
-       [HttpPost]
-        public async Task<IActionResult> AddAsset([FromBody] FacAssetToInsert facAssetToInsert)
-        {
-            if (facAssetToInsert is null)
-            {
-                return BadRequest();
-            }
-
-            var fati = new FacilityAsset
-            {
-                
-                
-                
-                
-                AssignedDate = facAssetToInsert.AssignedDate,
-                ReceivedDate = facAssetToInsert.StartDate,
-                WorkstationId = facAssetToInsert.WorkstationId
-
-            };
-            try
-            {
-                await _context.FacilityAssets.AddAsync(fati);
-                await _context.SaveChangesAsync();
-            }
-
-            catch (System.Exception ex)
-            {
-                Console.Write(ex.Message);
-                return StatusCode(500);
-
-            }
-
-            return Ok(fati);
-        }
-
-        [HttpDelete("delete-asset-by-id/{id}")]
-
-        public async Task<IActionResult> DeleteAsset(int id)
-        {
-            var deleteAsset = await _context.FacilityAssets.FindAsync(id);
-            if (deleteAsset is null)
-            {
-                return NotFound();
-            }
-
-            _context.FacilityAssets.Remove(deleteAsset);
-            await _context.SaveChangesAsync();
-
-
-
-            return NoContent();
-
-        }
-
-        [HttpPut("{id}")]
-
-
-
-        public async Task<IActionResult> UpdateAsset(int id, FacAssetToInsert FacToUpdate)
-        {
-            var updateAsset = await _context.FacilityAssets.FirstOrDefaultAsync(x => x.Id == id);
-            if (updateAsset is null)
-            {
-                return NotFound();
-            }
-
-            //updateAsset.ItemName = FacToUpdate.ItemName;
-            
-            //updateAsset.ItemCount = FacToUpdate.ItemCount;
-
-
-            await _context.SaveChangesAsync();
-
-
-
-            return Ok(updateAsset);
-
-        }*/
-
- /*       [HttpPost]
-public async Task<IActionResult> CreateFacilityAssets()
-{
-    try
-    {
-        // Get all issued assets
-        var issuedAssets = _context.Assets.Where(a => a.Status == "Issued").ToList();
-
-        // Create FacilityAsset records for each issued asset
-        foreach (var asset in issuedAssets)
-        {
             var facilityAsset = new FacilityAsset
             {
-                AssetId = asset.Id,
-                SubcategoryId = asset.SubCategoryId,
-                Description = asset.Description,
-                Vendor = asset.Vendor,
-                 AssetConditionStatus = "New",
-                AssignedDate = DateTime.Now,
-                ReceivedDate = DateTime.Now
-
-            
-                
-                
-                
+                AssetId = createFacilityAssetDTO.AssetId,
+                AssetConditionStatus = createFacilityAssetDTO.AssetConditionStatus,
+                WorkstationId = createFacilityAssetDTO.WorkstationId,
+                AssignedDate = createFacilityAssetDTO.AssignedDate,
+                ReceivedDate = createFacilityAssetDTO.ReceivedDate
             };
 
             _context.FacilityAssets.Add(facilityAsset);
-        }
+            await _context.SaveChangesAsync();
 
-        await _context.SaveChangesAsync();
-
-        return Ok();
-    }
-    catch (Exception ex)
-    {
-        return BadRequest(ex.Message);
-    }
-}*/
-
-/*[HttpPost]
-public async Task<IActionResult> CreateFacilityAssets()
-{
-    try
-    {
-        // Get all issued assets
-        var issuedAssets = _context.Assets.Where(a => a.Status == "Issued").ToList();
-
-        // Create FacilityAsset records for each issued asset
-        foreach (var asset in issuedAssets)
-        {
-            var facilityAsset = new FacilityAsset();
-
-            // Map Asset properties to FacilityAsset DTO
-            var assetDto = new AssetTransferDto
+            var facilityAssetDTO = new FacilityAssetDTO
             {
-                AssetId = asset.Id,
-                SubcategoryId = asset.SubCategoryId,
-                Description = asset.Description,
-                Vendor = asset.Vendor,
-                WarrantyExpiration = asset.WarrentyExpiration
+                Id = facilityAsset.Id,
+                AssetId = facilityAsset.AssetId,
+                AssetConditionStatus = facilityAsset.AssetConditionStatus,
+                WorkstationId = facilityAsset.WorkstationId,
+                AssignedDate = facilityAsset.AssignedDate,
+                ReceivedDate = facilityAsset.ReceivedDate
             };
 
-            // Map Asset DTO to FacilityAsset entity
-            _mapper.Map(assetDto, facilityAsset);
-
-            // Set other FacilityAsset properties as needed
-            facilityAsset.AssetConditionStatus = "New";
-            facilityAsset.AssignedDate = DateTime.Now;
-            facilityAsset.ReceivedDate = DateTime.Now;
-
-            _context.FacilityAssets.Add(facilityAsset);
+            return CreatedAtAction(nameof(PostFacilityAsset), new { id = facilityAssetDTO.Id }, facilityAssetDTO);
         }
-
-        await _context.SaveChangesAsync();
-
-        return Ok();
-    }
-    catch (Exception ex)
-    {
-        return BadRequest(ex.Message);
-    }
-}*/
-
- 
     }
 }
-

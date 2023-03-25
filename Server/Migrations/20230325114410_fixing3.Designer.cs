@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230323133752_AddASSetIdToFacilityTable")]
-    partial class AddASSetIdToFacilityTable
+    [Migration("20230325114410_fixing3")]
+    partial class fixing3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,19 +63,11 @@ namespace Server.Migrations
                     b.Property<DateTime>("AssignedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("ReceivedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SubcategoryId")
+                    b.Property<int?>("SubCategoryId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Vendor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("WorkstationId")
                         .HasColumnType("int");
@@ -84,7 +76,7 @@ namespace Server.Migrations
 
                     b.HasIndex("AssetId");
 
-                    b.HasIndex("SubcategoryId");
+                    b.HasIndex("SubCategoryId");
 
                     b.HasIndex("WorkstationId");
 
@@ -121,25 +113,22 @@ namespace Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AssignedTo")
+                    b.Property<string>("Barcode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Cost")
-                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("PurchasedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SubCategoryId")
+                    b.Property<int>("StockId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SubCategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Vendor")
@@ -149,11 +138,44 @@ namespace Server.Migrations
                     b.Property<DateTime>("WarrentyExpiration")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("condition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StockId");
 
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("Assets");
+                });
+
+            modelBuilder.Entity("Server.Models.Inventory.Assign", b =>
+                {
+                    b.Property<int>("AssignId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssignId"));
+
+                    b.Property<int>("AssetId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("AssignTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReqID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AssignId");
+
+                    b.HasIndex("AssetId");
+
+                    b.ToTable("Assign");
                 });
 
             modelBuilder.Entity("Server.Models.Inventory.Category", b =>
@@ -171,6 +193,39 @@ namespace Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Server.Models.Inventory.Stock", b =>
+                {
+                    b.Property<int>("StockId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StockId"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cost")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PurchasedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("WarrantyExpiring")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("StockId");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("Stock");
                 });
 
             modelBuilder.Entity("Server.Models.Inventory.SubCategory", b =>
@@ -200,24 +255,20 @@ namespace Server.Migrations
                     b.HasOne("Server.Models.Inventory.Asset", "Asset")
                         .WithMany()
                         .HasForeignKey("AssetId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Server.Models.Inventory.SubCategory", "SubCategory")
+                    b.HasOne("Server.Models.Inventory.SubCategory", null)
                         .WithMany("FacilityAssets")
-                        .HasForeignKey("SubcategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SubCategoryId");
 
                     b.HasOne("Server.Models.Facility.Workstation", "Workstation")
                         .WithMany("FacilityAssets")
                         .HasForeignKey("WorkstationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Asset");
-
-                    b.Navigation("SubCategory");
 
                     b.Navigation("Workstation");
                 });
@@ -235,8 +286,34 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Inventory.Asset", b =>
                 {
-                    b.HasOne("Server.Models.Inventory.SubCategory", "SubCategory")
+                    b.HasOne("Server.Models.Inventory.Stock", "Stock")
                         .WithMany("Assets")
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.Inventory.SubCategory", null)
+                        .WithMany("Assets")
+                        .HasForeignKey("SubCategoryId");
+
+                    b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("Server.Models.Inventory.Assign", b =>
+                {
+                    b.HasOne("Server.Models.Inventory.Asset", "Asset")
+                        .WithMany("Assigns")
+                        .HasForeignKey("AssetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Asset");
+                });
+
+            modelBuilder.Entity("Server.Models.Inventory.Stock", b =>
+                {
+                    b.HasOne("Server.Models.Inventory.SubCategory", "SubCategory")
+                        .WithMany()
                         .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -265,9 +342,19 @@ namespace Server.Migrations
                     b.Navigation("FacilityAssets");
                 });
 
+            modelBuilder.Entity("Server.Models.Inventory.Asset", b =>
+                {
+                    b.Navigation("Assigns");
+                });
+
             modelBuilder.Entity("Server.Models.Inventory.Category", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("Server.Models.Inventory.Stock", b =>
+                {
+                    b.Navigation("Assets");
                 });
 
             modelBuilder.Entity("Server.Models.Inventory.SubCategory", b =>
