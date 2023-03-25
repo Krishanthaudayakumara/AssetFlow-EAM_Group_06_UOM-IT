@@ -11,20 +11,20 @@ export default function SupportButton() {
   const handleClose = () => setshow(false);
   const handleNewTicket = () => {
     setModalTitle("New Ticket");
-    setModalBody(< NewTicketForm/>);
+    setModalBody(<NewTicketForm />);
     setshow(true);
-};
-const handleAddAgent = () => {
-  setModalTitle("Add Agent");
-  setModalBody(<AddAgentModalForm />);
-  setshow(true);
-};
-  
+  };
+  const handleAddAgent = () => {
+    setModalTitle("Add Agent");
+    setModalBody(<AddAgentModalForm />);
+    setshow(true);
+  };
+
   return (
     <div>
       <div className="container">
         <div className="row">
-          <div className="col-5">
+          <div className="col-2">
             <p
               style={{
                 margin: "0 0 0 60px",
@@ -36,21 +36,31 @@ const handleAddAgent = () => {
               SUPPORT
             </p>
           </div>
-          <div className="col-3" style={{ padding: "0 0 0 100px" }}>
+          <div className="col-3" style={{ padding: "0 0 0 120px" }}>
             <button
-              
               type="button"
               className="btn btn-outline-primary"
               style={{
                 border: "1px solid #482890",
                 color: "#482890",
-                
               }}
             >
-              Export to excel
+              + New Issue
             </button>
           </div>
-          <div className="col-2" style={{ padding: "0 0 0 20px" }}>
+          <div className="col-3" style={{ padding: "0 0 0 40px" }}>
+            <button
+              type="button"
+              className="btn btn-outline-primary"
+              style={{
+                border: "1px solid #482890",
+                color: "#482890",
+              }}
+            >
+              + New Team
+            </button>
+          </div>
+          <div className="col-2" style={{ padding: "0" }}>
             <button
               onClick={handleNewTicket}
               type="button"
@@ -60,14 +70,14 @@ const handleAddAgent = () => {
               + New Ticket
             </button>
           </div>
-          <div className="col-2" style={{ padding: "0 0 0 0" }}>
+          <div className="col-2" style={{ padding: "0" }}>
             <button
               onClick={handleAddAgent}
               type="button"
               className="btn btn-outline-light"
               style={{ backgroundColor: "#482890" }}
             >
-              + Add Agent
+              + New Agent
             </button>
           </div>
         </div>
@@ -76,13 +86,9 @@ const handleAddAgent = () => {
         <Modal.Header>
           <Modal.Title>{modalTitle}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-            {modalBody}          
-        </Modal.Body>
+        <Modal.Body>{modalBody}</Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={handleClose}  >
+          <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>

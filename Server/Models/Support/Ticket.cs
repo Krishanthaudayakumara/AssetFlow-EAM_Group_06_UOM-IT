@@ -17,7 +17,7 @@ namespace Server.Models.Support
         public Agent Agent { get; set; }
         public Feedback Feedback { get; set; }
         public string TicketStatus { get; set; }
-        public ICollection<Attachment> Attachments { get; set; }
+        
 
     }
 }

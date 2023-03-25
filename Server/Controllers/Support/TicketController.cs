@@ -20,6 +20,7 @@ namespace Server.Controllers.Support
         {
             var allTickets = await _context.Tickets.ToListAsync();
             return Ok(allTickets);
-        }       
+        }  
+             
     }
 }

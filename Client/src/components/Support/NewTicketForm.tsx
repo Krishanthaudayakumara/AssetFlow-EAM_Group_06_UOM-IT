@@ -49,6 +49,17 @@ const NewTicketForm = () => {
     <Form onSubmit={handleSubmit}>
       <Form.Group>
         <Form.Control
+          type="number"
+          placeholder="Enter your ID"
+          required
+          name="ID"
+          
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <br />
+      <Form.Group>
+        <Form.Control
           type="text"
           placeholder="Ticket Name *"
           required
@@ -95,17 +106,7 @@ const NewTicketForm = () => {
       </Form.Group>
       <br />
 
-      <Form.Group>
-        <Form.Control
-          type="number"
-          placeholder="Pending"
-          required
-          name="pending"
-          value={formData.pending}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <br />
+      
 
       <Form.Group>
         <Form.Control

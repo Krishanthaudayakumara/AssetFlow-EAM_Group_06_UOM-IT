@@ -21,17 +21,7 @@ const IssueTypeTable = () => {
       });
   }, []);
 
-  const handleDelete = (id: number) => {
-    axios
-      .delete(`http://localhost:5224/Api/IssueType/${id}`)
-      .then(() => {
-        const updatedIssues = issues.filter((issue) => issue.id !== id);
-        setIssues(updatedIssues);
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
+ 
 
   return (
     <div>
@@ -49,14 +39,7 @@ const IssueTypeTable = () => {
             <tr key={issue.id}>
               <td>{issue.id}</td>
               <td>{issue.name}</td>
-              <td>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDelete(issue.id)}
-                >
-                  Delete
-                </button>
-              </td>
+              
             </tr>
           ))}
         </tbody>

@@ -10,12 +10,18 @@ function SupportNav(){
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-             <li className="nav-item active">
-             <a className="nav-link">Agents(5)</a>
+            <li className="nav-item">
+             <a className="nav-link">Tickets(0)</a>
+                </li>
+             <li className="nav-item">
+             <a className="nav-link">Agents(0)</a>
                 </li>
             <li className="nav-item">
-             <a className="nav-link">Teams(5)</a>
-            </li>          
+             <a className="nav-link">Teams(0)</a>
+            </li> 
+            <li className="nav-item">
+             <a className="nav-link">Issues(0)</a>
+            </li>         
     </ul>
   </div>
 </nav>

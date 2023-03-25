@@ -1,24 +1,21 @@
-import { Fragment,useState } from "react";
-import { Button, Modal,  Table } from "react-bootstrap";
+import { Fragment, useState } from "react";
+import { Button, Modal, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons/faPen";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import Agents from "./Agents";
-import AgentStatus from "./AgentStatus";
+import Agents from "../Agents";
+import AgentStatus from "../AgentStatus";
 
-import SupportNav from "./SupportNav";
+//import SupportNav from "./SupportNav";
 
-function AgentTable() {
+function TicketTable() {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
   return (
     <div>
-         
-       <SupportNav/>
-      
       <p
         style={{
           margin: "0 0 30px 70px",
@@ -41,14 +38,12 @@ function AgentTable() {
               style={{ fontSize: "14px" }}
             >
               <thead>
-                <tr style={{ color: "#482890" }}>
-                  <th></th>
-                  <th>Agent Name</th>
-                  <th>Position</th>
-                  <th>Department</th>
-                  <th>E mail</th>
-                  <th>Pending</th>
-                  <th>Completed</th>
+                <tr style={{ color: "#482890" }}>                  
+                  <th>Ticket ID</th>
+                  <th>Employee ID</th>
+                  <th>Issue Type</th>
+                  <th>Problem</th>
+                  <th>Submit Date</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -57,17 +52,7 @@ function AgentTable() {
                 {Agents && Agents.length > 0
                   ? Agents.map((agent) => {
                       return (
-                        <tr >
-                          <td>
-                            <img
-                              src="/img/krish.png"
-                              alt="User profile"
-                              className="rounded-circle"
-                              style={{ width: "45px", height: "45px" }}
-                              onClick={handleShow}
-                            />
-                          </td>
-
+                        <tr>             
                           <td>{agent.agent_name}</td>
                           <td className="text-secondary">
                             {agent.agent_position}
@@ -107,23 +92,11 @@ function AgentTable() {
                   : "No data available"}
               </tbody>
             </Table>
-
-            <Modal show={show} onHide={handleClose}>
-              <Modal.Header>
-                <Modal.Title>Agent Details</Modal.Title>
-              </Modal.Header>
-              <Modal.Body></Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-              </Modal.Footer>
-            </Modal>
-          </div>
+           </div>
         </Fragment>
       </div>
     </div>
   );
 }
 
-export default AgentTable;
+export default TicketTable;
