@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../../components/Navbar";
 import {
   Form,
   Button,
@@ -12,6 +11,10 @@ import {
 } from "react-bootstrap";
 import { BsArrowRightCircle, BsPencilSquare, BsTrash } from "react-icons/bs";
 import axios from "axios";
+import UserTable from "../components/User/UserTable";
+import AddUserForm from "../components/User/AddUserForm";
+import EditUserForm from "../components/User/EditUserForm";
+
 
 interface IUser {
   id: string;
@@ -35,6 +38,11 @@ const User: React.FC = () => {
   const [showEditUserModal, setShowEditUserModal] = useState<boolean>(false);
   const [editingUser, setEditingUser] = useState<IUser | null>(null);
 
+  const [showAddUserForm, setShowAddUserForm] = useState(false);
+  const toggleAddUserForm = () => {
+    setShowAddUserForm(!showAddUserForm);
+  };
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -44,28 +52,12 @@ const User: React.FC = () => {
     setUsers(response.data);
   };
 
-  const handleAddUserModalOpen = () => {
-    setShowAddUserModal(true);
-  };
 
   const handleAddUserModalClose = () => {
     setShowAddUserModal(false);
   };
 
-  const handleAddUser = async () => {
-    const response = await axios.post(
-      "http://localhost:5087/api/auth/register",
-      newUser
-    );
-    if (response.data.isSuccess) {
-      alert(response.data.message);
-      getUsers();
-      setNewUser({ id: "", username: "", email: "", password: "", role: "" });
-      handleAddUserModalClose();
-    } else {
-      alert(response.data.message);
-    }
-  };
+  
 
   const handleEditUser = (user: IUser) => {
     setEditingUser(user);
@@ -112,114 +104,22 @@ const User: React.FC = () => {
             <h3 className="mt-5 mb-3">Users</h3>
           </Col>
           <Col className="text-end">
-            <Button variant="primary" onClick={handleAddUserModalOpen}>
+            <Button variant="primary" onClick={toggleAddUserForm}>
               Add User <BsArrowRightCircle />
             </Button>
           </Col>
         </Row>
-        <Table striped bordered hover className="mt-3">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
-                <td>
-                  <Button variant="light" onClick={() => handleEditUser(user)}>
-                    <BsPencilSquare />
-                  </Button>
-                </td>
-                <td>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDeleteUser(user.id)}
-                  >
-                    <BsTrash />
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+        <UserTable
+          users={users}
+          onEditUser={handleEditUser}
+          onDeleteUser={handleDeleteUser}
+        />
       </Container>{" "}
-      <Modal show={showAddUserModal} onHide={handleAddUserModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add User</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="formBasicUsername">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter username"
-                value={newUser.username}
-                onChange={(e) =>
-                  setNewUser({ ...newUser, username: e.target.value })
-                }
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={newUser.email}
-                onChange={(e) =>
-                  setNewUser({ ...newUser, email: e.target.value })
-                }
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                value={newUser.password}
-                onChange={(e) =>
-                  setNewUser({ ...newUser, password: e.target.value })
-                }
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicRole">
-              <Form.Label>Role</Form.Label>
-              <Form.Control
-                as="select"
-                value={newUser.role}
-                onChange={(e) =>
-                  setNewUser({ ...newUser, role: e.target.value })
-                }
-              >
-                <option value="">--Select--</option>
-                <option value="Admin">Admin</option>
-                <option value="User">User</option>
-              </Form.Control>
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleAddUserModalClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleAddUser}>
-            Add
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <AddUserForm
+        show={showAddUserForm}
+        handleClose={toggleAddUserForm}
+        handleAddUser={() => console.log("User added")}
+      />
       <Modal
         show={showEditUserModal}
         onHide={() => setShowEditUserModal(false)}

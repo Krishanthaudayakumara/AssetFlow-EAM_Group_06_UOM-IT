@@ -2,11 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import User from "./pages/User/User";
+import User from "./pages/User";
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/DashWrapper";
 import Sidebar from "./components/Sidebar";
 import PrivateRoute from "./PrivateRoute";
+import Employee from "./pages/Employee";
 
 const App: React.FC = () => {
   return (
@@ -39,6 +40,17 @@ const App: React.FC = () => {
             element={
               <Wrapper>
                 <User />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/employee" element={<PrivateRoute />}>
+          <Route
+            path="/employee"
+            element={
+              <Wrapper>
+                <Employee />
               </Wrapper>
             }
           />
