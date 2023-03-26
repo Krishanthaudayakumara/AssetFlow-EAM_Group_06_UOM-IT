@@ -13,7 +13,7 @@ namespace Server.Models.Support
         public string Problem { get; set; }
         public DateTime SubmitDate { get; set; }
         public Reply Reply { get; set; }
-        public int AgentId { get; set; }
+        public int? AgentId { get; set; }
         public Agent Agent { get; set; }
         public Feedback Feedback { get; set; }
         public string TicketStatus { get; set; }

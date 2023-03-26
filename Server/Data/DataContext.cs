@@ -14,6 +14,7 @@ namespace Server.Data
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Reply> Replys { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        
 
     }
 }

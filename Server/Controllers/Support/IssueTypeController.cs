@@ -21,6 +21,19 @@ namespace Server.Controllers.Support
             var allIssueTypes = await _context.IssueTypes.ToListAsync();
             return Ok(allIssueTypes);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetIssueType(int id)
+        {
+            var issue = await _context.IssueTypes.Include(x => x.Teams).Include(x => x.Tickets).FirstOrDefaultAsync(x => x.Id == id);
+
+            if (issue is null)
+            {
+                return NotFound();
+            }
+
+
+            return Ok(issue);
+        }
         [HttpPost]
         public async Task<IActionResult> AddIssueType([FromBody] IssueTypeToInsert issueTypeToInsert)
         {
@@ -46,6 +59,31 @@ namespace Server.Controllers.Support
                 return StatusCode(500);
             }
             return Ok(issue);
+        }
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> UpdateIssueType(int id, [FromBody] IssueTypeToUpdate issueTypeToUpdate)
+        {
+            var updateIssueType = await _context.IssueTypes.FirstOrDefaultAsync(x => x.Id == id);
+            if (updateIssueType is null)
+            {
+                return NotFound();
+            }
+            updateIssueType.Name = issueTypeToUpdate.Name;
+           
+            try
+            {
+                _context.Update(updateIssueType);
+                await _context.SaveChangesAsync();
+            }
+            catch (System.Exception ex)
+            {
+
+                Console.Write(ex.Message);
+                return StatusCode(500);
+
+            }
+            return Ok();
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIssueType(int id)
