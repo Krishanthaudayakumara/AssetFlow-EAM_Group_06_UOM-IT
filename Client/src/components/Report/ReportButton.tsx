@@ -2,6 +2,8 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Button, Modal, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import AgentReport from './AgentReport';
+import TicketReport from './TicketReport';
 
 interface GeneratedReport {
 id: number;
@@ -16,6 +18,12 @@ note: string;
 const ReportButton: React.FC = () => {
 const [showModal, setShowModal] = useState(false);
 const [reports, setReports] = useState<GeneratedReport[]>([]);
+const [reportType, setReportType] = useState<string>('');
+
+  
+
+
+
 
 const handleShowModal = async () => {
 try {
@@ -65,9 +73,8 @@ Report History
 </div>
 </div>
 
-php
-Copy code
-  <Modal show={showModal} onHide={handleCloseModal}>
+
+<Modal show={showModal} onHide={handleCloseModal}>
     <Modal.Header closeButton>
       <Modal.Title>Report History</Modal.Title>
     </Modal.Header>
