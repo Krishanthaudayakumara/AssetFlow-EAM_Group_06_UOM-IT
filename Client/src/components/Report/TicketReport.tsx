@@ -3,8 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {  Table } from "react-bootstrap";
 import axios from 'axios';
 
-
-
 interface Ticket {
 
 id:number;
@@ -17,8 +15,6 @@ rating:String;
 
 
 }
-
-
 const TicketReport = () => {
 
   const [TicketReports,setTicketReports]=useState<Ticket[]>([])
@@ -82,8 +78,6 @@ return (
      
     </div>
     </Fragment>  
-    
-  
-)};
+    )};
 
 export default TicketReport;
