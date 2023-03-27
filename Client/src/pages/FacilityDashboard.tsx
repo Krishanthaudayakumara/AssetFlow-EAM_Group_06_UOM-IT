@@ -21,9 +21,9 @@ const FacilityDashboard: React.FC = () => {
       <Container>
               <h1 style={{margin:"0px 0 0 65px"}}>Facility Summary</h1>
               <div className="row mb-3" style={{ margin: '0px 0 0 65px' }}>
-              <CardDashboard  name="Assigned assets" quantity={98}  />
+            {/*  <CardDashboard  name="Assigned assets" Count={}={98}  />
               <CardDashboard  name="Available user" quantity={98}  />
-              <CardDashboard  name="Assigned assets" quantity={98}  />
+              <CardDashboard  name="Assigned assets" quantity={98}  />*/}
               
               </div>
             

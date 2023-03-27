@@ -52,9 +52,9 @@ const InventoryDashboard: React.FC = () => {
           <div>
            <h1 style={{margin:"0px 0 0 65px"}}>Inventory Summary</h1>
             <div className="row mb-6" style={{margin:"0px 0 0 65px"}}>
-              <CardDashboard  name="Assigned assets" quantity={98}  />
+             {/*} <CardDashboard  name="Assigned assets" quantity={98}  />
               <CardDashboard  name="Available user" quantity={98}  />
-              <CardDashboard  name="Available user" quantity={98}  />
+  <CardDashboard  name="Available user" quantity={98}  />*/}
               </div>
             
             <div  className="shadow p-3 mb-5 bg-white rounded"style={{margin:"0px 2px 2px 65px"}}>
@@ -87,7 +87,7 @@ const InventoryDashboard: React.FC = () => {
               Data in Chart
             </h4>
             <div>
-            <ITTable/>
+           
             </div>
 
            
