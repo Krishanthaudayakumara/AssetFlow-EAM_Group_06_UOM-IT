@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-
+using Server.Models.Facility;
 using Server.Models.Report;
 using Server.Models.Support;
 using Server.Models.User;
@@ -22,5 +22,10 @@ namespace Server.Data
         public DbSet<Attachment> Attachments {get; set;}
         public DbSet<Reply> Replys {get; set;}
         public DbSet<Employee> Employees {get; set;}
+
+        public DbSet<Building> Buildings {get; set;}
+        public DbSet<FacilityAsset> FacilityAssets {get; set;}
+        public DbSet<Workstation> Workstations {get; set;}
+
     }
 }

@@ -18,7 +18,6 @@ namespace Server.Models.Support
         public Feedback Feedback { get; set; }
         public string TicketStatus { get; set; }
         public ICollection<Attachment> Attachments { get; set; }
-        
-
+      
     }
 }

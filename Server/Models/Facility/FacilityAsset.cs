@@ -11,15 +11,11 @@ namespace Server.Models.Facility
         public int WorkstationId{get; set;}
         public string Manufacturer { get; set; }
         public DateTime AssignedDate { get; set; }
-        public DateTime StartDate{get;set;}
+        public DateTime RecievedDate{get;set;}
         public Workstation Workstation{get; set;}
        
 
 
-                 
-
-
-        
-    }
+     }
 }
    
