@@ -13,6 +13,7 @@ import PieChart from './components/Dashboard/PieChart'
 import FacilityDashboard from './pages/FacilityDashboard'
 import InventoryDashboard from './pages/InventoryDashboard'
 import ITDashboard from './pages/ITDashboard'
+import ReportHistory from './components/Report/ReportHistory'
 
 const App: React.FC = () => {
   return (
@@ -35,6 +36,7 @@ const App: React.FC = () => {
             element={<InventoryDashboard />}
           ></Route>
           <Route path="/ITDashboard" element={<ITDashboard />}></Route>
+          <Route path="/ReportHistory" element={<ReportHistory />}></Route>
           {/* Temporary routes */}
           <Route path="/nav" element={<Navbar />} />
 
