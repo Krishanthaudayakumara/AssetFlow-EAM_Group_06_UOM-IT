@@ -47,32 +47,27 @@ namespace Server.Controllers.Report
         return Ok(generatedreport);
 
      }
-    [HttpGet("{id}")]
-    public async  Task<IActionResult> GetGeneratedReport(int id){
+  
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<GeneratedReportToReturn>>> GetGeneratedReports()
+    {
+        var generatedReports = await _context.GeneratedReports.ToListAsync();
 
-        var generatedreport =  await _context.GeneratedReports.FirstOrDefaultAsync(x => x.Id == id);
+        var generatedReportsToReturn = generatedReports.Select(generatedReport => new GeneratedReportToReturn
+        {
+            Id = generatedReport.Id,
+            Date = generatedReport.Date,
+            ReportName = generatedReport.ReportName,
+            ReportType = generatedReport.ReportType,
+            ReportFormat = generatedReport.ReportFormat,
+            GeneratedBy = generatedReport.GeneratedBy,
+            Note = generatedReport.Note
+        }).ToList();
 
-        if(generatedreport is null){
-
-            return NotFound();
-        }
-
-        var generatedReportToreturn = new GeneratedReportToReturn{
-
-            Id = generatedreport.Id,
-            Date = generatedreport.Date,
-            ReportName = generatedreport.ReportName,
-            ReportType = generatedreport.ReportType,
-            ReportFormat = generatedreport.ReportFormat,
-            GeneratedBy = generatedreport.GeneratedBy,
-            Note = generatedreport.Note,
-
-
-        };
-        
-        return Ok(generatedReportToreturn);
-
+        return generatedReportsToReturn;
     }
+
+
     [HttpDelete("{id}")]
     public async  Task<IActionResult> DeleteReportHistory(int id){
 
