@@ -1,17 +1,34 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons/faPen";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import Agents from "../Agents";
 import AgentStatus from "../AgentStatus";
+import axios from "axios";
 
 interface ticketType {
   id: number;
-  name: string;
+  employeeId: number;
+  email: string;
+  issueTypeId: number;
+  problem: string;
+  submitDate: string;
+  agentId: number;
+  ticketStatus: number;
 }
 const TicketTable = () => {
+  const [tickets, setTickets] = useState<ticketType[]>([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5224/Api/Ticket")
+      .then((response) => {
+        setTickets(response.data);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, []);
     return (
     <div>
       <p style={{margin: "0 0 30px 70px",color: "#482890",fontSize: "18px",fontWeight: "bold",}}> Support Tickets </p>
@@ -32,24 +49,22 @@ const TicketTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {Agents && Agents.length > 0
-                  ? Agents.map((agent) => {
-                      return (
-                        <tr>             
-                          <td>{agent.agent_name}</td>
-                          <td className="text-secondary"> {agent.agent_position} </td>
-                          <td className="text-secondary"> {agent.agent_department} </td>
-                          <td className="text-secondary"> {agent.agent_email} </td>
-                          <td className="text-secondary"> &nbsp;&nbsp;&nbsp;&nbsp; {agent.agent_pending} </td>
-                          <td className="text-secondary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {agent.agent_completed}  </td>
-                          <td> <AgentStatus></AgentStatus> </td>
-                          <td> <FontAwesomeIcon icon={faPen} style={{ color: "#482890" }}/> &nbsp; &nbsp; &nbsp;
+                {tickets.map((ticket) => (
+                     
+                        <tr key={ticket.id}>             
+                          <td>{ticket.id}</td>
+                          <td className="text-secondary"> {ticket.employeeId} </td>
+                          <td className="text-secondary"> {ticket.issueTypeId} </td>
+                          <td className="text-secondary"> {ticket.problem} </td>
+                          <td className="text-secondary"> {ticket.submitDate} </td>
+                          <td className="text-secondary"> {ticket.agentId} </td>
+                          <td className="text-secondary"> {ticket.ticketStatus} </td>                          
+                          <td> <FontAwesomeIcon icon={faPen} style={{ color: "#482890" }}/> &nbsp; &nbsp;
                             <FontAwesomeIcon  icon={faTrash} style={{ color: "#FF615A" }}/>
                           </td>
                         </tr>
-                      );
-                    })
-                  : "No data available"}
+                      
+                    ))}
               </tbody>
             </Table>
            </div>

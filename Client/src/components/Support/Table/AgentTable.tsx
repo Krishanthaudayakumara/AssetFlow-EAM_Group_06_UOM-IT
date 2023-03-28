@@ -1,126 +1,105 @@
-import { Fragment, useState } from "react";
-import { Button, Modal, Table } from "react-bootstrap";
+import { Fragment, useEffect, useState } from "react";
+import { Table, Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons/faPen";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import Agents from "../Agents";
-import AgentStatus from "../AgentStatus";
 
-//import SupportNav from "./SupportNav";
+import axios from "axios";
 
-function AgentTable() {
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+interface agentType{
+  profileImage: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  contact: string;
+  position: string;
+  email: string;
+  joinDate: string;
+  teamId: number;
+  agentStatus: number;
+}
+
+const AgentTable = () => {
+  const [agents, setAgents] = useState<agentType[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedAgent, setSelectedAgent] = useState<agentType | null>(null);
+
+  const handleImageClick = (agent: agentType) => {
+    setSelectedAgent(agent);
+    setShowModal(true);
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5224/Api/Agent")
+      .then((response) => {
+        setAgents(response.data);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, []);
 
   return (
     <div>
-      <p
-        style={{
-          margin: "0 0 30px 70px",
-          color: "#482890",
-          fontSize: "18px",
-          fontWeight: "bold",
-        }}
-      >
-        Avaliable Agents
-      </p>
-      <div
-        className="shadow p-3 bg-white rounded"
-        style={{ margin: "30px 0 0 65px" }}
-      >
+      <p style={{ margin: "0 0 30px 70px", color: "#482890", fontSize: "18px", fontWeight: "bold", }}> Avaliable Agents </p>
+      <div  className="shadow p-3 bg-white rounded" style={{ margin: "30px 0 0 65px" }} >
         <Fragment>
           <div>
             <Table
-              className="table w-100 small table-borderless table-responsiv align-middle align-left"
-              hover
-              style={{ fontSize: "14px" }}
-            >
+              className="table w-100 small table-borderless table-responsiv align-middle align-left" hover  style={{ fontSize: "14px" }} >
               <thead>
                 <tr style={{ color: "#482890" }}>
                   <th></th>
-                  <th>Agent Name</th>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Contact</th>
                   <th>Position</th>
-                  <th>Department</th>
-                  <th>E mail</th>
-                  <th>Pending</th>
-                  <th>Completed</th>
+                  <th>Join Date</th>
+                  <th>Team</th>
                   <th>Status</th>
-                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {Agents && Agents.length > 0
-                  ? Agents.map((agent) => {
-                      return (
-                        <tr>
-                          <td>
-                            <img
-                              src="/img/krish.png"
-                              alt="User profile"
-                              className="rounded-circle"
-                              style={{ width: "45px", height: "45px" }}
-                              onClick={handleShow}
-                            />
-                          </td>
-
-                          <td>{agent.agent_name}</td>
-                          <td className="text-secondary">
-                            {agent.agent_position}
-                          </td>
-                          <td className="text-secondary">
-                            {agent.agent_department}
-                          </td>
-                          <td className="text-secondary">
-                            {agent.agent_email}
-                          </td>
-                          <td className="text-secondary">
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            {agent.agent_pending}
-                          </td>
-                          <td className="text-secondary">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            {agent.agent_completed}
-                          </td>
-                          <td>
-                            <AgentStatus></AgentStatus>
-                          </td>
-                          <td>
-                            <FontAwesomeIcon
-                              onClick={handleShow}
-                              icon={faPen}
-                              style={{ color: "#482890" }}
-                            />
-                            &nbsp; &nbsp; &nbsp;
-                            <FontAwesomeIcon
-                              icon={faTrash}
-                              style={{ color: "#FF615A" }}
-                            />
-                          </td>
-                        </tr>
-                      );
-                    })
-                  : "No data available"}
+                {agents.map((agent) => (                      
+                        <tr key={agent.id}>
+                          <td> <img src={`http://localhost:5224/ProfileImages/${agent.profileImage}`} alt="User profile" className="rounded-circle" style={{ width: "45px", height: "45px", cursor: "pointer" }} onClick={() => handleImageClick(agent)} /></td>
+                          <td>{agent.id}</td>
+                          <td> {agent.firstName} </td>                    
+                          <td> {agent.lastName} </td>
+                          <td> {agent.email} </td>
+                          <td> {agent.contact} </td>
+                          <td> {agent.position} </td>
+                          <td> {agent.joinDate} </td>
+                          <td> {agent.teamId} </td>
+                          <td> {agent.agentStatus} </td>
+                        </tr>                      
+                    ))}
               </tbody>
-            </Table>
-
-            <Modal show={show} onHide={handleClose}>
-              <Modal.Header>
-                <Modal.Title>Agent Details</Modal.Title>
-              </Modal.Header>
-              <Modal.Body></Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-              </Modal.Footer>
-            </Modal>
+            </Table>           
           </div>
         </Fragment>
       </div>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        {selectedAgent && (
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>{selectedAgent.firstName}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <img src={`http://localhost:5224/ProfileImages/${selectedAgent.profileImage}`} alt="User profile" className="rounded-circle" style={{ width: "100px", height: "100px" }} />
+              <p>ID: {selectedAgent.id}</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+            </Modal.Footer>
+          </>
+        )}
+      </Modal>
     </div>
   );
 }
 
 export default AgentTable;
+

@@ -24,7 +24,7 @@ namespace Server.Controllers.Support
             return Ok(allReply);
         }
          [HttpPost]
-        public async Task<IActionResult> AddIssueType([FromBody] ReplyToInsert replyToInsert)
+        public async Task<IActionResult> AddReply([FromBody] ReplyToInsert replyToInsert)
         {
             if (replyToInsert is null)
             {
@@ -50,6 +50,45 @@ namespace Server.Controllers.Support
                 return StatusCode(500);
             }
             return Ok(reply);
+        }
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> UpdateReply(int id, [FromBody] ReplyToUpdate replyToUpdate)
+        {
+            var updateReply = await _context.Replys.FirstOrDefaultAsync(x => x.Id == id);
+            if (updateReply is null)
+            {
+                return NotFound();
+            }
+            updateReply.Text = replyToUpdate.Text;
+            
+            try
+            {
+                _context.Update(updateReply);
+                await _context.SaveChangesAsync();
+            }
+            catch (System.Exception ex)
+            {
+
+                Console.Write(ex.Message);
+                return StatusCode(500);
+
+            }
+            return Ok();
+        }  
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteReply(int id)
+        {
+            var deleteReply = await _context.Replys.FirstOrDefaultAsync(x => x.Id == id);
+            if (deleteReply is null)
+            {
+                return NotFound();
+            }
+            _context.Replys.Remove(deleteReply);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+
         }
     }
 }

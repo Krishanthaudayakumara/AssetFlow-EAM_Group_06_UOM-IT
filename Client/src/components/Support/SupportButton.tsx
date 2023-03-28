@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalTitle } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import AddAgentModalForm from "./AddAgentModalForm";
-import NewTicketForm from "./NewTicketForm";
+import AddAgentModalForm from "./Forms/AddAgentModalForm";
+import NewTicketForm from "./Forms/NewTicketForm";
 
 export default function SupportButton() {
   const [show, setshow] = useState(false);

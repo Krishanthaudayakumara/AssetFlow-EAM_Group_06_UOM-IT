@@ -101,6 +101,7 @@ namespace Server.Controllers.Support
             }
             updateTeam.Name = teamToUpdate.Name;
             updateTeam.Description = teamToUpdate.Description;
+            updateTeam.IssueTypeId = teamToUpdate.IssueTypeId;
 
             try
             {

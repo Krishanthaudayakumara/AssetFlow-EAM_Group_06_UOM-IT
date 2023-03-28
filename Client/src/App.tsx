@@ -17,7 +17,7 @@ import ViewAgent from "./components/Support/ViewAgent";
 import AgentTeam from "./pages/Support/Teams";
 import IssueTypeTable from "./components/Support/Table/IssueTypeTable";
 import TeamTable from "./components/Support/Table/TeamTable";
-import NewTeamForm from "./components/Support/NewTeamForm";
+import NewTeamForm from "./components/Support/Forms/NewTeamForm";
 
 const App: React.FC = () => {
   return (
