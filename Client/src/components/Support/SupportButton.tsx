@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Modal, ModalTitle } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddAgentModalForm from "./Forms/AddAgentModalForm";
 import NewTicketForm from "./Forms/NewTicketForm";
