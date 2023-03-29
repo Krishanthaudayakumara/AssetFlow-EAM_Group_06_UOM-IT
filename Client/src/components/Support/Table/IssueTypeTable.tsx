@@ -21,6 +21,16 @@ const IssueTypeTable = () => {
         alert(error);
       });
   }, []);
+  const handleDelete = (id: number) => {
+    axios
+      .delete(`http://localhost:5224/Api/IssueType/${id}`)
+      .then(() => {
+        setIssues(issues.filter((issue) => issue.id !== id));
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
 
   return (
     <div>
@@ -41,7 +51,7 @@ const IssueTypeTable = () => {
             <tr key={issue.id}>
               <td className="text-secondary">{issue.id}</td>
               <td className="text-secondary">{issue.name}</td>
-              <td> <FontAwesomeIcon icon={faPen} style={{ color: "#482890" }}/> &nbsp; &nbsp; &nbsp;<FontAwesomeIcon  icon={faTrash} style={{ color: "#FF615A" }}/> </td>              
+              <td> <FontAwesomeIcon icon={faPen} style={{ color: "#482890" }}/> &nbsp; &nbsp; &nbsp;<FontAwesomeIcon  icon={faTrash} style={{ color: "#FF615A" }} onClick={() => handleDelete(issue.id)}/> </td>              
             </tr>
           ))}
               </tbody>
