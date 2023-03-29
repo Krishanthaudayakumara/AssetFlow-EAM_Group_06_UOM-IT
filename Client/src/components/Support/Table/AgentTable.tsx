@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { Table, Modal, Button } from "react-bootstrap";
+import { Table, Modal, Button, Badge } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
@@ -8,13 +8,7 @@ interface agentType{
   profileImage: string;
   id: number;
   firstName: string;
-  lastName: string;
-  contact: string;
-  position: string;
-  email: string;
-  joinDate: string;
-  teamId: number;
-  agentStatus: number;
+ 
 }
 
 const AgentTable = () => {
@@ -25,6 +19,20 @@ const AgentTable = () => {
   const handleRowClick = (agent: agentType) => {
     setSelectedAgent(agent);
     setShowModal(true);
+  };
+  const handleDelete = (id: number) => {
+    axios
+      .delete(`http://localhost:5224/Api/Agent/${selectedAgent?.id}`)
+      .then(() => {
+        setAgents((prevAgents) =>
+          prevAgents.filter((agent) => agent.id !== selectedAgent?.id)
+        );
+        setSelectedAgent(null);
+        setShowModal(false);
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   useEffect(() => {
@@ -50,12 +58,7 @@ const AgentTable = () => {
                 <tr style={{ color: "#482890" }}>
                   <th></th>
                   <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Contact</th>
-                  <th>Position</th>                  
-                  <th>Team</th>
-                  <th>Status</th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -63,12 +66,7 @@ const AgentTable = () => {
                         <tr key={agent.id} onClick={() => handleRowClick(agent)}>
                           <td> <img src={`http://localhost:5224/ProfileImages/${agent.profileImage}`} alt="User profile" className="rounded-circle" style={{ width: "45px", height: "45px", cursor: "pointer" }}  /></td>
                           <td> {agent.firstName} </td>                    
-                          <td> {agent.lastName} </td>
-                          <td className="text-secondary"> {agent.email} </td>
-                          <td className="text-secondary"> {agent.contact} </td>
-                          <td className="text-secondary"> {agent.position} </td>
-                          <td className="text-secondary"> {agent.teamId} </td>
-                          <td className="text-secondary"> {agent.agentStatus} </td>
+                         
                         </tr>                      
                     ))}
               </tbody>
@@ -77,27 +75,21 @@ const AgentTable = () => {
         </Fragment>
       </div>
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal show={showModal} onHide={() => setShowModal(false)} >
         {selectedAgent && (
           <>
             <Modal.Header style={{backgroundColor:"#482890"}}>
               <Modal.Title><div style={{margin:"20px 180px"}}><img src={`http://localhost:5224/ProfileImages/${selectedAgent.profileImage}`} alt="User profile" className="rounded-circle" style={{ width: "100px", height: "100px" }} /></div></Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <h3><div>{selectedAgent.firstName}&nbsp;&nbsp;{selectedAgent.lastName}</div></h3>
+              <h3><div>{selectedAgent.firstName}</div></h3>
               <p>Agent ID: {selectedAgent.id}</p>
               <p>First Name: {selectedAgent.firstName}</p>
-              <p>Last Name: {selectedAgent.lastName}</p>
-              <p>E mail: {selectedAgent.email}</p>
-              <p>Contact: {selectedAgent.contact}</p>
-              <p>Position: {selectedAgent.position}</p>
-              <p>Join Date: {selectedAgent.joinDate}</p>
-              <p>Team: {selectedAgent.teamId}</p>
-              <p>Status: {selectedAgent.agentStatus}</p>
+             
             </Modal.Body>
             <Modal.Footer >
               <center><Button>Update</Button></center>
-              <Button>Delete</Button>
+              <Button onClick={() => handleDelete(selectedAgent.id) }>Delete</Button>
               
             </Modal.Footer>
           </>
