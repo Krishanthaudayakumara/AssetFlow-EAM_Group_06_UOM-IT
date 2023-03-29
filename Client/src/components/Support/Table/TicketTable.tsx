@@ -54,11 +54,11 @@ const TicketTable = () => {
                         <tr key={ticket.id}>             
                           <td>{ticket.id}</td>
                           <td className="text-secondary"> {ticket.employeeId} </td>
-                          <td className="text-secondary"> {ticket.issueTypeId} </td>
+                          <td> {ticket.issueTypeId} </td>
                           <td className="text-secondary"> {ticket.problem} </td>
-                          <td className="text-secondary"> {ticket.submitDate} </td>
+                          <td> {ticket.submitDate} </td>
                           <td className="text-secondary"> {ticket.agentId} </td>
-                          <td className="text-secondary"> {ticket.ticketStatus} </td>                          
+                          <td> {ticket.ticketStatus} </td>                          
                           <td> <FontAwesomeIcon icon={faPen} style={{ color: "#482890" }}/> &nbsp; &nbsp;
                             <FontAwesomeIcon  icon={faTrash} style={{ color: "#FF615A" }}/>
                           </td>

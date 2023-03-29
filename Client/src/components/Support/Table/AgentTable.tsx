@@ -22,7 +22,7 @@ const AgentTable = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedAgent, setSelectedAgent] = useState<agentType | null>(null);
 
-  const handleImageClick = (agent: agentType) => {
+  const handleRowClick = (agent: agentType) => {
     setSelectedAgent(agent);
     setShowModal(true);
   };
@@ -49,7 +49,6 @@ const AgentTable = () => {
               <thead>
                 <tr style={{ color: "#482890" }}>
                   <th></th>
-                  <th>ID</th>
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Email</th>
@@ -62,17 +61,16 @@ const AgentTable = () => {
               </thead>
               <tbody>
                 {agents.map((agent) => (                      
-                        <tr key={agent.id}>
-                          <td> <img src={`http://localhost:5224/ProfileImages/${agent.profileImage}`} alt="User profile" className="rounded-circle" style={{ width: "45px", height: "45px", cursor: "pointer" }} onClick={() => handleImageClick(agent)} /></td>
-                          <td>{agent.id}</td>
+                        <tr key={agent.id} onClick={() => handleRowClick(agent)}>
+                          <td> <img src={`http://localhost:5224/ProfileImages/${agent.profileImage}`} alt="User profile" className="rounded-circle" style={{ width: "45px", height: "45px", cursor: "pointer" }}  /></td>
                           <td> {agent.firstName} </td>                    
-                          <td> {agent.lastName} </td>
-                          <td> {agent.email} </td>
-                          <td> {agent.contact} </td>
-                          <td> {agent.position} </td>
-                          <td> {agent.joinDate} </td>
-                          <td> {agent.teamId} </td>
-                          <td> {agent.agentStatus} </td>
+                          <td className="text-secondary"> {agent.lastName} </td>
+                          <td className="text-secondary"> {agent.email} </td>
+                          <td className="text-secondary"> {agent.contact} </td>
+                          <td className="text-secondary"> {agent.position} </td>
+                          <td className="text-secondary"> {agent.joinDate} </td>
+                          <td className="text-secondary"> {agent.teamId} </td>
+                          <td className="text-secondary"> {agent.agentStatus} </td>
                         </tr>                      
                     ))}
               </tbody>
@@ -85,11 +83,19 @@ const AgentTable = () => {
         {selectedAgent && (
           <>
             <Modal.Header closeButton>
-              <Modal.Title>{selectedAgent.firstName}</Modal.Title>
+              <Modal.Title><center>{selectedAgent.firstName}</center></Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <img src={`http://localhost:5224/ProfileImages/${selectedAgent.profileImage}`} alt="User profile" className="rounded-circle" style={{ width: "100px", height: "100px" }} />
-              <p>ID: {selectedAgent.id}</p>
+              <center><img src={`http://localhost:5224/ProfileImages/${selectedAgent.profileImage}`} alt="User profile" className="rounded-circle" style={{ width: "100px", height: "100px" }} /></center>
+              <p>Agent ID: {selectedAgent.id}</p>
+              <p>First Name: {selectedAgent.firstName}</p>
+              <p>Last Name: {selectedAgent.lastName}</p>
+              <p>E mail: {selectedAgent.email}</p>
+              <p>Contact: {selectedAgent.contact}</p>
+              <p>Position: {selectedAgent.position}</p>
+              <p>Join Date: {selectedAgent.joinDate}</p>
+              <p>Team: {selectedAgent.teamId}</p>
+              <p>Status: {selectedAgent.agentStatus}</p>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
