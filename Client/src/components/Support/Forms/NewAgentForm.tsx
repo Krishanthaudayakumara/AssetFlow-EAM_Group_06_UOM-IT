@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 interface AgentData {
+  image: File | null;
   firstname: string;
   lastname: string;
   contact: string;
@@ -10,11 +11,11 @@ interface AgentData {
   email: string;
   team: string;
   status: string;
-  profileimage: File | null;
 }
 
-const AddAgent = () => {
+const NewAgentForm = () => {
   const [agent, setAgent] = useState<AgentData>({
+    image: null,
     firstname: "",
     lastname: "",
     contact: "",
@@ -22,16 +23,31 @@ const AddAgent = () => {
     email: "",
     team: "",
     status: "",
-    profileimage: null,
   });
-
+  const [image, setImage] = useState<File | null>(null);
+  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      
+      const formData = new FormData();
+      formData.append("firstname", agent.firstname);
+      formData.append("lastname", agent.lastname);
+      formData.append("contact", agent.contact);
+      formData.append("position", agent.position);
+      formData.append("email", agent.email);
+      formData.append("team", agent.team);
+      formData.append("status", agent.status);
+      if (image) {
+        formData.append("image", image);
+      }
       const response = await axios.post(
         "http://localhost:5224/Api/Agent",
-        agent
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       console.log(response);
     } catch (error) {
@@ -40,16 +56,29 @@ const AddAgent = () => {
   };
 
   const handleChange = (
-    event: React.ChangeEvent<
-      HTMLInputElement 
-    >
+    event: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
     setAgent({ ...agent, [name]: value });
   };
 
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setImage(event.target.files[0]);
+    }
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
+      <Form.Group>
+        <Form.Control
+          type="file"
+          placeholder="Image"
+          name="image"
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <br />
       <Form.Group>
         <Form.Control
           type="text"
@@ -134,7 +163,6 @@ const AddAgent = () => {
       </Form.Group>
       <br />
 
-      
       <br />
 
       <Button variant="success" type="submit">
@@ -144,4 +172,4 @@ const AddAgent = () => {
   );
 };
 
-export default AddAgent;
+export default NewAgentForm;

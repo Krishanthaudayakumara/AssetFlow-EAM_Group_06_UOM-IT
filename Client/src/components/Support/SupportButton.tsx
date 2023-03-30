@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import AddAgentModalForm from "./Forms/AddAgentModalForm";
+import NewAgentForm from "./Forms/NewAgentForm";
 import NewTicketForm from "./Forms/NewTicketForm";
+import NewTeamForm from "./Forms/NewTeamForm";
 
 export default function SupportButton() {
   const [show, setshow] = useState(false);
@@ -14,12 +15,16 @@ export default function SupportButton() {
     setModalBody(<NewTicketForm />);
     setshow(true);
   };
-  const handleAddAgent = () => {
-    setModalTitle("Add Agent");
-    setModalBody(<AddAgentModalForm />);
+  const handleNewAgent = () => {
+    setModalTitle("New Agent");
+    setModalBody(<NewAgentForm />);
     setshow(true);
   };
-
+  const handleNewTeam = () => {
+    setModalTitle("New Team");
+    setModalBody(<NewTeamForm />);
+    setshow(true);
+  };
   return (
     <div>
       <div className="container">
@@ -50,6 +55,7 @@ export default function SupportButton() {
           </div>
           <div className="col-3" style={{ padding: "0 0 0 40px" }}>
             <button
+              onClick={ handleNewTeam}
               type="button"
               className="btn btn-outline-primary"
               style={{
@@ -72,7 +78,7 @@ export default function SupportButton() {
           </div>
           <div className="col-2" style={{ padding: "0" }}>
             <button
-              onClick={handleAddAgent}
+              onClick={handleNewAgent}
               type="button"
               className="btn btn-outline-light"
               style={{ backgroundColor: "#482890" }}

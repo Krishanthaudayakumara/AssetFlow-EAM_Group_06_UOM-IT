@@ -21,7 +21,6 @@ const NewTeamForm = () => {
     issueTypeId: "",
     image: null,
   });
-
   const [issueTypes, setIssueTypes] = useState<IssueTypeData[]>([]);
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
 
@@ -88,6 +87,15 @@ const NewTeamForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
+       <Form.Group>
+        <Form.Control
+          type="file"
+          placeholder="Image"
+          name="image"
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <br />
       <Form.Group>
         <Form.Control
           type="text"
@@ -98,22 +106,18 @@ const NewTeamForm = () => {
           onChange={handleChange}
         />
       </Form.Group>
-
       <br />
       <Form.Group>
         <Form.Select
           aria-label="Default select example"
           name="description"
           value={formData.description}
-          onChange={handleChange}
-        >
+          onChange={handleChange} >
           <option value="1">Available</option>
           <option value="2">Not Available</option>
         </Form.Select>
       </Form.Group>
-
       <br />
-
       <Form.Group>
         <Form.Select
           aria-label="Default select example"
@@ -128,22 +132,9 @@ const NewTeamForm = () => {
             </option>
           ))}
         </Form.Select>
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Control
-          type="file"
-          placeholder="Image"
-          name="image"
-          onChange={handleChange}
-        />
-      </Form.Group>
+      </Form.Group> 
       <br />
-      
-
-      <Button variant="success" type="submit">
-        Submit
-      </Button>
+      <Button variant="success" type="submit">  Submit  </Button>
 
       {isSubmitSuccessful && (
         <div className="alert alert-success mt-3" role="alert">
