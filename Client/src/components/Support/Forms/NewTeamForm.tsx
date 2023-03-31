@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 type FormData = {
   name: string;
@@ -17,7 +19,7 @@ type IssueTypeData = {
 const NewTeamForm = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
-    description: "1",
+    description: "",
     issueTypeId: "",
     image: null,
   });
@@ -113,8 +115,8 @@ const NewTeamForm = () => {
           name="description"
           value={formData.description}
           onChange={handleChange} >
-          <option value="1">Available</option>
-          <option value="2">Not Available</option>
+          <option value="Available">Available</option>
+          <option value="Not Available">Not Available</option>
         </Form.Select>
       </Form.Group>
       <br />
