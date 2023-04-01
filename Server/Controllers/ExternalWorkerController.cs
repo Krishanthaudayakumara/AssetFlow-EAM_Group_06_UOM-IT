@@ -12,9 +12,9 @@ namespace Server.Controllers
     [ApiController]
     public class ExternalWorkerController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly DataContext _context;
 
-        public ExternalWorkerController(ApplicationDbContext context)
+        public ExternalWorkerController(DataContext context)
         {
             _context = context;
         }

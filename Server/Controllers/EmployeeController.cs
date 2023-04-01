@@ -13,10 +13,10 @@ namespace Server.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly DataContext _context;
         private readonly UserManager<User> _userManager;
 
-        public EmployeeController(ApplicationDbContext context, UserManager<User> userManager)
+        public EmployeeController(DataContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;

@@ -4,9 +4,9 @@ using Server.Models;
 
 namespace Server.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class DataContext : IdentityDbContext<User>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
         }
@@ -14,6 +14,8 @@ namespace Server.Data
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<ExternalWorker> ExternalWorkers { get; set; }
+
+        public DbSet<Supplier> Suppliers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -9,6 +9,8 @@ import Sidebar from "./components/Sidebar";
 import PrivateRoute from "./PrivateRoute";
 import EmployeePage from "./pages/Employee" ;
 import Department from "./pages/Department";
+import Calendar from "./pages/Calendar";
+import Supplier from "./pages/Supplier";
 
 const App: React.FC = () => {
   return (
@@ -63,6 +65,28 @@ const App: React.FC = () => {
             element={
               <Wrapper>
                 <Department />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/calendar" element={<PrivateRoute />}>
+          <Route
+            path="/calendar"
+            element={
+              <Wrapper>
+                <Calendar />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/supplier" element={<PrivateRoute />}>
+          <Route
+            path="/supplier"
+            element={
+              <Wrapper>
+                <Supplier />
               </Wrapper>
             }
           />

@@ -14,9 +14,9 @@ namespace Server.Controllers
     [ApiController]
     public class DepartmentsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly DataContext _context;
 
-        public DepartmentsController(ApplicationDbContext context)
+        public DepartmentsController(DataContext context)
         {
             _context = context;
         }

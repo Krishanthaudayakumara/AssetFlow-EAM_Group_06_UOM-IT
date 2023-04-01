@@ -21,9 +21,9 @@ namespace Server.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly ApplicationDbContext _context;
+        private readonly DataContext _context;
 
-        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext context)
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, DataContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;

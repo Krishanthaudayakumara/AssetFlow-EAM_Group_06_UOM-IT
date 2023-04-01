@@ -11,9 +11,9 @@ using Server.Data;
 
 namespace Server.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230306072253_anychanges")]
-    partial class anychanges
+    [DbContext(typeof(DataContext))]
+    [Migration("20230401072757_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -271,6 +271,39 @@ namespace Server.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("ExternalWorkers");
+                });
+
+            modelBuilder.Entity("Server.Models.Supplier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("Server.Models.User", b =>
