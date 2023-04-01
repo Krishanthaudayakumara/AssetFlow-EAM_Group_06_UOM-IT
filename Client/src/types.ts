@@ -1,5 +1,7 @@
 // types.ts
 
+import { UserRole } from "./enum";
+
 export interface Employee {
   id: number;
   firstName: string;
@@ -31,3 +33,15 @@ export interface Supplier {
   email: string;
   notes: string;
 }
+
+
+export interface User {
+    id: string;
+    username: string;
+    email: string;
+    password: string;
+    role: UserRole;
+  }
+  
+
+export { UserRole };

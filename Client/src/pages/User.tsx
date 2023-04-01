@@ -1,193 +1,103 @@
 import React, { useState, useEffect } from "react";
-import {
-  Form,
-  Button,
-  Container,
-  Row,
-  Col,
-  Image,
-  Table,
-  Modal,
-} from "react-bootstrap";
-import { BsArrowRightCircle, BsPencilSquare, BsTrash } from "react-icons/bs";
-import axios from "axios";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { BsPlus } from "react-icons/bs";
+import { getUsers, deleteUser, addUser, editUser } from "../api/userApi";
+import { User } from "../types";
 import UserTable from "../components/User/UserTable";
-import AddUserForm from "../components/User/AddUserForm";
-import EditUserForm from "../components/User/EditUserForm";
+import UserModal from "../components/User/UserModal";
+import AddUserModal from "../components/User/AddUserModal";
 
+const UserPage: React.FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [selectedUser, setSelectedUser] = useState<Partial<User> | null>(null);
+  const [showEditModal, setshowEditModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
-interface IUser {
-  id: string;
-  username: string;
-  email: string;
-  password: string;
-  role: string;
-}
-
-const User: React.FC = () => {
-  const [showAddUserModal, setShowAddUserModal] = useState<boolean>(false);
-  const [users, setUsers] = useState<IUser[]>([]);
-  const [newUser, setNewUser] = useState<IUser>({
-    id: "",
-    username: "",
-    email: "",
-    password: "",
-    role: "",
-  });
-
-  const [showEditUserModal, setShowEditUserModal] = useState<boolean>(false);
-  const [editingUser, setEditingUser] = useState<IUser | null>(null);
-
-  const [showAddUserForm, setShowAddUserForm] = useState(false);
-  const toggleAddUserForm = () => {
-    setShowAddUserForm(!showAddUserForm);
+  const handleAddUser = async (user: User) => {
+    await addUser(user);
+    const updatedUsers = await getUsers();
+    setUsers(updatedUsers);
+    setShowAddModal(false); // close the modal
   };
 
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const getUsers = async () => {
-    const response = await axios.get("http://localhost:5087/api/auth/users");
-    setUsers(response.data);
+  const handleDelete = async (id: string) => {
+    await deleteUser(id);
+    setUsers(users.filter((user) => user.id !== id));
   };
 
-
-  const handleAddUserModalClose = () => {
-    setShowAddUserModal(false);
+  const handleEdit = (user: User) => {
+    setSelectedUser(user);
+    setshowEditModal(true);
   };
 
+  const handleCloseModal = () => {
+    setSelectedUser(null);
+    setshowEditModal(false);
+    setShowAddModal(false);
+  };
+
+  const handleSubmit = async (user: User) => {
+    try {
+      if (user.id) {
+        // update existing user
+        await editUser(user);
+        const updatedUsers = await getUsers();
+        setUsers(updatedUsers);
+      } else {
+        // create new user
+        await addUser(user);
+        const updatedUsers = await getUsers();
+        setUsers(updatedUsers);
+      }
+      handleCloseModal();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
 
-  const handleEditUser = (user: IUser) => {
-    setEditingUser(user);
-    setShowEditUserModal(true);
-  };
-
-  const handleEditUserSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault(); // Prevent the default form submission behavior
-
-    if (editingUser) {
-      try {
-        const response = await axios.put(
-          "http://localhost:5087/api/auth/users/" + editingUser.id,
-          editingUser
-        );
-        console.log(response.data); // Log the server response
-      } catch (error) {
-        console.error(error); // Log any errors that occur
-      }
-    }
-  };
-
-  const handleDeleteUser = async (id: string) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      const response = await axios.delete(
-        `http://localhost:5087/api/auth/users/${id}`
-      );
-      if (response.data.isSuccess) {
-        alert(response.data.message);
-        getUsers();
-      } else {
-        alert(response.data.message);
-      }
-    }
-  };
+  useEffect(() => {
+    getUsers().then((data) => setUsers(data));
+  }, []);
 
   return (
-    <>
-      <Container>
-        <Row>
-          <Col>
-            <h3 className="mt-5 mb-3">Users</h3>
-          </Col>
-          <Col className="text-end">
-            <Button variant="primary" onClick={toggleAddUserForm}>
-              Add User <BsArrowRightCircle />
-            </Button>
-          </Col>
-        </Row>
-        <UserTable
-          users={users}
-          onEditUser={handleEditUser}
-          onDeleteUser={handleDeleteUser}
+    <Container fluid>
+      <Row>
+        <Col>
+          <h2 className="text-center mb-4">User Management</h2>
+        </Col>
+      </Row>
+      <Row className="mb-3">
+        <Col>
+          <Button variant="success" onClick={() => setShowAddModal(true)}>
+            <BsPlus /> Add User
+          </Button>
+          <AddUserModal
+            show={showAddModal}
+            onHide={handleCloseModal}
+            onSubmit={handleAddUser}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <UserTable
+            users={users}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+          />
+        </Col>
+      </Row>
+      {selectedUser && (
+        <UserModal
+          show={showEditModal}
+          onHide={handleCloseModal}
+          user={selectedUser!}
+          onSubmit={handleSubmit}
         />
-      </Container>{" "}
-      <AddUserForm
-        show={showAddUserForm}
-        handleClose={toggleAddUserForm}
-        handleAddUser={() => console.log("User added")}
-      />
-      <Modal
-        show={showEditUserModal}
-        onHide={() => setShowEditUserModal(false)}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Edit User</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleEditUserSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicUsername">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter username"
-                value={editingUser?.username || ""}
-                onChange={(e) =>
-                  setEditingUser({ ...editingUser!, username: e.target.value })
-                }
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={editingUser?.email || ""}
-                onChange={(e) =>
-                  setEditingUser({ ...editingUser!, email: e.target.value })
-                }
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                value={editingUser?.password || ""}
-                onChange={(e) =>
-                  setEditingUser({ ...editingUser!, password: e.target.value })
-                }
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicRole">
-              <Form.Label>Role</Form.Label>
-              <Form.Control
-                as="select"
-                value={editingUser?.role || ""}
-                onChange={(e) =>
-                  setEditingUser({ ...editingUser!, role: e.target.value })
-                }
-              >
-                <option value="">--Select--</option>
-                <option value="Admin">Admin</option>
-                <option value="User">User</option>
-              </Form.Control>
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
-              Save Changes
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
-    </>
+      )}
+    </Container>
   );
 };
 
-export default User;
+export default UserPage;

@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 import Wrapper from "./components/DashWrapper";
 import Sidebar from "./components/Sidebar";
 import PrivateRoute from "./PrivateRoute";
-import EmployeePage from "./pages/Employee" ;
+import Employee from "./pages/Employee" ;
 import Department from "./pages/Department";
 import Calendar from "./pages/Calendar";
 import Supplier from "./pages/Supplier";
@@ -53,7 +53,7 @@ const App: React.FC = () => {
             path="/employee"
             element={
               <Wrapper>
-                <EmployeePage />
+                <Employee />
               </Wrapper>
             }
           />

@@ -1,28 +1,18 @@
-import React, { useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import React from "react";
+import { Table, Button } from "react-bootstrap";
+import { User } from "../../types";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
 
-interface IUser {
-    id: string;
-    username: string;
-    email: string;
-    password: string;
-    role: string;
-  }
 
-interface IUserTableProps {
-  users: IUser[];
-  onEditUser: (user: IUser) => void;
-  onDeleteUser: (id: string) => void;
+interface Props {
+  users: User[];
+  onEdit: (user: User) => void;
+  onDelete: (userId: string) => void;
 }
 
-const UserTable: React.FC<IUserTableProps> = ({
-  users,
-  onEditUser,
-  onDeleteUser,
-}) => {
+const UserTable: React.FC<Props> = ({ users, onEdit, onDelete }) => {
   return (
-    <Table striped bordered hover className="mt-3">
+    <Table striped bordered hover>
       <thead>
         <tr>
           <th>ID</th>
@@ -31,6 +21,7 @@ const UserTable: React.FC<IUserTableProps> = ({
           <th>Role</th>
           <th>Edit</th>
           <th>Delete</th>
+
         </tr>
       </thead>
       <tbody>
@@ -41,14 +32,17 @@ const UserTable: React.FC<IUserTableProps> = ({
             <td>{user.email}</td>
             <td>{user.role}</td>
             <td>
-              <Button variant="outline-primary" onClick={() => onEditUser(user)}>
+              <Button
+                variant="outline-primary"
+                onClick={() => onEdit(user)}
+              >
                 <BsPencilSquare />
-              </Button>
+              </Button>{" "}
             </td>
             <td>
               <Button
                 variant="outline-danger"
-                onClick={() => onDeleteUser(user.id)}
+                onClick={() => onDelete(user.id)}
               >
                 <BsTrash />
               </Button>
