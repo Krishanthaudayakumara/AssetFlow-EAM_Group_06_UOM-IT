@@ -1,14 +1,13 @@
 // Employee.tsx
 
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import axios from "axios";
 import EmployeeTable from "../components/Employee/EmployeeTable";
 import AddEmployeeModal from "../components/Employee/AddEmployeeModal";
 import EmployeeModal from "../components/Employee/EmployeeModal";
 
-import { Employee } from "../types"; 
-
+import { Employee } from "../types";
 
 const EmployeePage: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -17,6 +16,46 @@ const EmployeePage: React.FC = () => {
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
     null
   );
+  const [showUploadModal, setShowUploadModal] = useState(false);
+
+  const uploadFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5087/api/Employee/upload",
+        formData
+      );
+      console.log(response.data); // Employees uploaded successfully
+      fetchEmployees();
+      setShowUploadModal(false); // close the modal
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const downloadSample = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5087/api/Employee/download/sample",
+        {
+          responseType: "blob",
+        }
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "employees_sample.xlsx");
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     fetchEmployees();
@@ -79,6 +118,21 @@ const EmployeePage: React.FC = () => {
     }
   };
 
+  const downloadExcel = () => {
+    axios({
+      url: "http://localhost:5087/api/Employee/export",
+      method: "GET",
+      responseType: "blob",
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "employees.xlsx");
+      document.body.appendChild(link);
+      link.click();
+    });
+  };
+
   return (
     <Container>
       <Row>
@@ -86,6 +140,44 @@ const EmployeePage: React.FC = () => {
           <Button variant="primary" onClick={() => setShowAddModal(true)}>
             Add Employee
           </Button>
+
+          <Button variant="primary" onClick={() => downloadExcel()}>
+            Download Excel
+          </Button>
+
+          <Button variant="primary" onClick={() => downloadSample()}>
+            Download Sample Excel
+          </Button>
+
+          <Button variant="primary" onClick={() => setShowUploadModal(true)}>
+            Upload Excel
+          </Button>
+
+          <Modal
+            show={showUploadModal}
+            onHide={() => setShowUploadModal(false)}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Upload Excel</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form>
+                <Form.Group controlId="uploadExcel">
+                  <Form.Label>Choose Excel file</Form.Label>
+                  <Form.Control type="file" onChange={uploadFile} />
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={() => setShowUploadModal(false)}
+              >
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
           <AddEmployeeModal
             show={showAddModal}
             onHide={() => setShowAddModal(false)}

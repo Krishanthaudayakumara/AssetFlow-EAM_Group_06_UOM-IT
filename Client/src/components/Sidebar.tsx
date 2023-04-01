@@ -22,7 +22,7 @@ import {
   FaAngleLeft,
   FaAngleRight,
   FaUserTie,
-  FaSuitcase
+  FaSuitcase,
 } from "react-icons/fa";
 
 import "../css/Sidebar.css"; // import background image CSS file
@@ -54,7 +54,7 @@ const items = [
   { label: "Dashboard", link: "/", icon: FaThLarge },
   {
     label: "Inventory",
-    link : "/inventory",
+    link: "/inventory",
     icon: FaBox,
     dropdownItems: [
       { label: "Add Items", link: "/inventory/building1" },
@@ -64,7 +64,7 @@ const items = [
   {
     label: "Facility",
     icon: FaBuilding,
-    link : "/facility",
+    link: "/facility",
     dropdownItems: [
       { label: "Building 1", link: "/facility/building1" },
       { label: "Building 2", link: "/facility/building2" },
@@ -73,13 +73,12 @@ const items = [
   { label: "Reports", link: "/report", icon: FaFileAlt },
   {
     label: "Users",
-    link : "/user",
+    link: "/user",
 
-    icon: FaUsers
+    icon: FaUsers,
   },
   { label: "Employees", link: "/employee", icon: FaUserTie },
   { label: "Departments", link: "/department", icon: FaSuitcase },
-
 
   { label: "Suppliers", link: "/supplier", icon: FaShippingFast },
   { label: "Support", link: "/support", icon: FaComments },
@@ -131,7 +130,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
               className="logo-img"
               src="/img/favicon.png"
               alt="Logo"
-              width= {collapsed || isMobile() ? "70" : "100"}
+              width={collapsed || isMobile() ? "70" : "100"}
               style={{ paddingLeft: collapsed || isMobile() ? "10px" : "0px" }}
             />
           </div>
@@ -143,7 +142,9 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                   <div className="nav-item" key={item.label}>
                     <div
                       className={`${
-                        collapsed || isMobile() ? "side-link-collapsed" : "side-link"
+                        collapsed || isMobile()
+                          ? "side-link-collapsed"
+                          : "side-link"
                       } nav-link ${props.active === item.link ? "active" : ""}`}
                       onClick={() => toggle(item.label)}
                     >
@@ -151,7 +152,10 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                       <span className={collapsed || isMobile() ? "hidden" : ""}>
                         {item.label}
                       </span>
-                      <FaAngleDown className="dropdown-icon" style={{float: "right"}}/>
+                      <FaAngleDown
+                        className="dropdown-icon"
+                        style={{ float: "right" }}
+                      />
                     </div>
                     {openKey === item.label && (
                       <div className="dropdown-collection">
@@ -173,7 +177,9 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                   <NavItem key={item.link}>
                     <NavLink
                       className={`${
-                        collapsed || isMobile() ? "side-link-collapsed" : "side-link"
+                        collapsed || isMobile()
+                          ? "side-link-collapsed"
+                          : "side-link"
                       } nav-link ${props.active === item.link ? "active" : ""}`}
                       href={item.link}
                     >
@@ -190,14 +196,16 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         </Navbar>
       </Col>
       <Col md={2} className="comp-collapse-col">
-        <button
-          className="collapse-button"
-          onClick={() => {
-            collapseSideBar(collapsed);
-          }}
-        >
-          {collapsed ? <FaAngleRight /> : <FaAngleLeft />}
-        </button>
+        <div className="collapse-button-container">
+          <button
+            className="collapse-button"
+            onClick={() => {
+              collapseSideBar(collapsed);
+            }}
+          >
+            {collapsed ? <FaAngleRight /> : <FaAngleLeft />}
+          </button>
+        </div>
       </Col>
     </Row>
   );

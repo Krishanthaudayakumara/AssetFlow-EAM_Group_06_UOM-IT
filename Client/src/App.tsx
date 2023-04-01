@@ -11,6 +11,7 @@ import Employee from "./pages/Employee" ;
 import Department from "./pages/Department";
 import Calendar from "./pages/Calendar";
 import Supplier from "./pages/Supplier";
+import "./App.css";
 
 const App: React.FC = () => {
   return (

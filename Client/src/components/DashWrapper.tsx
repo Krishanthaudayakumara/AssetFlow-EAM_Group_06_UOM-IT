@@ -15,15 +15,15 @@ const Wrapper: React.FC<React.PropsWithChildren<{}>> = ({children}) => {
   console.log(active)
 
   return (
-    <Container fluid="xxxl">
-      <Row>
+    <Container fluid="xxl">
+      <Row className="page-content">
         <Col className={`sidebar-col ${ isMobile() ? "col-2": "col-3"}`}>
           <div>
             <Sidebar active={active} />
           </div>
         </Col>
         <Col className={`content-col ${isMobile() ? "col-10": "col-8"}`}>
-          <div>
+          <div className="main-content">
             <Navbar />
             {children}
           </div>
