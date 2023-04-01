@@ -182,7 +182,7 @@ namespace Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AgentId")
+                    b.Property<int?>("AgentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -282,9 +282,7 @@ namespace Server.Migrations
                 {
                     b.HasOne("Server.Models.Support.Agent", "Agent")
                         .WithMany("Tickets")
-                        .HasForeignKey("AgentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AgentId");
 
                     b.HasOne("Server.Models.User.Employee", "Employee")
                         .WithMany("Tickets")

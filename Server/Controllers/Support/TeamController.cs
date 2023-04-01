@@ -60,13 +60,12 @@ namespace Server.Controllers.Support
             {
                 Name = teamToInsert.Name,
                 Description = teamToInsert.Description,
-                //CreateDate = teamToInsert.CreateDate,
                 IssueTypeId = teamToInsert.IssueTypeId
 
             };
             if (teamToInsert.ProfileImage != null){
+                
                 string fileName = teamToInsert.ProfileImage.FileName ;
-
                 string directory = Path.Combine(WebHostEnvironment.ContentRootPath, "ProfileImages");
                 Directory.CreateDirectory(directory);
                 string filePath = Path.Combine(directory, fileName);

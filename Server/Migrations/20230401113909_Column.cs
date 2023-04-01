@@ -11,8 +11,8 @@ namespace Server.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "ProfileImage",
-                table: "Teams",
+                name: "AgentStatus",
+                table: "Agents",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
@@ -22,8 +22,8 @@ namespace Server.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ProfileImage",
-                table: "Teams");
+                name: "AgentStatus",
+                table: "Agents");
         }
     }
 }

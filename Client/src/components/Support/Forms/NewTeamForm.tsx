@@ -1,30 +1,15 @@
 import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-type FormData = {
-  name: string;
-  description: string;
-  issueTypeId: string;
-  image: File | null;
-};
-
-type IssueTypeData = {
-  id: number;
-  name: string;
-};
+//Define data types using interfaces
+interface FormData {  name: string;  description: string;  issueTypeId: string;  image: File | null;};
+interface IssueTypeData  {  id: number;  name: string;};
 
 const NewTeamForm = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    description: "",
-    issueTypeId: "",
-    image: null,
-  });
+  const [formData, setFormData] = useState<FormData>({name: "", description: "", issueTypeId: "", image: null, });
+
   const [issueTypes, setIssueTypes] = useState<IssueTypeData[]>([]);
-  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
 
   useEffect(() => {
     const fetchIssueTypes = async () => {
@@ -59,12 +44,7 @@ const NewTeamForm = () => {
       alert("Successfully added!");
 
       // reset the form after successfully submitting the data
-      setFormData({
-        name: "",
-        description: "1",
-        issueTypeId: "",
-        image: null,
-      });
+      setFormData({ name: "", description: "", issueTypeId: "", image: null,});
     } catch (error) {
       console.log(error);
       alert(" Not added!");
@@ -89,44 +69,13 @@ const NewTeamForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-       <Form.Group>
-        <Form.Control
-          type="file"
-          placeholder="Image"
-          name="image"
-          onChange={handleChange}
-        />
-      </Form.Group>
+       <Form.Group>  <Form.Control type="file" placeholder="Image"  name="image" onChange={handleChange} /> </Form.Group>
       <br />
-      <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="Name *"
-          required
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-      </Form.Group>
+      <Form.Group>  <Form.Control type="text" placeholder="Name *"  required  name="name" value={formData.name} onChange={handleChange} />  </Form.Group>
       <br />
-      <Form.Group>
-        <Form.Select
-          aria-label="Default select example"
-          name="description"
-          value={formData.description}
-          onChange={handleChange} >
-          <option value="Available">Available</option>
-          <option value="Not Available">Not Available</option>
-        </Form.Select>
-      </Form.Group>
+      <Form.Group>  <Form.Control type="text" placeholder="Description *"  required  name="description" value={formData.description} onChange={handleChange} />  </Form.Group>
       <br />
-      <Form.Group>
-        <Form.Select
-          aria-label="Default select example"
-          name="issueTypeId"
-          value={formData.issueTypeId}
-          onChange={handleChange}
-        >
+      <Form.Group> <Form.Select aria-label="Default select example" name="issueTypeId"  value={formData.issueTypeId} onChange={handleChange} >
           <option value="">Select Issue Type</option>
           {issueTypes.map((issueType) => (
             <option key={issueType.id} value={issueType.id}>
@@ -136,13 +85,7 @@ const NewTeamForm = () => {
         </Form.Select>
       </Form.Group> 
       <br />
-      <Button variant="success" type="submit">  Submit  </Button>
-
-      {isSubmitSuccessful && (
-        <div className="alert alert-success mt-3" role="alert">
-          Successfully added!
-        </div>
-      )}
+      <Button variant="success" type="submit">  Submit  </Button>    
     </Form>
   );
 };

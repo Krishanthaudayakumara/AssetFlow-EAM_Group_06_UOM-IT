@@ -1,173 +1,116 @@
-import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
+import axios from "axios";
 
-interface AgentData {
-  image: File | null;
-  firstname: string;
-  lastname: string;
-  contact: string;
-  position: string;
-  email: string;
-  team: string;
-  status: string;
-}
+interface FormData { firstName: string;  lastName: string;  contact: string; position: string; email: string;  teamId: string; agentStatus: string;  image: File | null;};
+interface TeamData  {  id: number;  name: string;};
 
 const NewAgentForm = () => {
-  const [agent, setAgent] = useState<AgentData>({
-    image: null,
-    firstname: "",
-    lastname: "",
-    contact: "",
-    position: "",
-    email: "",
-    team: "",
-    status: "",
-  });
-  const [image, setImage] = useState<File | null>(null);
-  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append("firstname", agent.firstname);
-      formData.append("lastname", agent.lastname);
-      formData.append("contact", agent.contact);
-      formData.append("position", agent.position);
-      formData.append("email", agent.email);
-      formData.append("team", agent.team);
-      formData.append("status", agent.status);
-      if (image) {
-        formData.append("image", image);
+const [formData, setFormData] = useState<FormData>({firstName: "", lastName: "", contact: "", position: "", email: "", teamId: "",agentStatus: "",  image: null, });
+const [teams, setTeams] = useState<TeamData[]>([]);
+
+useEffect(() => {
+    const fetchTeams = async () => {
+      const response = await axios.get("http://localhost:5224/Api/Team");
+      setTeams(response.data);
+    };
+    fetchTeams();
+  }, []);
+
+const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+   event.preventDefault();
+   try {
+      const formDataWithImage = new FormData();
+      formDataWithImage.append("firstName", formData.firstName);
+      formDataWithImage.append("lastName", formData.lastName);
+      formDataWithImage.append("contact", formData.contact);
+      formDataWithImage.append("position", formData.position);
+      formDataWithImage.append("email", formData.email);
+      formDataWithImage.append("teamId", formData.teamId);
+      formDataWithImage.append("agentStatus", formData.agentStatus); 
+
+      if (formData.image) {
+        formDataWithImage.append("profileImage", formData.image);
       }
       const response = await axios.post(
         "http://localhost:5224/Api/Agent",
-        formData,
+        formDataWithImage,
         {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         }
       );
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      console.log(response.data);
+      alert("Successfully added!"); 
 
-  const handleChange = (
+      // reset the form after successfully submitting the data
+      //setFormData({ firstName: "",  teamId: "",  image: null,}); 
+      } catch (error) {
+      console.log(error);
+      alert(" Not added!");
+    }
+  }; 
+
+const handleChange = (
     event: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
   ) => {
-    const { name, value } = event.target;
-    setAgent({ ...agent, [name]: value });
-  };
-
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setImage(event.target.files[0]);
+    if (event.target.name === "image") {
+      setFormData({
+        ...formData,
+        image: event.target.files ? event.target.files[0] : null,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [event.target.name]: event.target.value,
+      });
     }
   };
-
-  return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group>
-        <Form.Control
-          type="file"
-          placeholder="Image"
-          name="image"
-          onChange={handleChange}
-        />
+return (
+       <Form onSubmit={handleSubmit}>
+       <Form.Group>
+        <Form.Control type="file" placeholder="Image" name="image" onChange={handleChange} />
+       </Form.Group>
+       <br />
+       <Form.Group>
+       <Form.Control type="text"  placeholder="First Name *" required  name="firstName" value={formData.firstName} onChange={handleChange} />
+       </Form.Group>
+       <br />   
+       <Form.Group>
+       <Form.Control type="text"  placeholder="Last Name *" required  name="lastName" value={formData.lastName} onChange={handleChange} />
+       </Form.Group>
+       <br />
+       <Form.Group>
+       <Form.Control type="text"  placeholder="Contact *" required  name="contact" value={formData.contact} onChange={handleChange} />
+       </Form.Group>
+       <br />
+       <Form.Group>
+       <Form.Control type="text"  placeholder="Position *" required  name="position" value={formData.position} onChange={handleChange} />
+       </Form.Group>
+       <br />
+       <Form.Group>
+       <Form.Control type="text"  placeholder="Email *" required  name="email" value={formData.email} onChange={handleChange} />
+       </Form.Group>
+       <br />         
+       <Form.Group>
+        <Form.Select  aria-label="Default select example"  name="teamId"  value={formData.teamId}  onChange={handleChange} >
+          <option value="">Select Team</option>
+          {teams.map((team) => (
+            <option key={team.id} value={team.id}>{team.name}</option>
+          ))}
+        </Form.Select>
       </Form.Group>
       <br />
       <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="First Name *"
-          name="firstname"
-          value={agent.firstname}
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
-      <br />
-
-      <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="Last Name *"
-          name="lastname"
-          value={agent.lastname}
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
-      <br />
-
-      <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="Contact *"
-          name="contact"
-          value={agent.contact}
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
-      <br />
-
-      <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="Position *"
-          name="position"
-          value={agent.position}
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
-      <br />
-
-      <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="Email *"
-          name="email"
-          value={agent.email}
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
-      <br />
-
-      <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="Team ID *"
-          name="team"
-          value={agent.team}
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
-      <br />
-
-      <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="Agent Status *"
-          name="status"
-          value={agent.status}
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
-      <br />
-
-      <br />
-
-      <Button variant="success" type="submit">
-        Submit
-      </Button>
+        <Form.Select
+          aria-label="Default select example"  name="agentStatus"  value={formData.agentStatus} onChange={handleChange} >
+          <option value="Not Available">Not Available</option>
+          <option value="Available">Available</option>          
+        </Form.Select>
+      </Form.Group> 
+       <br />
+      <Button variant="success" type="submit">Submit</Button>    
     </Form>
   );
 };

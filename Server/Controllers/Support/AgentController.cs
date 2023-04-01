@@ -42,11 +42,8 @@ namespace Server.Controllers.Support
             {
                 Id = agent.Id,
                 FirstName = agent.FirstName,
-                Position = agent.Position,
-                Email = agent.Email,
-                JoinDate = agent.JoinDate,
-                TeamId = agent.TeamId,
-                AgentStatus = agent.AgentStatus,
+                
+
             };
             return Ok(agentToReturn);
         }
@@ -62,19 +59,19 @@ namespace Server.Controllers.Support
             var agent = new Agent
             {
                 FirstName = agentToInsert.FirstName,
-                LastName = agentToInsert.LaststName,
+                LastName = agentToInsert.LastName,
                 Contact = agentToInsert.Contact,
                 Position = agentToInsert.Position,
                 Email = agentToInsert.Email,
-                JoinDate = agentToInsert.JoinDate,
                 TeamId = agentToInsert.TeamId,
                 AgentStatus = agentToInsert.AgentStatus,
+                JoinDate = DateTime.UtcNow,
             };
 
             if (agentToInsert.ProfileImage != null)
             {
                 // generate a unique filename for the image
-                string fileName = agentToInsert.ProfileImage.FileName ;
+                string fileName = agentToInsert.ProfileImage.FileName;
 
                 // create a new directory to store the uploaded image
                 string directory = Path.Combine(WebHostEnvironment.ContentRootPath, "ProfileImages");
@@ -118,11 +115,7 @@ namespace Server.Controllers.Support
             }
 
             updateAgent.FirstName = agentToUpdate.FirstName;
-            updateAgent.LastName = agentToUpdate.LastName;
-            updateAgent.Contact = agentToUpdate.Contact;
-            updateAgent.Position = agentToUpdate.Position;
-            updateAgent.Email = agentToUpdate.Email;
-            updateAgent.AgentStatus = agentToUpdate.AgentStatus;
+
             updateAgent.TeamId = agentToUpdate.TeamId;
 
 

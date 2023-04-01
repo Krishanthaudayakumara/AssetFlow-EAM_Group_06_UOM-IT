@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230323034108_Database")]
-    partial class Database
+    [Migration("20230401115611_DtaeColumn")]
+    partial class DtaeColumn
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,38 +74,6 @@ namespace Server.Migrations
                     b.ToTable("Agents");
                 });
 
-            modelBuilder.Entity("Server.Models.Support.Attachment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("FileSize")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FileType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Filename")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TicketId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TicketId");
-
-                    b.ToTable("Attachments");
-                });
-
             modelBuilder.Entity("Server.Models.Support.Feedback", b =>
                 {
                     b.Property<int>("Id")
@@ -134,23 +102,6 @@ namespace Server.Migrations
                         .IsUnique();
 
                     b.ToTable("Feedbacks");
-                });
-
-            modelBuilder.Entity("Server.Models.Support.ImageUpload", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ImageFile")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ImageUploads");
                 });
 
             modelBuilder.Entity("Server.Models.Support.IssueType", b =>
@@ -204,9 +155,6 @@ namespace Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -215,6 +163,10 @@ namespace Server.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfileImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -233,7 +185,7 @@ namespace Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AgentId")
+                    b.Property<int?>("AgentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -296,17 +248,6 @@ namespace Server.Migrations
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("Server.Models.Support.Attachment", b =>
-                {
-                    b.HasOne("Server.Models.Support.Ticket", "Ticket")
-                        .WithMany("Attachments")
-                        .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ticket");
-                });
-
             modelBuilder.Entity("Server.Models.Support.Feedback", b =>
                 {
                     b.HasOne("Server.Models.Support.Ticket", "Ticket")
@@ -344,9 +285,7 @@ namespace Server.Migrations
                 {
                     b.HasOne("Server.Models.Support.Agent", "Agent")
                         .WithMany("Tickets")
-                        .HasForeignKey("AgentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AgentId");
 
                     b.HasOne("Server.Models.User.Employee", "Employee")
                         .WithMany("Tickets")
@@ -386,8 +325,6 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Support.Ticket", b =>
                 {
-                    b.Navigation("Attachments");
-
                     b.Navigation("Feedback")
                         .IsRequired();
 
