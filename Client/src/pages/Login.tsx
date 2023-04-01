@@ -99,11 +99,9 @@ const Login: React.FC = () => {
             </Button>
             {isLoading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            {isValid === false && <p>Invalid User</p>}
+            {/* {isValid === true && <p>Invalid User</p>} */}
           </Form>
-          <Button variant="danger" onClick={handleDeleteUser}>
-            Delete User
-          </Button>
+        
         </Col>
       </Row>
     </Container>

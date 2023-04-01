@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import axios from "axios";
 import "../css/Home.css"; // import background image CSS file
 import EmployeeTable from "../components/Employee/EmployeeTable";
 
@@ -23,9 +24,10 @@ const Employee: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5087/api/Employee")
-      .then((res) => res.json())
-      .then((data) => {
+    axios
+      .get("http://localhost:5087/api/Employee")
+      .then((res) => {
+        const data = res.data;
         const employees = data.map((employee: any) => ({
           id: employee.id,
           firstName: employee.firstName,

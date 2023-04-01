@@ -24,17 +24,24 @@ namespace Server.Controllers
 
         // GET: api/Employee
         [HttpGet]
-        public async Task<ActionResult<Employee[]>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
-            var employees = await _context.Employees.ToArrayAsync();
+            var employees = await _context.Employees
+                .Include(e => e.User)
+                .Include(e => e.Department)
+                .ToListAsync();
             return employees;
         }
+
 
         // GET: api/Employee/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employees
+                .Include(e => e.User)
+                .Include(e => e.Department)
+                .FirstOrDefaultAsync(e => e.Id == id);
 
             if (employee == null)
             {
@@ -44,6 +51,7 @@ namespace Server.Controllers
             return employee;
         }
 
+
         // POST: api/Employee
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(EmployeeDto employeeDto)
@@ -52,10 +60,14 @@ namespace Server.Controllers
             {
                 FirstName = employeeDto.FirstName,
                 LastName = employeeDto.LastName,
+                MiddleName = employeeDto.MiddleName,
                 DepartmentId = employeeDto.DepartmentId,
                 Email = employeeDto.Email,
                 PhoneNumber = employeeDto.PhoneNumber,
-                User = new User { UserName = employeeDto.UserName, Email = employeeDto.Email, Role = "employee" } 
+                DateOfBirth = employeeDto.DateOfBirth,
+                HireDate = employeeDto.HireDate,
+                JobTitle = employeeDto.JobTitle,
+                User = new User { UserName = employeeDto.UserName, Email = employeeDto.Email, Role = "employee" }
             };
 
             _context.Employees.Add(employee);
@@ -83,8 +95,14 @@ namespace Server.Controllers
 
             employee.FirstName = employeeDto.FirstName;
             employee.LastName = employeeDto.LastName;
+            employee.MiddleName = employeeDto.MiddleName;
             employee.DepartmentId = employeeDto.DepartmentId;
             employee.Email = employeeDto.Email;
+            employee.PhoneNumber = employeeDto.PhoneNumber;
+            employee.DateOfBirth = employeeDto.DateOfBirth;
+            employee.HireDate = employeeDto.HireDate;
+            employee.JobTitle = employeeDto.JobTitle;
+            
 
             await _context.SaveChangesAsync();
 

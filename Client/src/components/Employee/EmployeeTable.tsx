@@ -31,9 +31,7 @@ const EmployeeTable: React.FC<Props> = ({ employees }) => {
           <th>Email</th>
           <th>Phone Number</th>
           <th>Job Title</th>
-          <th>Department ID</th>
           <th>Department</th>
-          <th>User ID</th>
           <th>User</th>
         </tr>
       </thead>
@@ -47,9 +45,7 @@ const EmployeeTable: React.FC<Props> = ({ employees }) => {
             <td>{employee.email}</td>
             <td>{employee.phoneNumber}</td>
             <td>{employee.jobTitle}</td>
-            <td>{employee.departmentId}</td>
             <td>{employee.department}</td>
-            <td>{employee.userId}</td>
             <td>{employee.user}</td>
             </tr>
         ))}
