@@ -1,49 +1,48 @@
-// EmployeeModal.tsx
+// AddEmployeeModal.tsx
 
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import EmployeeForm from "./EmployeeForm";
-import { Employee } from "../../types"; 
+import { Employee } from "../../types";
 
 interface Props {
   show: boolean;
-  employee: Employee;
   onHide: () => void;
   onSubmit: (employee: Employee) => void;
 }
 
-const EmployeeModal: React.FC<Props> = ({ show, employee, onHide, onSubmit }) => {
-  const [editedEmployee, setEditedEmployee] = useState<Employee>(employee);
+const AddEmployeeModal: React.FC<Props> = ({ show, onHide, onSubmit }) => {
+  const [newEmployee, setNewEmployee] = useState<Partial<Employee>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditedEmployee({
-      ...editedEmployee,
+    setNewEmployee({
+      ...newEmployee,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = () => {
-    onSubmit(editedEmployee);
+    onSubmit(newEmployee as Employee);
   };
 
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Employee</Modal.Title>
+        <Modal.Title>Add Employee</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <EmployeeForm employee={editedEmployee} onChange={handleChange} />
+        <EmployeeForm employee={newEmployee} onChange={handleChange} />
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>
           Close
         </Button>
         <Button variant="primary" onClick={handleSubmit}>
-          Save Changes
+          Add Employee
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default EmployeeModal;
+export default AddEmployeeModal;

@@ -1,25 +1,17 @@
-import React from "react";
-import { Table } from "react-bootstrap";
+// EmployeeTable.tsx
 
-interface Employee {
-  id: number;
-  firstName: string;
-  lastName: string;
-  middleName: string | null;
-  email: string;
-  phoneNumber: string;
-  jobTitle: string | null;
-  departmentId: number;
-  department: string | null;
-  userId: string;
-  user: string | null;
-}
+import React from "react";
+import { Table, Button } from "react-bootstrap";
+import { Employee } from "../../types";
+import { BsPencilSquare, BsTrash } from "react-icons/bs";
 
 interface Props {
   employees: Employee[];
+  onEdit: (employee: Employee) => void;
+  onDelete: (employee: Employee) => void;
 }
 
-const EmployeeTable: React.FC<Props> = ({ employees }) => {
+const EmployeeTable: React.FC<Props> = ({ employees, onEdit, onDelete }) => {
   return (
     <Table striped bordered hover>
       <thead>
@@ -33,6 +25,8 @@ const EmployeeTable: React.FC<Props> = ({ employees }) => {
           <th>Job Title</th>
           <th>Department</th>
           <th>User</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -47,11 +41,21 @@ const EmployeeTable: React.FC<Props> = ({ employees }) => {
             <td>{employee.jobTitle}</td>
             <td>{employee.department}</td>
             <td>{employee.user}</td>
-            </tr>
+            <td>
+              <Button variant="light" onClick={() => onEdit(employee)}>
+                <BsPencilSquare />
+              </Button>{" "}
+            </td>
+            <td>
+              <Button variant="danger" onClick={() => onDelete(employee)}>
+                <BsTrash />
+              </Button>
+            </td>
+          </tr>
         ))}
-        </tbody>
+      </tbody>
     </Table>
-    );
+  );
 };
 
 export default EmployeeTable;

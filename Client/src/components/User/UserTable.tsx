@@ -50,7 +50,7 @@ const UserTable: React.FC<IUserTableProps> = ({
                 variant="danger"
                 onClick={() => onDeleteUser(user.id)}
               >
-                <BsTrash />
+                <BsPencilSquare />
               </Button>
             </td>
           </tr>

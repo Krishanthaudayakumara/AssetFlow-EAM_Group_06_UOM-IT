@@ -1,20 +1,8 @@
 // EmployeeForm.tsx
 
 import React from "react";
-
-interface Employee {
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  email: string;
-  phoneNumber: string;
-  dateOfBirth: string;
-  hireDate: string;
-  jobTitle: string;
-  departmentId: number;
-  userName: string;
-  password: string;
-}
+import { Employee } from "../../types";
+import { Form } from "react-bootstrap";
 
 interface Props {
   employee: Partial<Employee>;
@@ -23,118 +11,120 @@ interface Props {
 
 const EmployeeForm: React.FC<Props> = ({ employee, onChange }) => {
   return (
-    <form>
-      <div>
-        <label htmlFor="firstName">First Name:</label>
-        <input
+    <Form>
+      <Form.Group>
+        <Form.Label htmlFor="firstName">First Name:</Form.Label>
+        <Form.Control
           type="text"
           id="firstName"
           name="firstName"
           value={employee.firstName || ""}
           onChange={onChange}
         />
-      </div>
-      <div>
-        <label htmlFor="lastName">Last Name:</label>
-        <input
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label htmlFor="lastName">Last Name:</Form.Label>
+        <Form.Control
           type="text"
           id="lastName"
           name="lastName"
           value={employee.lastName || ""}
           onChange={onChange}
         />
-      </div>
-      <div>
-        <label htmlFor="middleName">Middle Name:</label>
-        <input
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="middleName">Middle Name:</Form.Label>
+        <Form.Control
           type="text"
           id="middleName"
           name="middleName"
           value={employee.middleName || ""}
           onChange={onChange}
         />
-      </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="email">Email:</Form.Label>
+        <Form.Control
           type="email"
           id="email"
           name="email"
           value={employee.email || ""}
           onChange={onChange}
         />
-      </div>
-      <div>
-        <label htmlFor="phoneNumber">Phone Number:</label>
-        <input
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="phoneNumber">Phone Number:</Form.Label>
+        <Form.Control
           type="tel"
           id="phoneNumber"
           name="phoneNumber"
           value={employee.phoneNumber || ""}
           onChange={onChange}
         />
-      </div>
-      <div>
-        <label htmlFor="dateOfBirth">Date of Birth:</label>
-        <input
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="dateOfBirth">Date of Birth:</Form.Label>
+        <Form.Control
           type="date"
           id="dateOfBirth"
           name="dateOfBirth"
           value={employee.dateOfBirth ? employee.dateOfBirth.split("T")[0] : ""}
           onChange={onChange}
         />
-      </div>
-      <div>
-        <label htmlFor="hireDate">Hire Date:</label>
-        <input
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="hireDate">Hire Date:</Form.Label>
+        <Form.Control
           type="date"
           id="hireDate"
           name="hireDate"
           value={employee.hireDate ? employee.hireDate.split("T")[0] : ""}
           onChange={onChange}
         />
-      </div>
-      <div>
-        <label htmlFor="jobTitle">Job Title:</label>
-        <input
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="jobTitle">Job Title:</Form.Label>
+        <Form.Control
           type="text"
           id="jobTitle"
           name="jobTitle"
           value={employee.jobTitle || ""}
           onChange={onChange}
         />
-      </div>
-      <div>
-        <label htmlFor="departmentId">Department ID:</label>
-        <input
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="departmentId">Department ID:</Form.Label>
+        <Form.Control
           type="number"
           id="departmentId"
           name="departmentId"
           value={employee.departmentId || ""}
           onChange={onChange}
         />
-      </div>
-      <div>
-        <label htmlFor="userName">Username:</label>
-        <input
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="userName">Username:</Form.Label>
+        <Form.Control
           type="text"
           id="userName"
           name="userName"
           value={employee.userName || ""}
           onChange={onChange}
         />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label htmlFor="password">Password:</Form.Label>
+        <Form.Control
           type="password"
           id="password"
           name="password"
           value={employee.password || ""}
           onChange={onChange}
         />
-      </div>
-    </form>
+      </Form.Group>
+    </Form>
   );
 };
 

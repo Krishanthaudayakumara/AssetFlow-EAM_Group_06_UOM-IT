@@ -1,29 +1,28 @@
+// Employee.tsx
+
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
-import "../css/Home.css"; // import background image CSS file
 import EmployeeTable from "../components/Employee/EmployeeTable";
+import AddEmployeeModal from "../components/Employee/AddEmployeeModal";
+import EmployeeModal from "../components/Employee/EmployeeModal";
 
-interface Employee {
-  id: number;
-  firstName: string;
-  lastName: string;
-  middleName: string | null;
-  email: string;
-  phoneNumber: string;
-  dateOfBirth: string;
-  hireDate: string;
-  jobTitle: string | null;
-  departmentId: number;
-  department: string | null;
-  userId: string;
-  user: string | null;
-}
+import { Employee } from "../types"; 
 
-const Employee: React.FC = () => {
+
+const EmployeePage: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
+    null
+  );
 
   useEffect(() => {
+    fetchEmployees();
+  }, []);
+
+  const fetchEmployees = () => {
     axios
       .get("http://localhost:5087/api/Employee")
       .then((res) => {
@@ -46,17 +45,72 @@ const Employee: React.FC = () => {
         setEmployees(employees);
       })
       .catch((error) => console.error(error));
-  }, []);
+  };
+
+  const handleAddEmployee = (employee: Employee) => {
+    axios
+      .post("http://localhost:5087/api/Employee", employee)
+      .then(() => {
+        fetchEmployees();
+        setShowAddModal(false);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleEditEmployee = (employee: Employee) => {
+    axios
+      .put(`http://localhost:5087/api/Employee/${employee.id}`, employee)
+      .then(() => {
+        fetchEmployees();
+        setShowEditModal(false);
+        setSelectedEmployee(null);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleDeleteEmployee = (employee: Employee) => {
+    if (window.confirm("Are you sure you want to delete this employee?")) {
+      axios
+        .delete(`http://localhost:5087/api/Employee/${employee.id}`)
+        .then(() => {
+          fetchEmployees();
+        })
+        .catch((error) => console.error(error));
+    }
+  };
 
   return (
     <Container>
       <Row>
         <Col>
-          <EmployeeTable employees={employees} />
+          <Button variant="primary" onClick={() => setShowAddModal(true)}>
+            Add Employee
+          </Button>
+          <AddEmployeeModal
+            show={showAddModal}
+            onHide={() => setShowAddModal(false)}
+            onSubmit={handleAddEmployee}
+          />
+          {selectedEmployee && (
+            <EmployeeModal
+              show={showEditModal}
+              employee={selectedEmployee}
+              onHide={() => setShowEditModal(false)}
+              onSubmit={handleEditEmployee}
+            />
+          )}
+          <EmployeeTable
+            employees={employees}
+            onEdit={(employee) => {
+              setSelectedEmployee(employee);
+              setShowEditModal(true);
+            }}
+            onDelete={handleDeleteEmployee}
+          />
         </Col>
       </Row>
     </Container>
   );
 };
 
-export default Employee;
+export default EmployeePage;

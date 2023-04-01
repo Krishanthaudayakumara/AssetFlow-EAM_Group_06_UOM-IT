@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 import Wrapper from "./components/DashWrapper";
 import Sidebar from "./components/Sidebar";
 import PrivateRoute from "./PrivateRoute";
-import Employee from "./pages/Employee";
+import EmployeePage from "./pages/Employee" ;
 
 const App: React.FC = () => {
   return (
@@ -50,7 +50,7 @@ const App: React.FC = () => {
             path="/employee"
             element={
               <Wrapper>
-                <Employee />
+                <EmployeePage />
               </Wrapper>
             }
           />
