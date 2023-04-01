@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Server.Data;
 using Server.DTOs.Report;
-
+using Server.Data;
 
 namespace Server.Controllers
 {
@@ -19,24 +18,29 @@ namespace Server.Controllers
 
         // GET: api/SupportTicket
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SupportTicketReport>>> GetSupportTickets()
+        public async Task<ActionResult<IEnumerable<SupportTicketReport>>>
+        GetSupportTickets()
         {
-            var supportTickets = await _context.Tickets
-                .Include(t => t.Employee)
-                .Include(t => t.Reply)
-                .Include(t => t.Agent)
-                .Include(t => t.Feedback)
-                .ToListAsync();
+            var supportTickets =
+                await _context
+                    .Tickets
+                    .Include(t => t.Employee)
+                    .Include(t => t.Reply)
+                    .Include(t => t.Agent)
+                    .Include(t => t.Feedback)
+                    .ToListAsync();
 
-            var supportTicketReports = supportTickets.Select(t => new SupportTicketReport
-            {
-                TicketId = t.Id,
-                CreatedByEmployeeId = t.EmployeeId,
-                Problem = t.Problem,
-                Reply = t.Reply?.Text, // null-conditional operator to avoid null reference exception
-                AgentFirstName = t.Agent?.FirstName, // null-conditional operator to avoid null reference exception
-                Rating = t.Feedback?.Rating // null-conditional operator to avoid null reference exception
-            });
+            var supportTicketReports =
+                supportTickets
+                    .Select(t =>
+                        new SupportTicketReport {
+                            TicketId = t.Id,
+                            CreatedByEmployeeId = t.EmployeeId,
+                            Problem = t.Problem,
+                            Reply = t.Reply?.Text, // null-conditional operator to avoid null reference exception
+                            AgentFirstName = t.Agent?.FirstName, // null-conditional operator to avoid null reference exception
+                            Rating = t.Feedback?.Rating // null-conditional operator to avoid null reference exception
+                        });
 
             return Ok(supportTicketReports);
         }

@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Server.Data;
 using Server.DTOs.Report;
-
+using Server.Data;
 
 namespace Server.Controllers
 {
@@ -18,19 +17,31 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SupportAgentReportToReturn>>> GetSupportAgentReport()
+        public async Task<ActionResult<IEnumerable<SupportAgentReportToReturn>>>
+        GetSupportAgentReport()
         {
-            var supportAgentReports = await _context.Agents
-                .Select(a => new SupportAgentReportToReturn
-                {
-                    AgentFirstName = a.FirstName,
-                    AgentLastName = a.LastName,
-                    TeamId = a.TeamId,
-                    OpenedTickets = a.Tickets.Count(t => t.TicketStatus == "Opened"),
-                    SolvedTickets = a.Tickets.Count(t => t.TicketStatus == "Solved"),
-                    PendingTickets = a.Tickets.Count(t => t.TicketStatus == "Pending")
-                })
-                .ToListAsync();
+            var supportAgentReports =
+                await _context
+                    .Agents
+                    .Select(a =>
+                        new SupportAgentReportToReturn {
+                            AgentFirstName = a.FirstName,
+                            AgentLastName = a.LastName,
+                            TeamId = a.TeamId,
+                            OpenedTickets =
+                                a
+                                    .Tickets
+                                    .Count(t => t.TicketStatus == "Opened"),
+                            SolvedTickets =
+                                a
+                                    .Tickets
+                                    .Count(t => t.TicketStatus == "Solved"),
+                            PendingTickets =
+                                a
+                                    .Tickets
+                                    .Count(t => t.TicketStatus == "Pending")
+                        })
+                    .ToListAsync();
 
             return supportAgentReports;
         }
