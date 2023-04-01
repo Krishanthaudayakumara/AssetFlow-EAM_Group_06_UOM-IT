@@ -55,7 +55,7 @@ const items = [
     link : "/inventory",
     icon: FaBox,
     dropdownItems: [
-      { label: "Add Items", link: "/inventory/building1" },
+      { label: "Inventory Dashboard", link: "/InventoryDashboard" },
       { label: "Item", link: "/inventory/building2" },
     ],
   },
@@ -64,7 +64,7 @@ const items = [
     icon: FaBuilding,
     link : "/facility",
     dropdownItems: [
-      { label: "Building 1", link: "/facility/building1" },
+      { label: "Facility Dashboard", link: "/FacilityDashboard" },
       { label: "Building 2", link: "/facility/building2" },
     ],
   },
@@ -80,7 +80,10 @@ const items = [
     ],
   },
   { label: "Suppliers", link: "/supplier", icon: FaShippingFast },
-  { label: "Support", link: "/support", icon: FaComments },
+  { label: "Support", link: "/support", icon: FaComments ,dropdownItems: [
+    { label: "IT Dashboard", link: "/ITDashboard" },
+   
+  ],},
   { label: "Calendar", link: "/calendar", icon: FaCalendarAlt },
 ];
 
