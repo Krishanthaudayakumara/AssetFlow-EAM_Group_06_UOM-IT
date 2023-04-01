@@ -41,16 +41,16 @@ const UserTable: React.FC<IUserTableProps> = ({
             <td>{user.email}</td>
             <td>{user.role}</td>
             <td>
-              <Button variant="light" onClick={() => onEditUser(user)}>
+              <Button variant="outline-primary" onClick={() => onEditUser(user)}>
                 <BsPencilSquare />
               </Button>
             </td>
             <td>
               <Button
-                variant="danger"
+                variant="outline-danger"
                 onClick={() => onDeleteUser(user.id)}
               >
-                <BsPencilSquare />
+                <BsTrash />
               </Button>
             </td>
           </tr>

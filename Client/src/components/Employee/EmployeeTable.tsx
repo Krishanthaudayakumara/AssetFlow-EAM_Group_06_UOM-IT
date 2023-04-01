@@ -42,12 +42,12 @@ const EmployeeTable: React.FC<Props> = ({ employees, onEdit, onDelete }) => {
             <td>{employee.department}</td>
             <td>{employee.user}</td>
             <td>
-              <Button variant="light" onClick={() => onEdit(employee)}>
+              <Button variant="outline-primary" onClick={() => onEdit(employee)}>
                 <BsPencilSquare />
               </Button>{" "}
             </td>
             <td>
-              <Button variant="danger" onClick={() => onDelete(employee)}>
+              <Button variant="outline-danger" onClick={() => onDelete(employee)}>
                 <BsTrash />
               </Button>
             </td>

@@ -8,6 +8,7 @@ import Wrapper from "./components/DashWrapper";
 import Sidebar from "./components/Sidebar";
 import PrivateRoute from "./PrivateRoute";
 import EmployeePage from "./pages/Employee" ;
+import Department from "./pages/Department";
 
 const App: React.FC = () => {
   return (
@@ -55,6 +56,19 @@ const App: React.FC = () => {
             }
           />
         </Route>
+
+        <Route path="/department" element={<PrivateRoute />}>
+          <Route
+            path="/department"
+            element={
+              <Wrapper>
+                <Department />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+
       </Routes>
     </Router>
   );
