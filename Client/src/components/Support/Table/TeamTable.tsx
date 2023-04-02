@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons/faPen";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-interface agentType {
+interface teamType {
     profileImage:string,
     id:number,
     name:string,
@@ -13,7 +13,7 @@ interface agentType {
     
 }
 const TeamTable = () => {
-    const [teams,setTeams]=useState<agentType[]>([])
+    const [teams,setTeams]=useState<teamType[]>([])
     useEffect(()=>{
         axios.get("http://localhost:5224/Api/Team").then((response)=>{
         setTeams(response.data) 
@@ -21,6 +21,17 @@ const TeamTable = () => {
             alert(error)
         })
     },[])
+    const handleDeleteTeam = (team: teamType) => {
+      axios
+        .delete(`http://localhost:5224/Api/Team/${team.id}`)
+        .then((response) => {
+          setTeams(teams.filter((item) => item.id !== team.id));
+          alert("Successfully deleted!");
+        })
+        .catch((error) => {
+          alert("Not deleted!");
+        });
+    };
     return(
         <div>
              <p style={{margin: "0 0 30px 70px",color: "#482890",fontSize: "18px",fontWeight: "bold",}}>Support Teams</p>
@@ -67,6 +78,7 @@ const TeamTable = () => {
                             <FontAwesomeIcon
                               icon={faTrash}
                               style={{ color: "#FF615A" }}
+                              onClick={() => handleDeleteTeam(team)}
                             />
                           </td>
                 </tr> ))}
