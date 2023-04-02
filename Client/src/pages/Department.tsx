@@ -71,7 +71,7 @@ const DepartmentPage: React.FC = () => {
     <Container>
       <Row>
         <Col>
-          <Button variant="primary" onClick={() => setShowAddModal(true)}>
+          <Button variant="primary" onClick={() => setShowAddModal(true)} className="btn-purple">
             Add Department
           </Button>
           <AddDepartmentModal

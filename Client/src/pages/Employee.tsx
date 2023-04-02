@@ -137,21 +137,23 @@ const EmployeePage: React.FC = () => {
     <Container>
       <Row>
         <Col>
-          <Button variant="primary" onClick={() => setShowAddModal(true)}>
+          <Button variant="primary" onClick={() => setShowAddModal(true)} className="btn-l-purple">
             Add Employee
           </Button>
 
-          <Button variant="primary" onClick={() => downloadExcel()}>
-            Download Excel
+          <Button variant="primary" onClick={() => setShowUploadModal(true)} className="btn-l-purple">
+            Upload Excel
           </Button>
 
-          <Button variant="primary" onClick={() => downloadSample()}>
+          <Button variant="primary" onClick={() => downloadExcel()} className="btn-purple">
+            Export to Excel
+          </Button>
+
+          <Button variant="primary" onClick={() => downloadSample()} className="btn-orange">
             Download Sample Excel
           </Button>
 
-          <Button variant="primary" onClick={() => setShowUploadModal(true)}>
-            Upload Excel
-          </Button>
+          
 
           <Modal
             show={showUploadModal}

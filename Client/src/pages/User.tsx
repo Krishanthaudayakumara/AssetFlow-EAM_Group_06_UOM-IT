@@ -69,7 +69,7 @@ const UserPage: React.FC = () => {
       </Row>
       <Row className="mb-3">
         <Col>
-          <Button variant="success" onClick={() => setShowAddModal(true)}>
+          <Button variant="success" onClick={() => setShowAddModal(true)} className="btn-purple">
             <BsPlus /> Add User
           </Button>
           <AddUserModal

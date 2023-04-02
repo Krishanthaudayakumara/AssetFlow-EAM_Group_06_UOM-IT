@@ -1,0 +1,56 @@
+.btn-l-purple{
+    background-color: white !important;
+    color: #482890 !important;
+    border: 1px solid #482890 !important;
+    border-radius: 5px !important;
+    padding: 10px 20px;
+    margin: 10px;
+    /* font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px; */
+    transition: all 0.3s ease 0s;
+}
+
+.btn-l-purple:hover{
+    background-color: #482890 !important;
+    color: white !important;
+}
+
+.btn-purple{
+    background-color: #482890 !important;
+    color: white !important;
+    border: 1px solid #482890 !important;
+    border-radius: 5px !important;
+    padding: 10px 20px;
+    margin: 10px;
+    /* font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px; */
+    transition: all 0.3s ease 0s;
+}
+
+.btn-purple:hover{
+    background-color: white !important;
+    color: #482890 !important;
+}
+
+.btn-orange{
+    background-color: #ff615a !important;
+    color: white !important;
+    border: 1px solid #ff615a !important;
+    border-radius: 5px !important;
+    padding: 10px 20px;
+    margin: 10px;
+    /* font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px; */
+    transition: all 0.3s ease 0s;
+}
+
+.btn-orange:hover{
+    background-color: white !important;
+    color: #ff615a !important;
+}

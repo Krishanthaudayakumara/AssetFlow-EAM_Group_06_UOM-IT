@@ -12,6 +12,7 @@ import Department from "./pages/Department";
 import Calendar from "./pages/Calendar";
 import Supplier from "./pages/Supplier";
 import "./App.css";
+import "./css/Buttons.css";
 
 const App: React.FC = () => {
   return (
