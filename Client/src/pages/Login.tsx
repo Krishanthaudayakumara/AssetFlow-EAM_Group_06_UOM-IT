@@ -1,7 +1,16 @@
-import React, { useState } from "react";
-import { Form, Button, Container, Row, Col, Image } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Image,
+  Alert,
+} from "react-bootstrap";
 import "../css/Login.css"; // import background image CSS file
 import { BsArrowRightCircle } from "react-icons/bs";
+import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import { login } from "../services/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +22,15 @@ const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError("");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,6 +68,7 @@ const Login: React.FC = () => {
 
   return (
     <Container
+      fluid="xxl"
       className="login-container"
       style={{
         backgroundImage: `url(/img/login-back.png)`,
@@ -66,7 +85,11 @@ const Login: React.FC = () => {
         <Col lg={4}>
           <Form className="login-form" onSubmit={handleSubmit}>
             <Image src={"/img/logo.png"} className="logo" />
-
+            {error && (
+              <Alert variant="danger" className="mt-3">
+                {error}
+              </Alert>
+            )}
             <Form.Group controlId="usernameForm">
               <Form.Label>Username</Form.Label>
               <Form.Control
@@ -97,11 +120,41 @@ const Login: React.FC = () => {
                 }}
               />
             </Button>
+            <a href="">Forgot Password</a>
+
             {isLoading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
+
             {/* {isValid === true && <p>Invalid User</p>} */}
           </Form>
-        
+        </Col>
+      </Row>
+
+      <Row className="l-footer">
+        <Col>
+          <div className="d-flex justify-content-start">
+            <ul className="footer-links list-unstyled d-flex">
+              <li className="mr-3">
+                <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+              </li>
+              {" | "}
+              <li>
+                <a href="/documentation">Documentation</a>
+              </li>
+            </ul>
+          </div>
+        </Col>
+        <Col>
+          <div className="d-flex justify-content-end">
+            <a href="https://www.facebook.com" className="social-icon mr-2">
+              <FaFacebookF />
+            </a>
+            <a href="https://www.twitter.com" className="social-icon mr-2">
+              <FaTwitter />
+            </a>
+            <a href="https://www.linkedin.com" className="social-icon">
+              <FaLinkedinIn />
+            </a>
+          </div>
         </Col>
       </Row>
     </Container>

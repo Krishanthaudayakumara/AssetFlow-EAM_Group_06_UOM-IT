@@ -35,10 +35,10 @@ const EmployeeModal: React.FC<Props> = ({ show, employee, onHide, onSubmit }) =>
         <EmployeeForm employee={editedEmployee} onChange={handleChange} />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
+        <Button className="btn-l-purple" onClick={onHide}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleSubmit}>
+        <Button className="btn-orange" onClick={handleSubmit}>
           Save Changes
         </Button>
       </Modal.Footer>

@@ -32,10 +32,10 @@ const SupplierModal: React.FC<Props> = ({ show, onHide, supplier, onSubmit }) =>
         <SupplierForm supplier={supplier} onSubmit={handleSubmit} />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
+        <Button className="btn-l-purple" onClick={onHide}>
           Close
         </Button>
-        <Button variant="primary" type="submit" form="supplierForm">
+        <Button className="btn-orange" type="submit" form="supplierForm">
           {supplier ? "Update" : "Add"}
         </Button>
       </Modal.Footer>

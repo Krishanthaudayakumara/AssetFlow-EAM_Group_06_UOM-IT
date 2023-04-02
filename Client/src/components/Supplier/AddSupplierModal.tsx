@@ -85,10 +85,10 @@ const AddSupplierModal: React.FC<Props> = ({ show, onHide, onSubmit }) => {
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={onHide}>
+          <Button className="btn-l-purple" onClick={onHide}>
             Cancel
           </Button>
-          <Button variant="primary" type="submit">
+          <Button className="btn-orange" type="submit">
             Add Supplier
           </Button>
         </Modal.Footer>

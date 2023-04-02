@@ -29,10 +29,10 @@ const AddUserModal: React.FC<Props> = ({ show, onHide, onSubmit }) => {
         <UserForm onSubmit={handleSubmit} />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
+        <Button className="btn-l-purple" onClick={onHide}>
           Close
         </Button>
-        <Button variant="primary" type="submit" form="userForm">
+        <Button className="btn-orange" type="submit" form="userForm">
           Add
         </Button>
       </Modal.Footer>

@@ -51,10 +51,10 @@ const DepartmentModal: React.FC<Props> = ({
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
+        <Button className="btn-l-purple" onClick={onHide}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleSubmit}>
+        <Button className="btn-orange" onClick={handleSubmit}>
           Save Changes
         </Button>
       </Modal.Footer>
