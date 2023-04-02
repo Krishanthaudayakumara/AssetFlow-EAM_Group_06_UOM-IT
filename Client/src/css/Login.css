@@ -90,3 +90,16 @@
     font-size: 30px;
     margin: 0px 10px 20px 10px;
 }
+
+
+.login-btn-icon{
+
+  font-size: 2.2rem;
+  margin-right: -2rem;
+  margin-left: 1rem;
+}
+
+.login-btn-icon:hover{
+  margin-left: 2rem;
+  transition: 200ms;
+}

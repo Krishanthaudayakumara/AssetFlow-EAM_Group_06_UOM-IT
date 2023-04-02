@@ -111,14 +111,7 @@ const Login: React.FC = () => {
             </Form.Group>
 
             <Button variant="primary" type="submit" className="submit-btn">
-              Login{" "}
-              <BsArrowRightCircle
-                style={{
-                  fontSize: "2.2rem",
-                  marginRight: "-2rem",
-                  marginLeft: "2rem",
-                }}
-              />
+              Login <BsArrowRightCircle className="login-btn-icon" />
             </Button>
             <a href="">Forgot Password</a>
 

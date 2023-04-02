@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { FaRegBell } from "react-icons/fa";
 import "../css/Navbar.css"; // import background image CSS file
+import { useNavigate } from "react-router";
 
 
 const MyNavbar: React.FC = () => {
@@ -20,6 +21,14 @@ const MyNavbar: React.FC = () => {
   ];
 
   const [notificationCount, setNotificationCount] = useState(2);
+
+  
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <Navbar className="top-bar">
@@ -51,7 +60,7 @@ const MyNavbar: React.FC = () => {
           <NavDropdown.Divider />
           <NavDropdown.Item href="#">Notifications</NavDropdown.Item>
           <NavDropdown.Item href="#">Settings</NavDropdown.Item>
-          <NavDropdown.Item href="#">Logout</NavDropdown.Item>
+          <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
         </NavDropdown>
         <NavDropdown className="notification"
           key={"down-centered"}

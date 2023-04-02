@@ -17,6 +17,19 @@ const AddUserModal: React.FC<Props> = ({ show, onHide, onSubmit }) => {
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
     const role = formData.get("role") as string;
+
+    // Email validation
+    if (!email || !email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    // Password validation
+    if (!password || password.length < 8 || !/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
+      alert("Password must contain at least 8 characters, 1 uppercase letter, 1 number, and 1 special character.");
+      return;
+    }
+
     onSubmit({ email, username, password, role } as User);
   };
 
