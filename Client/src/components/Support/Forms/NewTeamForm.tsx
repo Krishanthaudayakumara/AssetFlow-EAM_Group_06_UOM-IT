@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 
-//Define data types using interfaces
+//Define form data types using interfaces
 interface FormData {  name: string;  description: string;  issueTypeId: string;  image: File | null;};
 interface IssueTypeData  {  id: number;  name: string;};
 
 const NewTeamForm = () => {
-  const [formData, setFormData] = useState<FormData>({name: "", description: "", issueTypeId: "", image: null, });
+  const [formData, setFormData] = useState<FormData>({name: "", description: "", issueTypeId: "", image: null, }); //Declare a use state variable & function
 
   const [issueTypes, setIssueTypes] = useState<IssueTypeData[]>([]);
 
   useEffect(() => {
     const fetchIssueTypes = async () => {
-      const response = await axios.get("http://localhost:5224/Api/IssueType");
+      const response = await axios.get("http://localhost:5224/Api/IssueType");  
       setIssueTypes(response.data);
     };
     fetchIssueTypes();
@@ -42,7 +42,6 @@ const NewTeamForm = () => {
       );
       console.log(response.data);
       alert("Successfully added!");
-
       // reset the form after successfully submitting the data
       setFormData({ name: "", description: "", issueTypeId: "", image: null,});
     } catch (error) {

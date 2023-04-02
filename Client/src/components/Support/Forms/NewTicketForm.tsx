@@ -2,26 +2,10 @@ import { ChangeEvent, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 
-type FormData = {
-  ticketName: string;
-  ticketPosition: string;
-  department: string;
-  email: string;
-  pending: number;
-  completed: number;
-  status: string;
-};
+type FormData = {ticketName: string;ticketPosition: string; department: string; email: string; pending: number; completed: number; status: string;};
 
 const NewTicketForm = () => {
-  const [formData, setFormData] = useState<FormData>({
-    ticketName: "",
-    ticketPosition: "",
-    department: "",
-    email: "",
-    pending: 0,
-    completed: 0,
-    status: "",
-  });
+  const [formData, setFormData] = useState<FormData>({ ticketName: "", ticketPosition: "", department: "", email: "", pending: 0, completed: 0, status: "", });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,6 +13,7 @@ const NewTicketForm = () => {
     try {
       const response = await axios.post("API_URL", formData);
       console.log(response.data);
+      
     } catch (error) {
       console.log(error);
     }
@@ -36,8 +21,7 @@ const NewTicketForm = () => {
 
   const handleChange = (
     event: ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement >
   ) => {
     setFormData({
       ...formData,
@@ -133,9 +117,7 @@ const NewTicketForm = () => {
       </Form.Group>
       <br />
 
-      <Button variant="success" type="submit">
-        Submit
-      </Button>
+      <Button variant="success" type="submit">Submit</Button>
     </Form>
   );
 };

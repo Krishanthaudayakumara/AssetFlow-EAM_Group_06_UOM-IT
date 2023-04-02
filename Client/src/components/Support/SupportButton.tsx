@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NewAgentForm from "./Forms/NewAgentForm";
 import NewTicketForm from "./Forms/NewTicketForm";
 import NewTeamForm from "./Forms/NewTeamForm";
+import NewIssurTypeForm from "./Forms/NewIssueTypeForm";
 
 export default function SupportButton() {
   const [show, setshow] = useState(false);
@@ -25,6 +26,11 @@ export default function SupportButton() {
     setModalBody(<NewTeamForm />);
     setshow(true);
   };
+  const handleNewIssueType = () => {
+    setModalTitle("New Issue Type");
+    setModalBody(<NewIssurTypeForm />);
+    setshow(true);
+  };
   return (
     <div>
       <div className="container">
@@ -42,9 +48,7 @@ export default function SupportButton() {
             </p>
           </div>
           <div className="col-3" style={{ padding: "0 0 0 120px" }}>
-            <button
-              type="button"
-              className="btn btn-outline-primary"
+            <button  onClick={handleNewIssueType} type="button" className="btn btn-outline-primary"
               style={{
                 border: "1px solid #482890",
                 color: "#482890",
@@ -54,10 +58,7 @@ export default function SupportButton() {
             </button>
           </div>
           <div className="col-3" style={{ padding: "0 0 0 40px" }}>
-            <button
-              onClick={ handleNewTeam}
-              type="button"
-              className="btn btn-outline-primary"
+            <button onClick={ handleNewTeam} type="button" className="btn btn-outline-primary"
               style={{
                 border: "1px solid #482890",
                 color: "#482890",
@@ -67,20 +68,14 @@ export default function SupportButton() {
             </button>
           </div>
           <div className="col-2" style={{ padding: "0" }}>
-            <button
-              onClick={handleNewTicket}
-              type="button"
-              className="btn btn-outline-light"
+            <button onClick={handleNewTicket}  type="button"  className="btn btn-outline-light"
               style={{ backgroundColor: "#FF615A" }}
             >
               + New Ticket
             </button>
           </div>
           <div className="col-2" style={{ padding: "0" }}>
-            <button
-              onClick={handleNewAgent}
-              type="button"
-              className="btn btn-outline-light"
+            <button  onClick={handleNewAgent}  type="button"  className="btn btn-outline-light"
               style={{ backgroundColor: "#482890" }}
             >
               + New Agent
@@ -89,7 +84,7 @@ export default function SupportButton() {
         </div>
       </div>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header>
+        <Modal.Header style={{ backgroundColor: "#FF615A" }}>
           <Modal.Title>{modalTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{modalBody}</Modal.Body>
