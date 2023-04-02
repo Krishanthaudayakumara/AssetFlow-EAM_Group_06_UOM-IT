@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { Table } from "react-bootstrap";
+import { Button, Form, Modal, Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons/faPen";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +14,9 @@ interface teamType {
 }
 const TeamTable = () => {
     const [teams,setTeams]=useState<teamType[]>([])
+    const [showModal, setShowModal] = useState(false);
+    const [selectedTeam, setSelectedTeam] = useState<teamType | null>(null);
+
     useEffect(()=>{
         axios.get("http://localhost:5224/Api/Team").then((response)=>{
         setTeams(response.data) 
@@ -21,6 +24,37 @@ const TeamTable = () => {
             alert(error)
         })
     },[])
+
+    const handleEditTeamClick = (team: teamType) => {
+      setSelectedTeam(team);
+      setShowModal(true);
+    };
+
+    const handleModalClose = () => {
+      setSelectedTeam(null);
+      setShowModal(false);
+    };
+
+    const handleUpdateTeam = () => {
+      axios
+        .put(
+          `http://localhost:5224/Api/Team/${selectedTeam?.id}`,
+          selectedTeam
+        )
+        .then((response) => {
+          setTeams(
+            teams.map((team) =>
+              team.id === selectedTeam?.id ? selectedTeam : team
+            )
+          );
+          setShowModal(false);
+          alert("Successfully updated!");
+        })
+        .catch((error) => {
+          alert("Not updated!");
+        });
+    };
+
     const handleDeleteTeam = (team: teamType) => {
       axios
         .delete(`http://localhost:5224/Api/Team/${team.id}`)
@@ -69,15 +103,15 @@ const TeamTable = () => {
                  <td>{team.description}</td>
                  <td>{team.issueTypeId}</td>
                  <td>
-                            <FontAwesomeIcon
-                              
+                            <FontAwesomeIcon                              
                               icon={faPen}
-                              style={{ color: "#482890" }}
+                              style={{ color: "#482890", cursor: "pointer" }}
+                              onClick={() => handleEditTeamClick(team)}
                             />
                             &nbsp; &nbsp; &nbsp;
                             <FontAwesomeIcon
                               icon={faTrash}
-                              style={{ color: "#FF615A" }}
+                              style={{ color: "#FF615A", cursor: "pointer" }}
                               onClick={() => handleDeleteTeam(team)}
                             />
                           </td>
@@ -87,6 +121,41 @@ const TeamTable = () => {
              </div>
              </Fragment>
              </div>
+             <Modal show={showModal} onHide={handleModalClose}>
+             {selectedTeam && (
+              <>
+              <Modal.Header style={{ backgroundColor: "#482890" }}>
+              <Modal.Title>
+                <div style={{ margin: "20px 180px" }}>
+                  <img
+                    src={`http://localhost:5224/ProfileImages/${selectedTeam.profileImage}`}
+                    alt="User profile"
+                    className="rounded-circle"
+                    style={{ width: "100px", height: "100px" }}                    
+                  />
+                </div>
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>             
+            <h3>
+                <div>
+                  {selectedTeam.name}
+                </div>
+              </h3>
+              <form>
+              <Form.Group> <Form.Label>Name</Form.Label> <Form.Control type="text" placeholder="Name *"  required  name="name" value={selectedTeam.name} onChange={(e) =>  setSelectedTeam({...selectedTeam,name: e.target.value, })}/>  </Form.Group>
+             <br />
+             <Form.Group> <Form.Label>Description</Form.Label> <Form.Control type="text" placeholder="Description *"  required  name="description" value={selectedTeam.description} onChange={(e) =>  setSelectedTeam({...selectedTeam,description: e.target.value, })} />  </Form.Group>
+             <br/>
+             <Form.Group> <Form.Label>Issue Type</Form.Label> <Form.Control type="number" placeholder="Issue Type *"  required  name="issueTypeId" value={selectedTeam.issueTypeId} onChange={(e) =>  setSelectedTeam({...selectedTeam,issueTypeId: Number(e.target.value,) })} />  </Form.Group>
+              </form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={() => handleUpdateTeam()}>Update</Button>             
+            </Modal.Footer>
+              </>
+             )}
+             </Modal>
     
     
     </div>

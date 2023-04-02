@@ -172,6 +172,7 @@ const AgentTable = () => {
                     alt="User profile"
                     className="rounded-circle"
                     style={{ width: "100px", height: "100px" }}
+                    
                   />
                 </div>
               </Modal.Title>
@@ -256,10 +257,7 @@ const AgentTable = () => {
               </Form>
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={() => handleUpdateAgent()}>Update</Button>
-              <Button onClick={() => handleDelete(selectedAgent.id)}>
-                Delete
-              </Button>
+              <Button onClick={() => handleUpdateAgent()}>Update</Button>             
             </Modal.Footer>
           </>
         )}
