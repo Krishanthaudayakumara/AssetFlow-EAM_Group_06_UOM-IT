@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons/faPen";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 interface agentType {
+    profileImage:string,
     id:number,
     name:string,
     description:string,
@@ -28,7 +29,8 @@ const TeamTable = () => {
              <div>
              <Table className="table w-100 small table-borderless table-responsiv align-middle align-left" hover  style={{ fontSize: "14px" }}>
                 <thead>
-                <tr style={{ color: "#482890" }}>                  
+                <tr style={{ color: "#482890" }}> 
+                  <th></th>                 
                   <th>Team Id</th>
                   <th>Team Name</th>
                   <th>Team Descrption</th> 
@@ -38,6 +40,19 @@ const TeamTable = () => {
                 </thead>
                 <tbody>
                 {teams.map((team)=>(<tr key={team.id}>
+                  <td>
+                  {" "}
+                      <img
+                        src={`http://localhost:5224/ProfileImages/${team.profileImage}`}
+                        alt="User profile"
+                        className="rounded-circle"
+                        style={{
+                          width: "45px",
+                          height: "45px",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </td>
                  <td>{team.id}</td>
                  <td>{team.name}</td>
                  <td>{team.description}</td>
