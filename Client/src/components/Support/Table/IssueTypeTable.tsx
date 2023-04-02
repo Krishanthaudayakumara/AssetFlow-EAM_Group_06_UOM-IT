@@ -50,6 +50,17 @@ const IssueTypeTable = () => {
     setSelectedIssue(null);
     setShowModal(false);
   };
+  const handleDeleteIssue = (issue: issueType) => {
+    axios
+      .delete(`http://localhost:5224/Api/IssueType/${issue.id}`)
+      .then((response) => {
+        setIssues(issues.filter((item) => item.id !== issue.id));
+        alert("Successfully deleted!");
+      })
+      .catch((error) => {
+        alert("Not deleted!");
+      });
+  };
 
   return (
     <div>
@@ -74,7 +85,7 @@ const IssueTypeTable = () => {
                     <td>
                       <FontAwesomeIcon  icon={faPen} style={{ color: "#482890", cursor: "pointer" }} onClick={() => handleEditIssueClick(issue)} />
                       &nbsp; &nbsp; &nbsp;
-                      <FontAwesomeIcon  icon={faTrash} style={{ color: "#FF615A", cursor: "pointer" }} />
+                      <FontAwesomeIcon  icon={faTrash} style={{ color: "#FF615A", cursor: "pointer" }} onClick={() => handleDeleteIssue(issue)} />
                     </td>
                   </tr>
                 ))}
