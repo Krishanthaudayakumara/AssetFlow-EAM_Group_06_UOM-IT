@@ -1,10 +1,12 @@
-import { type } from "@testing-library/user-event/dist/type";
+
 import React from "react";
 import Table from "react-bootstrap/Table";
 import "../../css/Facilitycss/workstationcard.css"; // import background image CSS file
 import { FaMouse } from "react-icons/fa";
 import { FaKeyboard } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
+
+import Workstationdata from "./Workstationdata"
 
  type workstationprop = {
   workstationno: string;

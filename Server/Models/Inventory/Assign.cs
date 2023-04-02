@@ -1,6 +1,6 @@
+using Server.Models.Inventory;
 
-
-namespace Server.Models.Inventory
+namespace Server.Models
 {
     public class Assign
     {
@@ -12,6 +12,5 @@ namespace Server.Models.Inventory
         public DateTime AssignTime{get;set;}
         public int ReqID{get;set;}
         public EmployeeRequest EmployeeRequest{get;set;}
-        
-    }
-}
+
+    }}

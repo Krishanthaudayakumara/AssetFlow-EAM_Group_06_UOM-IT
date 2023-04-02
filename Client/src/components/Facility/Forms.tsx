@@ -14,6 +14,7 @@ function Forms() {
     buildingName: "",
     floorNo: 0,
   });
+
   
   
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

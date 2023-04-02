@@ -1,10 +1,10 @@
+using Server.Models.Inventory;
 
-
-namespace Server.Models.Inventory
+namespace Server.Models
 {
     public class Stock
     {
-         public int StockId { get; set; }
+        public int Id { get; set; }
         public int SubCategoryId { get; set; }
         public SubCategory SubCategory { get; set; }
 
@@ -15,6 +15,7 @@ namespace Server.Models.Inventory
         public Supplier Supplier{get;set;}
         public int Amount { get; set; }
         public ICollection<Asset> Assets { get; set; }
-        
+
+
     }
 }

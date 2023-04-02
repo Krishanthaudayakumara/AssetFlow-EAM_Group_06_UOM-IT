@@ -1,13 +1,9 @@
-
+using Server.Models.Facility;
 
 namespace Server.Models.Inventory
 {
     public class Asset
     {
-        
-
-    
-    
         public int Id { get; set; }
         public string Barcode { get; set; }
         public string Description { get; set; }
@@ -18,9 +14,6 @@ namespace Server.Models.Inventory
         public int StockId { get; set; }
         public Stock Stock { get; set; }
         public ICollection<Assign> Assigns { get; set; }
-
-
-
+        public FacilityAsset FacilityAsset { get; set; }
     }
 }
-    

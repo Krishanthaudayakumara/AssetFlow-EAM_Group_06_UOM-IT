@@ -8,7 +8,7 @@ import Workstation from './Facility/Workstationdata';
 import Workstationdata from './Facility/Workstationdata';
 import { useState } from 'react';
 import Forms from './Facility/Forms';
-import Assigneditemform from './Facility/Assignitemform';
+
 
 export default function Work1() {
     const [show, setshow] = useState(false);
@@ -24,11 +24,7 @@ export default function Work1() {
         setshow(true);
     };
 
-    const handleAssignItem = () => {
-        setModalTitle("Assign Item");
-        setModalBody(<Assigneditemform />);
-        setshow(true);
-    };
+    
 
     
 
@@ -41,7 +37,6 @@ export default function Work1() {
 
                     </div>
                     <div className="col-3">
-                    <Button type="button" className='assign-item-btn' onClick={handleAssignItem}>Assign Item</Button>
 
                     </div>
                 </div>

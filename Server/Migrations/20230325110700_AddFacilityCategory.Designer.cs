@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Data;
 
@@ -11,9 +12,11 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230325110700_AddFacilityCategory")]
+    partial class AddFacilityCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,47 @@ namespace Server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Server.Models.Asset", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StockId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Vendor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("WarrentyExpiration")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("condition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("Assets");
+                });
 
             modelBuilder.Entity("Server.Models.Assign", b =>
                 {
@@ -141,21 +185,19 @@ namespace Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AssetConditionStatus")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("AssetId")
                         .HasColumnType("int");
 
-                    b.Property<string>("AssignStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("AssignedDate")
+                    b.Property<DateTime>("AssignedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("ReceivedDate")
+                    b.Property<DateTime>("ReceivedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("WorkstationId")
+                    b.Property<int>("WorkstationId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -190,54 +232,13 @@ namespace Server.Migrations
                     b.ToTable("Workstations");
                 });
 
-            modelBuilder.Entity("Server.Models.Inventory.Asset", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barcode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StockId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Vendor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("WarrentyExpiration")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("condition")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StockId");
-
-                    b.ToTable("Assets");
-                });
-
             modelBuilder.Entity("Server.Models.Stock", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("StockId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StockId"));
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
@@ -257,7 +258,7 @@ namespace Server.Migrations
                     b.Property<DateTime>("WarrantyExpiring")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("StockId");
 
                     b.HasIndex("SubCategoryId");
 
@@ -295,18 +296,25 @@ namespace Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Suppliers");
                 });
 
+            modelBuilder.Entity("Server.Models.Asset", b =>
+                {
+                    b.HasOne("Server.Models.Stock", "Stock")
+                        .WithMany("Assets")
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stock");
+                });
+
             modelBuilder.Entity("Server.Models.Assign", b =>
                 {
-                    b.HasOne("Server.Models.Inventory.Asset", "Asset")
+                    b.HasOne("Server.Models.Asset", "Asset")
                         .WithMany("Assigns")
                         .HasForeignKey("AssetId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -344,7 +352,7 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Facility.FacilityAsset", b =>
                 {
-                    b.HasOne("Server.Models.Inventory.Asset", "Asset")
+                    b.HasOne("Server.Models.Asset", "Asset")
                         .WithOne("FacilityAsset")
                         .HasForeignKey("Server.Models.Facility.FacilityAsset", "AssetId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -352,7 +360,9 @@ namespace Server.Migrations
 
                     b.HasOne("Server.Models.Facility.Workstation", "Workstation")
                         .WithMany("FacilityAssets")
-                        .HasForeignKey("WorkstationId");
+                        .HasForeignKey("WorkstationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Asset");
 
@@ -368,17 +378,6 @@ namespace Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Building");
-                });
-
-            modelBuilder.Entity("Server.Models.Inventory.Asset", b =>
-                {
-                    b.HasOne("Server.Models.Stock", "Stock")
-                        .WithMany("Assets")
-                        .HasForeignKey("StockId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Stock");
                 });
 
             modelBuilder.Entity("Server.Models.Stock", b =>
@@ -411,6 +410,14 @@ namespace Server.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Server.Models.Asset", b =>
+                {
+                    b.Navigation("Assigns");
+
+                    b.Navigation("FacilityAsset")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Server.Models.Category", b =>
                 {
                     b.Navigation("SubCategories");
@@ -436,14 +443,6 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Models.Facility.Workstation", b =>
                 {
                     b.Navigation("FacilityAssets");
-                });
-
-            modelBuilder.Entity("Server.Models.Inventory.Asset", b =>
-                {
-                    b.Navigation("Assigns");
-
-                    b.Navigation("FacilityAsset")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Server.Models.Stock", b =>
