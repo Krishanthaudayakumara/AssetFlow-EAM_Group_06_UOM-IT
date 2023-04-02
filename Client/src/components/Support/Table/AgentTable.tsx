@@ -4,23 +4,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-interface agentType {
-  profileImage: string;
-  id: number;
-  firstName: string;
-  lastName: string;
-  contact: string;
-  position: string;
-  email: string;
-  joinDate: string;
-  teamId: number;
-  agentStatus: string;
-}
+
+interface agentType { profileImage: string; id: number; firstName: string; lastName: string; contact: string; position: string; email: string; joinDate: string; teamId: number; agentStatus: string;}
+interface TeamData  {  id: number;  name: string;};
+
 
 const AgentTable = () => {
   const [agents, setAgents] = useState<agentType[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedAgent, setSelectedAgent] = useState<agentType | null>(null);
+  const [teams, setTeams] = useState<TeamData[]>([]);
+
+useEffect(() => {
+    const fetchTeams = async () => {
+      const response = await axios.get("http://localhost:5224/Api/Team");
+      setTeams(response.data);
+    };
+    fetchTeams();
+  }, []);
 
   useEffect(() => {
     axios
@@ -62,15 +63,11 @@ const AgentTable = () => {
       });
   };
 
-  const handleDelete = (id: number) => {
+  const handleDeleteAgent = (agent: agentType) => {
     axios
-      .delete(`http://localhost:5224/Api/Agent/${selectedAgent?.id}`)
-      .then(() => {
-        setAgents((prevAgents) =>
-          prevAgents.filter((agent) => agent.id !== selectedAgent?.id)
-        );
-        setSelectedAgent(null);
-        setShowModal(false);
+      .delete(`http://localhost:5224/Api/Agent/${agent.id}`)
+      .then((response) => {
+        setAgents(agents.filter((item) => item.id !== agent.id));
         alert("Successfully deleted!");
       })
       .catch((error) => {
@@ -139,7 +136,7 @@ const AgentTable = () => {
                     <td>{agent.position}</td>
                     <td>{agent.email}</td>
                     <td>{agent.teamId}</td>
-                    <td>{agent.agentStatus}</td>
+                    <td>{agent.agentStatus === "Available" ? (<Badge className={"bg-success"}>Available</Badge>) : (<Badge className={"bg-warning"}>Not Available</Badge> )}</td>
                     <td>
                       {" "}
                       <FontAwesomeIcon
@@ -147,10 +144,11 @@ const AgentTable = () => {
                         style={{ color: "#482890", cursor: "pointer" }}
                         onClick={() => handleEditAgentClick(agent)}
                       />
-                      &nbsp; &nbsp; &nbsp;
+                      &nbsp; &nbsp;
                       <FontAwesomeIcon
                         icon={faTrash}
                         style={{ color: "#FF615A", cursor: "pointer" }}
+                        onClick={() => handleDeleteAgent(agent)}
                       />
                     </td>
                   </tr>
@@ -227,16 +225,17 @@ const AgentTable = () => {
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Team</Form.Label>
-                  <Form.Control
-                    type="number"
-                    value={selectedAgent.teamId}
-                    onChange={(e) =>
+                  <Form.Select  aria-label="Default select example"  name="teamId"  value={selectedAgent.teamId}  onChange={(e) =>
                       setSelectedAgent({
                         ...selectedAgent,
                         teamId: Number(e.target.value),
                       })
-                    }
-                  />
+                    } >
+          <option value="">Select Team</option>
+          {teams.map((team) => (
+            <option key={team.id} value={team.id}>{team.name}</option>
+          ))}
+        </Form.Select>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Status</Form.Label>

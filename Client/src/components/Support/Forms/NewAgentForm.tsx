@@ -70,7 +70,8 @@ const handleChange = (
 return (
        <Form onSubmit={handleSubmit}>
        <Form.Group>
-        <Form.Control type="file" placeholder="Image" name="image" onChange={handleChange} />
+        <label>Profile Image</label>
+        <Form.Control type="file" name="image" onChange={handleChange} />
        </Form.Group>
        <br />
        <Form.Group>
