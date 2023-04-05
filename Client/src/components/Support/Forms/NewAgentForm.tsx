@@ -45,7 +45,7 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       alert("Successfully added!"); 
 
       // reset the form after successfully submitting the data
-      //setFormData({ firstName: "",  teamId: "",  image: null,}); 
+      //setFormData({ firstName: "", lastName: "", contact: "", position: "", email: "", teamId: "",agentStatus: "",  image: null,}); 
       } catch (error) {
       console.log(error);
       alert(" Not added!");

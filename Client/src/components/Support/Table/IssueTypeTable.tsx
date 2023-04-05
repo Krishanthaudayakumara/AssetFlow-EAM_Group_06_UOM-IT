@@ -101,7 +101,7 @@ const IssueTypeTable = () => {
         <Modal.Body>
           {selectedIssue && (
             <Form>
-              <Form.Group controlId="formIssueNam">
+              <Form.Group controlId="formIssueName">
                 <Form.Label>Issue</Form.Label>
                 <Form.Control type="text"  value={selectedIssue.name} onChange={(e) => setSelectedIssue({ ...selectedIssue, name: e.target.value,})} />
               </Form.Group>

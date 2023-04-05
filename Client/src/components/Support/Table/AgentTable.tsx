@@ -15,6 +15,8 @@ const AgentTable = () => {
   const [selectedAgent, setSelectedAgent] = useState<agentType | null>(null);
   const [teams, setTeams] = useState<TeamData[]>([]);
 
+  
+
 useEffect(() => {
     const fetchTeams = async () => {
       const response = await axios.get("http://localhost:5224/Api/Team");
