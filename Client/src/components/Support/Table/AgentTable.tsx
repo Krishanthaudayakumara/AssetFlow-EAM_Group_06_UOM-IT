@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "../../../css/Support/Support.css";
 
 interface agentType { profileImage: string; id: number; firstName: string; lastName: string; contact: string; position: string; email: string; joinDate: string; teamId: number; agentStatus: string;}
 interface TeamData  {  id: number;  name: string;};
@@ -79,21 +80,8 @@ useEffect(() => {
 
   return (
     <div>
-      <p
-        style={{
-          margin: "0 0 30px 70px",
-          color: "#482890",
-          fontSize: "18px",
-          fontWeight: "bold",
-        }}
-      >
-        {" "}
-        Avaliable Agents{" "}
-      </p>
-      <div
-        className="shadow p-3 bg-white rounded"
-        style={{ margin: "30px 0 0 65px" }}
-      >
+      <p className="table-heading">Support Agents</p>
+      <div className="box-shadow">
         <Fragment>
           <div>
             <Table

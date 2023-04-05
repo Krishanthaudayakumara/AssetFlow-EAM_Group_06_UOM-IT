@@ -2,8 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons/faPen";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import "../../../css/Support/Support.css";
 
@@ -30,16 +29,12 @@ const TicketTable = () => {
       });
   }, []);
   return (
-    <div><p className="table-heading"> Support Tickets </p>
-     
-      <div
-        className="shadow p-3 bg-white rounded"
-        style={{ margin: "30px 0 0 65px" }}
-      >
+    <div><p className="table-heading">Support Tickets</p>     
+      <div className="box-shadow">
         <Fragment>
           <div>
             <Table
-              className="table w-100 small table-borderless table-responsiv align-middle align-left"
+              className="table w-100 small table-borderless table-responsiv align-middle"
               hover
               style={{ fontSize: "14px" }}
             >

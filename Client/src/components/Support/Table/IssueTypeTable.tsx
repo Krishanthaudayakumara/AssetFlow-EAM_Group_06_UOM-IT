@@ -3,6 +3,7 @@ import axios from "axios";
 import { Table, Modal, Button, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "../../../css/Support/Support.css";
 interface issueType {
   id: number;
   name: string;}
@@ -64,9 +65,8 @@ const IssueTypeTable = () => {
 
   return (
     <div>
-      <p
-        style={{ margin: "0 0 30px 70px", color: "#482890",  fontSize: "18px", fontWeight: "bold", }} > Issue Types </p>
-      <div className="shadow p-3 bg-white rounded"  style={{ margin: "30px 0 0 65px" }} >
+      <p className="table-heading">Issue Types</p>
+      <div className="box-shadow">
         <Fragment>
           <div>
             <Table  className="table w-100 small table-borderless table-responsiv align-middle align-left"  hover style={{ fontSize: "14px" }} >

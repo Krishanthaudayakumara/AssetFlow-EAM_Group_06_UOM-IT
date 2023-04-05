@@ -2,8 +2,8 @@ import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Form, Modal, Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons/faPen";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "../../../css/Support/Support.css";
 interface teamType {
     profileImage:string,
     id:number,
@@ -68,8 +68,8 @@ const TeamTable = () => {
     };
     return(
         <div>
-             <p style={{margin: "0 0 30px 70px",color: "#482890",fontSize: "18px",fontWeight: "bold",}}>Support Teams</p>
-             <div  className="shadow p-3 bg-white rounded" style={{ margin: "30px 0 0 65px" }} >
+             <p className="table-heading">Support Teams</p>
+             <div className="box-shadow">
              <Fragment>
              <div>
              <Table className="table w-100 small table-borderless table-responsiv align-middle align-left" hover  style={{ fontSize: "14px" }}>
