@@ -72,15 +72,13 @@ const IssueTypeTable = () => {
             <Table className="support-table">
               <thead>
                 <tr style={{ color: "#482890" }}>
-                  <th>Issue Type ID</th>
-                  <th>Issue</th>
+                  <th>Issue Type</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {issues.map((issue) => (
                   <tr key={issue.id}>
-                    <td >{issue.id}</td>
                     <td>{issue.name}</td>
                     <td>
                       <FontAwesomeIcon  icon={faPen} style={{ color: "#482890", cursor: "pointer" }} onClick={() => handleEditIssueClick(issue)} />
