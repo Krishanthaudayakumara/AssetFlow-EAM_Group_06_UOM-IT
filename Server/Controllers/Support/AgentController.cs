@@ -112,13 +112,13 @@ namespace Server.Controllers.Support
             if (updateAgent is null)
             {
                 return NotFound();
-            }
+            }           
 
-            updateAgent.FirstName = agentToUpdate.FirstName;
-
+            updateAgent.Contact = agentToUpdate.Contact;
+            updateAgent.Position = agentToUpdate.Position;
+            updateAgent.Email = agentToUpdate.Email;
             updateAgent.TeamId = agentToUpdate.TeamId;
-
-
+            updateAgent.AgentStatus = agentToUpdate.AgentStatus;
 
             try
             {
