@@ -33,11 +33,7 @@ const TicketTable = () => {
       <div className="box-shadow">
         <Fragment>
           <div>
-            <Table
-              className="table w-100 small table-borderless table-responsiv align-middle"
-              hover
-              style={{ fontSize: "14px" }}
-            >
+            <Table className="support-table">
               <thead>
                 <tr style={{ color: "#482890" }}>
                   <th>Ticket ID</th>

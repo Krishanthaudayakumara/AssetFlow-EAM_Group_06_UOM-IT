@@ -72,7 +72,7 @@ const TeamTable = () => {
              <div className="box-shadow">
              <Fragment>
              <div>
-             <Table className="table w-100 small table-borderless table-responsiv align-middle align-left" hover  style={{ fontSize: "14px" }}>
+             <Table  className="support-table">
                 <thead>
                 <tr style={{ color: "#482890" }}> 
                   <th></th>                 

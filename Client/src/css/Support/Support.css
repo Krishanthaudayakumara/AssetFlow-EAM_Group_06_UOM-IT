@@ -1,5 +1,5 @@
 .table-heading{
-    margin: 0 0 30px 70px;
+  margin: 0 0 30px 70px;
   color: #482890;
   font-size: 18px;
   font-weight: bold;
@@ -13,4 +13,20 @@
     margin: 30px 0 0 65px;
   }
 
+  .support-table {
+    width: 100%;
+    font-size: 14px;
+    border-collapse: collapse;
+    vertical-align: middle;
+  }
   
+  .support-table td,
+  .support-table th {
+    border: none;
+    padding: 0.5rem;
+    text-align: left;    
+  }
+  
+  .support-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+  }
