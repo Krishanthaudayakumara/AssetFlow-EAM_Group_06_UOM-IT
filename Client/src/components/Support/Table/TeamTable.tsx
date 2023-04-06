@@ -72,7 +72,7 @@ const TeamTable = () => {
              <div className="box-shadow">
              <Fragment>
              <div>
-             <Table  className="support-table">
+             <Table className="support-table">
                 <thead>
                 <tr style={{ color: "#482890" }}> 
                   <th></th>                 
@@ -85,8 +85,7 @@ const TeamTable = () => {
                 </thead>
                 <tbody>
                 {teams.map((team)=>(<tr key={team.id}>
-                  <td>
-                  {" "}
+                  <td>                
                       <img
                         src={`http://localhost:5224/ProfileImages/${team.profileImage}`}
                         alt="User profile"

@@ -50,23 +50,15 @@ const TicketTable = () => {
                 {tickets.map((ticket) => (
                   <tr key={ticket.id}>
                     <td>{ticket.id}</td>
-                    <td className="text-secondary"> {ticket.employeeId} </td>
+                    <td> {ticket.employeeId} </td>
                     <td> {ticket.issueTypeId} </td>
-                    <td className="text-secondary"> {ticket.problem} </td>
+                    <td> {ticket.problem} </td>
                     <td> {ticket.submitDate} </td>
-                    <td className="text-secondary"> {ticket.agentId} </td>
+                    <td> {ticket.agentId} </td>
                     <td> {ticket.ticketStatus} </td>
-                    <td>
-                      {" "}
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        style={{ color: "#482890" }}
-                      />{" "}
+                    <td> <FontAwesomeIcon icon={faPen} style={{ color: "#482890" }}/>
                       &nbsp; &nbsp;
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        style={{ color: "#FF615A" }}
-                      />
+                      <FontAwesomeIcon icon={faTrash} style={{ color: "#FF615A" }}/>
                     </td>
                   </tr>
                 ))}

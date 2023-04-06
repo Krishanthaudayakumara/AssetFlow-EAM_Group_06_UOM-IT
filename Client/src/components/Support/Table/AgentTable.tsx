@@ -172,69 +172,27 @@ useEffect(() => {
               <Form>
                 <Form.Group>
                   <Form.Label>Contact</Form.Label>
-                  <Form.Control
-                    type="tel"
-                    value={selectedAgent.contact}
-                    onChange={(e) =>
-                      setSelectedAgent({
-                        ...selectedAgent,
-                        contact: e.target.value,
-                      })
-                    }
-                  />
+                  <Form.Control type="tel" value={selectedAgent.contact} onChange={(e) => setSelectedAgent({ ...selectedAgent,contact: e.target.value,})}/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Position</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={selectedAgent.position}
-                    onChange={(e) =>
-                      setSelectedAgent({
-                        ...selectedAgent,
-                        position: e.target.value,
-                      })
-                    }
-                  />
+                  <Form.Control type="text" value={selectedAgent.position} onChange={(e) => setSelectedAgent({...selectedAgent, position: e.target.value,})}/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    value={selectedAgent.email}
-                    onChange={(e) =>
-                      setSelectedAgent({
-                        ...selectedAgent,
-                        email: e.target.value,
-                      })
-                    }
-                  />
+                  <Form.Control type="email" value={selectedAgent.email} onChange={(e) => setSelectedAgent({ ...selectedAgent, email: e.target.value,})} />
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Team</Form.Label>
-                  <Form.Select  aria-label="Default select example"  name="teamId"  value={selectedAgent.teamId}  onChange={(e) =>
-                      setSelectedAgent({
-                        ...selectedAgent,
-                        teamId: Number(e.target.value),
-                      })
-                    } >
-          <option value="">Select Team</option>
-          {teams.map((team) => (
-            <option key={team.id} value={team.id}>{team.name}</option>
-          ))}
-        </Form.Select>
+                  <Form.Select  aria-label="Default select example"  name="teamId"  value={selectedAgent.teamId}  onChange={(e) => setSelectedAgent({...selectedAgent, teamId: Number(e.target.value), })} >
+                  <option value="">Select Team</option>
+                  {teams.map((team) => (
+                 <option key={team.id} value={team.id}>{team.name}</option> ))}
+               </Form.Select>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Status</Form.Label>
-                  <Form.Select
-                    name="agentStatus"
-                    value={selectedAgent.agentStatus}
-                    onChange={(e) =>
-                      setSelectedAgent({
-                        ...selectedAgent,
-                        agentStatus: e.target.value,
-                      })
-                    }
-                  >
+                  <Form.Select name="agentStatus" value={selectedAgent.agentStatus} onChange={(e) => setSelectedAgent({...selectedAgent, agentStatus: e.target.value, })}>
                     <option value="Available">Available</option>{" "}
                     <option value="Not Available">Not Available</option>
                   </Form.Select>

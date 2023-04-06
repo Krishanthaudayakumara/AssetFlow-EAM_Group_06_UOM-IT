@@ -80,8 +80,8 @@ const IssueTypeTable = () => {
               <tbody>
                 {issues.map((issue) => (
                   <tr key={issue.id}>
-                    <td className="text-secondary">{issue.id}</td>
-                    <td className="text-secondary">{issue.name}</td>
+                    <td >{issue.id}</td>
+                    <td>{issue.name}</td>
                     <td>
                       <FontAwesomeIcon  icon={faPen} style={{ color: "#482890", cursor: "pointer" }} onClick={() => handleEditIssueClick(issue)} />
                       &nbsp; &nbsp; &nbsp;
