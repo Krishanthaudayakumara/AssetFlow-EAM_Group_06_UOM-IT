@@ -14,8 +14,7 @@
   }
 
   .support-table {
-    width: 100%;
-    font-size: 14px;    
+    width: 100%;        
     vertical-align: middle;    
   }
   .support-table thead{
@@ -26,6 +25,14 @@
     border: none;
     padding: 0.5rem;
     text-align: left;    
+  }
+  .support-table th {
+    font-size: 14px;
+  }
+  .support-table td {
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color:  rgba(125, 118, 118, 0.992);
   }
   
   .support-table tbody tr:hover {
