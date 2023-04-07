@@ -4,9 +4,11 @@ import { Table, Modal, Button, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../../../css/Support/Support.css";
+
 interface issueType {
   id: number;
-  name: string;}
+  name: string;
+}
 
 const IssueTypeTable = () => {
   const [issues, setIssues] = useState<issueType[]>([]);
@@ -27,7 +29,9 @@ const IssueTypeTable = () => {
   const handleUpdateIssue = () => {
     axios
       .put(
-        `http://localhost:5224/Api/IssueType/${selectedIssue?.id}`, selectedIssue )
+        `http://localhost:5224/Api/IssueType/${selectedIssue?.id}`,
+        selectedIssue
+      )
       .then((response) => {
         setIssues(
           issues.map((issue) =>
@@ -63,6 +67,30 @@ const IssueTypeTable = () => {
       });
   };
 
+  const getDefaultProfilePicture = (name: string, fontSize: number = 36) => {
+    const initials = name.charAt(0);
+
+    return (
+      <div className="default-profile-picture">
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="50" fill="#cfcfcf" />
+          <text
+            x="50"
+            y="50"
+            textAnchor="middle"
+            dy="0.35em"
+            fill="#555555"
+            fontFamily="sans-serif"
+            fontWeight="bold"
+            fontSize={fontSize}
+          >
+            {initials}
+          </text>
+        </svg>
+      </div>
+    );
+  };
+
   return (
     <div>
       <p className="table-heading">Issue Types</p>
@@ -72,6 +100,7 @@ const IssueTypeTable = () => {
             <Table className="support-table">
               <thead>
                 <tr style={{ color: "#482890" }}>
+                  <th></th>
                   <th>Issue Type</th>
                   <th>Action</th>
                 </tr>
@@ -79,11 +108,26 @@ const IssueTypeTable = () => {
               <tbody>
                 {issues.map((issue) => (
                   <tr key={issue.id}>
+                    <td>{getDefaultProfilePicture(issue.name)}</td>
                     <td>{issue.name}</td>
                     <td>
-                      <FontAwesomeIcon  icon={faPen} style={{ color: "#482890", cursor: "pointer" }} onClick={() => handleEditIssueClick(issue)} />
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        style={{
+                          color: "#482890",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleEditIssueClick(issue)}
+                      />
                       &nbsp; &nbsp; &nbsp;
-                      <FontAwesomeIcon  icon={faTrash} style={{ color: "#FF615A", cursor: "pointer" }} onClick={() => handleDeleteIssue(issue)} />
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        style={{
+                          color: "#FF615A",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleDeleteIssue(issue)}
+                      />
                     </td>
                   </tr>
                 ))}
@@ -101,16 +145,31 @@ const IssueTypeTable = () => {
             <Form>
               <Form.Group controlId="formIssueName">
                 <Form.Label>Issue</Form.Label>
-                <Form.Control type="text"  value={selectedIssue.name} onChange={(e) => setSelectedIssue({ ...selectedIssue, name: e.target.value,})} />
+                <Form.Control
+                  type="text"
+                  value={selectedIssue.name}
+                  onChange={(e) =>
+                    setSelectedIssue({
+                      ...selectedIssue,
+                      name: e.target.value,
+                    })
+                  }
+                />
               </Form.Group>
             </Form>
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}> Close </Button>
-          <Button variant="primary" onClick={() => handleUpdateIssue()}> Update Issue </Button>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={() => handleUpdateIssue()}>
+            Update Issue
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
-  );};
+  );
+};
+
 export default IssueTypeTable;

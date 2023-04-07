@@ -27,9 +27,10 @@
     text-align: left;    
   }
   .support-table th {
-    font-size: 14px;
+    font-size: 15px;
   }
   .support-table td {
+    height: 45px;
     font-size: 14px;
     font-family: Arial, sans-serif;
     color:  rgba(125, 118, 118, 0.992);
