@@ -35,10 +35,7 @@ const TicketTable = () => {
           <div>
             <Table className="support-table">
               <thead>
-                <tr style={{ color: "#482890" }}>
-                  <th>Ticket ID</th>
-                  <th>Employee ID</th>
-                  <th>Issue Type</th>
+                <tr style={{ color: "#482890" }}>                  
                   <th>Problem</th>
                   <th>Submit Date</th>
                   <th>Assign Agent</th>
@@ -48,10 +45,7 @@ const TicketTable = () => {
               </thead>
               <tbody>
                 {tickets.map((ticket) => (
-                  <tr key={ticket.id}>
-                    <td>{ticket.id}</td>
-                    <td> {ticket.employeeId} </td>
-                    <td> {ticket.issueTypeId} </td>
+                  <tr key={ticket.id}>                    
                     <td> {ticket.problem} </td>
                     <td> {ticket.submitDate} </td>
                     <td> {ticket.agentId} </td>

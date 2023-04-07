@@ -15,13 +15,11 @@
 
   .support-table {
     width: 100%;
-    font-size: 14px;
-    
-    vertical-align: middle;
-    border-radius: 20px;
+    font-size: 14px;    
+    vertical-align: middle;    
   }
   .support-table thead{
-    background-color: rgba(0, 0, 0, 0.075);
+    height: 50px;    
   }
   .support-table td,
   .support-table th {

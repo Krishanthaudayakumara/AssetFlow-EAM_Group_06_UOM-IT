@@ -75,11 +75,9 @@ const TeamTable = () => {
              <Table className="support-table">
                 <thead>
                 <tr style={{ color: "#482890" }}> 
-                  <th></th>                 
-                  <th>Team Id</th>
+                  <th></th>        
                   <th>Team Name</th>
-                  <th>Team Descrption</th> 
-                  <th>Issue Id</th>
+                  <th>Team Descrption</th>                   
                   <th>Action</th>                
                 </tr>
                 </thead>
@@ -96,11 +94,9 @@ const TeamTable = () => {
                           cursor: "pointer",
                         }}
                       />
-                    </td>
-                 <td>{team.id}</td>
+                    </td>               
                  <td>{team.name}</td>
-                 <td>{team.description}</td>
-                 <td>{team.issueTypeId}</td>
+                 <td>{team.description}</td>                 
                  <td>
                             <FontAwesomeIcon                              
                               icon={faPen}

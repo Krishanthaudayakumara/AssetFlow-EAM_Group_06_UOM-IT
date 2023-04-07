@@ -87,14 +87,12 @@ useEffect(() => {
             <Table className="support-table">
               <thead>
                 <tr style={{ color: "#482890" }}>
-                  <th></th>
-                  <th>ID</th>
+                  <th></th>                  
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Contact</th>
                   <th>Position</th>
-                  <th>Email</th>
-                  <th>Team</th>
+                  <th>Email</th>                  
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -114,14 +112,12 @@ useEffect(() => {
                           cursor: "pointer",
                         }}
                       />
-                    </td>
-                    <td>{agent.id}</td>
+                    </td>                   
                     <td>{agent.firstName}</td>
                     <td>{agent.lastName}</td>
                     <td>{agent.contact}</td>
                     <td>{agent.position}</td>
-                    <td>{agent.email}</td>
-                    <td>{agent.teamId}</td>
+                    <td>{agent.email}</td>                    
                     <td>{agent.agentStatus === "Available" ? (<Badge className={"bg-success"}>Available</Badge>) : (<Badge className={"bg-warning"}>Not Available</Badge> )}</td>
                     <td>
                       {" "}
