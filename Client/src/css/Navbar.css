@@ -1,0 +1,35 @@
+.notification .badge {
+    background-color: #ff615a !important;
+}
+
+.form-inline {
+  width: 40vw;
+  margin: 0vw 5vw;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+img.rounded-circle {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #482890;
+}
+
+.dropdown-toggle svg {
+  margin-top: 10px;
+}
+
+.as-nav {
+  background-color: none;
+  padding-block: 2em;
+}
+
+.searchbar{
+    padding: 0.6em 1em !important;
+}
+
+.top-bar{
+  margin-bottom: 6vh;
+}
