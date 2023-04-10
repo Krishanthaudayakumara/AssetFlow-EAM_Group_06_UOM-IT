@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Nav, Table } from "react-bootstrap";
 import "../css/Home.css"; // import background image CSS file
+import Chatbot from "../components/Support/Chatbot";
 
 const data = [
   { id: "1", fname: "Krish", lname: "FaHome", uname: "krish" },

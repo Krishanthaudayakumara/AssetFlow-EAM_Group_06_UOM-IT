@@ -1,0 +1,41 @@
+.table-heading{
+  margin: 0 0 30px 70px;
+  color: #482890;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.box-shadow {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin: 30px 0 0 65px;
+  }
+
+  .support-table {
+    width: 100%;        
+    vertical-align: middle;    
+  }
+  .support-table thead{
+    height: 50px;    
+  }
+  .support-table td,
+  .support-table th {
+    border: none;
+    padding: 0.5rem;
+    text-align: left;    
+  }
+  .support-table th {
+    font-size: 15px;
+  }
+  .support-table td {
+    height: 45px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color:  rgba(125, 118, 118, 0.992);
+  }
+  
+  .support-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+  }
