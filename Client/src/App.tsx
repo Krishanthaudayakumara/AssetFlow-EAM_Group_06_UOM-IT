@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
-import User from "./pages/User";
+import Login from "./pages/Authentication/Login";
+import Home from "./pages/General/Home";
+import User from "./pages/User/User";
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/DashWrapper";
 import Sidebar from "./components/Sidebar";
 import PrivateRoute from "./PrivateRoute";
-import Employee from "./pages/Employee" ;
-import Department from "./pages/Department";
-import Calendar from "./pages/Calendar";
-import Supplier from "./pages/Supplier";
+import Employee from "./pages/Employee/Employee" ;
+import Department from "./pages/Department/Department";
+import Calendar from "./pages/General/Calendar";
+import Supplier from "./pages/Supplier/Supplier";
 import "./App.css";
 import "./css/Buttons.css";
 

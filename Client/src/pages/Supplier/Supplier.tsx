@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
-import SupplierTable from "../components/Supplier/SupplierTable";
-import AddSupplierModal from "../components/Supplier/AddSupplierModal";
-import SupplierModal from "../components/Supplier/SupplierModal";
+import SupplierTable from "../../components/Supplier/SupplierTable";
+import AddSupplierModal from "../../components/Supplier/AddSupplierModal";
+import SupplierModal from "../../components/Supplier/SupplierModal";
 
-import { Supplier } from "../types";
+import { Supplier } from "../../types";
 
 const SupplierPage: React.FC = () => {
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);

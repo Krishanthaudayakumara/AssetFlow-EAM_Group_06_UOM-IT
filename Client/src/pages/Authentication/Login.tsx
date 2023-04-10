@@ -8,10 +8,10 @@ import {
   Image,
   Alert,
 } from "react-bootstrap";
-import "../css/Login.css"; // import background image CSS file
+import "../../css/Login.css"; // import background image CSS file
 import { BsArrowRightCircle } from "react-icons/bs";
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
-import { login } from "../services/auth";
+import { login } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {

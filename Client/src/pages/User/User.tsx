@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { BsPlus } from "react-icons/bs";
-import { getUsers, deleteUser, addUser, editUser } from "../api/userApi";
-import { User } from "../types";
-import UserTable from "../components/User/UserTable";
-import UserModal from "../components/User/UserModal";
-import AddUserModal from "../components/User/AddUserModal";
+import { getUsers, deleteUser, addUser, editUser } from "../../api/userApi";
+import { User } from "../../types";
+import UserTable from "../../components/User/UserTable";
+import UserModal from "../../components/User/UserModal";
+import AddUserModal from "../../components/User/AddUserModal";
 
 const UserPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
 
-import DepartmentTable from "../components/Department/DepartmentTable";
-import AddDepartmentModal from "../components/Department/AddDepartmentModal";
-import DepartmentModal from "../components/Department/DepartmentModal";
+import DepartmentTable from "../../components/Department/DepartmentTable";
+import AddDepartmentModal from "../../components/Department/AddDepartmentModal";
+import DepartmentModal from "../../components/Department/DepartmentModal";
 
-import { Department } from "../types";
+import { Department } from "../../types";
 
 const DepartmentPage: React.FC = () => {
   const [departments, setDepartments] = useState<Department[]>([]);

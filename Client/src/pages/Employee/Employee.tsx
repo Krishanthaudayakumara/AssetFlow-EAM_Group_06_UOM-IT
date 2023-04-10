@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import axios from "axios";
-import EmployeeTable from "../components/Employee/EmployeeTable";
-import AddEmployeeModal from "../components/Employee/AddEmployeeModal";
-import EmployeeModal from "../components/Employee/EmployeeModal";
+import EmployeeTable from "../../components/Employee/EmployeeTable";
+import AddEmployeeModal from "../../components/Employee/AddEmployeeModal";
+import EmployeeModal from "../../components/Employee/EmployeeModal";
 
-import { Employee } from "../types";
+import { Employee } from "../../types";
 
 const EmployeePage: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
