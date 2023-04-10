@@ -18,7 +18,7 @@ const IssueTypeTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5224/Api/IssueType")
+      .get("http://localhost:5087/Api/IssueType")
       .then((response) => {
         setIssues(response.data);
       })
@@ -30,7 +30,7 @@ const IssueTypeTable = () => {
   const handleUpdateIssue = () => {
     axios
       .put(
-        `http://localhost:5224/Api/IssueType/${selectedIssue?.id}`,
+        `http://localhost:5087/Api/IssueType/${selectedIssue?.id}`,
         selectedIssue
       )
       .then((response) => {
@@ -58,7 +58,7 @@ const IssueTypeTable = () => {
   };
   const handleDeleteIssue = (issue: issueType) => {
     axios
-      .delete(`http://localhost:5224/Api/IssueType/${issue.id}`)
+      .delete(`http://localhost:5087/Api/IssueType/${issue.id}`)
       .then((response) => {
         setIssues(issues.filter((item) => item.id !== issue.id));
         alert("Successfully deleted!");

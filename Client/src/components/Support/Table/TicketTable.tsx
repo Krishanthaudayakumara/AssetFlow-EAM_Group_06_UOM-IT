@@ -20,7 +20,7 @@ const TicketTable = () => {
   const [tickets, setTickets] = useState<ticketType[]>([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5224/Api/Ticket")
+      .get("http://localhost:5087/Api/Ticket")
       .then((response) => {
         setTickets(response.data);
       })

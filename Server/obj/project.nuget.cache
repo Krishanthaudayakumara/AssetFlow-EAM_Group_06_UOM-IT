@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "7UzW5gR5HFShQyObBqrfaUksnWHIhZgk3k35caBlQ4fLbrqzxH2gi3cUb78NHNKq4r4JdaOOZtr8gcgUUn3ejw==",
-  "success": false,
+  "dgSpecHash": "t/8PwYv4oZ7cn4GTyAiro0ho8KfI1NtDIzwE7tJDdJnyvon/PkARmHUa6P6yKeOmaaKhhosObNzMMGTTb7fikQ==",
+  "success": true,
   "projectFilePath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Krishantha\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
@@ -33,9 +33,9 @@
     "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",
     "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.0.1\\microsoft.data.sqlclient.sni.runtime.5.0.1.nupkg.sha512",
-    "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.2\\microsoft.entityframeworkcore.7.0.2.nupkg.sha512",
-    "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.2\\microsoft.entityframeworkcore.abstractions.7.0.2.nupkg.sha512",
-    "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.2\\microsoft.entityframeworkcore.analyzers.7.0.2.nupkg.sha512",
+    "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.4\\microsoft.entityframeworkcore.7.0.4.nupkg.sha512",
+    "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.4\\microsoft.entityframeworkcore.abstractions.7.0.4.nupkg.sha512",
+    "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.4\\microsoft.entityframeworkcore.analyzers.7.0.4.nupkg.sha512",
     "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.2\\microsoft.entityframeworkcore.design.7.0.2.nupkg.sha512",
     "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.4\\microsoft.entityframeworkcore.relational.7.0.4.nupkg.sha512",
     "C:\\Users\\Krishantha\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.2\\microsoft.entityframeworkcore.sqlserver.7.0.2.nupkg.sha512",
@@ -114,15 +114,5 @@
     "C:\\Users\\Krishantha\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\Krishantha\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Detected package downgrade: Microsoft.EntityFrameworkCore from 7.0.4 to 7.0.2. Reference the package directly from the project to select a different version. \r\n Server -> Microsoft.AspNetCore.Identity.EntityFrameworkCore 7.0.4 -> Microsoft.EntityFrameworkCore.Relational 7.0.4 -> Microsoft.EntityFrameworkCore (>= 7.0.4) \r\n Server -> Microsoft.EntityFrameworkCore (>= 7.0.2)",
-      "libraryId": "Microsoft.EntityFrameworkCore",
-      "targetGraphs": [
-        "net7.0"
-      ]
-    }
-  ]
+  "logs": []
 }

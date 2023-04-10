@@ -11,7 +11,7 @@ import Agents from "./pages/Support/Agents";
 import Teams from "./pages/Support/Teams";
 import Issues from "./pages/Support/Issues";
 import PrivateRoute from "./PrivateRoute";
-import Employee from "./pages/Employee/Employee" ;
+import Employee from "./pages/Employee/Employee";
 import Department from "./pages/Department/Department";
 import Calendar from "./pages/General/Calendar";
 import Supplier from "./pages/Supplier/Supplier";
@@ -21,15 +21,7 @@ import "./css/Buttons.css";
 const App: React.FC = () => {
   return (
     <Router>
-      
       <Routes>
-      <Wrapper>
-          <Route path="/" element={<Home />} />
-          <Route path="/Tickets" element={<Tickets />} />
-          <Route path="/Agents" element={<Agents />} />
-          <Route path="/Teams" element={<Teams />} />
-          <Route path="/Issues" element={<Issues />} />
-        </Wrapper>
         <Route
           path="/"
           element={
@@ -49,7 +41,6 @@ const App: React.FC = () => {
           }
         />
 
-          
         <Route path="/login" element={<Login />} />
 
         <Route path="/user" element={<PrivateRoute />}>
@@ -107,7 +98,46 @@ const App: React.FC = () => {
           />
         </Route>
 
+        <Route path="/Tickets" element={<PrivateRoute />}>
+          <Route
+            path="/Tickets"
+            element={
+              <Wrapper>
+                <Tickets />
+              </Wrapper>
+            }
+          />
+        </Route>
 
+        <Route path="/Agents" element={<PrivateRoute />}>
+          <Route
+            path="/Agents"
+            element={
+              <Wrapper>
+                <Agents />
+              </Wrapper>
+            }
+          />
+
+          </Route>
+
+          <Route path="/Teams" element={<PrivateRoute />}>
+            <Route
+              path="/Teams"
+              element={
+                <Wrapper>
+               
+                  <Teams />
+                </Wrapper>
+              }
+            />
+          </Route>
+
+          <Route path="/Issues" element={<PrivateRoute />}>
+            <Route path="/Issues" element={<Wrapper><Issues /></Wrapper>} />
+          </Route>
+
+         
       </Routes>
     </Router>
   );

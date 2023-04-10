@@ -13,7 +13,7 @@ const NewTeamForm = () => {
 
   useEffect(() => {
     const fetchIssueTypes = async () => {
-      const response = await axios.get("http://localhost:5224/Api/IssueType");  
+      const response = await axios.get("http://localhost:5087/Api/IssueType");  
       setIssueTypes(response.data);
     };
     fetchIssueTypes();
@@ -32,7 +32,7 @@ const NewTeamForm = () => {
         formDataWithImage.append("profileImage", formData.image);
       }
       const response = await axios.post(
-        "http://localhost:5224/Api/Team",
+        "http://localhost:5087/Api/Team",
         formDataWithImage,
         {
           headers: {

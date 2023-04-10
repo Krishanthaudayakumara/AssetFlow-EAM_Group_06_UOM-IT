@@ -18,7 +18,7 @@ const TeamTable = () => {
     const [selectedTeam, setSelectedTeam] = useState<teamType | null>(null);
 
     useEffect(()=>{
-        axios.get("http://localhost:5224/Api/Team").then((response)=>{
+        axios.get("http://localhost:5087/Api/Team").then((response)=>{
         setTeams(response.data) 
         }).catch((error)=>{
             alert(error)
@@ -38,7 +38,7 @@ const TeamTable = () => {
     const handleUpdateTeam = () => {
       axios
         .put(
-          `http://localhost:5224/Api/Team/${selectedTeam?.id}`,
+          `http://localhost:5087/Api/Team/${selectedTeam?.id}`,
           selectedTeam
         )
         .then((response) => {
@@ -57,7 +57,7 @@ const TeamTable = () => {
 
     const handleDeleteTeam = (team: teamType) => {
       axios
-        .delete(`http://localhost:5224/Api/Team/${team.id}`)
+        .delete(`http://localhost:5087/Api/Team/${team.id}`)
         .then((response) => {
           setTeams(teams.filter((item) => item.id !== team.id));
           alert("Successfully deleted!");
@@ -85,7 +85,7 @@ const TeamTable = () => {
                 {teams.map((team)=>(<tr key={team.id}>
                   <td>                
                       <img
-                        src={`http://localhost:5224/ProfileImages/${team.profileImage}`}
+                        src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
                         alt="User profile"
                         className="rounded-circle"
                         style={{
@@ -123,7 +123,7 @@ const TeamTable = () => {
               <Modal.Title>
                 <div style={{ margin: "20px 180px" }}>
                   <img
-                    src={`http://localhost:5224/ProfileImages/${selectedTeam.profileImage}`}
+                    src={`http://localhost:5087/ProfileImages/${selectedTeam.profileImage}`}
                     alt="User profile"
                     className="rounded-circle"
                     style={{ width: "100px", height: "100px" }}                    

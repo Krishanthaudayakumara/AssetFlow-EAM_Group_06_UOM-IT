@@ -12,7 +12,7 @@ const NewIssurTypeForm = () => {
         event.preventDefault();
     
         try {
-          const response = await axios.post("http://localhost:5224/Api/IssueType", formData);
+          const response = await axios.post("http://localhost:5087/Api/IssueType", formData);
           console.log(response.data);
           alert("Successfully added!");
           setFormData({ name: "", });

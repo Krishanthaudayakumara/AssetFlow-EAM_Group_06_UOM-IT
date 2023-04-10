@@ -20,7 +20,7 @@ const AgentTable = () => {
 
 useEffect(() => {
     const fetchTeams = async () => {
-      const response = await axios.get("http://localhost:5224/Api/Team");
+      const response = await axios.get("http://localhost:5087/Api/Team");
       setTeams(response.data);
     };
     fetchTeams();
@@ -28,7 +28,7 @@ useEffect(() => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5224/Api/Agent")
+      .get("http://localhost:5087/Api/Agent")
       .then((response) => {
         setAgents(response.data);
       })
@@ -49,7 +49,7 @@ useEffect(() => {
   const handleUpdateAgent = () => {
     axios
       .put(
-        `http://localhost:5224/Api/Agent/${selectedAgent?.id}`,
+        `http://localhost:5087/Api/Agent/${selectedAgent?.id}`,
         selectedAgent
       )
       .then((response) => {
@@ -68,7 +68,7 @@ useEffect(() => {
 
   const handleDeleteAgent = (agent: agentType) => {
     axios
-      .delete(`http://localhost:5224/Api/Agent/${agent.id}`)
+      .delete(`http://localhost:5087/Api/Agent/${agent.id}`)
       .then((response) => {
         setAgents(agents.filter((item) => item.id !== agent.id));
         alert("Successfully deleted!");
@@ -102,7 +102,7 @@ useEffect(() => {
                   <tr key={agent.id}>
                     <td>                      
                       <img
-                        src={`http://localhost:5224/ProfileImages/${agent.profileImage}`}
+                        src={`http://localhost:5087/ProfileImages/${agent.profileImage}`}
                         alt="User profile"
                         className="rounded-circle"
                         style={{
@@ -147,7 +147,7 @@ useEffect(() => {
               <Modal.Title>
                 <div style={{ margin: "20px 180px" }}>
                   <img
-                    src={`http://localhost:5224/ProfileImages/${selectedAgent.profileImage}`}
+                    src={`http://localhost:5087/ProfileImages/${selectedAgent.profileImage}`}
                     alt="User profile"
                     className="rounded-circle"
                     style={{ width: "100px", height: "100px" }}

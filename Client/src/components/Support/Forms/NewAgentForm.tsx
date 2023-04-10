@@ -11,7 +11,7 @@ const [teams, setTeams] = useState<TeamData[]>([]);
 
 useEffect(() => {
     const fetchTeams = async () => {
-      const response = await axios.get("http://localhost:5224/Api/Team");
+      const response = await axios.get("http://localhost:5087/Api/Team");
       setTeams(response.data);
     };
     fetchTeams();
@@ -33,7 +33,7 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         formDataWithImage.append("profileImage", formData.image);
       }
       const response = await axios.post(
-        "http://localhost:5224/Api/Agent",
+        "http://localhost:5087/Api/Agent",
         formDataWithImage,
         {
           headers: {
