@@ -132,8 +132,9 @@ function FacilityAssetForm() {
           style={{
             position: "relative",
             width: "100px",
-            left: "20px",
+            left: "30px",
             backgroundColor: "#482890",
+            
             borderColor: "#482890!important",
           }}
         >
@@ -142,9 +143,8 @@ function FacilityAssetForm() {
       </form>
       <Button
         style={{
-          float: "right",
-          marginLeft: "10 px",
           
+          float:"right",
           marginTop: "-40px",
           backgroundColor: "#ff615a ",
           borderColor: "#ff615a ",

@@ -23,6 +23,7 @@ function Forms() {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+   
     try {
       const response = await axios.post(
         "http://localhost:5298/api/Building",
