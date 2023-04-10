@@ -15,7 +15,7 @@ function CategoryTable() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("https://localhost:7272/api/Category");
+      const response = await axios.get("http://localhost:5050/api/Category");
       setCategoryProduct(response.data);
     } catch (error) {
       console.log(error);
@@ -37,11 +37,11 @@ function CategoryTable() {
       "Enter updated description:",
       categoryToEdit?.description
     );
-
+     
     // Make the PUT request to update the category
     try {
       const response = await axios.put(
-        `https://localhost:7272/api/Category/${categoryId}`,
+        `http://localhost:5050/api/Category/${categoryId}`,
         {
           categoryType: updatedCategoryType,
           description: updatedDescription,
@@ -55,9 +55,18 @@ function CategoryTable() {
   };
 
   const handleDelete = async (categoryId: number) => {
+    // Check if the category ID exists in the categoryProduct state
+    const categoryToDelete = categoryProduct.find(
+      (category) => category.id === categoryId
+    );
+    if (!categoryToDelete) {
+      console.log(`Category ID ${categoryId} does not exist`);
+      return;
+    }
+
     try {
       const response = await axios.delete(
-        `https://localhost:7272/api/Category/${categoryId}`
+        `http://localhost:5050/api/Category/${categoryId}`
       );
       console.log(response);
       fetchCategories(); // update the categories list
@@ -65,6 +74,7 @@ function CategoryTable() {
       console.log(error);
     }
   };
+
 
   return (
     <div>

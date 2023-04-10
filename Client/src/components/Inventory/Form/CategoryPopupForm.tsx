@@ -15,7 +15,7 @@ function AddCategory() {
       description: event.currentTarget.description.value,
     };
     try {
-      const response = await axios.post("https://localhost:7272/api/Category", data);
+      const response = await axios.post("http://localhost:5050/api/Category", data);
       console.log(response);
       handleClose(); // close the modal
       window.location.reload(); // reload the page

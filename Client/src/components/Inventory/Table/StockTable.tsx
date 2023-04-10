@@ -15,7 +15,7 @@ function StockTable() {
 
   const fetchStocks = async () => {
     try {
-      const response = await axios.get("https://localhost:7272/api/Stock");
+      const response = await axios.get("http://localhost:5050/api/Stock");
       setStockProduct(response.data);
     } catch (error) {
       console.log(error);
@@ -29,37 +29,30 @@ function StockTable() {
     );
 
     // Show a prompt to get the updated values
-    const updatedSubCategoryId = prompt(
-      "Enter updated sub category id:",
-      stockToEdit?.subCategoryId
-    );
+    // const updatedSubCategoryId = prompt(
+    //   "Enter updated sub category id:",
+    //   stockToEdit?.subCategoryId
+    // );
     const updatePurchasedDate = prompt(
-        "Enter updated purchased date:",
-        stockToEdit?.purchasedDate
-      );
-    const updateCost = prompt(
-      "Enter updated cost:",
-      stockToEdit?.cost
+      "Enter updated purchased date:",
+      stockToEdit?.purchasedDate
     );
+    const updateCost = prompt("Enter updated cost:", stockToEdit?.cost);
     const updatedWarrantyExpiring = prompt(
-        "Enter updated warranty expiring date:",
-        stockToEdit?.warrantyExpiring
-      );
-      const updatedSupplierId = prompt(
-        "Enter updated supplier id:",
-        stockToEdit?.supplierId
-      );
-      const updatedAmount = prompt(
-        "Enter updated Amount:",
-        stockToEdit?.amount
-      );
+      "Enter updated warranty expiring date:",
+      stockToEdit?.warrantyExpiring
+    );
+    const updatedSupplierId = prompt(
+      "Enter updated supplier id:",
+      stockToEdit?.supplierId
+    );
+    const updatedAmount = prompt("Enter updated Amount:", stockToEdit?.amount);
 
     // Make the PUT request to update the stock
     try {
       const response = await axios.put(
-        `https://localhost:7272/api/Stock/${stockId}`,
+        `http://localhost:5050/api/Stock/${stockId}`,
         {
-          subCategoryId: updatedSubCategoryId,
           purchasedDate: updatePurchasedDate,
           cost: updateCost,
           warrantyExpiring: updatedWarrantyExpiring,
@@ -75,12 +68,17 @@ function StockTable() {
   };
 
   const handleDelete = async (stockId: number) => {
+    // Make the DELETE request to delete the stock
     try {
       const response = await axios.delete(
-        `https://localhost:7272/api/Stock/${stockId}`
+        `http://localhost:5050/api/Stock/${stockId}`
       );
       console.log(response);
-      fetchStocks(); // update the stocks list
+      // Remove the deleted stock from the stocks list
+      const updatedStocks = stockProduct.filter(
+        (stock) => stock.stockId !== stockId
+      );
+      setStockProduct(updatedStocks);
     } catch (error) {
       console.log(error);
     }
@@ -153,13 +151,13 @@ function StockTable() {
                         <FontAwesomeIcon
                             icon={faPen}
                             style={{ color: "482890", cursor: "pointer" }}
-                            onClick={() => handleEdit(stock.id)}
+                            onClick={() => handleEdit(stock.stockId)}
                           />
                           &nbsp; &nbsp; &nbsp;
                           <FontAwesomeIcon
                             icon={faTrash}
                             style={{ color: "#FF615A", cursor: "pointer" }}
-                            onClick={() => handleDelete(stock.id)}
+                            onClick={() => handleDelete(stock.stockId)}
                           />
                         </td>
                       </tr>

@@ -12,8 +12,9 @@ function AddSubCategory() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("https://localhost:7272/api/Category");
-      setCategoryProduct(response.data);
+      const categoryProduct = await axios.get("http://localhost:5050/api/Category");
+      console.log(categoryProduct);
+      setCategoryProduct(categoryProduct.data);
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +36,7 @@ function AddSubCategory() {
       categoryId: selectedCategoryId,
     };
     try {
-      const response = await axios.post("https://localhost:7272/api/SubCategory", data);
+      const response = await axios.post("http://localhost:5050/api/SubCategory", data);
       console.log(response);
       handleClose(); // close the modal
       window.location.reload(); // reload the page
@@ -63,14 +64,10 @@ function AddSubCategory() {
 
             <Form.Group>
               <Form.Label>Category id</Form.Label>
-              <Form.Control type="text" name="categoryId" placeholder="Enter category Id" value={selectedCategoryId} onChange={handleCategoryIdChange} />
-              <Form.Text className="text-muted">
-                Select a category id from the drop-down or enter it manually.
-              </Form.Text>
-              <Form.Control as="select" name="categoryId" onChange={(e) => setSelectedCategoryId(e.target.value)}>
-                <option>Select a category id</option>
+              <Form.Control as="select" name="categoryId" value={selectedCategoryId} onChange={handleCategoryIdChange}>
+                <option>Choose a category id...</option>
                 {categoryProduct.map((category) => (
-                  <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>
+                  <option key={category.categoryId} value={category.categoryId}>{category.id}</option>
                 ))}
               </Form.Control>
             </Form.Group>

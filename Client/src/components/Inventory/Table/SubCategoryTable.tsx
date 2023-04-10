@@ -15,7 +15,7 @@ function SubCategoryTable() {
 
   const fetchSubCategories = async () => {
     try {
-      const response = await axios.get("https://localhost:7272/api/SubCategory");
+      const response = await axios.get("http://localhost:5050/api/SubCategory");
       setSubCategoryProduct(response.data);
     } catch (error) {
       console.log(error);
@@ -41,7 +41,7 @@ function SubCategoryTable() {
     // Make the PUT request to update the subcategory
     try {
       const response = await axios.put(
-        `https://localhost:7272/api/SubCategory/${subCategoryId}`,
+        `http://localhost:5050/api/SubCategory/${subCategoryId}`,
         {
           subCategoryType: updatedSubCategoryType,
           categoryId: updatedCategoryId,
@@ -55,9 +55,11 @@ function SubCategoryTable() {
   };
 
   const handleDelete = async (subCategoryId: number) => {
+   
+   
     try {
       const response = await axios.delete(
-        `https://localhost:7272/api/SubCategory/${subCategoryId}`
+        `http://localhost:5050/api/SubCategory/${subCategoryId}`
       );
       console.log(response);
       fetchSubCategories(); // update the subcategories list
@@ -85,7 +87,7 @@ function SubCategoryTable() {
         <Fragment>
           <div>
             <Table
-              className="table w-100 small table-borderless table-responsiv align-middle align-left"
+              className="table w-100 small table-borderless table-responsive align-middle align-left"
               hover
               style={{ fontSize: "14px" }}
             >
