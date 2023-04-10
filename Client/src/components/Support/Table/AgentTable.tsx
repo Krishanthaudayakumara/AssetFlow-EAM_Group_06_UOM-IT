@@ -100,8 +100,7 @@ useEffect(() => {
               <tbody>
                 {agents.map((agent) => (
                   <tr key={agent.id}>
-                    <td>
-                      {" "}
+                    <td>                      
                       <img
                         src={`http://localhost:5224/ProfileImages/${agent.profileImage}`}
                         alt="User profile"

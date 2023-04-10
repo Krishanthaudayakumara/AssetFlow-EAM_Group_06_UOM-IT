@@ -4,6 +4,7 @@ import { Table, Modal, Button, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../../../css/Support/Support.css";
+import DefaultProfilePicture from "../DefaultProfilePicture";
 
 interface issueType {
   id: number;
@@ -67,29 +68,7 @@ const IssueTypeTable = () => {
       });
   };
 
-  const getDefaultProfilePicture = (name: string, fontSize: number = 36) => {
-    const initials = name.charAt(0);
-
-    return (
-      <div className="default-profile-picture">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="50" fill="#cfcfcf" />
-          <text
-            x="50"
-            y="50"
-            textAnchor="middle"
-            dy="0.35em"
-            fill="#555555"
-            fontFamily="sans-serif"
-            fontWeight="bold"
-            fontSize={fontSize}
-          >
-            {initials}
-          </text>
-        </svg>
-      </div>
-    );
-  };
+  
 
   return (
     <div>
@@ -108,7 +87,7 @@ const IssueTypeTable = () => {
               <tbody>
                 {issues.map((issue) => (
                   <tr key={issue.id}>
-                    <td>{getDefaultProfilePicture(issue.name)}</td>
+                    <td>{DefaultProfilePicture({ name: issue.name })}</td>
                     <td>{issue.name}</td>
                     <td>
                       <FontAwesomeIcon
