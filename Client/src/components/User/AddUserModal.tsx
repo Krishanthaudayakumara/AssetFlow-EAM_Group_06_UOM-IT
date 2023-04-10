@@ -25,10 +25,10 @@ const AddUserModal: React.FC<Props> = ({ show, onHide, onSubmit }) => {
     }
 
     // Password validation
-    if (!password || password.length < 8 || !/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
-      alert("Password must contain at least 8 characters, 1 uppercase letter, 1 number, and 1 special character.");
-      return;
-    }
+    // if (!password || password.length < 8 || !/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
+    //   alert("Password must contain at least 8 characters, 1 uppercase letter, 1 number, and 1 special character.");
+    //   return;
+    // }
 
     onSubmit({ email, username, password, role } as User);
   };

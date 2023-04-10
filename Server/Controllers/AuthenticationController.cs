@@ -39,6 +39,12 @@ namespace Server.Controllers
                 return BadRequest("Username already exists");
             }
 
+            var emailExists = await _userManager.FindByEmailAsync(model.Email);
+            if (emailExists != null)
+            {
+                return BadRequest("Email already exists");
+            }
+
             var user = new User
             {
                 Email = model.Email,

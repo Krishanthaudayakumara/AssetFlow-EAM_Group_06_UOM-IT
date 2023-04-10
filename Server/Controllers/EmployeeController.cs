@@ -57,6 +57,27 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(EmployeeDto employeeDto)
         {
+            // Check if email already exists
+            var emailExists = await _userManager.FindByEmailAsync(employeeDto.Email);
+            if (emailExists != null)
+            {
+                return BadRequest("Email already exists");
+            }
+
+            // Check if phone number already exists
+            var phoneNumberExists = await _context.Employees.AnyAsync(e => e.PhoneNumber == employeeDto.PhoneNumber);
+            if (phoneNumberExists)
+            {
+                return BadRequest("Phone number already exists");
+            }
+
+            // Check if username already exists
+            var usernameExists = await _userManager.FindByNameAsync(employeeDto.UserName);
+            if (usernameExists != null)
+            {
+                return BadRequest("Username already exists");
+            }
+
             var employee = new Employee
             {
                 FirstName = employeeDto.FirstName,
@@ -83,6 +104,7 @@ namespace Server.Controllers
 
             return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);
         }
+
 
         // PUT: api/Employee/5
         [HttpPut("{id}")]
