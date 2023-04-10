@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+
+
 namespace Server.Models.Support
 {
     public class Team

@@ -1,3 +1,6 @@
+using System;
+
+
 namespace Server.Models.Support
 {
     public class Reply

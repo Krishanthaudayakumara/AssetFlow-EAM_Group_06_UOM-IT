@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+
+
 namespace Server.Models.Support
 {
     public class IssueType

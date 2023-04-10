@@ -21,6 +21,8 @@ import {
   FaCalendarAlt,
   FaAngleLeft,
   FaAngleRight,
+  FaUserTie,
+  FaSuitcase,
 } from "react-icons/fa";
 
 import "../css/Sidebar.css"; // import background image CSS file
@@ -74,11 +76,10 @@ const items = [
     link: "/user",
 
     icon: FaUsers,
-    dropdownItems: [
-      { label: "All Users", link: "/user" },
-      { label: "Add User", link: "/user/add" },
-    ],
   },
+  { label: "Employees", link: "/employee", icon: FaUserTie },
+  { label: "Departments", link: "/department", icon: FaSuitcase },
+
   { label: "Suppliers", link: "/supplier", icon: FaShippingFast },
 
   {
@@ -207,14 +208,16 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         </Navbar>
       </Col>
       <Col md={2} className="comp-collapse-col">
-        <button
-          className="collapse-button"
-          onClick={() => {
-            collapseSideBar(collapsed);
-          }}
-        >
-          {collapsed ? <FaAngleRight /> : <FaAngleLeft />}
-        </button>
+        <div className="collapse-button-container">
+          <button
+            className="collapse-button"
+            onClick={() => {
+              collapseSideBar(collapsed);
+            }}
+          >
+            {collapsed ? <FaAngleRight /> : <FaAngleLeft />}
+          </button>
+        </div>
       </Col>
     </Row>
   );

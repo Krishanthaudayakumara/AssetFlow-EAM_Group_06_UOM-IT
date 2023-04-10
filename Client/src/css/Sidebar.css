@@ -1,14 +1,15 @@
 .sidebar {
-  height: 100vh;
   display: block !important;
   -webkit-box-shadow: 2px 6px 13px -4px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 2px 6px 13px -4px rgba(0, 0, 0, 0.75);
   box-shadow: 2px 6px 13px -4px rgba(0, 0, 0, 0.75);
+  height: auto;
+  position: fixed;
+  bottom: 0;
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
-.sidebar-nav {
-  margin: 0px;
-}
 
 .side-link {
   padding-inline: 92px !important;
@@ -96,3 +97,6 @@
   background-color: #482890;
   padding-bottom: 4px !important;
  }
+
+
+ 
