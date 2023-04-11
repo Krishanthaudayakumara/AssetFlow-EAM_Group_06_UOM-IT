@@ -46,7 +46,6 @@
           }
         }
       },
-<<<<<<< HEAD
       "EPPlus/6.2.0": {
         "type": "package",
         "dependencies": {
@@ -90,8 +89,6 @@
           "lib/net7.0/EPPlus.System.Drawing.dll": {}
         }
       },
-=======
->>>>>>> Kavindya
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -105,7 +102,6 @@
           }
         }
       },
-<<<<<<< HEAD
       "Microsoft.AspNetCore.Authentication/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -408,8 +404,6 @@
           }
         }
       },
-=======
->>>>>>> Kavindya
       "Microsoft.AspNetCore.OpenApi/7.0.2": {
         "type": "package",
         "dependencies": {
@@ -429,7 +423,6 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-<<<<<<< HEAD
       "Microsoft.AspNetCore.WebUtilities/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -447,8 +440,6 @@
           }
         }
       },
-=======
->>>>>>> Kavindya
       "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
         "type": "package",
         "compile": {
@@ -532,19 +523,11 @@
           }
         }
       },
-<<<<<<< HEAD
       "Microsoft.EntityFrameworkCore/7.0.4": {
         "type": "package",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Abstractions": "7.0.4",
           "Microsoft.EntityFrameworkCore.Analyzers": "7.0.4",
-=======
-      "Microsoft.EntityFrameworkCore/7.0.3": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "7.0.3",
-          "Microsoft.EntityFrameworkCore.Analyzers": "7.0.3",
->>>>>>> Kavindya
           "Microsoft.Extensions.Caching.Memory": "7.0.0",
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
           "Microsoft.Extensions.Logging": "7.0.0"
@@ -563,11 +546,7 @@
           "buildTransitive/net6.0/Microsoft.EntityFrameworkCore.props": {}
         }
       },
-<<<<<<< HEAD
       "Microsoft.EntityFrameworkCore.Abstractions/7.0.4": {
-=======
-      "Microsoft.EntityFrameworkCore.Abstractions/7.0.3": {
->>>>>>> Kavindya
         "type": "package",
         "compile": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
@@ -580,11 +559,7 @@
           }
         }
       },
-<<<<<<< HEAD
       "Microsoft.EntityFrameworkCore.Analyzers/7.0.4": {
-=======
-      "Microsoft.EntityFrameworkCore.Analyzers/7.0.3": {
->>>>>>> Kavindya
         "type": "package",
         "compile": {
           "lib/netstandard2.0/_._": {}
@@ -593,19 +568,11 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-<<<<<<< HEAD
       "Microsoft.EntityFrameworkCore.Design/7.0.2": {
         "type": "package",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.2",
-=======
-      "Microsoft.EntityFrameworkCore.Design/7.0.3": {
-        "type": "package",
-        "dependencies": {
-          "Humanizer.Core": "2.14.1",
-          "Microsoft.EntityFrameworkCore.Relational": "7.0.3",
->>>>>>> Kavindya
           "Microsoft.Extensions.DependencyModel": "7.0.0",
           "Mono.TextTemplating": "2.2.1"
         },
@@ -623,17 +590,10 @@
           "build/net6.0/Microsoft.EntityFrameworkCore.Design.props": {}
         }
       },
-<<<<<<< HEAD
       "Microsoft.EntityFrameworkCore.Relational/7.0.4": {
         "type": "package",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.4",
-=======
-      "Microsoft.EntityFrameworkCore.Relational/7.0.3": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "7.0.3",
->>>>>>> Kavindya
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0"
         },
         "compile": {
@@ -647,19 +607,11 @@
           }
         }
       },
-<<<<<<< HEAD
       "Microsoft.EntityFrameworkCore.SqlServer/7.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.Data.SqlClient": "5.0.1",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.2"
-=======
-      "Microsoft.EntityFrameworkCore.SqlServer/7.0.3": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Data.SqlClient": "5.0.1",
-          "Microsoft.EntityFrameworkCore.Relational": "7.0.3"
->>>>>>> Kavindya
         },
         "compile": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.SqlServer.dll": {
@@ -725,7 +677,6 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-<<<<<<< HEAD
       "Microsoft.Extensions.Configuration/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -746,8 +697,6 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-=======
->>>>>>> Kavindya
       "Microsoft.Extensions.Configuration.Abstractions/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -767,7 +716,6 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-<<<<<<< HEAD
       "Microsoft.Extensions.Configuration.FileExtensions/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -814,8 +762,6 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-=======
->>>>>>> Kavindya
       "Microsoft.Extensions.DependencyInjection/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -871,7 +817,6 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-<<<<<<< HEAD
       "Microsoft.Extensions.FileProviders.Abstractions/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -983,8 +928,6 @@
           }
         }
       },
-=======
->>>>>>> Kavindya
       "Microsoft.Extensions.Logging/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -1023,7 +966,6 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-<<<<<<< HEAD
       "Microsoft.Extensions.ObjectPool/2.2.0": {
         "type": "package",
         "compile": {
@@ -1038,9 +980,6 @@
         }
       },
       "Microsoft.Extensions.Options/7.0.1": {
-=======
-      "Microsoft.Extensions.Options/7.0.0": {
->>>>>>> Kavindya
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
@@ -1076,7 +1015,6 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-<<<<<<< HEAD
       "Microsoft.Extensions.WebEncoders/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -1095,8 +1033,6 @@
           }
         }
       },
-=======
->>>>>>> Kavindya
       "Microsoft.Identity.Client/4.45.0": {
         "type": "package",
         "dependencies": {
@@ -1130,11 +1066,7 @@
           }
         }
       },
-<<<<<<< HEAD
       "Microsoft.IdentityModel.Abstractions/6.26.0": {
-=======
-      "Microsoft.IdentityModel.Abstractions/6.21.0": {
->>>>>>> Kavindya
         "type": "package",
         "compile": {
           "lib/net6.0/Microsoft.IdentityModel.Abstractions.dll": {
@@ -1163,17 +1095,10 @@
           }
         }
       },
-<<<<<<< HEAD
       "Microsoft.IdentityModel.Logging/6.26.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.IdentityModel.Abstractions": "6.26.0"
-=======
-      "Microsoft.IdentityModel.Logging/6.21.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.IdentityModel.Abstractions": "6.21.0"
->>>>>>> Kavindya
         },
         "compile": {
           "lib/net6.0/Microsoft.IdentityModel.Logging.dll": {
@@ -1189,7 +1114,6 @@
       "Microsoft.IdentityModel.Protocols/6.21.0": {
         "type": "package",
         "dependencies": {
-<<<<<<< HEAD
           "Microsoft.IdentityModel.Logging": "6.21.0",
           "Microsoft.IdentityModel.Tokens": "6.21.0"
         },
@@ -1230,55 +1154,28 @@
         },
         "compile": {
           "lib/net6.0/Microsoft.IdentityModel.Tokens.dll": {
-=======
-          "Microsoft.IdentityModel.Logging": "6.21.0",
-          "Microsoft.IdentityModel.Tokens": "6.21.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.IdentityModel.Protocols.dll": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< HEAD
           "lib/net6.0/Microsoft.IdentityModel.Tokens.dll": {
-=======
-          "lib/net6.0/Microsoft.IdentityModel.Protocols.dll": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         }
       },
-<<<<<<< HEAD
       "Microsoft.IO.RecyclableMemoryStream/2.2.1": {
         "type": "package",
         "compile": {
           "lib/net5.0/Microsoft.IO.RecyclableMemoryStream.dll": {
-=======
-      "Microsoft.IdentityModel.Protocols.OpenIdConnect/6.21.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.IdentityModel.Protocols": "6.21.0",
-          "System.IdentityModel.Tokens.Jwt": "6.21.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< HEAD
           "lib/net5.0/Microsoft.IO.RecyclableMemoryStream.dll": {
-=======
-          "lib/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         }
       },
-<<<<<<< HEAD
       "Microsoft.Net.Http.Headers/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -1287,26 +1184,11 @@
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {
-=======
-      "Microsoft.IdentityModel.Tokens/6.21.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.CSharp": "4.5.0",
-          "Microsoft.IdentityModel.Logging": "6.21.0",
-          "System.Security.Cryptography.Cng": "4.5.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.IdentityModel.Tokens.dll": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< HEAD
           "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {
-=======
-          "lib/net6.0/Microsoft.IdentityModel.Tokens.dll": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         }
@@ -1362,11 +1244,7 @@
           "System.Security.Principal.Windows": "5.0.0"
         },
         "compile": {
-<<<<<<< HEAD
           "ref/netstandard2.0/Microsoft.Win32.Registry.dll": {
-=======
-          "ref/netstandard2.0/_._": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         },
@@ -1382,25 +1260,14 @@
           }
         }
       },
-<<<<<<< HEAD
       "Microsoft.Win32.SystemEvents/7.0.0": {
         "type": "package",
         "compile": {
           "lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
-=======
-      "Microsoft.Win32.SystemEvents/5.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "5.0.0"
-        },
-        "compile": {
-          "ref/netstandard2.0/_._": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< HEAD
           "lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
             "related": ".xml"
           }
@@ -1410,14 +1277,6 @@
         },
         "runtimeTargets": {
           "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
-=======
-          "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll": {
->>>>>>> Kavindya
             "assetType": "runtime",
             "rid": "win"
           }
@@ -1548,7 +1407,6 @@
           }
         }
       },
-<<<<<<< HEAD
       "System.Drawing.Common/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -1556,20 +1414,10 @@
         },
         "compile": {
           "lib/net7.0/System.Drawing.Common.dll": {
-=======
-      "System.Drawing.Common/5.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Win32.SystemEvents": "5.0.0"
-        },
-        "compile": {
-          "ref/netcoreapp3.0/_._": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< HEAD
           "lib/net7.0/System.Drawing.Common.dll": {
             "related": ".xml"
           }
@@ -1579,50 +1427,25 @@
         },
         "runtimeTargets": {
           "runtimes/win/lib/net7.0/System.Drawing.Common.dll": {
-=======
-          "lib/netcoreapp3.0/System.Drawing.Common.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll": {
-            "assetType": "runtime",
-            "rid": "unix"
-          },
-          "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll": {
->>>>>>> Kavindya
             "assetType": "runtime",
             "rid": "win"
           }
         }
       },
-<<<<<<< HEAD
       "System.Formats.Asn1/7.0.0": {
         "type": "package",
         "compile": {
           "lib/net7.0/System.Formats.Asn1.dll": {
-=======
-      "System.Formats.Asn1/5.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/_._": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< HEAD
           "lib/net7.0/System.Formats.Asn1.dll": {
             "related": ".xml"
           }
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
-=======
-          "lib/netstandard2.0/System.Formats.Asn1.dll": {
-            "related": ".xml"
-          }
->>>>>>> Kavindya
         }
       },
       "System.Globalization/4.3.0": {
@@ -1789,11 +1612,7 @@
           "System.Security.Principal.Windows": "5.0.0"
         },
         "compile": {
-<<<<<<< HEAD
           "ref/netstandard2.0/System.Security.AccessControl.dll": {
-=======
-          "ref/netstandard2.0/_._": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         },
@@ -1831,7 +1650,6 @@
           }
         }
       },
-<<<<<<< HEAD
       "System.Security.Cryptography.Pkcs/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -1857,8 +1675,6 @@
           }
         }
       },
-=======
->>>>>>> Kavindya
       "System.Security.Cryptography.ProtectedData/5.0.0": {
         "type": "package",
         "compile": {
@@ -1878,7 +1694,6 @@
           }
         }
       },
-<<<<<<< HEAD
       "System.Security.Cryptography.Xml/4.5.0": {
         "type": "package",
         "dependencies": {
@@ -1894,8 +1709,6 @@
           "lib/netstandard2.0/System.Security.Cryptography.Xml.dll": {}
         }
       },
-=======
->>>>>>> Kavindya
       "System.Security.Permissions/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -1903,11 +1716,7 @@
           "System.Windows.Extensions": "5.0.0"
         },
         "compile": {
-<<<<<<< HEAD
           "ref/net5.0/System.Security.Permissions.dll": {
-=======
-          "ref/net5.0/_._": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         },
@@ -1920,11 +1729,7 @@
       "System.Security.Principal.Windows/5.0.0": {
         "type": "package",
         "compile": {
-<<<<<<< HEAD
           "ref/netcoreapp3.0/System.Security.Principal.Windows.dll": {
-=======
-          "ref/netcoreapp3.0/_._": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         },
@@ -1957,25 +1762,14 @@
           }
         }
       },
-<<<<<<< HEAD
       "System.Text.Encoding.CodePages/7.0.0": {
         "type": "package",
         "compile": {
           "lib/net7.0/System.Text.Encoding.CodePages.dll": {
-=======
-      "System.Text.Encoding.CodePages/5.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "5.0.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/_._": {
->>>>>>> Kavindya
             "related": ".xml"
           }
         },
         "runtime": {
-<<<<<<< HEAD
           "lib/net7.0/System.Text.Encoding.CodePages.dll": {
             "related": ".xml"
           }
@@ -1985,14 +1779,6 @@
         },
         "runtimeTargets": {
           "runtimes/win/lib/net7.0/System.Text.Encoding.CodePages.dll": {
-=======
-          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll": {
->>>>>>> Kavindya
             "assetType": "runtime",
             "rid": "win"
           }
@@ -2063,7 +1849,6 @@
       },
       "System.Windows.Extensions/5.0.0": {
         "type": "package",
-<<<<<<< HEAD
         "dependencies": {
           "System.Drawing.Common": "5.0.0"
         },
@@ -2445,85 +2230,6 @@
         "lib/net7.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml",
         "microsoft.aspnetcore.identity.entityframeworkcore.7.0.4.nupkg.sha512",
         "microsoft.aspnetcore.identity.entityframeworkcore.nuspec"
-=======
-        "dependencies": {
-          "System.Drawing.Common": "5.0.0"
-        },
-        "compile": {
-          "ref/netcoreapp3.0/_._": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netcoreapp3.0/System.Windows.Extensions.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll": {
-            "assetType": "runtime",
-            "rid": "win"
-          }
-        }
-      }
-    }
-  },
-  "libraries": {
-    "Azure.Core/1.24.0": {
-      "sha512": "+/qI1j2oU1S4/nvxb2k/wDsol00iGf1AyJX5g3epV7eOpQEP/2xcgh/cxgKMeFgn3U2fmgSiBnQZdkV+l5y0Uw==",
-      "type": "package",
-      "path": "azure.core/1.24.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "CHANGELOG.md",
-        "README.md",
-        "azure.core.1.24.0.nupkg.sha512",
-        "azure.core.nuspec",
-        "azureicon.png",
-        "lib/net461/Azure.Core.dll",
-        "lib/net461/Azure.Core.xml",
-        "lib/net5.0/Azure.Core.dll",
-        "lib/net5.0/Azure.Core.xml",
-        "lib/netcoreapp2.1/Azure.Core.dll",
-        "lib/netcoreapp2.1/Azure.Core.xml",
-        "lib/netstandard2.0/Azure.Core.dll",
-        "lib/netstandard2.0/Azure.Core.xml"
-      ]
-    },
-    "Azure.Identity/1.6.0": {
-      "sha512": "EycyMsb6rD2PK9P0SyibFfEhvWWttdrYhyPF4f41uzdB/44yQlV+2Wehxyg489Rj6gbPvSPgbKq0xsHJBhipZA==",
-      "type": "package",
-      "path": "azure.identity/1.6.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "CHANGELOG.md",
-        "README.md",
-        "azure.identity.1.6.0.nupkg.sha512",
-        "azure.identity.nuspec",
-        "azureicon.png",
-        "lib/netstandard2.0/Azure.Identity.dll",
-        "lib/netstandard2.0/Azure.Identity.xml"
-      ]
-    },
-    "Humanizer.Core/2.14.1": {
-      "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
-      "type": "package",
-      "path": "humanizer.core/2.14.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "humanizer.core.2.14.1.nupkg.sha512",
-        "humanizer.core.nuspec",
-        "lib/net6.0/Humanizer.dll",
-        "lib/net6.0/Humanizer.xml",
-        "lib/netstandard1.0/Humanizer.dll",
-        "lib/netstandard1.0/Humanizer.xml",
-        "lib/netstandard2.0/Humanizer.dll",
-        "lib/netstandard2.0/Humanizer.xml",
-        "logo.png"
->>>>>>> Kavindya
       ]
     },
     "Microsoft.AspNetCore.OpenApi/7.0.2": {
@@ -2541,7 +2247,6 @@
         "microsoft.aspnetcore.openapi.nuspec"
       ]
     },
-<<<<<<< HEAD
     "Microsoft.AspNetCore.WebUtilities/2.2.0": {
       "sha512": "9ErxAAKaDzxXASB/b5uLEkLgUWv1QbeVxyJYEHQwMaxXOeFFVkQxiq8RyfVcifLU7NR0QY0p3acqx4ZpYfhHDg==",
       "type": "package",
@@ -2555,8 +2260,6 @@
         "microsoft.aspnetcore.webutilities.nuspec"
       ]
     },
-=======
->>>>>>> Kavindya
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "sha512": "yuvf07qFWFqtK3P/MRkEKLhn5r2UbSpVueRziSqj0yJQIKFwG1pq9mOayK3zE5qZCTs0CbrwL9M6R8VwqyGy2w==",
       "type": "package",
@@ -2727,17 +2430,10 @@
         "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll"
       ]
     },
-<<<<<<< HEAD
     "Microsoft.EntityFrameworkCore/7.0.4": {
       "sha512": "eNcsY3rft5ERJJcen80Jyg57EScjWZmvhwmFLYXmEOTdVqHG+wQZiMOXnO1b5RH3u2qTQq+Tpci7KGfLAG5Gtg==",
       "type": "package",
       "path": "microsoft.entityframeworkcore/7.0.4",
-=======
-    "Microsoft.EntityFrameworkCore/7.0.3": {
-      "sha512": "6XUI2YGoaLMoP9KGaqWmmd4B2n5bpQbXrVRpH20Et3YjQ0Rn3Ia6HM/ANcSq9rBfjfUySgo9SwUZgQ4m4PF3LQ==",
-      "type": "package",
-      "path": "microsoft.entityframeworkcore/7.0.3",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2745,7 +2441,6 @@
         "buildTransitive/net6.0/Microsoft.EntityFrameworkCore.props",
         "lib/net6.0/Microsoft.EntityFrameworkCore.dll",
         "lib/net6.0/Microsoft.EntityFrameworkCore.xml",
-<<<<<<< HEAD
         "microsoft.entityframeworkcore.7.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.nuspec"
       ]
@@ -2754,23 +2449,12 @@
       "sha512": "6GbYvs4L5oFpYpMzwF05kdDgvX09UmMX7MpDtDlGI5ymijFwquwv+yvdijbtodOuu0yLUpc4n71x6eBdJ8v1xQ==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.abstractions/7.0.4",
-=======
-        "microsoft.entityframeworkcore.7.0.3.nupkg.sha512",
-        "microsoft.entityframeworkcore.nuspec"
-      ]
-    },
-    "Microsoft.EntityFrameworkCore.Abstractions/7.0.3": {
-      "sha512": "0NaFBZykUlQHknddRuKY4v+MFZX/AW+v2V85dgj7abIlt+kL3GWa7QNH5S1084VLf1u+dq1SnhZsOvykc3Y0sA==",
-      "type": "package",
-      "path": "microsoft.entityframeworkcore.abstractions/7.0.3",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
-<<<<<<< HEAD
         "microsoft.entityframeworkcore.abstractions.7.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.abstractions.nuspec"
       ]
@@ -2779,23 +2463,12 @@
       "sha512": "YRD4bViuaEPEsaBIL52DzXGzLCt3jYoE3wztYEW1QZYDl89hQ+ca0nvBO2mnMHmCXpU/2wlErrUyDp4x5B/3mg==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.analyzers/7.0.4",
-=======
-        "microsoft.entityframeworkcore.abstractions.7.0.3.nupkg.sha512",
-        "microsoft.entityframeworkcore.abstractions.nuspec"
-      ]
-    },
-    "Microsoft.EntityFrameworkCore.Analyzers/7.0.3": {
-      "sha512": "CLyRWFLwaOUZNPEia/aBMzFxZqm/ITKt3B+yUFtrg4Ys5VF3n2gvneuItC9IhpeOcjfdSgu/yUKf8y/IsNHs5A==",
-      "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/7.0.3",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "lib/netstandard2.0/_._",
-<<<<<<< HEAD
         "microsoft.entityframeworkcore.analyzers.7.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
@@ -2804,16 +2477,6 @@
       "sha512": "gUUucCoJci8BBxOcU/XuuldUZpCo5Od8lwFEzZ5WywnvDfSmARnXNe97BpjL+JiBhSrnuTxW/wCJjWqPonXXHQ==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.design/7.0.2",
-=======
-        "microsoft.entityframeworkcore.analyzers.7.0.3.nupkg.sha512",
-        "microsoft.entityframeworkcore.analyzers.nuspec"
-      ]
-    },
-    "Microsoft.EntityFrameworkCore.Design/7.0.3": {
-      "sha512": "Nv0Y2Zh8d919qKq8Q1bvbWQbFeb4JQ7jCuakajSVtip5JIwt4hTIWetVIapJ2vOQDDZuAHCzkjimMOlHH5LVsQ==",
-      "type": "package",
-      "path": "microsoft.entityframeworkcore.design/7.0.3",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2821,7 +2484,6 @@
         "build/net6.0/Microsoft.EntityFrameworkCore.Design.props",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Design.xml",
-<<<<<<< HEAD
         "microsoft.entityframeworkcore.design.7.0.2.nupkg.sha512",
         "microsoft.entityframeworkcore.design.nuspec"
       ]
@@ -2830,23 +2492,12 @@
       "sha512": "L41+VonK6L0IurFHopoe5yY+m3MD26OMocKLPPR/XKxnazzZUcGPz0IGJpVnwpZyKVPfEIAnD5vmm60meYr1NA==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.relational/7.0.4",
-=======
-        "microsoft.entityframeworkcore.design.7.0.3.nupkg.sha512",
-        "microsoft.entityframeworkcore.design.nuspec"
-      ]
-    },
-    "Microsoft.EntityFrameworkCore.Relational/7.0.3": {
-      "sha512": "RxNNjtTrxsMtdBtgoXGRSy8uCXaBHaVzIonTeo7+Ys+N0yEWwhf2E74cxneyunMi13Ezlld10ecCHlDubEU/Pw==",
-      "type": "package",
-      "path": "microsoft.entityframeworkcore.relational/7.0.3",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Relational.xml",
-<<<<<<< HEAD
         "microsoft.entityframeworkcore.relational.7.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
@@ -2855,27 +2506,13 @@
       "sha512": "G2z5rwNUrMe3+lIil1o5LjQWYXen3ErP48kw4OuqQZPH+cAyGrU9UYKPP5HfXEQUiHq5UT+ZqgayJjgh9Q3Umw==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.sqlserver/7.0.2",
-=======
-        "microsoft.entityframeworkcore.relational.7.0.3.nupkg.sha512",
-        "microsoft.entityframeworkcore.relational.nuspec"
-      ]
-    },
-    "Microsoft.EntityFrameworkCore.SqlServer/7.0.3": {
-      "sha512": "WXd8Mg12+LrfuVOfz0YUYsiaIKI0fLTdhN/WdQGxzGM3l86GLdpACUb30Y7oUpMG4YNegerEd0AVLlMpfwOjug==",
-      "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlserver/7.0.3",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/net6.0/Microsoft.EntityFrameworkCore.SqlServer.dll",
         "lib/net6.0/Microsoft.EntityFrameworkCore.SqlServer.xml",
-<<<<<<< HEAD
         "microsoft.entityframeworkcore.sqlserver.7.0.2.nupkg.sha512",
-=======
-        "microsoft.entityframeworkcore.sqlserver.7.0.3.nupkg.sha512",
->>>>>>> Kavindya
         "microsoft.entityframeworkcore.sqlserver.nuspec"
       ]
     },
@@ -3164,7 +2801,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< HEAD
     "Microsoft.Extensions.Configuration/7.0.0": {
       "sha512": "tldQUBWt/xeH2K7/hMPPo5g8zuLc3Ro9I5d4o/XrxvxOCA2EZBtW7bCHHTc49fcBtvB8tLAb/Qsmfrq+2SJ4vA==",
       "type": "package",
@@ -3192,8 +2828,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-=======
->>>>>>> Kavindya
     "Microsoft.Extensions.Configuration.Abstractions/7.0.0": {
       "sha512": "f34u2eaqIjNO9YLHBz8rozVZ+TcFiFs0F3r7nUJd7FRkVSxk8u4OpoK226mi49MwexHOR2ibP9MFvRUaLilcQQ==",
       "type": "package",
@@ -3221,7 +2855,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< HEAD
     "Microsoft.Extensions.Configuration.FileExtensions/7.0.0": {
       "sha512": "xk2lRJ1RDuqe57BmgvRPyCt6zyePKUmvT6iuXqiHR+/OIIgWVR8Ff5k2p6DwmqY8a17hx/OnrekEhziEIeQP6Q==",
       "type": "package",
@@ -3278,8 +2911,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-=======
->>>>>>> Kavindya
     "Microsoft.Extensions.DependencyInjection/7.0.0": {
       "sha512": "elNeOmkeX3eDVG6pYVeV82p29hr+UKDaBhrZyWvWLw/EVZSYEkZlQdkp0V39k/Xehs2Qa0mvoCvkVj3eQxNQ1Q==",
       "type": "package",
@@ -3366,7 +2997,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< HEAD
     "Microsoft.Extensions.FileProviders.Abstractions/7.0.0": {
       "sha512": "NyawiW9ZT/liQb34k9YqBSNPLuuPkrjMgQZ24Y/xXX1RoiBkLUdPMaQTmxhZ5TYu8ZKZ9qayzil75JX95vGQUg==",
       "type": "package",
@@ -3499,8 +3129,6 @@
         "microsoft.extensions.identity.stores.nuspec"
       ]
     },
-=======
->>>>>>> Kavindya
     "Microsoft.Extensions.Logging/7.0.0": {
       "sha512": "Nw2muoNrOG5U5qa2ZekXwudUn2BJcD41e65zwmDHb1fQegTX66UokLWZkJRpqSSHXDOWZ5V0iqhbxOEky91atA==",
       "type": "package",
@@ -3600,7 +3228,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< HEAD
     "Microsoft.Extensions.ObjectPool/2.2.0": {
       "sha512": "gA8H7uQOnM5gb+L0uTNjViHYr+hRDqCdfugheGo/MxQnuHzmhhzCBTIPm19qL1z1Xe0NEMabfcOBGv9QghlZ8g==",
       "type": "package",
@@ -3618,12 +3245,6 @@
       "sha512": "pZRDYdN1FpepOIfHU62QoBQ6zdAoTvnjxFfqAzEd9Jhb2dfhA5i6jeTdgGgcgTWFRC7oT0+3XrbQu4LjvgX1Nw==",
       "type": "package",
       "path": "microsoft.extensions.options/7.0.1",
-=======
-    "Microsoft.Extensions.Options/7.0.0": {
-      "sha512": "lP1yBnTTU42cKpMozuafbvNtQ7QcBjr/CcK3bYOGEMH55Fjt+iecXjT6chR7vbgCMqy3PG3aNQSZgo/EuY/9qQ==",
-      "type": "package",
-      "path": "microsoft.extensions.options/7.0.0",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3644,11 +3265,7 @@
         "lib/netstandard2.0/Microsoft.Extensions.Options.xml",
         "lib/netstandard2.1/Microsoft.Extensions.Options.dll",
         "lib/netstandard2.1/Microsoft.Extensions.Options.xml",
-<<<<<<< HEAD
         "microsoft.extensions.options.7.0.1.nupkg.sha512",
-=======
-        "microsoft.extensions.options.7.0.0.nupkg.sha512",
->>>>>>> Kavindya
         "microsoft.extensions.options.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -3680,7 +3297,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-<<<<<<< HEAD
     "Microsoft.Extensions.WebEncoders/2.2.0": {
       "sha512": "V8XcqYcpcdBAxUhLeyYcuKmxu4CtNQA9IphTnARpQGhkop4A93v2XgM3AtaVVJo3H2cDWxWM6aeO8HxkifREqw==",
       "type": "package",
@@ -3694,8 +3310,6 @@
         "microsoft.extensions.webencoders.nuspec"
       ]
     },
-=======
->>>>>>> Kavindya
     "Microsoft.Identity.Client/4.45.0": {
       "sha512": "ircobISCLWbtE5eEoLKU+ldfZ8O41vg4lcy38KRj/znH17jvBiAl8oxcyNp89CsuqE3onxIpn21Ca7riyDDrRw==",
       "type": "package",
@@ -3745,17 +3359,10 @@
         "microsoft.identity.client.extensions.msal.nuspec"
       ]
     },
-<<<<<<< HEAD
     "Microsoft.IdentityModel.Abstractions/6.26.0": {
       "sha512": "NHEnDBvLYqP81YWqKk1pJt0qSUmqobvFsRL/SR/H6x1jmQh2D1EcuHHhmfIzDnzaOlQJL9GeBDHykqHp0JGNCw==",
       "type": "package",
       "path": "microsoft.identitymodel.abstractions/6.26.0",
-=======
-    "Microsoft.IdentityModel.Abstractions/6.21.0": {
-      "sha512": "XeE6LQtD719Qs2IG7HDi1TSw9LIkDbJ33xFiOBoHbApVw/8GpIBCbW+t7RwOjErUDyXZvjhZliwRkkLb8Z1uzg==",
-      "type": "package",
-      "path": "microsoft.identitymodel.abstractions/6.21.0",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3769,11 +3376,7 @@
         "lib/net6.0/Microsoft.IdentityModel.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.IdentityModel.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.IdentityModel.Abstractions.xml",
-<<<<<<< HEAD
         "microsoft.identitymodel.abstractions.6.26.0.nupkg.sha512",
-=======
-        "microsoft.identitymodel.abstractions.6.21.0.nupkg.sha512",
->>>>>>> Kavindya
         "microsoft.identitymodel.abstractions.nuspec"
       ]
     },
@@ -3798,17 +3401,10 @@
         "microsoft.identitymodel.jsonwebtokens.nuspec"
       ]
     },
-<<<<<<< HEAD
     "Microsoft.IdentityModel.Logging/6.26.0": {
       "sha512": "Svec5ltH4zz5ylAmFiHrUETLalw3d8siPbQ7+0H9GNGbZrVf5u7TaHpmDuJyb3EUiITfisD3vM83spsO/l1igA==",
       "type": "package",
       "path": "microsoft.identitymodel.logging/6.26.0",
-=======
-    "Microsoft.IdentityModel.Logging/6.21.0": {
-      "sha512": "tuEhHIQwvBEhMf8I50hy8FHmRSUkffDFP5EdLsSDV4qRcl2wvOPkQxYqEzWkh+ytW6sbdJGEXElGhmhDfAxAKg==",
-      "type": "package",
-      "path": "microsoft.identitymodel.logging/6.21.0",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3822,11 +3418,7 @@
         "lib/net6.0/Microsoft.IdentityModel.Logging.xml",
         "lib/netstandard2.0/Microsoft.IdentityModel.Logging.dll",
         "lib/netstandard2.0/Microsoft.IdentityModel.Logging.xml",
-<<<<<<< HEAD
         "microsoft.identitymodel.logging.6.26.0.nupkg.sha512",
-=======
-        "microsoft.identitymodel.logging.6.21.0.nupkg.sha512",
->>>>>>> Kavindya
         "microsoft.identitymodel.logging.nuspec"
       ]
     },
@@ -3872,17 +3464,10 @@
         "microsoft.identitymodel.protocols.openidconnect.nuspec"
       ]
     },
-<<<<<<< HEAD
     "Microsoft.IdentityModel.Tokens/6.26.0": {
       "sha512": "mFNbROC89eap6GTqoYcInCiYsaV8sLxPsgCurQnJDcJoLBk7XoAJpBJae6rkj2VEzWqfErd4jlzaqqRI7wjGOQ==",
       "type": "package",
       "path": "microsoft.identitymodel.tokens/6.26.0",
-=======
-    "Microsoft.IdentityModel.Tokens/6.21.0": {
-      "sha512": "AAEHZvZyb597a+QJSmtxH3n2P1nIJGpZ4Q89GTenknRx6T6zyfzf592yW/jA5e8EHN4tNMjjXHQaYWEq5+L05w==",
-      "type": "package",
-      "path": "microsoft.identitymodel.tokens/6.21.0",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3896,7 +3481,6 @@
         "lib/net6.0/Microsoft.IdentityModel.Tokens.xml",
         "lib/netstandard2.0/Microsoft.IdentityModel.Tokens.dll",
         "lib/netstandard2.0/Microsoft.IdentityModel.Tokens.xml",
-<<<<<<< HEAD
         "microsoft.identitymodel.tokens.6.26.0.nupkg.sha512",
         "microsoft.identitymodel.tokens.nuspec"
       ]
@@ -3936,12 +3520,6 @@
         "microsoft.net.http.headers.nuspec"
       ]
     },
-=======
-        "microsoft.identitymodel.tokens.6.21.0.nupkg.sha512",
-        "microsoft.identitymodel.tokens.nuspec"
-      ]
-    },
->>>>>>> Kavindya
     "Microsoft.NETCore.Platforms/5.0.0": {
       "sha512": "VyPlqzH2wavqquTcYpkIIAQ6WdenuKoFN0BdYBbCWsclXacSOHNQn66Gt4z5NBqEYW0FAPm5rlvki9ZiCij5xQ==",
       "type": "package",
@@ -4051,24 +3629,16 @@
         "version.txt"
       ]
     },
-<<<<<<< HEAD
     "Microsoft.Win32.SystemEvents/7.0.0": {
       "sha512": "2nXPrhdAyAzir0gLl8Yy8S5Mnm/uBSQQA7jEsILOS1MTyS7DbmV1NgViMtvV1sfCD1ebITpNwb1NIinKeJgUVQ==",
       "type": "package",
       "path": "microsoft.win32.systemevents/7.0.0",
-=======
-    "Microsoft.Win32.SystemEvents/5.0.0": {
-      "sha512": "Bh6blKG8VAKvXiLe2L+sEsn62nc1Ij34MrNxepD2OCrS5cpCwQa9MeLyhVQPQ/R4Wlzwuy6wMK8hLb11QPDRsQ==",
-      "type": "package",
-      "path": "microsoft.win32.systemevents/5.0.0",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-<<<<<<< HEAD
         "buildTransitive/net461/Microsoft.Win32.SystemEvents.targets",
         "buildTransitive/net462/_._",
         "buildTransitive/net6.0/_._",
@@ -4088,24 +3658,6 @@
         "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll",
         "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.xml",
         "useSharedDesignerContext.txt"
-=======
-        "lib/net461/Microsoft.Win32.SystemEvents.dll",
-        "lib/net461/Microsoft.Win32.SystemEvents.xml",
-        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
-        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
-        "microsoft.win32.systemevents.5.0.0.nupkg.sha512",
-        "microsoft.win32.systemevents.nuspec",
-        "ref/net461/Microsoft.Win32.SystemEvents.dll",
-        "ref/net461/Microsoft.Win32.SystemEvents.xml",
-        "ref/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
-        "ref/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
-        "runtimes/win/lib/netcoreapp2.0/Microsoft.Win32.SystemEvents.dll",
-        "runtimes/win/lib/netcoreapp2.0/Microsoft.Win32.SystemEvents.xml",
-        "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll",
-        "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.xml",
-        "useSharedDesignerContext.txt",
-        "version.txt"
->>>>>>> Kavindya
       ]
     },
     "Mono.TextTemplating/2.2.1": {
@@ -4306,24 +3858,16 @@
         "version.txt"
       ]
     },
-<<<<<<< HEAD
     "System.Drawing.Common/7.0.0": {
       "sha512": "KIX+oBU38pxkKPxvLcLfIkOV5Ien8ReN78wro7OF5/erwcmortzeFx+iBswlh2Vz6gVne0khocQudGwaO1Ey6A==",
       "type": "package",
       "path": "system.drawing.common/7.0.0",
-=======
-    "System.Drawing.Common/5.0.0": {
-      "sha512": "SztFwAnpfKC8+sEKXAFxCBWhKQaEd97EiOL7oZJZP56zbqnLpmxACWA8aGseaUExciuEAUuR9dY8f7HkTRAdnw==",
-      "type": "package",
-      "path": "system.drawing.common/5.0.0",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-<<<<<<< HEAD
         "buildTransitive/net461/System.Drawing.Common.targets",
         "buildTransitive/net462/_._",
         "buildTransitive/net6.0/_._",
@@ -4338,19 +3882,10 @@
         "lib/net7.0/System.Drawing.Common.xml",
         "lib/netstandard2.0/System.Drawing.Common.dll",
         "lib/netstandard2.0/System.Drawing.Common.xml",
-=======
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net461/System.Drawing.Common.dll",
-        "lib/netcoreapp3.0/System.Drawing.Common.dll",
-        "lib/netcoreapp3.0/System.Drawing.Common.xml",
-        "lib/netstandard2.0/System.Drawing.Common.dll",
->>>>>>> Kavindya
         "lib/xamarinios10/_._",
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-<<<<<<< HEAD
         "runtimes/win/lib/net6.0/System.Drawing.Common.dll",
         "runtimes/win/lib/net6.0/System.Drawing.Common.xml",
         "runtimes/win/lib/net7.0/System.Drawing.Common.dll",
@@ -4364,41 +3899,12 @@
       "sha512": "+nfpV0afLmvJW8+pLlHxRjz3oZJw4fkyU9MMEaMhCsHi/SN9bGF9q79ROubDiwTiCHezmK0uCWkPP7tGFP/4yg==",
       "type": "package",
       "path": "system.formats.asn1/7.0.0",
-=======
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net461/System.Drawing.Common.dll",
-        "ref/netcoreapp3.0/System.Drawing.Common.dll",
-        "ref/netcoreapp3.0/System.Drawing.Common.xml",
-        "ref/netstandard2.0/System.Drawing.Common.dll",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "runtimes/unix/lib/netcoreapp2.0/System.Drawing.Common.dll",
-        "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll",
-        "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.xml",
-        "runtimes/win/lib/netcoreapp2.0/System.Drawing.Common.dll",
-        "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll",
-        "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.xml",
-        "system.drawing.common.5.0.0.nupkg.sha512",
-        "system.drawing.common.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
-      ]
-    },
-    "System.Formats.Asn1/5.0.0": {
-      "sha512": "MTvUIktmemNB+El0Fgw9egyqT9AYSIk6DTJeoDSpc3GIHxHCMo8COqkWT1mptX5tZ1SlQ6HJZ0OsSvMth1c12w==",
-      "type": "package",
-      "path": "system.formats.asn1/5.0.0",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-<<<<<<< HEAD
         "buildTransitive/net461/System.Formats.Asn1.targets",
         "buildTransitive/net462/_._",
         "buildTransitive/net6.0/_._",
@@ -4414,16 +3920,6 @@
         "system.formats.asn1.7.0.0.nupkg.sha512",
         "system.formats.asn1.nuspec",
         "useSharedDesignerContext.txt"
-=======
-        "lib/net461/System.Formats.Asn1.dll",
-        "lib/net461/System.Formats.Asn1.xml",
-        "lib/netstandard2.0/System.Formats.Asn1.dll",
-        "lib/netstandard2.0/System.Formats.Asn1.xml",
-        "system.formats.asn1.5.0.0.nupkg.sha512",
-        "system.formats.asn1.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
->>>>>>> Kavindya
       ]
     },
     "System.Globalization/4.3.0": {
@@ -5136,7 +4632,6 @@
         "version.txt"
       ]
     },
-<<<<<<< HEAD
     "System.Security.Cryptography.Pkcs/7.0.0": {
       "sha512": "mjUbEXkR6DYRef6dnEYKdfec9otcAkibExL+1f9hmbGlWIUyaCnS3Y3oGZEet38waXmuY1ORE8vgv4sgD5nMYg==",
       "type": "package",
@@ -5170,8 +4665,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-=======
->>>>>>> Kavindya
     "System.Security.Cryptography.ProtectedData/5.0.0": {
       "sha512": "HGxMSAFAPLNoxBvSfW08vHde0F9uh7BjASwu6JF9JnXuEPhCY3YUqURn0+bQV/4UWeaqymmrHWV+Aw9riQCtCA==",
       "type": "package",
@@ -5218,7 +4711,6 @@
         "version.txt"
       ]
     },
-<<<<<<< HEAD
     "System.Security.Cryptography.Xml/4.5.0": {
       "sha512": "i2Jn6rGXR63J0zIklImGRkDIJL4b1NfPSEbIVHBlqoIb12lfXIigCbDRpDmIEzwSo/v1U5y/rYJdzZYSyCWxvg==",
       "type": "package",
@@ -5240,8 +4732,6 @@
         "version.txt"
       ]
     },
-=======
->>>>>>> Kavindya
     "System.Security.Permissions/5.0.0": {
       "sha512": "uE8juAhEkp7KDBCdjDIE3H9R1HJuEHqeqX8nLX9gmYKWwsqk3T5qZlPx8qle5DPKimC/Fy3AFTdV7HamgCh9qQ==",
       "type": "package",
@@ -5397,24 +4887,16 @@
         "system.text.encoding.nuspec"
       ]
     },
-<<<<<<< HEAD
     "System.Text.Encoding.CodePages/7.0.0": {
       "sha512": "LSyCblMpvOe0N3E+8e0skHcrIhgV2huaNcjUUEa8hRtgEAm36aGkRoC8Jxlb6Ra6GSfF29ftduPNywin8XolzQ==",
       "type": "package",
       "path": "system.text.encoding.codepages/7.0.0",
-=======
-    "System.Text.Encoding.CodePages/5.0.0": {
-      "sha512": "NyscU59xX6Uo91qvhOs2Ccho3AR2TnZPomo1Z0K6YpyztBPM/A5VbkzOO19sy3A3i1TtEnTxA7bCe3Us+r5MWg==",
-      "type": "package",
-      "path": "system.text.encoding.codepages/5.0.0",
->>>>>>> Kavindya
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-<<<<<<< HEAD
         "buildTransitive/net461/System.Text.Encoding.CodePages.targets",
         "buildTransitive/net462/_._",
         "buildTransitive/net6.0/_._",
@@ -5427,21 +4909,12 @@
         "lib/net6.0/System.Text.Encoding.CodePages.xml",
         "lib/net7.0/System.Text.Encoding.CodePages.dll",
         "lib/net7.0/System.Text.Encoding.CodePages.xml",
-=======
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net46/System.Text.Encoding.CodePages.dll",
-        "lib/net461/System.Text.Encoding.CodePages.dll",
-        "lib/net461/System.Text.Encoding.CodePages.xml",
-        "lib/netstandard1.3/System.Text.Encoding.CodePages.dll",
->>>>>>> Kavindya
         "lib/netstandard2.0/System.Text.Encoding.CodePages.dll",
         "lib/netstandard2.0/System.Text.Encoding.CodePages.xml",
         "lib/xamarinios10/_._",
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-<<<<<<< HEAD
         "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.dll",
         "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.xml",
         "runtimes/win/lib/net7.0/System.Text.Encoding.CodePages.dll",
@@ -5449,25 +4922,6 @@
         "system.text.encoding.codepages.7.0.0.nupkg.sha512",
         "system.text.encoding.codepages.nuspec",
         "useSharedDesignerContext.txt"
-=======
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "runtimes/win/lib/net461/System.Text.Encoding.CodePages.dll",
-        "runtimes/win/lib/net461/System.Text.Encoding.CodePages.xml",
-        "runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll",
-        "runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.xml",
-        "runtimes/win/lib/netstandard1.3/System.Text.Encoding.CodePages.dll",
-        "runtimes/win/lib/netstandard2.0/System.Text.Encoding.CodePages.dll",
-        "runtimes/win/lib/netstandard2.0/System.Text.Encoding.CodePages.xml",
-        "system.text.encoding.codepages.5.0.0.nupkg.sha512",
-        "system.text.encoding.codepages.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
->>>>>>> Kavindya
       ]
     },
     "System.Text.Encodings.Web/7.0.0": {
@@ -5702,7 +5156,6 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-<<<<<<< HEAD
       "EPPlus >= 6.2.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.2",
       "Microsoft.AspNetCore.Identity >= 2.2.0",
@@ -5712,34 +5165,15 @@
       "Microsoft.EntityFrameworkCore.Design >= 7.0.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.2",
       "Microsoft.IdentityModel.Tokens >= 6.26.0",
-=======
-      "Microsoft.AspNetCore.OpenApi >= 7.0.2",
-      "Microsoft.EntityFrameworkCore.Design >= 7.0.3",
-      "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.3",
->>>>>>> Kavindya
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
-=======
     "C:\\Users\\Krishantha\\.nuget\\packages\\": {}
->>>>>>> Kavindya
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
-      "projectName": "Server",
-      "projectPath": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
       "projectUniqueName": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
       "projectName": "Server",
       "projectPath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
@@ -5748,7 +5182,6 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Krishantha\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> Kavindya
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5774,7 +5207,6 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
-<<<<<<< HEAD
           "EPPlus": {
             "target": "Package",
             "version": "[6.2.0, )"
@@ -5791,24 +5223,18 @@
             "target": "Package",
             "version": "[7.0.4, )"
           },
-=======
->>>>>>> Kavindya
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[7.0.2, )"
           },
-<<<<<<< HEAD
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[7.0.4, )"
           },
-=======
->>>>>>> Kavindya
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
             "target": "Package",
-<<<<<<< HEAD
             "version": "[7.0.2, )"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
@@ -5818,13 +5244,6 @@
           "Microsoft.IdentityModel.Tokens": {
             "target": "Package",
             "version": "[6.26.0, )"
-=======
-            "version": "[7.0.3, )"
-          },
-          "Microsoft.EntityFrameworkCore.SqlServer": {
-            "target": "Package",
-            "version": "[7.0.3, )"
->>>>>>> Kavindya
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
@@ -5853,5 +5272,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.104\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

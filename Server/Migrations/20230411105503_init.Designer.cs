@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230410123440_Database")]
-    partial class Database
+    [Migration("20230411105503_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,6 +158,99 @@ namespace Server.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Server.Models.Asset", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StockId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Vendor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("WarrentyExpiration")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("condition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("Assets");
+                });
+
+            modelBuilder.Entity("Server.Models.Assign", b =>
+                {
+                    b.Property<int>("AssignId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssignId"));
+
+                    b.Property<int>("AssetId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("AssignTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReqID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AssignId");
+
+                    b.HasIndex("AssetId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ReqID");
+
+                    b.ToTable("Assigns");
+                });
+
+            modelBuilder.Entity("Server.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CategoryType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("Server.Models.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -231,6 +324,28 @@ namespace Server.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("Server.Models.EmployeeRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Request")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("EmployeeRequests");
+                });
+
             modelBuilder.Entity("Server.Models.ExternalWorker", b =>
                 {
                     b.Property<int>("Id")
@@ -271,6 +386,65 @@ namespace Server.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("ExternalWorkers");
+                });
+
+            modelBuilder.Entity("Server.Models.Stock", b =>
+                {
+                    b.Property<int>("StockId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StockId"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cost")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PurchasedDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WarrantyExpiring")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StockId");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("Stocks");
+                });
+
+            modelBuilder.Entity("Server.Models.SubCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubCategoryType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("SubCategories");
                 });
 
             modelBuilder.Entity("Server.Models.Supplier", b =>
@@ -620,6 +794,44 @@ namespace Server.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Server.Models.Asset", b =>
+                {
+                    b.HasOne("Server.Models.Stock", "Stock")
+                        .WithMany()
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("Server.Models.Assign", b =>
+                {
+                    b.HasOne("Server.Models.Asset", "Asset")
+                        .WithMany("Assigns")
+                        .HasForeignKey("AssetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.Employee", "Employee")
+                        .WithMany("Assigns")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.EmployeeRequest", "EmployeeRequest")
+                        .WithMany("Assigns")
+                        .HasForeignKey("ReqID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Asset");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("EmployeeRequest");
+                });
+
             modelBuilder.Entity("Server.Models.Employee", b =>
                 {
                     b.HasOne("Server.Models.Department", "Department")
@@ -639,6 +851,17 @@ namespace Server.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Server.Models.EmployeeRequest", b =>
+                {
+                    b.HasOne("Server.Models.Employee", "Employee")
+                        .WithMany("employeeRequests")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("Server.Models.ExternalWorker", b =>
                 {
                     b.HasOne("Server.Models.Department", "Department")
@@ -648,6 +871,32 @@ namespace Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("Server.Models.Stock", b =>
+                {
+                    b.HasOne("Server.Models.SubCategory", null)
+                        .WithMany("Stocks")
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.Supplier", null)
+                        .WithMany("Stocks")
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Server.Models.SubCategory", b =>
+                {
+                    b.HasOne("Server.Models.Category", "Category")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Server.Models.Support.Agent", b =>
@@ -719,9 +968,38 @@ namespace Server.Migrations
                     b.Navigation("IssueType");
                 });
 
+            modelBuilder.Entity("Server.Models.Asset", b =>
+                {
+                    b.Navigation("Assigns");
+                });
+
+            modelBuilder.Entity("Server.Models.Category", b =>
+                {
+                    b.Navigation("SubCategories");
+                });
+
             modelBuilder.Entity("Server.Models.Employee", b =>
                 {
+                    b.Navigation("Assigns");
+
                     b.Navigation("Tickets");
+
+                    b.Navigation("employeeRequests");
+                });
+
+            modelBuilder.Entity("Server.Models.EmployeeRequest", b =>
+                {
+                    b.Navigation("Assigns");
+                });
+
+            modelBuilder.Entity("Server.Models.SubCategory", b =>
+                {
+                    b.Navigation("Stocks");
+                });
+
+            modelBuilder.Entity("Server.Models.Supplier", b =>
+                {
+                    b.Navigation("Stocks");
                 });
 
             modelBuilder.Entity("Server.Models.Support.Agent", b =>

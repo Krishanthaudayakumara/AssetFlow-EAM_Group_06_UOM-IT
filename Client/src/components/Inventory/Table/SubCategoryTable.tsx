@@ -15,7 +15,7 @@ function SubCategoryTable() {
 
   const fetchSubCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:5050/api/SubCategory");
+      const response = await axios.get("http://localhost:5087/api/SubCategory");
       setSubCategoryProduct(response.data);
     } catch (error) {
       console.log(error);
@@ -41,7 +41,7 @@ function SubCategoryTable() {
     // Make the PUT request to update the subcategory
     try {
       const response = await axios.put(
-        `http://localhost:5050/api/SubCategory/${subCategoryId}`,
+        `http://localhost:5087/api/SubCategory/${subCategoryId}`,
         {
           subCategoryType: updatedSubCategoryType,
           categoryId: updatedCategoryId,
@@ -59,7 +59,7 @@ function SubCategoryTable() {
    
     try {
       const response = await axios.delete(
-        `http://localhost:5050/api/SubCategory/${subCategoryId}`
+        `http://localhost:5087/api/SubCategory/${subCategoryId}`
       );
       console.log(response);
       fetchSubCategories(); // update the subcategories list

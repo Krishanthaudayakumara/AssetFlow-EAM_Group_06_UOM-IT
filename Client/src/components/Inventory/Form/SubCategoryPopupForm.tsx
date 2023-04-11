@@ -12,7 +12,7 @@ function AddSubCategory() {
 
   const fetchCategories = async () => {
     try {
-      const categoryProduct = await axios.get("http://localhost:5050/api/Category");
+      const categoryProduct = await axios.get("http://localhost:5087/api/Category");
       console.log(categoryProduct);
       setCategoryProduct(categoryProduct.data);
     } catch (error) {
@@ -36,7 +36,7 @@ function AddSubCategory() {
       categoryId: selectedCategoryId,
     };
     try {
-      const response = await axios.post("http://localhost:5050/api/SubCategory", data);
+      const response = await axios.post("http://localhost:5087/api/SubCategory", data);
       console.log(response);
       handleClose(); // close the modal
       window.location.reload(); // reload the page

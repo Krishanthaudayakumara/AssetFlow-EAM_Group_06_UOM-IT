@@ -155,65 +155,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        {/* Tables */}
-        <Route path="/Tables" element={<PrivateRoute />}>
-          <Route
-            path="/CategoryTable"
-            element={
-              <Wrapper>
-                <CategoryTable />
-              </Wrapper>
-            }
-          />
-        </Route>
-
-        <Route path="/SubCategoryTable" element={<PrivateRoute />}>
-          <Route
-            path="/SubCategoryTable"
-            element={
-              <Wrapper>
-                <SubCategoryTable />
-              </Wrapper>
-            }
-          />
-        </Route>
-
-        <Route path="/StockTable" element={<PrivateRoute />}>
-          <Route
-            path="/StockTable"
-            element={
-              <Wrapper>
-                <StockTable />
-              </Wrapper>
-            }
-          />
-        </Route>
-
-        {/* popupforms */}
-        <Route
-          path="/CategoryPopupForm"
-          element={
-            <Wrapper>
-              <CategoryPopupForm />
-            </Wrapper>
-          }
-        />
-        <Route
-          path="/SubCategoryPopupForm"
-          element={
-            <Wrapper>
-              <SubCategoryPopupForm />
-            </Wrapper>
-          }
-        />
-        <Route
-          path="/StockPopupForm"
-          element={
-            <Wrapper>
-              <StockPopupForm />
-            </Wrapper>
-          }
-        />
+      
 
         {/* Pages */}
         <Route path="/Category" element={<PrivateRoute />}>

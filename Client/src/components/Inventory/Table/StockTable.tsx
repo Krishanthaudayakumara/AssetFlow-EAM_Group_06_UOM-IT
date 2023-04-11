@@ -15,7 +15,7 @@ function StockTable() {
 
   const fetchStocks = async () => {
     try {
-      const response = await axios.get("http://localhost:5050/api/Stock");
+      const response = await axios.get("http://localhost:5087/api/Stock");
       setStockProduct(response.data);
     } catch (error) {
       console.log(error);
@@ -51,7 +51,7 @@ function StockTable() {
     // Make the PUT request to update the stock
     try {
       const response = await axios.put(
-        `http://localhost:5050/api/Stock/${stockId}`,
+        `http://localhost:5087/api/Stock/${stockId}`,
         {
           purchasedDate: updatePurchasedDate,
           cost: updateCost,
@@ -71,7 +71,7 @@ function StockTable() {
     // Make the DELETE request to delete the stock
     try {
       const response = await axios.delete(
-        `http://localhost:5050/api/Stock/${stockId}`
+        `http://localhost:5087/api/Stock/${stockId}`
       );
       console.log(response);
       // Remove the deleted stock from the stocks list

@@ -23,7 +23,7 @@ function AddStock() {
 
   const fetchSubCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:5050/api/SubCategory");
+      const response = await axios.get("http://localhost:5087/api/SubCategory");
       setSubCategoryProduct(response.data);
     } catch (error) {
       console.log(error);
@@ -49,7 +49,7 @@ function AddStock() {
 
 
     try {
-      const response = await axios.post("http://localhost:5050/api/Stock", data);
+      const response = await axios.post("http://localhost:5087/api/Stock", data);
       console.log(response);
       handleClose(); // close the modal
       window.location.reload(); // reload the page
