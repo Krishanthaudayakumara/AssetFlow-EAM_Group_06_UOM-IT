@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Server.Migrations
 {
     /// <inheritdoc />
-    public partial class Database : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,24 +38,12 @@ namespace Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Supplier",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Supplier", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SubCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SubCategoryType = table.Column<int>(type: "int", nullable: false),
+                    SubCategoryType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -66,7 +54,7 @@ namespace Server.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,7 +74,7 @@ namespace Server.Migrations
                         column: x => x.EmployeeId,
                         principalTable: "Employee",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,9 +84,9 @@ namespace Server.Migrations
                     StockId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SubCategoryId = table.Column<int>(type: "int", nullable: false),
-                    PurchasedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PurchasedDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cost = table.Column<int>(type: "int", nullable: false),
-                    WarrantyExpiring = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    WarrantyExpiring = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SupplierId = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false)
                 },
@@ -110,13 +98,7 @@ namespace Server.Migrations
                         column: x => x.SubCategoryId,
                         principalTable: "SubCategories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Stocks_Supplier_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Supplier",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -141,7 +123,7 @@ namespace Server.Migrations
                         column: x => x.StockId,
                         principalTable: "Stocks",
                         principalColumn: "StockId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,8 +135,7 @@ namespace Server.Migrations
                     EmployeeId = table.Column<int>(type: "int", nullable: false),
                     AssetId = table.Column<int>(type: "int", nullable: false),
                     AssignTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReqID = table.Column<int>(type: "int", nullable: false),
-                    EmployeeRequestId = table.Column<int>(type: "int", nullable: false)
+                    ReqID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -164,19 +145,18 @@ namespace Server.Migrations
                         column: x => x.AssetId,
                         principalTable: "Assets",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Assigns_EmployeeRequests_EmployeeRequestId",
-                        column: x => x.EmployeeRequestId,
+                        name: "FK_Assigns_EmployeeRequests_ReqID",
+                        column: x => x.ReqID,
                         principalTable: "EmployeeRequests",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Assigns_Employee_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employee",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -195,9 +175,9 @@ namespace Server.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assigns_EmployeeRequestId",
+                name: "IX_Assigns_ReqID",
                 table: "Assigns",
-                column: "EmployeeRequestId");
+                column: "ReqID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeRequests_EmployeeId",
@@ -208,11 +188,6 @@ namespace Server.Migrations
                 name: "IX_Stocks_SubCategoryId",
                 table: "Stocks",
                 column: "SubCategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Stocks_SupplierId",
-                table: "Stocks",
-                column: "SupplierId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubCategories_CategoryId",
@@ -240,9 +215,6 @@ namespace Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "SubCategories");
-
-            migrationBuilder.DropTable(
-                name: "Supplier");
 
             migrationBuilder.DropTable(
                 name: "Categories");

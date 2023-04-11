@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230329110236_UpadateV1")]
-    partial class UpadateV1
+    [Migration("20230411093321_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,9 +83,6 @@ namespace Server.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EmployeeRequestId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ReqID")
                         .HasColumnType("int");
 
@@ -95,7 +92,7 @@ namespace Server.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("EmployeeRequestId");
+                    b.HasIndex("ReqID");
 
                     b.ToTable("Assigns");
                 });
@@ -240,8 +237,8 @@ namespace Server.Migrations
 
                     b.HasOne("Server.Models.EmployeeRequest", "EmployeeRequest")
                         .WithMany("Assigns")
-                        .HasForeignKey("EmployeeRequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("ReqID")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Asset");

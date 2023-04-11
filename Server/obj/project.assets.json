@@ -3873,19 +3873,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ACER\\.nuget\\packages\\": {}
+    "C:\\Users\\Krishantha\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ACER\\Desktop\\New folder\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+      "projectUniqueName": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\ACER\\Desktop\\New folder\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ACER\\Desktop\\New folder\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
+      "projectPath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\Krishantha\\.nuget\\packages\\",
+      "outputPath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Krishantha\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3949,7 +3949,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.104\\RuntimeIdentifierGraph.json"
       }
     }
   }
