@@ -1,26 +1,71 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./pages/Login";
 import Home from "./pages/Home";
 import User from "./pages/User";
 import Navbar from "./components/Navbar";
+import Wrapper from "./components/DashWrapper";
 import Sidebar from "./components/Sidebar";
-import BasicExample from "./components/Inventory/Category_table";
+
+import CategoryTable from "./components/Inventory/Table/CategoryTable";
+import Category from "./pages/Inventory/Category";
+import CategoryPopupForm from "./components/Inventory/Form/CategoryPopupForm";
+
+import SubCategoryTable from "./components/Inventory/Table/SubCategoryTable";
+import SubCategory from "./pages/Inventory/SubCategory";
+import SubCategoryPopupForm from "./components/Inventory/Form/SubCategoryPopupForm";
+
+import StockTable from "./components/Inventory/Table/StockTable";
+import Stock from "./pages/Inventory/Stock";
+import StockPopupForm from "./components/Inventory/Form/StockPopupForm";
+
+
+
+
+
+
+
+
+
+
 const App: React.FC = () => {
   return (
     <Router>
-      <Routes>
+      <Wrapper>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/user" element={<User />} />
 
-        <Route path="/" element={<Home />} />
+          {/* Page Elements */}
+          <Route path="/nav" element={<Navbar />} />
+          <Route path="/sideBar" element={<Sidebar active={""} />} />
+        
 
-        {/* Temporary routes */}
-        <Route path="/nav" element={<Navbar />} />
-        <Route path="/side" element={<Sidebar />} />
-<Route path="/category_table"element={<BasicExample />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/user" element={<User />} />
+
+
+
+
+    
+          {/* Tables */}
+          <Route path="/CategoryTable" element={<CategoryTable/>} />
+          <Route path="/SubCategoryTable" element={<SubCategoryTable/>} />
+          <Route path="/StockTable" element={<StockTable/>} />
+
+          {/* popupforms */}
+          <Route path="/CategoryPopupForm" element={<CategoryPopupForm/>}/>
+          <Route path="/SubCategoryPopupForm" element={<SubCategoryPopupForm/>}/>
+          <Route path="/StockPopupForm" element={<StockPopupForm/>}/>
+          
+          
+          {/* Pages */}
+          <Route path="/Category" element={<Category />} />
+          <Route path="/SubCategory" element={<SubCategory />} />
+          <Route path="/Stock" element={<Stock />} />
+          
+        
       
-      </Routes>
+         
+        </Routes>
+      </Wrapper>
     </Router>
   );
 };
