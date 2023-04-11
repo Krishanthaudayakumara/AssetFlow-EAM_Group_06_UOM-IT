@@ -119,7 +119,7 @@ function AddStock() {
             
             <Button variant="primary" type="submit">
               Submit
-            </Button>
+            </Button>--
           </Form>
         </Modal.Body>
       </Modal>

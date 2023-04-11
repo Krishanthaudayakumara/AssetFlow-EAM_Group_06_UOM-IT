@@ -3873,24 +3873,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HP\\.nuget\\packages\\": {}
+    "C:\\Users\\ACER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HP\\Desktop\\kavindya\\clone kavindya\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\ACER\\Desktop\\New folder\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\HP\\Desktop\\kavindya\\clone kavindya\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP\\Desktop\\kavindya\\clone kavindya\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
+      "projectPath": "C:\\Users\\ACER\\Desktop\\New folder\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ACER\\Desktop\\New folder\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
