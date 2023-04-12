@@ -13,11 +13,6 @@ using Microsoft.AspNetCore.Cors;
 using System.IdentityModel.Tokens.Jwt;
 using Server.Services;
 
-using System.Text.Json.Serialization;
-using Microsoft.EntityFrameworkCore;
-using Server.Data;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +21,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 var secretKey = "very_secret_key_for_jwt_token";
 var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
+
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddCors(options =>
@@ -83,6 +81,8 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
 });
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
@@ -104,9 +104,7 @@ app.UseCors("AllowAll");
 
 app.UseRouting();
 
-app.UseCors("AllowAll");
 
-app.UseAuthentication();
 
 app.UseAuthorization();
 
@@ -114,5 +112,12 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
+app.UseCors("AllowAll");
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
 
 app.Run();

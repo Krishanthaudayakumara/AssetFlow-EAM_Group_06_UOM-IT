@@ -1,0 +1,16 @@
+
+
+.mainContainer{
+    background:white;
+    max-width: 50vw;
+    margin-left: 80px;
+    box-shadow:  rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    margin-top: -20px;
+    
+}
+
+.row{
+    display: flex;
+    margin-bottom: 20px;
+}

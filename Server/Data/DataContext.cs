@@ -30,18 +30,35 @@ namespace Server.Data
         public DbSet<EmployeeRequest> EmployeeRequests { get; set; }
         public DbSet<Assign> Assigns { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
+        public DbSet<FacilityAsset> FacilityAssets { get; set; }
+        
+        public DbSet<Workstation> Workstations { get; set; }
 
-            builder.Entity<Assign>(builder =>
+        public DbSet<Building> Buildings { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Assign>(entity =>
             {
-                builder.HasOne(a => a.EmployeeRequest)
+                entity.HasOne(a => a.Employee)
+                    .WithMany(e => e.Assigns)
+                    .HasForeignKey(a => a.EmployeeId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(a => a.Asset)
+                    .WithMany()
+                    .HasForeignKey(a => a.AssetId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(a => a.EmployeeRequest)
                     .WithMany(er => er.Assigns)
                     .HasForeignKey(a => a.ReqID)
-                    .OnDelete(DeleteBehavior.NoAction); // Set the delete behavior to NoAction.
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }
 }
+
 

@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Authentication/Login";
 import Home from "./pages/General/Home";
 import User from "./pages/User/User";
-
+import FacilityDashboard from "./pages/Facility/FacilityDashboard";
+import BuildingFloor from "./pages/Facility/BuildingFloor";
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/DashWrapper";
-
 import Tickets from "./pages/Support/Tickets";
 import Agents from "./pages/Support/Agents";
 import Teams from "./pages/Support/Teams";
@@ -30,6 +30,9 @@ import SubCategoryPopupForm from "./components/Inventory/Form/SubCategoryPopupFo
 import StockTable from "./components/Inventory/Table/StockTable";
 import Stock from "./pages/Inventory/Stock";
 import StockPopupForm from "./components/Inventory/Form/StockPopupForm";
+
+import FacilityAsset from "./pages/Facility/FacilityAsset";
+import FacilityStock from "./pages/Facility/FacilityStock";
 
 const App: React.FC = () => {
   return (
@@ -155,8 +158,6 @@ const App: React.FC = () => {
           />
         </Route>
 
-      
-
         {/* Pages */}
         <Route path="/Category" element={<PrivateRoute />}>
           <Route
@@ -186,6 +187,48 @@ const App: React.FC = () => {
             element={
               <Wrapper>
                 <Stock />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/BuildingFloor" element={<PrivateRoute />}>
+          <Route
+            path="/BuildingFloor"
+            element={
+              <Wrapper>
+                <BuildingFloor />
+              </Wrapper>
+            }
+          />
+        </Route>
+        <Route path="/FacilityDashboard" element={<PrivateRoute />}>
+          <Route
+            path="/FacilityDashboard"
+            element={
+              <Wrapper>
+                <FacilityDashboard />
+              </Wrapper>
+            }
+          />
+        </Route>
+        <Route path="/FacilityAsset" element={<PrivateRoute />}>
+          <Route
+            path="/FacilityAsset"
+            element={
+              <Wrapper>
+                <FacilityAsset />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/FacilityStock" element={<PrivateRoute />}>
+          <Route
+            path="/FacilityStock"
+            element={
+              <Wrapper>
+                <FacilityStock />
               </Wrapper>
             }
           />
