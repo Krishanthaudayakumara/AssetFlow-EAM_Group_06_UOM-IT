@@ -1,6 +1,6 @@
 using System;
 
-namespace Server.Models.Report
+namespace Server.Models
 {
     public class GeneratedReport
     {

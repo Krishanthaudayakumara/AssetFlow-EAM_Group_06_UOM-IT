@@ -10,7 +10,7 @@ import PieChart from '../../components/Dashboard/PieChart'
 import BarChart from '../../components/Dashboard/BarChart'
 import LineChart from '../../components/Dashboard/LineChart'
 import Card from '../../components/Dashboard/Card'
-import '../css/Home.css'
+import '../../css/Home.css'
 
 
 const data = [

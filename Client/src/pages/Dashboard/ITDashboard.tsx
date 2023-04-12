@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios, { AxiosResponse} from 'axios'
 import { Container, Row, Col } from 'react-bootstrap'
 import LineChart from '../../components/Dashboard/LineChart'
-import '../css/Home.css'
+import '../../css/Home.css'
 import CardDashboard from '../../components/Dashboard/CardDashboard'
 import TicketBarChart from '../../components/Dashboard/TicketBarChart'
 interface TicketCount {
@@ -24,7 +24,7 @@ const ITDashboard = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5293/ITDashboard/monthly-ticket-counts')
+      .get('http://localhost:5087/ITDashboard/monthly-ticket-counts')
       .then((response) => {
         setTicketCounts(response.data)
       })
@@ -32,7 +32,7 @@ const ITDashboard = () => {
         console.error(error)
       })
     axios
-      .get('http://localhost:5293/ITDashboard/available-agent-count')
+      .get('http://localhost:5087/ITDashboard/available-agent-count')
       .then((response) => {
         setAvailableAgentCount(response.data.availableAgentCount)
       })
@@ -40,7 +40,7 @@ const ITDashboard = () => {
         console.error(error)
       })
     axios
-      .get('http://localhost:5293/ITDashboard/solved-ticket-count')
+      .get('http://localhost:5087/ITDashboard/solved-ticket-count')
       .then((response) => {
         setSolvedTicketCount(response.data.solvedTicketCount)
       })
@@ -48,7 +48,7 @@ const ITDashboard = () => {
         console.error(error)
       })
     axios
-      .get('http://localhost:5293/ITDashboard/avg-response-time')
+      .get('http://localhost:5087/ITDashboard/avg-response-time')
       .then((response) => {
         setAverageResponseTime(response.data)
       })
@@ -57,7 +57,7 @@ const ITDashboard = () => {
       })
 
     axios
-      .get('http://localhost:5293/ITDashboard')
+      .get('http://localhost:5087/ITDashboard')
       .then((response: AxiosResponse) => {
         setTicketSatisfaction(response.data)
       })

@@ -16,7 +16,7 @@ const ReportHistory = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5293/api/GeneratedReport')
+      .get('http://localhost:5087/api/GeneratedReport')
       .then((response) => {
         setGeneratedReports(response.data)
       })
@@ -24,7 +24,7 @@ const ReportHistory = () => {
         console.log(error)
       })
     axios
-      .get('http://localhost:5293/api/GeneratedReport')
+      .get('http://localhost:5087/api/GeneratedReport')
       .then((response) => {
         setGeneratedReports(response.data)
       })
@@ -39,7 +39,7 @@ const ReportHistory = () => {
     )
     if (confirmed) {
       axios
-        .delete(`http://localhost:5293/api/GeneratedReport/${id}`)
+        .delete(`http://localhost:5087/api/GeneratedReport/${id}`)
         .then((response) => {
           console.log(response)
           setGeneratedReports(

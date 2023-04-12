@@ -105,13 +105,12 @@ const items = [
       { label: "Teams", link: "/Teams" },
       { label: "Issues", link: "/Issues" },
       { label: "My Tickets", link: "/MyTickets" },
+      { label: "IT Dashboard", link: "/ITDashboard" },
+
     ],
   },
   { label: "Suppliers", link: "/supplier", icon: FaShippingFast },
-  { label: "Support", link: "/support", icon: FaComments ,dropdownItems: [
-    { label: "IT Dashboard", link: "/ITDashboard" },
-   
-  ],},
+  
   { label: "Calendar", link: "/calendar", icon: FaCalendarAlt },
 ];
 

@@ -17,7 +17,7 @@ const AgentReport = () => {
   const [agentReports, setAgtReneports] = useState<Agent[]>([])
   useEffect(() => {
     axios
-      .get('http://localhost:5293/api/SupportAgentReport')
+      .get('http://localhost:5087/api/SupportAgentReport')
       .then((response) => {
         setAgtReneports(response.data)
       })

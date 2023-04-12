@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs.Report;
-using Server.Models.Report;
+using Server.Models;
 
 namespace Server.Controllers.Report
 {   [ApiController]
