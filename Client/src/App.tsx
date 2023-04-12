@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Authentication/Login";
 import Home from "./pages/General/Home";
 import User from "./pages/User/User";
-import FacilityDashboard from "./pages/Facility/FacilityDashboard";
+import AssignAsset from "./pages/Facility/AssignAsset";
 import BuildingFloor from "./pages/Facility/BuildingFloor";
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/DashWrapper";
@@ -34,30 +34,84 @@ import StockPopupForm from "./components/Inventory/Form/StockPopupForm";
 import FacilityAsset from "./pages/Facility/FacilityAsset";
 import FacilityStock from "./pages/Facility/FacilityStock";
 
+import Report from "./pages/Report/Report";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import FacilityDashboard from "./pages/Dashboard/FacilityDashboard";
+import InventoryDashboard from "./pages/Dashboard/InventoryDashboard";
+import ITDashboard from "./pages/Dashboard/ITDashboard";
+import ReportHistory from "./components/Report/ReportHistory";
+
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Wrapper>
-              <PrivateRoute />
-            </Wrapper>
-          }
-        />
-
-        {/* Temporary routes */}
-        <Route
-          path="/nav"
-          element={
-            <Wrapper>
-              <Navbar />
-            </Wrapper>
-          }
-        />
-
         <Route path="/login" element={<Login />} />
+
+        <Route path="/" element={<PrivateRoute />}>
+          <Route
+            path="/"
+            element={
+              <Wrapper>
+                <Dashboard />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="Report" element={<PrivateRoute />}>
+          "
+          <Route
+            path="/Report"
+            element={
+              <Wrapper>
+                <Report />
+              </Wrapper>
+            }
+          />
+        </Route>
+        <Route path="/FacilityDashboard" element={<PrivateRoute />}>
+          <Route
+            path="/FacilityDashboard"
+            element={
+              <Wrapper>
+                <FacilityDashboard />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/InventoryDashboard" element={<PrivateRoute />}>
+          <Route
+            path="/InventoryDashboard"
+            element={
+              <Wrapper>
+                <InventoryDashboard />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/ITDashboard" element={<PrivateRoute />}>
+          <Route
+            path="/ITDashboard"
+            element={
+              <Wrapper>
+                <ITDashboard />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/ReportHistory" element={<PrivateRoute />}>
+          <Route
+            path="/ReportHistory"
+            element={
+              <Wrapper>
+                <ReportHistory />
+              </Wrapper>
+            }
+          />
+        </Route>
 
         <Route path="/user" element={<PrivateRoute />}>
           <Route
@@ -202,12 +256,12 @@ const App: React.FC = () => {
             }
           />
         </Route>
-        <Route path="/FacilityDashboard" element={<PrivateRoute />}>
+        <Route path="/AssignAsset" element={<PrivateRoute />}>
           <Route
-            path="/FacilityDashboard"
+            path="/AssignAsset"
             element={
               <Wrapper>
-                <FacilityDashboard />
+                <AssignAsset />
               </Wrapper>
             }
           />

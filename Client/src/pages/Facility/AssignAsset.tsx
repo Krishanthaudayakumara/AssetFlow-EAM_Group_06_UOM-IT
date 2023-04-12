@@ -9,7 +9,7 @@ import Work1 from "../../components/Facility/Work1";
 
 
 
-const FacilityDashboard: React.FC = () => {
+const AssignAsset: React.FC = () => {
   return (
     <div>
      <Work1/> 
@@ -19,4 +19,4 @@ const FacilityDashboard: React.FC = () => {
   );
 };
 
-export default FacilityDashboard;
+export default AssignAsset;

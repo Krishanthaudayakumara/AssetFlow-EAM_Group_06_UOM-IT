@@ -14,7 +14,7 @@ namespace Server.Data
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Reply> Replys { get; set; }
-        
+
 
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
@@ -23,7 +23,7 @@ namespace Server.Data
         public DbSet<Supplier> Suppliers { get; set; }
 
 
-           public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Asset> Assets { get; set; }
@@ -31,10 +31,13 @@ namespace Server.Data
         public DbSet<Assign> Assigns { get; set; }
 
         public DbSet<FacilityAsset> FacilityAssets { get; set; }
-        
+
         public DbSet<Workstation> Workstations { get; set; }
 
         public DbSet<Building> Buildings { get; set; }
+
+        public DbSet<GeneratedReport> GeneratedReports { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

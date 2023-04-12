@@ -94,6 +94,24 @@ namespace Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GeneratedReports",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReportName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReportType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReportFormat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GeneratedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GeneratedReports", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "IssueTypes",
                 columns: table => new
                 {
@@ -783,6 +801,9 @@ namespace Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");
+
+            migrationBuilder.DropTable(
+                name: "GeneratedReports");
 
             migrationBuilder.DropTable(
                 name: "Replys");

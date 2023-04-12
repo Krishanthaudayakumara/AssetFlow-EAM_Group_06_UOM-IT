@@ -66,6 +66,8 @@ const items = [
       { label: "Assign", link: "/Assign" },
      
 
+      { label: "Inventory Dashboard", link: "/InventoryDashboard" },
+      { label: "Item", link: "/inventory/building2" },
     ],
   },
   {
@@ -76,11 +78,9 @@ const items = [
       {label :"Building",link :"/BuildingFloor" },
       { label: "Facility Stock", link: "/FacilityStock" },
       { label: "Facility Asset", link: "/FacilityAsset" },
-      { label: "Facility Dashboard", link: "/FacilityDashboard" }
+      { label: "Facility Dashboard", link: "/FacilityDashboard" },
       
-
-
-      
+      { label: "Building 2", link: "/facility/building2" },
     ],
   },
   { label: "Reports", link: "/report", icon: FaFileAlt },
@@ -105,8 +105,12 @@ const items = [
       { label: "Teams", link: "/Teams" },
       { label: "Issues", link: "/Issues" },
       { label: "My Tickets", link: "/MyTickets" },
+      { label: "IT Dashboard", link: "/ITDashboard" },
+
     ],
   },
+  { label: "Suppliers", link: "/supplier", icon: FaShippingFast },
+  
   { label: "Calendar", link: "/calendar", icon: FaCalendarAlt },
 ];
 
