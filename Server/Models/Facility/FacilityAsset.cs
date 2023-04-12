@@ -1,4 +1,6 @@
 using Server.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Server.Models
 {
