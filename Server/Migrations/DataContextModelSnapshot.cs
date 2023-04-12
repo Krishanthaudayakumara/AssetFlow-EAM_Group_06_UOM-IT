@@ -33,13 +33,13 @@ namespace Server.Migrations
                     b.Property<int>("AssetId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AssetId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("AssignTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeRequestId")
                         .HasColumnType("int");
 
                     b.Property<int>("ReqID")
@@ -49,9 +49,11 @@ namespace Server.Migrations
 
                     b.HasIndex("AssetId");
 
+                    b.HasIndex("AssetId1");
+
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("EmployeeRequestId");
+                    b.HasIndex("ReqID");
 
                     b.ToTable("Assigns");
                 });
@@ -307,20 +309,24 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Models.Assign", b =>
                 {
                     b.HasOne("Server.Models.Inventory.Asset", "Asset")
-                        .WithMany("Assigns")
+                        .WithMany()
                         .HasForeignKey("AssetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Server.Models.Inventory.Asset", null)
+                        .WithMany("Assigns")
+                        .HasForeignKey("AssetId1");
+
                     b.HasOne("Server.Models.Employee", "Employee")
                         .WithMany("Assigns")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Server.Models.EmployeeRequest", "EmployeeRequest")
                         .WithMany("Assigns")
-                        .HasForeignKey("EmployeeRequestId")
+                        .HasForeignKey("ReqID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

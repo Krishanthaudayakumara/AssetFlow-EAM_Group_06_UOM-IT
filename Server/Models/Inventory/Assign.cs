@@ -13,4 +13,6 @@ namespace Server.Models
         public int ReqID{get;set;}
         public EmployeeRequest EmployeeRequest{get;set;}
 
+
+
     }}
