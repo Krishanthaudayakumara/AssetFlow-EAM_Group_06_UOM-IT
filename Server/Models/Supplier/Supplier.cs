@@ -8,6 +8,9 @@ namespace Server.Models
         public string ContactNumber { get; set; }
         public string Email { get; set; }
         public string Notes { get; set; }
+
+        public ICollection<Stock> Stocks { get; set; }
+
     }
 
 }

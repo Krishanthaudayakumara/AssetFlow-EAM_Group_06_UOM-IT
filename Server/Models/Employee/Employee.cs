@@ -27,5 +27,9 @@ namespace Server.Models
 
         public ICollection<Ticket> Tickets { get; set; }
 
+        
+        public ICollection<Assign> Assigns { get; set; }
+         public ICollection<EmployeeRequest> employeeRequests { get; set; }
+
     }
 }

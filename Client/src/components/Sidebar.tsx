@@ -57,8 +57,15 @@ const items = [
     link: "/inventory",
     icon: FaBox,
     dropdownItems: [
-      { label: "Add Items", link: "/inventory/building1" },
-      { label: "Item", link: "/inventory/building2" },
+      
+      { label: "Category", link: "/Category" },
+      { label: "SubCategory", link: "/SubCategory" },
+      { label: "Stock", link: "/Stock" },
+      { label: "Asset", link: "/Asset" },
+      { label: "Employee Request", link: "/EmployeeRequest" },
+      { label: "Assign", link: "/Assign" },
+     
+
     ],
   },
   {

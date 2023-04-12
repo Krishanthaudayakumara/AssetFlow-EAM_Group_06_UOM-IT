@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Authentication/Login";
 import Home from "./pages/General/Home";
 import User from "./pages/User/User";
+
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/DashWrapper";
 
@@ -17,6 +18,18 @@ import Calendar from "./pages/General/Calendar";
 import Supplier from "./pages/Supplier/Supplier";
 import "./App.css";
 import "./css/Buttons.css";
+
+import CategoryTable from "./components/Inventory/Table/CategoryTable";
+import Category from "./pages/Inventory/Category";
+import CategoryPopupForm from "./components/Inventory/Form/CategoryPopupForm";
+
+import SubCategoryTable from "./components/Inventory/Table/SubCategoryTable";
+import SubCategory from "./pages/Inventory/SubCategory";
+import SubCategoryPopupForm from "./components/Inventory/Form/SubCategoryPopupForm";
+
+import StockTable from "./components/Inventory/Table/StockTable";
+import Stock from "./pages/Inventory/Stock";
+import StockPopupForm from "./components/Inventory/Form/StockPopupForm";
 
 const App: React.FC = () => {
   return (
@@ -118,26 +131,65 @@ const App: React.FC = () => {
               </Wrapper>
             }
           />
+        </Route>
 
-          </Route>
+        <Route path="/Teams" element={<PrivateRoute />}>
+          <Route
+            path="/Teams"
+            element={
+              <Wrapper>
+                <Teams />
+              </Wrapper>
+            }
+          />
+        </Route>
 
-          <Route path="/Teams" element={<PrivateRoute />}>
-            <Route
-              path="/Teams"
-              element={
-                <Wrapper>
-               
-                  <Teams />
-                </Wrapper>
-              }
-            />
-          </Route>
+        <Route path="/Issues" element={<PrivateRoute />}>
+          <Route
+            path="/Issues"
+            element={
+              <Wrapper>
+                <Issues />
+              </Wrapper>
+            }
+          />
+        </Route>
 
-          <Route path="/Issues" element={<PrivateRoute />}>
-            <Route path="/Issues" element={<Wrapper><Issues /></Wrapper>} />
-          </Route>
+      
 
-         
+        {/* Pages */}
+        <Route path="/Category" element={<PrivateRoute />}>
+          <Route
+            path="/Category"
+            element={
+              <Wrapper>
+                <Category />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/SubCategory" element={<PrivateRoute />}>
+          <Route
+            path="/SubCategory"
+            element={
+              <Wrapper>
+                <SubCategory />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/Stock" element={<PrivateRoute />}>
+          <Route
+            path="/Stock"
+            element={
+              <Wrapper>
+                <Stock />
+              </Wrapper>
+            }
+          />
+        </Route>
       </Routes>
     </Router>
   );
