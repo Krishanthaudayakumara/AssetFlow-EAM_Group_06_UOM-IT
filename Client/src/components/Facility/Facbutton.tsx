@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button,Modal} from 'react-bootstrap';
-import  "../css/Facilitycss/Topbutton.css"; 
+import  "../../css/Facilitycss/Topbutton.css"; 
 import { useState } from 'react';
 import { Container, Row, Col} from "react-bootstrap";
-import Forms from './Facility/Forms';
+import Forms from './Forms';
 import axios from 'axios';
 
 

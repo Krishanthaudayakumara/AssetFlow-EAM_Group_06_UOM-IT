@@ -1,5 +1,5 @@
 import React from "react";
-import FacilityAssetStock from "../components/Facility/FacilityAssetStock_table";
+import FacilityAssetStock from "../../components/Facility/FacilityAssetStock_table";
 
 const FacilityStock: React.FC = () => {
     return (

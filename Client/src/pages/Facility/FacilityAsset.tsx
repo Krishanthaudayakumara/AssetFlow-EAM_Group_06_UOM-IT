@@ -1,6 +1,6 @@
 import React from "react";
-import FacilityAssetTable from "../components/Facility/FacilityAsset_table";
-import FacilityAssetForm from "../components/Facility/FacilityAssetForm";
+import FacilityAssetTable from "../../components/Facility/FacilityAsset_table";
+import FacilityAssetForm from "../../components/Facility/FacilityAssetForm";
 
 const FacilityAsset: React.FC = () => {
     return (

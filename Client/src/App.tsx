@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import FacilityDashboard from "./pages/FacilityDashboard";
-import BuildingFloor from "./pages/BuildingFloor";
+import FacilityDashboard from "./pages/Facility/FacilityDashboard";
+import BuildingFloor from "./pages/Facility/BuildingFloor";
 
 
 
@@ -12,8 +12,8 @@ import Navbar from "./components/Navbar";
 import Wrapper from "./components/DashWrapper";
 import Sidebar from "./components/Sidebar";
 
-import FacilityAsset from "./pages/FacilityAsset";
-import FacilityStock from "./pages/FacilityStock";
+import FacilityAsset from "./pages/Facility/FacilityAsset";
+import FacilityStock from "./pages/Facility/FacilityStock";
 
 const App: React.FC = () => {
   return (

@@ -1,13 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Workstationform from './Facility/Workstationform';
-import WorkstationCard from './Facility/WorkstationCard';
-import "../css/Facilitycss/Workstation.css";
+import Workstationform from './Workstationform';
+import WorkstationCard from './WorkstationCard';
+import "../../css/Facilitycss/Workstation.css";
 import { Button, Modal } from 'react-bootstrap'
-import Workstation from './Facility/Workstationdata';
-import Workstationdata from './Facility/Workstationdata';
+import Workstation from './Workstationdata';
+import Workstationdata from './Workstationdata';
 import { useState } from 'react';
-import Forms from './Facility/Forms';
+import Forms from './Forms';
 
 
 export default function Work1() {
