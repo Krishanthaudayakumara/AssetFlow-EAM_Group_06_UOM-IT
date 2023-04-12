@@ -64,8 +64,14 @@ const items = [
     icon: FaBuilding,
     link : "/facility",
     dropdownItems: [
-      { label: "Building 1", link: "/facility/building1" },
-      { label: "Building 2", link: "/facility/building2" },
+      {label :"Building",link :"/BuildingFloor" },
+      { label: "Facility Stock", link: "/FacilityStock" },
+      { label: "Facility Asset", link: "/FacilityAsset" },
+      { label: "Facility Dashboard", link: "/FacilityDashboard" }
+      
+
+
+      
     ],
   },
   { label: "Reports", link: "/report", icon: FaFileAlt },

@@ -2,7 +2,6 @@
     
     border-radius: 2px;
     border-width: 0;
-    color: #ff615a;
     margin: 50%;
     cursor: pointer;
     font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
@@ -75,20 +74,9 @@
    background-color: #482890 !important;
    border-color: #482890!important;
   }
- .button4{
-  margin-left: 30px;
-  position: relative;
-  left: 50px;
-  background-color: #ff615a !important;
-  border-color: #ff615a !important;
-  
  
  
- }
- .button3 :hover{
-  background-color: transparent !important;
-  
- }
+ 
   
 
 

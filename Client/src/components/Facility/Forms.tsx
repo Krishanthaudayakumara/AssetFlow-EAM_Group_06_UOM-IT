@@ -14,6 +14,7 @@ function Forms() {
     buildingName: "",
     floorNo: 0,
   });
+
   
   
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +23,7 @@ function Forms() {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+   
     try {
       const response = await axios.post(
         "http://localhost:5298/api/Building",

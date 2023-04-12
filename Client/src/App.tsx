@@ -11,7 +11,9 @@ import User from "./pages/User";
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/DashWrapper";
 import Sidebar from "./components/Sidebar";
-import AssignItems from "./components/Facility/Assigneditemdata";
+
+import FacilityAsset from "./pages/FacilityAsset";
+import FacilityStock from "./pages/FacilityStock";
 
 const App: React.FC = () => {
   return (
@@ -23,6 +25,10 @@ const App: React.FC = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/BuildingFloor" element={<BuildingFloor />} />
           <Route path="/FacilityDashboard" element={<FacilityDashboard />} />
+          <Route path="/FacilityAsset" element={<FacilityAsset/>} />
+          <Route path="/FacilityStock" element={<FacilityStock/>} />
+
+
           
 
 
