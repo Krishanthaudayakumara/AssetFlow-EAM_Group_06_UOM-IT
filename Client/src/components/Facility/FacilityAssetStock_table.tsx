@@ -19,7 +19,7 @@ function FacilityAssetStock() {
     const fetchFacilityAssetStockData = async () => {
       try {
         const response = await axios.get<FacilityStockData[]>(
-          "http://localhost:5298/api/FacilityAsset"
+          "http://localhost:5087/api/FacilityAsset"
           
         );
         setFacilityStockData(response.data);

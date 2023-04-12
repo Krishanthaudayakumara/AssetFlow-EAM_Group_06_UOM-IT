@@ -27,7 +27,7 @@ function BuildingFloorTable() {
     const fetchBuildingData = async () => {
       try {
         const response = await axios.get<BuildingData[]>(
-          "http://localhost:5298/api/Building"
+          "http://localhost:5087/api/Building"
         );
         setBuildingData(response.data);
       } catch (error) {
@@ -57,7 +57,7 @@ function BuildingFloorTable() {
 
   const handleSave = () => {
     axios
-      .put(`http://localhost:5298/api/Building/${editData?.id}`, editData)
+      .put(`http://localhost:5087/api/Building/${editData?.id}`, editData)
       .then(() => {
         setBuildingData((prevState) =>
           prevState.map((row) => {
@@ -95,14 +95,14 @@ function BuildingFloorTable() {
 
 
     axios
-      .delete(`http://localhost:5298/api/Building/delete-asset-by-id/${deleteId}`)
+      .delete(`http://localhost:5087/api/Building/delete-asset-by-id/${deleteId}`)
       .then((response) => {
         //console.log(response.data);
         // refetch the data after the row is deleted
         setBuildingData(prevState => prevState.filter(row => row.id !== deleteId));
         setShow(false);
         axios
-          .get<BuildingData[]>("http://localhost:5298/api/Building")
+          .get<BuildingData[]>("http://localhost:5087/api/Building")
           .then((response) => {
             //setBuildingData(response.data);
 

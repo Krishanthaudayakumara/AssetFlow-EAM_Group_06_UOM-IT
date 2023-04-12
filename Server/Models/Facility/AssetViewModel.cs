@@ -1,6 +1,6 @@
 
 
-namespace Server.Models.Facility
+namespace Server.Models
 {
     public class AssetViewModel
     {

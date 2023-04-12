@@ -26,7 +26,7 @@ function Forms() {
    
     try {
       const response = await axios.post(
-        "http://localhost:5298/api/Building",
+        "http://localhost:5087/api/Building",
         formData
       );
       console.log("form data" + formData);

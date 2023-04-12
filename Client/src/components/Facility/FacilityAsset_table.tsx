@@ -24,7 +24,7 @@ function FacilityAssetTable() {
     const fetchFacilityAssetData = async () => {
       try {
         const response = await axios.get<FacilityAssetData[]>(
-        "http://localhost:5298/api/FacilityAsset/GetAllFacilityAssets"
+        "http://localhost:5087/api/FacilityAsset/GetAllFacilityAssets"
         
 
           

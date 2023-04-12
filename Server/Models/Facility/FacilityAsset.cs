@@ -1,5 +1,6 @@
-using Server.Models.Inventory;
-namespace Server.Models.Facility
+using Server.Models;
+
+namespace Server.Models
 {
     public class FacilityAsset
     {

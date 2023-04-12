@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs;
-using Server.Models.Facility;
-using Server.Models.Inventory;
+using Server.Models;
+using Server.Models;
 
 
 

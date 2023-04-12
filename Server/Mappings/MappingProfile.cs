@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Server.Models.Facility;
+using Server.Models;
 using Server.Models;
 
 namespace Server.Mappings

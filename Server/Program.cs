@@ -22,9 +22,6 @@ var builder = WebApplication.CreateBuilder(args);
 var secretKey = "very_secret_key_for_jwt_token";
 var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
-
-var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
@@ -34,7 +31,10 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers().AddJsonOptions(o =>
 {
     o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    o.JsonSerializerOptions.IgnoreReadOnlyProperties = true;
 });
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -55,12 +55,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-});
 
-builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.IgnoreReadOnlyProperties = true);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -94,12 +89,14 @@ if (app.Environment.IsDevelopment())
 }
 app.UseStaticFiles(); // For the wwwroot folder
 
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), @"ProfileImages")),
-                RequestPath = new PathString("/ProfileImages")
-            });
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), @"ProfileImages")),
+    RequestPath = new PathString("/ProfileImages")
+});
+
+
 app.UseCors("AllowAll");
 
 app.UseRouting();
@@ -112,11 +109,9 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 
 app.MapControllers();
 

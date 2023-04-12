@@ -42,7 +42,7 @@ function FacilityAssetForm() {
     try {
       console.log("form data" + formData);
       const response = await axios.post(
-        "http://localhost:5298/api/FacilityAsset/FacilityAsset",
+        "http://localhost:5087/api/FacilityAsset/FacilityAsset",
         formData
       );
 
