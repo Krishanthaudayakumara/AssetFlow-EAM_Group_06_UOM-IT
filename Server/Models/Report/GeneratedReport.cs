@@ -1,3 +1,5 @@
+using System;
+
 namespace Server.Models.Report
 {
     public class GeneratedReport
@@ -15,5 +17,6 @@ namespace Server.Models.Report
         public string GeneratedBy { get; set; }
 
         public string Note { get; set; }
+        public bool Deleted { get; set; }
     }
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import BarChart from '../components/Dashboard/BarChart'
+import BarChart from '../../components/Dashboard/BarChart'
 import '../css/Home.css'
-import CardDashboard from '../components/Dashboard/CardDashboard'
-import FacilityTable from '../components/Report/FacilityTable'
+import CardDashboard from '../../components/Dashboard/CardDashboard'
+import FacilityTable from '../../components/Report/FacilityTable'
 
 const options = {
   title: {

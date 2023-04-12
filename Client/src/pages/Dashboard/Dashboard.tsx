@@ -6,10 +6,10 @@ import {
   faUser,
   faWarehouse,
 } from '@fortawesome/free-solid-svg-icons'
-import PieChart from '../components/Dashboard/PieChart'
-import BarChart from '../components/Dashboard/BarChart'
-import LineChart from '../components/Dashboard/LineChart'
-import Card from '../components/Dashboard/Card'
+import PieChart from '../../components/Dashboard/PieChart'
+import BarChart from '../../components/Dashboard/BarChart'
+import LineChart from '../../components/Dashboard/LineChart'
+import Card from '../../components/Dashboard/Card'
 import '../css/Home.css'
 
 

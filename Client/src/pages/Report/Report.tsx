@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
-import ReportFilter from '../components/Report/ReportFilter'
+import ReportFilter from '../../components/Report/ReportFilter'
 import '../css/Home.css'
-import ReportButton from '../components/Report/ReportButton'
-import AgentReport from '../components/Report/AgentReport'
-import TicketReport from '../components/Report/TicketReport'
+import ReportButton from '../../components/Report/ReportButton'
+import AgentReport from '../../components/Report/AgentReport'
+import TicketReport from '../../components/Report/TicketReport'
 
 const Report: React.FC = () => {
   const [selectedReportType, setSelectedReportType] = useState<string>('')

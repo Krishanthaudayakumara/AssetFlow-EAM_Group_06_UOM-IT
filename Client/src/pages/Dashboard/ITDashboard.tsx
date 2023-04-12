@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios, { AxiosResponse} from 'axios'
 import { Container, Row, Col } from 'react-bootstrap'
-import LineChart from '../components/Dashboard/LineChart'
+import LineChart from '../../components/Dashboard/LineChart'
 import '../css/Home.css'
-import CardDashboard from '../components/Dashboard/CardDashboard'
-import TicketBarChart from '../components/Dashboard/TicketBarChart'
+import CardDashboard from '../../components/Dashboard/CardDashboard'
+import TicketBarChart from '../../components/Dashboard/TicketBarChart'
 interface TicketCount {
   month: string
   count: number
