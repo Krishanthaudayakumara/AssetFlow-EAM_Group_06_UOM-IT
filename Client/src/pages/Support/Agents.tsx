@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
 import AgentTable from "../../components/Support/Table/AgentTable";
-import Chatbot from "../../components/Support/Chatbot";
+//import Chatbot from "../../components/Support/Chatbot";
 import SupportButton from "../../components/Support/SupportButton";
 
 const Agents: React.FC = () => {
@@ -15,7 +15,7 @@ const Agents: React.FC = () => {
           <AgentTable />
         </div>
       </Row>
-      <Chatbot />
+      
     </Container>
   );
 };

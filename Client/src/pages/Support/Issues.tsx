@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from 'react';
 import { Container, Row} from "react-bootstrap";
-import Chatbot from '../../components/Support/Chatbot';
+//import Chatbot from '../../components/Support/Chatbot';
 import SupportButton from '../../components/Support/SupportButton';
 import IssueTypeTable from '../../components/Support/Table/IssueTypeTable';
 const Issues: React.FC = () => {
@@ -15,7 +15,7 @@ const Issues: React.FC = () => {
               <IssueTypeTable/>          
             </div>      
         </Row>
-        <Chatbot/>
+        
       </Container>      
     );
 };
