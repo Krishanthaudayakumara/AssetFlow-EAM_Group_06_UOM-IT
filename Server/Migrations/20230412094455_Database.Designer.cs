@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230412065547_init")]
-    partial class init
+    [Migration("20230412094455_Database")]
+    partial class Database
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

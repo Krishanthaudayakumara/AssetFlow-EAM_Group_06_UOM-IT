@@ -91,7 +91,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/ITDashboard" element={<PrivateRoute />}>
+        <Route path="/ITDashboard" >
           <Route
             path="/ITDashboard"
             element={
@@ -168,7 +168,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/Tickets" element={<PrivateRoute />}>
+        <Route path="/Tickets" >
           <Route
             path="/Tickets"
             element={
@@ -179,7 +179,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/Agents" element={<PrivateRoute />}>
+        <Route path="/Agents">
           <Route
             path="/Agents"
             element={
@@ -190,7 +190,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/Teams" element={<PrivateRoute />}>
+        <Route path="/Teams" >
           <Route
             path="/Teams"
             element={
@@ -201,7 +201,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/Issues" element={<PrivateRoute />}>
+        <Route path="/Issues" >
           <Route
             path="/Issues"
             element={
