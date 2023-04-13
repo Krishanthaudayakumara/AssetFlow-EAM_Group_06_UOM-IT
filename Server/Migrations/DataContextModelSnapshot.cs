@@ -207,6 +207,9 @@ namespace Server.Migrations
                     b.Property<int>("AssetId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AssetId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("AssignTime")
                         .HasColumnType("datetime2");
 
@@ -220,11 +223,33 @@ namespace Server.Migrations
 
                     b.HasIndex("AssetId");
 
+                    b.HasIndex("AssetId1");
+
                     b.HasIndex("EmployeeId");
 
                     b.HasIndex("ReqID");
 
                     b.ToTable("Assigns");
+                });
+
+            modelBuilder.Entity("Server.Models.Building", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BuildingName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FloorNo")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Buildings");
                 });
 
             modelBuilder.Entity("Server.Models.Category", b =>
@@ -383,6 +408,78 @@ namespace Server.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("ExternalWorkers");
+                });
+
+            modelBuilder.Entity("Server.Models.FacilityAsset", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AssetConditionStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AssetId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AssignStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("AssignedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ReceivedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("WorkstationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssetId")
+                        .IsUnique();
+
+                    b.HasIndex("WorkstationId");
+
+                    b.ToTable("FacilityAssets");
+                });
+
+            modelBuilder.Entity("Server.Models.GeneratedReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GeneratedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReportFormat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReportName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReportType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GeneratedReports");
                 });
 
             modelBuilder.Entity("Server.Models.Stock", b =>
@@ -740,6 +837,28 @@ namespace Server.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Server.Models.Workstation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BuildingId");
+
+                    b.ToTable("Workstations");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -805,21 +924,25 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Models.Assign", b =>
                 {
                     b.HasOne("Server.Models.Asset", "Asset")
-                        .WithMany("Assigns")
+                        .WithMany()
                         .HasForeignKey("AssetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Server.Models.Asset", null)
+                        .WithMany("Assigns")
+                        .HasForeignKey("AssetId1");
+
                     b.HasOne("Server.Models.Employee", "Employee")
                         .WithMany("Assigns")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Server.Models.EmployeeRequest", "EmployeeRequest")
                         .WithMany("Assigns")
                         .HasForeignKey("ReqID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Asset");
@@ -868,6 +991,23 @@ namespace Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("Server.Models.FacilityAsset", b =>
+                {
+                    b.HasOne("Server.Models.Asset", "Asset")
+                        .WithOne("FacilityAsset")
+                        .HasForeignKey("Server.Models.FacilityAsset", "AssetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.Workstation", "Workstation")
+                        .WithMany("FacilityAssets")
+                        .HasForeignKey("WorkstationId");
+
+                    b.Navigation("Asset");
+
+                    b.Navigation("Workstation");
                 });
 
             modelBuilder.Entity("Server.Models.Stock", b =>
@@ -965,9 +1105,28 @@ namespace Server.Migrations
                     b.Navigation("IssueType");
                 });
 
+            modelBuilder.Entity("Server.Models.Workstation", b =>
+                {
+                    b.HasOne("Server.Models.Building", "Building")
+                        .WithMany("Workstations")
+                        .HasForeignKey("BuildingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Building");
+                });
+
             modelBuilder.Entity("Server.Models.Asset", b =>
                 {
                     b.Navigation("Assigns");
+
+                    b.Navigation("FacilityAsset")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Server.Models.Building", b =>
+                {
+                    b.Navigation("Workstations");
                 });
 
             modelBuilder.Entity("Server.Models.Category", b =>
@@ -1023,6 +1182,11 @@ namespace Server.Migrations
 
                     b.Navigation("Reply")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Server.Models.Workstation", b =>
+                {
+                    b.Navigation("FacilityAssets");
                 });
 #pragma warning restore 612, 618
         }

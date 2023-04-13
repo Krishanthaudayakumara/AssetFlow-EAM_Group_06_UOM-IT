@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Server.Models
 {
     public class Asset
@@ -12,8 +15,6 @@ namespace Server.Models
         public int StockId { get; set; }
         public Stock Stock { get; set; }
         public ICollection<Assign> Assigns { get; set; }
-
-
-
+        public FacilityAsset FacilityAsset { get; set; }
     }
 }

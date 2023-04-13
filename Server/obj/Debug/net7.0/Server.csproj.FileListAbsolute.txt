@@ -1,10 +1,13 @@
-D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\appsettings.json
 D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\appsettings.Development.json
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\appsettings.json
 D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.exe
 D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.deps.json
 D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.runtimeconfig.json
 D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.dll
 D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.pdb
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\AutoMapper.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\AutoMapper.Extensions.ExpressionMapping.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Azure.Core.dll
 D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Azure.Identity.dll
 D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\EPPlus.dll

@@ -12,15 +12,11 @@ using System.Text;
 using Microsoft.AspNetCore.Cors;
 using System.IdentityModel.Tokens.Jwt;
 using Server.Services;
-
-using System.Text.Json.Serialization;
-using Microsoft.EntityFrameworkCore;
-using Server.Data;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +32,10 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers().AddJsonOptions(o =>
 {
     o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    o.JsonSerializerOptions.IgnoreReadOnlyProperties = true;
 });
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -57,12 +56,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-});
 
-builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.IgnoreReadOnlyProperties = true);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -83,6 +77,8 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
 });
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
@@ -94,19 +90,19 @@ if (app.Environment.IsDevelopment())
 }
 app.UseStaticFiles(); // For the wwwroot folder
 
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), @"ProfileImages")),
-                RequestPath = new PathString("/ProfileImages")
-            });
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), @"ProfileImages")),
+    RequestPath = new PathString("/ProfileImages")
+});
+
+
 app.UseCors("AllowAll");
 
 app.UseRouting();
 
-app.UseCors("AllowAll");
 
-app.UseAuthentication();
 
 app.UseAuthorization();
 
@@ -114,5 +110,10 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
+
+app.UseHttpsRedirection();
+
+
+app.MapControllers();
 
 app.Run();

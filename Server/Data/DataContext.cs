@@ -14,7 +14,7 @@ namespace Server.Data
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Reply> Replys { get; set; }
-        
+
 
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
@@ -23,25 +23,45 @@ namespace Server.Data
         public DbSet<Supplier> Suppliers { get; set; }
 
 
-           public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Asset> Assets { get; set; }
         public DbSet<EmployeeRequest> EmployeeRequests { get; set; }
         public DbSet<Assign> Assigns { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
+        public DbSet<FacilityAsset> FacilityAssets { get; set; }
 
-            builder.Entity<Assign>(builder =>
+        public DbSet<Workstation> Workstations { get; set; }
+
+        public DbSet<Building> Buildings { get; set; }
+
+        public DbSet<GeneratedReport> GeneratedReports { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Assign>(entity =>
             {
-                builder.HasOne(a => a.EmployeeRequest)
+                entity.HasOne(a => a.Employee)
+                    .WithMany(e => e.Assigns)
+                    .HasForeignKey(a => a.EmployeeId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(a => a.Asset)
+                    .WithMany()
+                    .HasForeignKey(a => a.AssetId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(a => a.EmployeeRequest)
                     .WithMany(er => er.Assigns)
                     .HasForeignKey(a => a.ReqID)
-                    .OnDelete(DeleteBehavior.NoAction); // Set the delete behavior to NoAction.
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }
 }
+
 

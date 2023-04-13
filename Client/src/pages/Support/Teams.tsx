@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row} from "react-bootstrap";
-import Chatbot from '../../components/Support/Chatbot';
+//import Chatbot from '../../components/Support/Chatbot';
 import SupportButton from '../../components/Support/SupportButton';
 import TeamTable from '../../components/Support/Table/TeamTable';
 const Teams: React.FC = () => {
@@ -14,7 +14,7 @@ const Teams: React.FC = () => {
             <TeamTable/>         
           </div>      
       </Row>
-      <Chatbot/>
+      
     </Container>      
   );
 };

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Server.Models
 {
     public class Assign
@@ -10,5 +13,6 @@ namespace Server.Models
         public DateTime AssignTime{get;set;}
         public int ReqID{get;set;}
         public EmployeeRequest EmployeeRequest{get;set;}
+
 
     }}

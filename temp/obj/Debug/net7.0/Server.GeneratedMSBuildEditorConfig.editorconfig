@@ -1,0 +1,25 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Server
+build_property.RootNamespace = Server
+<<<<<<< HEAD
+build_property.ProjectDir = C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server
+=======
+build_property.ProjectDir = D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server
+>>>>>>> janithmi
+build_property._RazorSourceGeneratorDebug = 
