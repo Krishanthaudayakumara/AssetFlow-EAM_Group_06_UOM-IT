@@ -114,14 +114,14 @@ const IssueTypeTable = () => {
         </Fragment>
       </div>
       <Modal show={showModal} onHide={handleModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Issue</Modal.Title>
+        <Modal.Header style={{ backgroundColor: "#482890" }}>
+          <Modal.Title style={{ color: 'white' }}>Edit Issue Type</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {selectedIssue && (
             <Form>
               <Form.Group controlId="formIssueName">
-                <Form.Label>Issue</Form.Label>
+                <Form.Label>Issue Type</Form.Label>
                 <Form.Control
                   type="text"
                   value={selectedIssue.name}

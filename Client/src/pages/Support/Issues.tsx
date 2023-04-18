@@ -34,7 +34,7 @@ const Issues: React.FC = () => {
       </div>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header style={{ backgroundColor: "#482890" }}>
-          <Modal.Title>New Issue Type</Modal.Title>
+          <Modal.Title style={{ color: 'white' }}>New Issue Type</Modal.Title>
         </Modal.Header>
         <Modal.Body ><NewIssurTypeForm /></Modal.Body>
         <Modal.Footer >

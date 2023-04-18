@@ -60,6 +60,13 @@ namespace Server.Data
                     .HasForeignKey(a => a.ReqID)
                     .OnDelete(DeleteBehavior.Cascade);
             });
+            modelBuilder.Entity<Team>(entity =>
+            {
+                entity.HasOne(a => a.IssueType)
+                    .WithMany(e => e.Teams)
+                    .HasForeignKey(a => a.IssueTypeId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
         }
     }
 }
