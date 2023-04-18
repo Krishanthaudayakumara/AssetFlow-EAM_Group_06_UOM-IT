@@ -68,8 +68,6 @@ const IssueTypeTable = () => {
       });
   };
 
-  
-
   return (
     <div>
       <p className="table-heading">Issue Types</p>

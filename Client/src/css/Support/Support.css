@@ -1,3 +1,10 @@
+.page-heading{
+  margin: 0 0 0 70px;
+  color: #482890;
+  font-size: 22px;
+  font-weight: bold;
+}
+
 .table-heading{
   margin: 0 0 30px 70px;
   color: #482890;

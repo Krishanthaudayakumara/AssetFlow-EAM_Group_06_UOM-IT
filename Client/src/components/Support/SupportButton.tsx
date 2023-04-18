@@ -48,7 +48,10 @@ export default function SupportButton() {
             </p>
           </div>
           <div className="col-3" style={{ padding: "0 0 0 120px" }}>
-            <button  onClick={handleNewIssueType} type="button" className="btn btn-outline-primary"
+            <button
+              onClick={handleNewIssueType}
+              type="button"
+              className="btn btn-outline-primary"
               style={{
                 border: "1px solid #482890",
                 color: "#482890",
@@ -58,7 +61,10 @@ export default function SupportButton() {
             </button>
           </div>
           <div className="col-3" style={{ padding: "0 0 0 40px" }}>
-            <button onClick={ handleNewTeam} type="button" className="btn btn-outline-primary"
+            <button
+              onClick={handleNewTeam}
+              type="button"
+              className="btn btn-outline-primary"
               style={{
                 border: "1px solid #482890",
                 color: "#482890",
@@ -68,14 +74,20 @@ export default function SupportButton() {
             </button>
           </div>
           <div className="col-2" style={{ padding: "0" }}>
-            <button onClick={handleNewTicket}  type="button"  className="btn btn-outline-light"
+            <button
+              onClick={handleNewTicket}
+              type="button"
+              className="btn btn-outline-light"
               style={{ backgroundColor: "#FF615A" }}
             >
               + New Ticket
             </button>
           </div>
           <div className="col-2" style={{ padding: "0" }}>
-            <button  onClick={handleNewAgent}  type="button"  className="btn btn-outline-light"
+            <button
+              onClick={handleNewAgent}
+              type="button"
+              className="btn btn-outline-light"
               style={{ backgroundColor: "#482890" }}
             >
               + New Agent
