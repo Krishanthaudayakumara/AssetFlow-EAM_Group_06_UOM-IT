@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import axios from "axios";
+import AddConfirmation from "../ConfirmMessages/AddConfirmation";
 
 interface FormData {
   name: string;
@@ -56,19 +57,14 @@ const NewIssueTypeForm = () => {
         Submit
       </Button>
 
-      <Modal show={showSuccessModal} onHide={handleCloseSuccessModal}>
-        <Modal.Header style={{ backgroundColor: "#FF615A" }}>
-          <Modal.Title>Success</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Successfully added {formData.name} !</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseSuccessModal}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <AddConfirmation
+        show={showSuccessModal}
+        handleClose={handleCloseSuccessModal}
+       
+      />
     </Form>
   );
 };
 
 export default NewIssueTypeForm;
+
