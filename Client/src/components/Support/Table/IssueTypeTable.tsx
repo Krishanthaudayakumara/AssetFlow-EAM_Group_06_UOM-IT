@@ -15,6 +15,9 @@ const IssueTypeTable = () => {
   const [issues, setIssues] = useState<issueType[]>([]);
   const [selectedIssue, setSelectedIssue] = useState<issueType | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deletingIssue, setDeletingIssue] = useState<issueType | null>(null);
+
 
   useEffect(() => {
     axios
@@ -57,17 +60,25 @@ const IssueTypeTable = () => {
     setShowModal(false);
   };
   const handleDeleteIssue = (issue: issueType) => {
+    setDeletingIssue(issue);
+    setShowDeleteModal(true);
+  };
+  const confirmDeleteIssue = () => {
     axios
-      .delete(`http://localhost:5087/Api/IssueType/${issue.id}`)
+      .delete(`http://localhost:5087/Api/IssueType/${deletingIssue?.id}`)
       .then((response) => {
-        setIssues(issues.filter((item) => item.id !== issue.id));
-        alert("Successfully deleted!");
+        setIssues(issues.filter((item) => item.id !== deletingIssue?.id));
+        
       })
       .catch((error) => {
-        alert("Not deleted!");
+        
+      })
+      .finally(() => {
+        setDeletingIssue(null);
+        setShowDeleteModal(false);
       });
   };
-
+  
   return (
     <div>
       <p className="table-heading">Issue Types</p>
@@ -121,7 +132,7 @@ const IssueTypeTable = () => {
           {selectedIssue && (
             <Form>
               <Form.Group controlId="formIssueName">
-                <Form.Label>Issue Type</Form.Label>
+                <Form.Label>Issue</Form.Label>
                 <Form.Control
                   type="text"
                   value={selectedIssue.name}
@@ -145,6 +156,23 @@ const IssueTypeTable = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+  <Modal.Header closeButton>
+    <Modal.Title>Confirm Delete</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    Are you sure you want to delete {deletingIssue?.name}?
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+      Cancel
+    </Button>
+    <Button variant="danger" onClick={confirmDeleteIssue}>
+      Delete
+    </Button>
+  </Modal.Footer>
+</Modal>
+
     </div>
   );
 };
