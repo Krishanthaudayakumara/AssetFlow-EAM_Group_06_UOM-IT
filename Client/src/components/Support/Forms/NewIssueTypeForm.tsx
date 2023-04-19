@@ -60,7 +60,7 @@ const NewIssueTypeForm = () => {
       <AddConfirmation
         show={showSuccessModal}
         handleClose={handleCloseSuccessModal}
-       
+        formData={formData.name}
       />
     </Form>
   );
