@@ -19,7 +19,7 @@ const NewIssueTypeForm = () => {
         formData
       );
       console.log(response.data);
-      
+
       setShowSuccessModal(true);
     } catch (error) {
       console.log(error);
@@ -60,9 +60,7 @@ const NewIssueTypeForm = () => {
         <Modal.Header style={{ backgroundColor: "#FF615A" }}>
           <Modal.Title>Success</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          Successfully added {formData.name} !
-        </Modal.Body>
+        <Modal.Body>Successfully added {formData.name} !</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseSuccessModal}>
             Close
@@ -74,5 +72,3 @@ const NewIssueTypeForm = () => {
 };
 
 export default NewIssueTypeForm;
-
-

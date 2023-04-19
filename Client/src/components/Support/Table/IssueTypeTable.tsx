@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../../../css/Support/Support.css";
 import DefaultProfilePicture from "../DefaultProfilePicture";
+import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
 
 interface issueType {
   id: number;
@@ -152,22 +153,13 @@ const IssueTypeTable = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Delete</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to delete {deletingIssue?.name}?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={confirmDeleteIssue}>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <DeleteConfirmation
+  show={showDeleteModal}
+  onClose={() => setShowDeleteModal(false)}
+  onConfirm={confirmDeleteIssue}
+  deletingIssueName={deletingIssue?.name || ""}
+/>
+
     </div>
   );
 };
