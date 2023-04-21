@@ -58,7 +58,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="Report" element={<PrivateRoute />}>
+        <Route path="Report">
           "
           <Route
             path="/Report"
@@ -102,7 +102,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/ReportHistory" element={<PrivateRoute />}>
+        <Route path="/ReportHistory" >
           <Route
             path="/ReportHistory"
             element={

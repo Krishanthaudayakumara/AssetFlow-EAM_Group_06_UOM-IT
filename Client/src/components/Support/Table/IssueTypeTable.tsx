@@ -1,11 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { Table, Modal, Button, Form } from "react-bootstrap";
+import { Table, Modal, Button, Form, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash, faSearch } from "@fortawesome/free-solid-svg-icons";
 import "../../../css/Support/Support.css";
 import DefaultProfilePicture from "../DefaultProfilePicture";
 import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
+import { FaSearch } from "react-icons/fa";
 
 interface issueType {
   id: number;
@@ -18,6 +19,7 @@ const IssueTypeTable = () => {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletingIssue, setDeletingIssue] = useState<issueType | null>(null);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     axios
@@ -78,7 +80,24 @@ const IssueTypeTable = () => {
 
   return (
     <div>
-      <p className="table-heading">Issue Types</p>
+      <div className="row">
+        <div className="col-8">
+          <p className="table-heading">Issue Types</p>
+        </div>
+        <div className="col-1">
+          <Form>
+            <InputGroup style={{ width: '300px' }}>
+              <Form.Control
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search Issue Types"
+              />
+              <InputGroup.Text>
+                <FaSearch />
+              </InputGroup.Text>
+            </InputGroup>
+          </Form>
+        </div>
+      </div>
       <div className="box-shadow">
         <Fragment>
           <div>
@@ -91,31 +110,37 @@ const IssueTypeTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {issues.map((issue) => (
-                  <tr key={issue.id}>
-                    <td>{DefaultProfilePicture({ name: issue.name })}</td>
-                    <td>{issue.name}</td>
-                    <td>
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        style={{
-                          color: "#482890",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => handleEditIssueClick(issue)}
-                      />
-                      &nbsp; &nbsp; &nbsp;
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        style={{
-                          color: "#FF615A",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => handleDeleteIssue(issue)}
-                      />
-                    </td>
-                  </tr>
-                ))}
+                {issues
+                  .filter((issue) => {
+                    return search.toLowerCase() === ""
+                      ? issue
+                      : issue.name.toLowerCase().includes(search);
+                  })
+                  .map((issue) => (
+                    <tr key={issue.id}>
+                      <td>{DefaultProfilePicture({ name: issue.name })}</td>
+                      <td>{issue.name}</td>
+                      <td>
+                        <FontAwesomeIcon
+                          icon={faPen}
+                          style={{
+                            color: "#482890",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleEditIssueClick(issue)}
+                        />
+                        &nbsp; &nbsp; &nbsp;
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          style={{
+                            color: "#FF615A",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleDeleteIssue(issue)}
+                        />
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </Table>
           </div>
@@ -154,12 +179,11 @@ const IssueTypeTable = () => {
         </Modal.Footer>
       </Modal>
       <DeleteConfirmation
-  show={showDeleteModal}
-  onClose={() => setShowDeleteModal(false)}
-  onConfirm={confirmDeleteIssue}
-  deletingIssueName={deletingIssue?.name || ""}
-/>
-
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={confirmDeleteIssue}
+        deletingIssueName={deletingIssue?.name || ""}
+      />
     </div>
   );
 };
