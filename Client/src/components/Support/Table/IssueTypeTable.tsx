@@ -1,12 +1,13 @@
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { Table, Modal, Button, Form, InputGroup } from "react-bootstrap";
+import { Table, Form, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../../../css/Support/Support.css";
 import DefaultProfilePicture from "../DefaultProfilePicture";
 import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
 import { FaSearch } from "react-icons/fa";
+import EditIssueTypeForm from "../Forms/EditIssueTypeForm";
 
 interface issueType {
   id: number;
@@ -86,7 +87,7 @@ const IssueTypeTable = () => {
         </div>
         <div className="col-1">
           <Form>
-            <InputGroup style={{ width: '300px' }}>
+            <InputGroup style={{ width: "300px" }}>
               <Form.Control
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search Issue Types"
@@ -146,38 +147,13 @@ const IssueTypeTable = () => {
           </div>
         </Fragment>
       </div>
-      <Modal show={showModal} onHide={handleModalClose}>
-        <Modal.Header style={{ backgroundColor: "#482890" }}>
-          <Modal.Title style={{ color: "white" }}>Edit Issue Type</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedIssue && (
-            <Form>
-              <Form.Group controlId="formIssueName">
-                <Form.Label>Issue</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={selectedIssue.name}
-                  onChange={(e) =>
-                    setSelectedIssue({
-                      ...selectedIssue,
-                      name: e.target.value,
-                    })
-                  }
-                />
-              </Form.Group>
-            </Form>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={() => handleUpdateIssue()}>
-            Update Issue
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <EditIssueTypeForm
+        show={showModal}
+        onClose={handleModalClose}
+        onUpdate={handleUpdateIssue}
+        selectedIssue={selectedIssue}
+        setSelectedIssue={setSelectedIssue}
+      />
       <DeleteConfirmation
         show={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
