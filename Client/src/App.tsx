@@ -246,7 +246,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/BuildingFloor" element={<PrivateRoute />}>
+        <Route path="/BuildingFloor">
           <Route
             path="/BuildingFloor"
             element={
@@ -256,7 +256,7 @@ const App: React.FC = () => {
             }
           />
         </Route>
-        <Route path="/AssignAsset" element={<PrivateRoute />}>
+        <Route path="/AssignAsset" >
           <Route
             path="/AssignAsset"
             element={
@@ -266,7 +266,7 @@ const App: React.FC = () => {
             }
           />
         </Route>
-        <Route path="/FacilityAsset" element={<PrivateRoute />}>
+        <Route path="/FacilityAsset" >
           <Route
             path="/FacilityAsset"
             element={
@@ -277,7 +277,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/FacilityStock" element={<PrivateRoute />}>
+        <Route path="/FacilityStock"   >
           <Route
             path="/FacilityStock"
             element={

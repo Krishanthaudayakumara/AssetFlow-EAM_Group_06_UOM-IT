@@ -8,6 +8,7 @@ namespace Server.DTOs
         public string BuildingName {get; set;}
         
         public int FloorNo{get; set;}
+        public string Address { get; set; }
         
     }
 }

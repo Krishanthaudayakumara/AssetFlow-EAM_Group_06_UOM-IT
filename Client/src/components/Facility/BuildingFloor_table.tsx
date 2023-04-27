@@ -9,6 +9,7 @@ interface BuildingData {
   id: string;
   buildingName: string;
   floorNo: number;
+  address:string;
 }
 
 function BuildingFloorTable() {
@@ -21,6 +22,7 @@ function BuildingFloorTable() {
     id: "",
     buildingName: "",
     floorNo: 0,
+    address:""
   });
 
   useEffect(() => {
@@ -69,13 +71,13 @@ function BuildingFloorTable() {
           })
         );
         setEditing(false);
-        setEditData({ id: "", buildingName: "", floorNo: 0 }); // clear editData state
+        setEditData({ id: "", buildingName: "", floorNo: 0 ,address:""}); // clear editData state
       })
       .catch((err) => console.log(err));
   };
   const handleCancel = () => {
     setEditing(false);
-    setEditData({ id: "", buildingName: "", floorNo: 0 });
+    setEditData({ id: "", buildingName: "", floorNo: 0,address:"" });
     
   };
 
@@ -156,9 +158,10 @@ function BuildingFloorTable() {
         >
           <thead>
             <tr style={{ color: "#482890" }}>
-              <th>b_id</th>
+            
               <th>building Name</th>
               <th colSpan={1}>floor No</th>
+              <th>Address</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -167,7 +170,7 @@ function BuildingFloorTable() {
               buildingData.map((a) => {
                 return (
                   <tr key={a.id} style={{ textAlign: "center" }}>
-                    <td>{a.id}</td>
+                    
                     <td>
                       {editing && editData.id === a.id ? (
                         <input
@@ -192,6 +195,19 @@ function BuildingFloorTable() {
                         a.floorNo
                       )}
                     </td>
+                    <td>
+                      {editing && editData.id === a.id ? (
+                        <input
+                          type="text"
+                          name="address"
+                          value={editData.address}
+                          onChange={handleInputChange}
+                        />
+                      ) : (
+                        a.address
+                      )}
+                    </td>
+                    
                     <td>
                       <FaTrashAlt
                        

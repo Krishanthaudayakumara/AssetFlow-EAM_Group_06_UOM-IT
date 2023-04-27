@@ -25,7 +25,8 @@ namespace Server.Controllers.Facility
             }
             var bti = new Building{
                 BuildingName= buildingToInsert.BuildingName,
-                FloorNo=buildingToInsert.FloorNo
+                FloorNo=buildingToInsert.FloorNo,
+                Address=buildingToInsert.Address
                               
                 
             };
