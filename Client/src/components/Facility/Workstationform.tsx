@@ -62,7 +62,11 @@ function Workstationform() {
     console.log(floornum);
     setFloorNum(floornum);
   };
-
+  
+const handleWorkstationName=(event :ChangeEvent<HTMLInputElement>)=>{
+  const workStationName=event.target.value; 
+  setWorkStationName(workStationName) ;
+};
   return (
     <Form>
       <Form.Group className="mb-3" controlId="buildingName">
@@ -87,7 +91,9 @@ function Workstationform() {
 
       <Form.Group className="mb-3" controlId="workstation_name">
         <Form.Label>Workstation name</Form.Label>
-        <Form.Control type="text" placeholder="Enter workstation name" />
+        <Form.Control 
+        type="text"
+         placeholder="Enter workstation name" />
       </Form.Group>
 
       <Button variant="success" type="submit">
