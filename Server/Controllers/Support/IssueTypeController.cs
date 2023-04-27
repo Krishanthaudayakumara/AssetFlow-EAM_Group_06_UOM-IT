@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs.Support;
 using Server.Models.Support;
+using Microsoft.Data.SqlClient;
 
 namespace Server.Controllers.Support
 {
@@ -86,18 +87,33 @@ namespace Server.Controllers.Support
             return Ok();
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteIssueType(int id)
+public async Task<IActionResult> DeleteIssueType(int id)
+{
+    var deleteIssueType = await _context.IssueTypes.FirstOrDefaultAsync(x => x.Id == id);
+    if (deleteIssueType is null)
+    {
+        return NotFound();
+    }
+    
+    try
+    {
+        _context.IssueTypes.Remove(deleteIssueType);
+        await _context.SaveChangesAsync();
+    }
+    catch (DbUpdateException ex)
+    {
+        if (ex.InnerException is SqlException sqlEx && sqlEx.Number == 547)
         {
-            var deleteIssueType = await _context.IssueTypes.FirstOrDefaultAsync(x => x.Id == id);
-            if (deleteIssueType is null)
-            {
-                return NotFound();
-            }
-            _context.IssueTypes.Remove(deleteIssueType);
-            await _context.SaveChangesAsync();
-
-            return Ok();
-
+            return Conflict("Unable to delete the Issue Type as it is being used by a Team.");
         }
+        else
+        {
+            throw;
+        }
+    }
+
+    return Ok();
+}
+
     }
 }

@@ -46,3 +46,12 @@
   .support-table tbody tr:hover {
     background-color: rgba(0, 0, 0, 0.075);
   }
+
+  .pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  

@@ -1,6 +1,7 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { Table, Form, InputGroup } from "react-bootstrap";
+import { Table, Form, InputGroup, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../../../css/Support/Support.css";
@@ -21,6 +22,9 @@ const IssueTypeTable = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletingIssue, setDeletingIssue] = useState<issueType | null>(null);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const recordsPerPage = 4;
 
   useEffect(() => {
     axios
@@ -72,13 +76,23 @@ const IssueTypeTable = () => {
       .then((response) => {
         setIssues(issues.filter((item) => item.id !== deletingIssue?.id));
       })
-      .catch((error) => {})
+      .catch((error) => {
+        if (error.response && error.response.status === 409) {
+          // Display the error message
+          alert(error.response.data);
+        } else {
+          // Handle other errors
+        }
+      })
       .finally(() => {
         setDeletingIssue(null);
         setShowDeleteModal(false);
       });
   };
-
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+  
   return (
     <div>
       <div className="row">
@@ -117,6 +131,10 @@ const IssueTypeTable = () => {
                       ? issue
                       : issue.name.toLowerCase().includes(search);
                   })
+                  .slice(
+                    (currentPage - 1) * recordsPerPage,
+                    currentPage * recordsPerPage
+                  )
                   .map((issue) => (
                     <tr key={issue.id}>
                       <td>{DefaultProfilePicture({ name: issue.name })}</td>
@@ -143,8 +161,8 @@ const IssueTypeTable = () => {
                     </tr>
                   ))}
               </tbody>
-            </Table>
-          </div>
+            </Table>           
+          </div>          
         </Fragment>
       </div>
       <EditIssueTypeForm
@@ -160,6 +178,25 @@ const IssueTypeTable = () => {
         onConfirm={confirmDeleteIssue}
         deletingIssueName={deletingIssue?.name || ""}
       />
+      <div className="pagination-wrapper">
+       <Pagination>
+        {Array.from(
+          { length: Math.ceil(issues.length / recordsPerPage) },
+          (_, index) => {
+            const pageNumber = index + 1;
+            return (
+              <Pagination.Item
+                key={pageNumber}
+                active={pageNumber === currentPage}
+                onClick={() => handlePageChange(pageNumber)}
+              >
+                {pageNumber}
+              </Pagination.Item>
+            );
+          }
+        )}
+      </Pagination>
+      </div>
     </div>
   );
 };
