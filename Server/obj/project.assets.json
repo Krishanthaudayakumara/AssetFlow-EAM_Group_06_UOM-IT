@@ -5260,26 +5260,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Krishantha\\.nuget\\packages\\": {}
+    "C:\\Users\\Chamudi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\Chamudi\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\Krishantha\\.nuget\\packages\\",
-      "outputPath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
+      "projectPath": "C:\\Users\\Chamudi\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\Chamudi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Chamudi\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Krishantha\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Chamudi\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5368,7 +5366,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.105\\RuntimeIdentifierGraph.json"
       }
     }
   }

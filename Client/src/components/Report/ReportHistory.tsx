@@ -1,57 +1,59 @@
-import React, { Fragment, useState, useEffect } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { Button, Table } from 'react-bootstrap'
-import axios from 'axios'
+import React, { Fragment, useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Table, Modal } from 'react-bootstrap';
+import axios from 'axios';
+
 interface GeneratedReport {
-  id: number
-  date: string
-  reportName: string
-  reportType: string
-  reportFormat: string
-  generatedBy: string
-  note: string
+  id: number;
+  date: string;
+  reportName: string;
+  reportType: string;
+  reportFormat: string;
+  generatedBy: string;
+  note: string;
 }
+
 const ReportHistory = () => {
-  const [generatedReports, setGeneratedReports] = useState<GeneratedReport[]>([],)
+  const [generatedReports, setGeneratedReports] = useState<GeneratedReport[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedReportId, setSelectedReportId] = useState<number | null>(null);
 
   useEffect(() => {
     axios
       .get('http://localhost:5087/api/GeneratedReport')
       .then((response) => {
-        setGeneratedReports(response.data)
+        setGeneratedReports(response.data);
       })
       .catch((error) => {
-        console.log(error)
-      })
-    axios
-      .get('http://localhost:5087/api/GeneratedReport')
-      .then((response) => {
-        setGeneratedReports(response.data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [])
+        console.log(error);
+      });
+  }, []);
 
   const handleDelete = (id: number) => {
-    const confirmed = window.confirm(
-      'Are you sure you want to delete this data?',
-    )
-    if (confirmed) {
+    setSelectedReportId(id);
+    setShowModal(true);
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  }
+
+  const handleConfirmDelete = () => {
+    if (selectedReportId) {
       axios
-        .delete(`http://localhost:5087/api/GeneratedReport/${id}`)
+        .delete(`http://localhost:5087/api/GeneratedReport/${selectedReportId}`)
         .then((response) => {
-          console.log(response)
-          setGeneratedReports(
-            generatedReports.filter((report) => report.id !== id),
-          )
-          window.alert('Data successfully deleted.')
+          console.log(response);
+          setGeneratedReports(generatedReports.filter((report) => report.id !== selectedReportId));
+          setShowModal(false);
+          window.alert('Data successfully deleted.');
         })
         .catch((error) => {
-          console.log(error)
-        })
+          console.log(error);
+        });
     }
   }
+
   return (
     <Fragment>
       <h4 style={{ margin: '30px 0 0 65px' }}>Report History</h4>
@@ -60,7 +62,7 @@ const ReportHistory = () => {
         style={{ margin: '30px 0 0 65px' }}
       >
         <Table
-          className="table w-100 small table-borderless table-responsiv align-middle align-left"
+          className="table w-100 small table-borderless table-responsive align-middle align-left"
           hover
           style={{ fontSize: '13px' }}
         >
@@ -100,7 +102,25 @@ const ReportHistory = () => {
           </tbody>
         </Table>
       </div>
+
+      <Modal show={showModal} onHide={handleCloseModal} >
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        Are you sure you want to delete this report?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Fragment>
-  )
+  );
 }
-export default ReportHistory
+
+export default ReportHistory;

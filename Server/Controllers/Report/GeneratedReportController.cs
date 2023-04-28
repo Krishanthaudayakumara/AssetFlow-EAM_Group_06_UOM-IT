@@ -51,7 +51,7 @@ namespace Server.Controllers.Report
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GeneratedReportToReturn>>> GetGeneratedReports()
     {
-        var generatedReports = await _context.GeneratedReports.ToListAsync();
+        var generatedReports = await _context.GeneratedReports.Where(r=>!r.Deleted).ToListAsync();
 
         var generatedReportsToReturn = generatedReports.Select(generatedReport => new GeneratedReportToReturn
         {
@@ -76,12 +76,11 @@ namespace Server.Controllers.Report
 
             return NotFound();
         }
-
-        _context.GeneratedReports.Remove(generatedreportDelete);
+        generatedreportDelete.Deleted=true;
+       // _context.GeneratedReports.Remove(generatedreportDelete);
         await _context.SaveChangesAsync();
 
         return Ok();
-
 
 
     }

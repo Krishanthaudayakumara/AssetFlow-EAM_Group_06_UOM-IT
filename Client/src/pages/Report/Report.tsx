@@ -8,21 +8,26 @@ import TicketReport from '../../components/Report/TicketReport'
 
 const Report: React.FC = () => {
   const [selectedReportType, setSelectedReportType] = useState<string>('')
+  const [fromDate, setFromDate] = useState<string>('');
+  const [toDate, setToDate] = useState<string>('');
 
   const handleReportTypeChange = (reportType: string) => {
     setSelectedReportType(reportType)
   }
+  const handleDateChange = (newFromDate: string, newToDate: string) => {
+    setFromDate(newFromDate);
+    setToDate(newToDate);
+  };
 
   const renderTable = () => {
     if (selectedReportType === 'Agent') {
-      return <AgentReport />
+      return <AgentReport fromDate={fromDate} toDate={toDate} />;
     } else if (selectedReportType === 'Support Ticket') {
-      return <TicketReport />
+      return <TicketReport />;
     } else {
-      return null
+      return null;
     }
-  }
-
+  };
   return (
     <Container>
       <div>
@@ -31,7 +36,10 @@ const Report: React.FC = () => {
           className="shadow p-3 mb-4 bg-white rounded"
           style={{ margin: '0 0 0 65px' }}
         >
-          <ReportFilter onReportTypeChange={handleReportTypeChange} />
+           <ReportFilter
+          onReportTypeChange={handleReportTypeChange}
+          onDateChange={handleDateChange}
+          />
         </div>
         <div style={{ margin: '0 0 0 65px', width: '100%' }}>
            {/* code for ReportButton component */}

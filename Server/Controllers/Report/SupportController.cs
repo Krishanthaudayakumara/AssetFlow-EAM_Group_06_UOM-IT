@@ -28,6 +28,7 @@ namespace Server.Controllers
                             AgentFirstName = a.FirstName,
                             AgentLastName = a.LastName,
                             TeamId = a.TeamId,
+                            JoinDate = a.JoinDate,
                             OpenedTickets =
                                 a
                                     .Tickets
