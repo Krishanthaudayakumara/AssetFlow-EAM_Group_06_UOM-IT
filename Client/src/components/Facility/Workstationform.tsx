@@ -12,9 +12,9 @@ interface BildingData {
 function Workstationform() {
   const [selectedBuildingName, setSelectedBuildingName] = useState("");
   const [buildingName, setBuildingName] = useState<BildingData[]>([]);
-  const [workStationName, setWorkStationName] = useState("");
+  const [workstationName, setWorkstationName] = useState("");
   const [floor, setFloor] = useState<JSX.Element[]>([]);
-  const [floornum, setFloorNum] = useState("");
+  const [floornum, setFloorNum] = useState<string>("");
 
   const [floorSelected, setFloorSelected] = useState("");
   useEffect(() => {
@@ -62,16 +62,37 @@ function Workstationform() {
     console.log(floornum);
     setFloorNum(floornum);
   };
-  
-const handleWorkstationName=(event :ChangeEvent<HTMLInputElement>)=>{
-  const workStationName=event.target.value; 
-  setWorkStationName(workStationName) ;
-};
+
+  const handleWorkstationNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setWorkstationName(event.target.value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try{
+      const response = await axios.post("http://localhost:5087/api/Building",{
+        buildingName:selectedBuildingName,
+        floorNo:floornum,
+        workstationName:workstationName
+      });
+      const data =response.data;
+      console.log(data);
+      alert("Workstation data saved successfully!");
+
+      
+    }catch (error){
+      alert(error);
+
+    }
+  }
+
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="buildingName">
         <Form.Label>Building Name</Form.Label>
-        <Form.Select onChange={(e) => handleBuildingChange(e)}>
+        <Form.Select onChange={(e) => handleBuildingChange}>
           <option value="0">-- Please Select Building Name --</option>
           {buildingName.map((building) => (
             <option key={building.id} value={building.id}>
@@ -93,7 +114,11 @@ const handleWorkstationName=(event :ChangeEvent<HTMLInputElement>)=>{
         <Form.Label>Workstation name</Form.Label>
         <Form.Control 
         type="text"
-         placeholder="Enter workstation name" />
+        placeholder="Enter workstation name" 
+        value={workstationName}
+        onChange={handleWorkstationNameChange}
+      />
+        
       </Form.Group>
 
       <Button variant="success" type="submit">

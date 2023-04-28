@@ -58,6 +58,7 @@ namespace Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BuildingName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FloorNo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -254,6 +255,7 @@ namespace Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Floor = table.Column<int>(type: "int", nullable: false),
                     BuildingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
