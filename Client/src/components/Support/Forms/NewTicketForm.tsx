@@ -36,8 +36,7 @@ const NewTicketForm = () => {
           type="number"
           placeholder="Enter your ID"
           required
-          name="ID"
-          
+          name="ID"          
           onChange={handleChange}
         />
       </Form.Group>

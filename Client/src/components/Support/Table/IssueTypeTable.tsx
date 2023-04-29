@@ -10,6 +10,7 @@ import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
 import { FaSearch } from "react-icons/fa";
 import EditIssueTypeForm from "../Forms/EditIssueTypeForm";
 import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
+import DeleteError from "../ConfirmMessages/DeleteError";
 
 interface issueType {
   id: number;
@@ -23,6 +24,7 @@ const IssueTypeTable = () => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletingIssue, setDeletingIssue] = useState<issueType | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -53,9 +55,6 @@ const IssueTypeTable = () => {
         );
         setShowModal(false);
         setShowUpdateModal(true);
-        setTimeout(() => {
-          setShowUpdateModal(false);
-        }, 2000);
       })
       .catch((error) => {
         alert("Not updated!");
@@ -84,7 +83,7 @@ const IssueTypeTable = () => {
       .catch((error) => {
         if (error.response && error.response.status === 409) {
           // Display the error message
-          alert(error.response.data);
+          setErrorMessage(error.response.data);
         } else {
           // Handle other errors
         }
@@ -94,6 +93,10 @@ const IssueTypeTable = () => {
         setShowDeleteModal(false);
       });
   };
+  const resetErrorMessage = () => {
+    setErrorMessage(null);
+  };
+
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
@@ -118,6 +121,10 @@ const IssueTypeTable = () => {
           </Form>
         </div>
       </div>
+      <DeleteError
+        errorMessage={errorMessage}
+        onResetError={resetErrorMessage}
+      />
       <div className="box-shadow">
         <Fragment>
           <div>

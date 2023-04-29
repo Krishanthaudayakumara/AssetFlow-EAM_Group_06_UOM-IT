@@ -20,7 +20,6 @@ const NewIssueTypeForm = () => {
         formData
       );
       console.log(response.data);
-
       setShowSuccessModal(true);
     } catch (error) {
       console.log(error);

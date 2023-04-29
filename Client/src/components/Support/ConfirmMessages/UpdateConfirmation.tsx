@@ -1,5 +1,3 @@
-// UpdateConfirmation.tsx
-
 import { Modal, Button } from "react-bootstrap";
 
 interface Props {
