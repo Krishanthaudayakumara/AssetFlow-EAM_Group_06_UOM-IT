@@ -24,8 +24,8 @@ namespace Server.Controllers.Report
 
             return BadRequest();
         }
-        var generatedreport = new GeneratedReport{
-            Date = generatedReportInsert.Date,
+            var generatedreport = new GeneratedReport{
+            Date = DateTime.UtcNow,
             ReportName = generatedReportInsert.ReportName,
             ReportType = generatedReportInsert.ReportType,
             ReportFormat = generatedReportInsert.ReportFormat,
