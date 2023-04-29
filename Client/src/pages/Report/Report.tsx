@@ -10,6 +10,8 @@ const Report: React.FC = () => {
   const [selectedReportType, setSelectedReportType] = useState<string>('')
   const [fromDate, setFromDate] = useState<string>('');
   const [toDate, setToDate] = useState<string>('');
+  const [departmentName, setDepartmentName] = useState<string>('');
+
 
   const handleReportTypeChange = (reportType: string) => {
     setSelectedReportType(reportType)
@@ -17,6 +19,12 @@ const Report: React.FC = () => {
   const handleDateChange = (newFromDate: string, newToDate: string) => {
     setFromDate(newFromDate);
     setToDate(newToDate);
+  };
+  const handleDepartmentChange = (department: string) => {
+    setDepartmentName(department);
+  };
+  const handleSelectedReportTypeChange = (selectedReportType: string) => {
+    setSelectedReportType(selectedReportType);
   };
 
   const renderTable = () => {
@@ -39,11 +47,13 @@ const Report: React.FC = () => {
            <ReportFilter
           onReportTypeChange={handleReportTypeChange}
           onDateChange={handleDateChange}
+          onDepartmentChange={handleDepartmentChange}
+          onSelectedReportTypeChange={handleSelectedReportTypeChange}
           />
         </div>
         <div style={{ margin: '0 0 0 65px', width: '100%' }}>
            {/* code for ReportButton component */}
-          <ReportButton />
+          <ReportButton departmentName={departmentName} selectedReportType={selectedReportType} />
         </div>
         {renderTable()}
       </div>

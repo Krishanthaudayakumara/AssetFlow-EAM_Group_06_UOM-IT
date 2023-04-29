@@ -5,9 +5,14 @@ import AgentReport from './AgentReport'
 interface ReportFilterProps {
   onReportTypeChange: (reportType: string) => void;
   onDateChange: (fromDate: string, toDate: string) => void;
+  onDepartmentChange: (department: string) => void; // Add this line
+  onSelectedReportTypeChange: (selectedReportType: string) => void; 
+
+
+  
 }
 
-const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateChange }) => {
+const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateChange,onDepartmentChange,onSelectedReportTypeChange }) => {
   const [reportType, setReportType] = useState<string>('')
   const [department, setDepartment] = useState<string>('')
   const [fromDate, setFromDate] = useState<string>('');
@@ -19,6 +24,7 @@ const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateC
     const newReportType = event.target.value
     setReportType(newReportType)
     onReportTypeChange(newReportType)
+    onSelectedReportTypeChange(newReportType);// Add this line
   }
 
   const handleDepartmentChange = (
@@ -26,6 +32,7 @@ const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateC
   ) => {
     const newDepartment = event.target.value
     setDepartment(newDepartment)
+    onDepartmentChange(newDepartment); // Add this line
   }
   const handleFromDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFromDate = event.target.value;
@@ -41,21 +48,21 @@ const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateC
 
 
   const renderReportTypeOptions = () => {
-    if (department === '1') {
+    if (department === 'IT Support') {
       return (
         <>
           <option value="Agent">Agent</option>
           <option value="Support Ticket">Support Ticket</option>
         </>
       )
-    } else if (department === '2') {
+    } else if (department === 'Facility') {
       return (
         <>
           <option value="Building">Building</option>
           <option value="Workstation">Workstation</option>
         </>
       )
-    } else if (department === '3') {
+    } else if (department === 'Inventory') {
       return (
         <>
           <option value="Stock">Stock</option>
@@ -78,9 +85,9 @@ const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateC
               onChange={handleDepartmentChange}
             >
               <option>Open this select menu</option>
-              <option value="1">IT Support</option>
-              <option value="2">Facility</option>
-              <option value="3">Inventory</option>
+              <option value="IT Support">IT Support</option>
+              <option value="Facility">Facility</option>
+              <option value="Inventory">Inventory</option>
             </Form.Select>
           </div>
         </div>
