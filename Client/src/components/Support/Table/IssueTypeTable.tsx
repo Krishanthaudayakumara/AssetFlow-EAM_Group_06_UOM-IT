@@ -9,6 +9,7 @@ import DefaultProfilePicture from "../DefaultProfilePicture";
 import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
 import { FaSearch } from "react-icons/fa";
 import EditIssueTypeForm from "../Forms/EditIssueTypeForm";
+import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
 
 interface issueType {
   id: number;
@@ -19,6 +20,7 @@ const IssueTypeTable = () => {
   const [issues, setIssues] = useState<issueType[]>([]);
   const [selectedIssue, setSelectedIssue] = useState<issueType | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletingIssue, setDeletingIssue] = useState<issueType | null>(null);
   const [search, setSearch] = useState("");
@@ -50,7 +52,10 @@ const IssueTypeTable = () => {
           )
         );
         setShowModal(false);
-        alert("Successfully updated!");
+        setShowUpdateModal(true);
+        setTimeout(() => {
+          setShowUpdateModal(false);
+        }, 2000);
       })
       .catch((error) => {
         alert("Not updated!");
@@ -92,7 +97,7 @@ const IssueTypeTable = () => {
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
-  
+
   return (
     <div>
       <div className="row">
@@ -161,8 +166,8 @@ const IssueTypeTable = () => {
                     </tr>
                   ))}
               </tbody>
-            </Table>           
-          </div>          
+            </Table>
+          </div>
         </Fragment>
       </div>
       <EditIssueTypeForm
@@ -172,6 +177,11 @@ const IssueTypeTable = () => {
         selectedIssue={selectedIssue}
         setSelectedIssue={setSelectedIssue}
       />
+      <UpdateConfirmation
+        show={showUpdateModal}
+        onClose={() => setShowUpdateModal(false)}
+        updatedIssueName={selectedIssue?.name || ""}
+      />
       <DeleteConfirmation
         show={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
@@ -179,23 +189,23 @@ const IssueTypeTable = () => {
         deletingIssueName={deletingIssue?.name || ""}
       />
       <div className="pagination-wrapper">
-       <Pagination>
-        {Array.from(
-          { length: Math.ceil(issues.length / recordsPerPage) },
-          (_, index) => {
-            const pageNumber = index + 1;
-            return (
-              <Pagination.Item
-                key={pageNumber}
-                active={pageNumber === currentPage}
-                onClick={() => handlePageChange(pageNumber)}
-              >
-                {pageNumber}
-              </Pagination.Item>
-            );
-          }
-        )}
-      </Pagination>
+        <Pagination className="custom-pagination">
+          {Array.from(
+            { length: Math.ceil(issues.length / recordsPerPage) },
+            (_, index) => {
+              const pageNumber = index + 1;
+              return (
+                <Pagination.Item
+                  key={pageNumber}
+                  active={pageNumber === currentPage}
+                  onClick={() => handlePageChange(pageNumber)}
+                >
+                  {pageNumber}
+                </Pagination.Item>
+              );
+            }
+          )}
+        </Pagination>
       </div>
     </div>
   );
