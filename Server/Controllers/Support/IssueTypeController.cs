@@ -42,10 +42,15 @@ namespace Server.Controllers.Support
             {
                 return BadRequest();
             }
+            var existingIssueType = await _context.IssueTypes.FirstOrDefaultAsync(x => x.Name == issueTypeToInsert.Name);
+
+           if (existingIssueType != null)
+           {
+            return BadRequest("An Issue Type with the same name already exists.");
+           }
             var issue = new IssueType
             {
-                Name = issueTypeToInsert.Name,
-                
+                Name = issueTypeToInsert.Name,              
 
             };
             try
@@ -104,7 +109,7 @@ public async Task<IActionResult> DeleteIssueType(int id)
     {
         if (ex.InnerException is SqlException sqlEx && sqlEx.Number == 547)
         {
-            return Conflict("Unable to delete the Issue Type as it is being used by a Team.");
+            return Conflict("Unable to delete the Issue Type as it is being used by a another table.");
         }
         else
         {

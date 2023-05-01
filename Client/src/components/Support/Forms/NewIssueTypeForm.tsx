@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import axios from "axios";
+import { Button, Form, Alert } from "react-bootstrap";
+import axios, { AxiosError } from "axios";
 import AddConfirmation from "../ConfirmMessages/AddConfirmation";
 
 interface FormData {
@@ -10,9 +10,11 @@ interface FormData {
 const NewIssueTypeForm = () => {
   const [formData, setFormData] = useState<FormData>({ name: "" });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setErrorMessage(null);
 
     try {
       const response = await axios.post(
@@ -21,9 +23,14 @@ const NewIssueTypeForm = () => {
       );
       console.log(response.data);
       setShowSuccessModal(true);
-    } catch (error) {
+    }catch (error) {
       console.log(error);
-      alert("Not added!");
+      const axiosError = error as AxiosError;
+      if (axiosError.response && axiosError.response.status === 400) {
+        setErrorMessage(axiosError.response.data as string);
+      } else {
+        alert("Not added!");
+      }
     }
   };
 
@@ -50,6 +57,11 @@ const NewIssueTypeForm = () => {
           name="name"
           onChange={handleChange}
         />
+        {errorMessage && (
+          <Alert variant="danger" className="mt-2">
+            {errorMessage}
+          </Alert>
+        )}
       </Form.Group>
       <br />
       <Button variant="success" type="submit">
@@ -66,4 +78,5 @@ const NewIssueTypeForm = () => {
 };
 
 export default NewIssueTypeForm;
+
 
