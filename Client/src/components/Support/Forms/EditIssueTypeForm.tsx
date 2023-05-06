@@ -28,7 +28,7 @@ const EditIssueTypeForm = ({
         {selectedIssue && (
           <Form>
             <Form.Group controlId="formIssueName">
-              <Form.Label>Issue</Form.Label>
+              <Form.Label>Issue Type</Form.Label>
               <Form.Control
                 type="text"
                 value={selectedIssue.name}

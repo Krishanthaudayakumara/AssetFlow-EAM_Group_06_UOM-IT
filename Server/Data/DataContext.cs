@@ -8,6 +8,8 @@ namespace Server.Data
     public class DataContext : IdentityDbContext<User>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+
+        //IT Support
         public DbSet<Agent> Agents { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<IssueType> IssueTypes { get; set; }
@@ -60,6 +62,7 @@ namespace Server.Data
                     .HasForeignKey(a => a.ReqID)
                     .OnDelete(DeleteBehavior.Cascade);
             });
+            //IT Support
             modelBuilder.Entity<Team>(entity =>
             {
                 entity.HasOne(a => a.IssueType)
@@ -67,6 +70,13 @@ namespace Server.Data
                     .HasForeignKey(a => a.IssueTypeId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
+            modelBuilder.Entity<Ticket>(entity =>
+           {
+               entity.HasOne(a => a.IssueType)
+                   .WithMany(e => e.Tickets)
+                   .HasForeignKey(a => a.IssueTypeId)
+                   .OnDelete(DeleteBehavior.Restrict);
+           });
         }
     }
 }

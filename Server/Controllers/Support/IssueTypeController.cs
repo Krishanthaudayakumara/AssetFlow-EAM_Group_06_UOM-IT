@@ -44,13 +44,13 @@ namespace Server.Controllers.Support
             }
             var existingIssueType = await _context.IssueTypes.FirstOrDefaultAsync(x => x.Name == issueTypeToInsert.Name);
 
-           if (existingIssueType != null)
-           {
-            return BadRequest("An Issue Type with the same name already exists.");
-           }
+            if (existingIssueType != null)
+            {
+                return BadRequest("An Issue Type with the same name already exists.");
+            }
             var issue = new IssueType
             {
-                Name = issueTypeToInsert.Name,              
+                Name = issueTypeToInsert.Name,
 
             };
             try
@@ -76,7 +76,7 @@ namespace Server.Controllers.Support
                 return NotFound();
             }
             updateIssueType.Name = issueTypeToUpdate.Name;
-           
+
             try
             {
                 _context.Update(updateIssueType);
@@ -92,33 +92,33 @@ namespace Server.Controllers.Support
             return Ok();
         }
         [HttpDelete("{id}")]
-public async Task<IActionResult> DeleteIssueType(int id)
-{
-    var deleteIssueType = await _context.IssueTypes.FirstOrDefaultAsync(x => x.Id == id);
-    if (deleteIssueType is null)
-    {
-        return NotFound();
-    }
-    
-    try
-    {
-        _context.IssueTypes.Remove(deleteIssueType);
-        await _context.SaveChangesAsync();
-    }
-    catch (DbUpdateException ex)
-    {
-        if (ex.InnerException is SqlException sqlEx && sqlEx.Number == 547)
+        public async Task<IActionResult> DeleteIssueType(int id)
         {
-            return Conflict("Unable to delete the Issue Type as it is being used by a another table.");
-        }
-        else
-        {
-            throw;
-        }
-    }
+            var deleteIssueType = await _context.IssueTypes.FirstOrDefaultAsync(x => x.Id == id);
+            if (deleteIssueType is null)
+            {
+                return NotFound();
+            }
 
-    return Ok();
-}
+            try
+            {
+                _context.IssueTypes.Remove(deleteIssueType);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is SqlException sqlEx && sqlEx.Number == 547)
+                {
+                    return Conflict("Unable to delete the Issue Type as it is being used by a another table.");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok();
+        }
 
     }
 }

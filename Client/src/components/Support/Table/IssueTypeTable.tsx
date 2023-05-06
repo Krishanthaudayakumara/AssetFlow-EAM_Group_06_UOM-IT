@@ -27,6 +27,8 @@ const IssueTypeTable = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  
+
 
   const recordsPerPage = 4;
 
@@ -40,7 +42,7 @@ const IssueTypeTable = () => {
         alert(error);
       });
   }, []);
-
+  
   const handleUpdateIssue = () => {
     axios
       .put(
@@ -150,7 +152,7 @@ const IssueTypeTable = () => {
                   .map((issue) => (
                     <tr key={issue.id}>
                       <td>{DefaultProfilePicture({ name: issue.name })}</td>
-                      <td>{issue.name}</td>
+                      <td >{issue.name}</td>
                       <td>
                         <FontAwesomeIcon
                           icon={faPen}
@@ -176,7 +178,8 @@ const IssueTypeTable = () => {
             </Table>
           </div>
         </Fragment>
-      </div>
+      </div>      
+
       <EditIssueTypeForm
         show={showModal}
         onClose={handleModalClose}
@@ -217,5 +220,4 @@ const IssueTypeTable = () => {
     </div>
   );
 };
-
 export default IssueTypeTable;
