@@ -31,6 +31,7 @@ namespace Server.Controllers
         }
 
         [HttpPost("register")]
+
         public async Task<IActionResult> Register(RegisterDto model)
         {
             var userExists = await _userManager.FindByNameAsync(model.Username);
@@ -110,22 +111,9 @@ namespace Server.Controllers
         }
 
 
-        [HttpGet("test")]
-        [Authorize]
-        public IActionResult Test()
-        {
-            var currentUser = HttpContext.User;
-            var userId = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var userName = currentUser.FindFirst(ClaimTypes.Name)?.Value;
-            var userEmail = currentUser.FindFirst(ClaimTypes.Email)?.Value;
-            var userRole = currentUser.FindFirst(ClaimTypes.Role)?.Value;
-
-            return Ok(new { message = "Authorized", userId, userName, userEmail, userRole });
-        }
-
-        [HttpGet("test2")]
+        [HttpGet("auth-status")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult Test2()
+        public IActionResult AuthStatus()
         {
             var currentUser = HttpContext.User;
             var userId = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -193,6 +181,17 @@ namespace Server.Controllers
 
             return Ok();
         }
+
+        //logout
+        [HttpPost("logout")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok(new AuthResponseDto { Message = "Logged out successfully" });
+        }
+
+        
 
 
 
