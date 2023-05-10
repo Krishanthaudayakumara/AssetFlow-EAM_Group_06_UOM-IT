@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,7 @@ using Server.Data;
 using Server.Dtos;
 using Server.DTOs;
 using Server.Models;
+using Server.Services;
 
 namespace Server.Controllers
 {
@@ -22,13 +24,18 @@ namespace Server.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly DataContext _context;
+        private readonly IEmailService _emailService;
 
-        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, DataContext context)
+
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, DataContext context, IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _emailService = emailService; // Assign the field
         }
+
+
 
         [HttpPost("register")]
 
@@ -58,6 +65,16 @@ namespace Server.Controllers
             {
                 return BadRequest(result.Errors);
             }
+
+            // Read the HTML template
+            var emailTemplatePath = Path.Combine(Directory.GetCurrentDirectory(), "EmailTemplates/WelcomeEmailTemplate.html");
+            var emailTemplate = await System.IO.File.ReadAllTextAsync(emailTemplatePath);
+
+            // Replace the placeholders with actual values
+            var emailContent = emailTemplate.Replace("{{Email}}", model.Email).Replace("{{Password}}", model.Password);
+
+            // Send the HTML email
+            await _emailService.SendEmailAsync(user.Email, "Welcome to Assetflow", emailContent, true);
 
             return Ok(new AuthResponseDto { Message = "Registration successful" });
         }
@@ -191,7 +208,48 @@ namespace Server.Controllers
             return Ok(new AuthResponseDto { Message = "Logged out successfully" });
         }
 
-        
+
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordDto model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return BadRequest("User not found");
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var encodedToken = HttpUtility.UrlEncode(token);
+
+            // Manually construct the URL to ensure proper encoding
+            var resetPasswordUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/api/auth/reset-password?userId={user.Id}&token={encodedToken}";
+
+            await _emailService.SendEmailAsync(user.Email, "Reset Password", $"Please reset your password by clicking here: {resetPasswordUrl}", true);
+
+            return Ok("Password reset link has been sent to your email.");
+        }
+
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto model)
+        {
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                return BadRequest("User not found");
+            }
+
+            var decodedToken = HttpUtility.UrlDecode(model.Token);
+            var result = await _userManager.ResetPasswordAsync(user, decodedToken, model.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok("Your password has been reset successfully.");
+        }
 
 
 
