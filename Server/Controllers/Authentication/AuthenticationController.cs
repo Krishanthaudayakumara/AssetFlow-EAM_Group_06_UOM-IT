@@ -70,7 +70,6 @@ namespace Server.Controllers
             var emailTemplatePath = Path.Combine(Directory.GetCurrentDirectory(), "EmailTemplates/WelcomeEmailTemplate.html");
             var emailTemplate = await System.IO.File.ReadAllTextAsync(emailTemplatePath);
 
-            // Replace the placeholders with actual values
             var emailContent = emailTemplate.Replace("{{Email}}", model.Email).Replace("{{Password}}", model.Password);
 
             // Send the HTML email
@@ -145,7 +144,7 @@ namespace Server.Controllers
         // [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _userManager.Users.Select(u => new UserDto
+            var users = await _userManager.Users.Where(u => !u.IsDeleted).Select(u => new UserDto
             {
                 Id = u.Id,
                 Username = u.UserName,
@@ -156,10 +155,46 @@ namespace Server.Controllers
             return Ok(users);
         }
 
-
         [HttpDelete("users/{userId}")]
         // [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.IsDeleted = true; // set the IsDeleted property
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok();
+        }
+
+        //get deleted users
+        [HttpGet("users/deleted")]
+        // [Authorize(Roles = "admin")]
+        public async Task<IActionResult> GetDeletedUsers()
+        {
+            var deletedUsers = await _userManager.Users.Where(u => u.IsDeleted).Select(u => new UserDto
+            {
+                Id = u.Id,
+                Username = u.UserName,
+                Email = u.Email,
+                Role = u.Role
+            }).ToListAsync();
+
+            return Ok(deletedUsers);
+        }
+
+        // under delete
+        [HttpDelete("users/deleted/{userId}")]
+        // [Authorize(Roles = "admin")]
+        public async Task<IActionResult> DeleteDeletedUser(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
@@ -175,6 +210,30 @@ namespace Server.Controllers
 
             return Ok();
         }
+
+
+        //restore deleted user
+        [HttpPost("users/deleted/{userId}/restore")]
+        // [Authorize(Roles = "admin")]
+        public async Task<IActionResult> RestoreDeletedUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.IsDeleted = false;
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok();
+        }
+
+
 
         [HttpPut("users/{userId}")]
         // [Authorize(Roles = "admin")]

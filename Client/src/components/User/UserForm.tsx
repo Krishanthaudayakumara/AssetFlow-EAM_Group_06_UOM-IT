@@ -15,7 +15,7 @@ const UserForm: React.FC<Props> = ({ user = {}, onSubmit }) => {
         <Form.Control
           type="email"
           name="email"
-          defaultValue={user.email}
+          defaultValue={user ? user.email : ""}
           required
         />
       </Form.Group>
@@ -25,7 +25,7 @@ const UserForm: React.FC<Props> = ({ user = {}, onSubmit }) => {
         <Form.Control
           type="text"
           name="username"
-          defaultValue={user.username}
+          defaultValue={user ? user.username: ""}
           required
         />
       </Form.Group>
@@ -35,7 +35,7 @@ const UserForm: React.FC<Props> = ({ user = {}, onSubmit }) => {
         <Form.Control
           type="password"
           name="password"
-          defaultValue={user.password}
+          defaultValue={user ? user.password: ""}
           required
         />
       </Form.Group>
@@ -45,7 +45,7 @@ const UserForm: React.FC<Props> = ({ user = {}, onSubmit }) => {
         <Form.Control
           as="select"
           name="role"
-          defaultValue={user.role || UserRole.Employee}
+          defaultValue={user ? user.role || UserRole.Employee: ""}
         >
           <option value={UserRole.Employee}>Employee</option>
           <option value={UserRole.Admin}>Admin</option>

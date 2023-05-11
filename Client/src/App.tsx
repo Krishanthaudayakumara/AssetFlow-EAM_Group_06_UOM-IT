@@ -40,6 +40,7 @@ import FacilityDashboard from "./pages/Dashboard/FacilityDashboard";
 import InventoryDashboard from "./pages/Dashboard/InventoryDashboard";
 import ITDashboard from "./pages/Dashboard/ITDashboard";
 import ReportHistory from "./components/Report/ReportHistory";
+import DeletedUsersPage from "./pages/User/DeletedUsersPage";
 
 const App: React.FC = () => {
   return (
@@ -123,6 +124,18 @@ const App: React.FC = () => {
             }
           />
         </Route>
+
+        <Route path="/deleted-users" element={<PrivateRoute />}>
+          <Route
+            path="/deleted-users"
+            element={
+              <Wrapper>
+                <DeletedUsersPage />
+              </Wrapper>
+            }
+          />
+        </Route>
+
 
         <Route path="/employee" element={<PrivateRoute />}>
           <Route

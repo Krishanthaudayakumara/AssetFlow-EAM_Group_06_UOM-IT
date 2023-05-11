@@ -6,12 +6,15 @@ import { User } from "../../types";
 import UserTable from "../../components/User/UserTable";
 import UserModal from "../../components/User/UserModal";
 import AddUserModal from "../../components/User/AddUserModal";
+import UserDeleteModal from "../../components/User/UserDeleteModal";
 
 const UserPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [selectedUser, setSelectedUser] = useState<Partial<User> | null>(null);
-  const [showEditModal, setshowEditModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+  const [showEditModal, setShowEditModal] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleAddUser = async (user: User) => {
     await addUser(user);
@@ -20,20 +23,28 @@ const UserPage: React.FC = () => {
     setShowAddModal(false); // close the modal
   };
 
-  const handleDelete = async (id: string) => {
-    await deleteUser(id);
-    setUsers(users.filter((user) => user.id !== id));
+  const handleDelete = (user: User) => {
+    setSelectedUser(user);
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (selectedUser && selectedUser.id) {
+      await deleteUser(selectedUser.id);
+      setUsers(users.filter((u) => u.id !== selectedUser.id));
+      handleCloseModal();
+    }
   };
 
   const handleEdit = (user: User) => {
     setSelectedUser(user);
-    setshowEditModal(true);
+    setShowEditModal(true);
   };
 
   const handleCloseModal = () => {
     setSelectedUser(null);
-    setshowEditModal(false);
-    setShowAddModal(false);
+    setShowEditModal(false);
+    setShowDeleteModal(false);
   };
 
   const handleSubmit = async (user: User) => {
@@ -54,7 +65,6 @@ const UserPage: React.FC = () => {
       console.error(error);
     }
   };
-  
 
   useEffect(() => {
     getUsers().then((data) => setUsers(data));
@@ -69,7 +79,11 @@ const UserPage: React.FC = () => {
       </Row>
       <Row className="mb-3">
         <Col>
-          <Button variant="success" onClick={() => setShowAddModal(true)} className="btn-purple">
+          <Button
+            variant="success"
+            onClick={() => setShowAddModal(true)}
+            className="btn-purple"
+          >
             <BsPlus /> Add User
           </Button>
           <AddUserModal
@@ -85,17 +99,22 @@ const UserPage: React.FC = () => {
             users={users}
             onDelete={handleDelete}
             onEdit={handleEdit}
+            showRestoreButton={false}
           />
         </Col>
       </Row>
-      {selectedUser && (
-        <UserModal
-          show={showEditModal}
-          onHide={handleCloseModal}
-          user={selectedUser!}
-          onSubmit={handleSubmit}
-        />
-      )}
+      <UserModal
+        show={showEditModal}
+        onHide={handleCloseModal}
+        user={selectedUser!}
+        onSubmit={handleSubmit}
+      />
+      <UserDeleteModal
+        show={showDeleteModal}
+        onHide={handleCloseModal}
+        onSubmit={handleConfirmDelete}
+        user={selectedUser}
+      />
     </Container>
   );
 };
