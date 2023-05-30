@@ -7,14 +7,14 @@ import UserTable from "../../components/User/UserTable";
 import UserModal from "../../components/User/UserModal";
 import AddUserModal from "../../components/User/AddUserModal";
 import UserDeleteModal from "../../components/User/UserDeleteModal";
+import {BsTrash} from "react-icons/bs";
 
 const UserPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
-
+  const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const handleAddUser = async (user: User) => {
     await addUser(user);
@@ -24,27 +24,29 @@ const UserPage: React.FC = () => {
   };
 
   const handleDelete = (user: User) => {
-    setSelectedUser(user);
-    setShowDeleteModal(true);
+    setSelectedUsers([user]);
+    setShowDeleteConfirmation(true);
   };
 
   const handleConfirmDelete = async () => {
-    if (selectedUser && selectedUser.id) {
-      await deleteUser(selectedUser.id);
-      setUsers(users.filter((u) => u.id !== selectedUser.id));
-      handleCloseModal();
-    }
+    const selectedUserIds = selectedUsers.map((user) => user.id);
+    await Promise.all(selectedUserIds.map((id) => deleteUser(id)));
+
+    setUsers(users.filter((user) => !selectedUserIds.includes(user.id)));
+
+    setSelectedUsers([]);
+    handleCloseModal();
   };
 
   const handleEdit = (user: User) => {
-    setSelectedUser(user);
+    setSelectedUsers([user]);
     setShowEditModal(true);
   };
 
   const handleCloseModal = () => {
-    setSelectedUser(null);
+    setSelectedUsers([]);
     setShowEditModal(false);
-    setShowDeleteModal(false);
+    setShowDeleteConfirmation(false);
   };
 
   const handleSubmit = async (user: User) => {
@@ -70,6 +72,21 @@ const UserPage: React.FC = () => {
     getUsers().then((data) => setUsers(data));
   }, []);
 
+  const handleSelectUser = (user: User) => {
+    const isSelected = selectedUsers.includes(user);
+    if (isSelected) {
+      setSelectedUsers(selectedUsers.filter((u) => u !== user));
+    } else {
+      setSelectedUsers([...selectedUsers, user]);
+    }
+  };
+
+  const handleDeleteSelected = async () => {
+    if (selectedUsers.length > 0) {
+      setShowDeleteConfirmation(true);
+    }
+  };
+
   return (
     <Container fluid>
       <Row>
@@ -86,17 +103,38 @@ const UserPage: React.FC = () => {
           >
             <BsPlus /> Add User
           </Button>
+          {selectedUsers.length > 0 && (
+            <Button
+              variant="danger"
+              onClick={handleDeleteSelected}
+              className="btn-orange"
+            >
+              Delete Selected
+            </Button>
+          )}
+
           <AddUserModal
             show={showAddModal}
             onHide={handleCloseModal}
             onSubmit={handleAddUser}
           />
         </Col>
+        <Col style={
+            {marginTop: "20px"}
+          }>
+          <a href="/deleted-users" className="btn-purple"  style={
+            { textDecoration:"none"}
+          }> <BsTrash/> Deleted
+            Users
+          </a>
+        </Col>
       </Row>
       <Row>
         <Col>
           <UserTable
             users={users}
+            selectedUsers={selectedUsers}
+            onSelect={handleSelectUser}
             onDelete={handleDelete}
             onEdit={handleEdit}
             showRestoreButton={false}
@@ -106,14 +144,14 @@ const UserPage: React.FC = () => {
       <UserModal
         show={showEditModal}
         onHide={handleCloseModal}
-        user={selectedUser!}
+        user={selectedUsers[0]}
         onSubmit={handleSubmit}
       />
       <UserDeleteModal
-        show={showDeleteModal}
-        onHide={handleCloseModal}
+        show={showDeleteConfirmation}
+        onHide={() => setShowDeleteConfirmation(false)}
         onSubmit={handleConfirmDelete}
-        user={selectedUser}
+        users={selectedUsers}
       />
     </Container>
   );

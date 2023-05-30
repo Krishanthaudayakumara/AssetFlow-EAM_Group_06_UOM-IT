@@ -5,13 +5,13 @@ import { User } from "../../types";
 interface Props {
   show: boolean;
   onHide: () => void;
-  onSubmit: (user: User) => void;
-  user: User | null;
+  onSubmit: (users: User[]) => void;
+  users: User[];
 }
 
-const UserDeleteModal: React.FC<Props> = ({ show, onHide, onSubmit, user }) => {
+const UserDeleteModal: React.FC<Props> = ({ show, onHide, onSubmit, users }) => {
   const handleDelete = () => {
-    onSubmit(user!);
+    onSubmit(users);
     onHide();
   };
 
@@ -21,7 +21,7 @@ const UserDeleteModal: React.FC<Props> = ({ show, onHide, onSubmit, user }) => {
         <Modal.Title>Confirm Delete User</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Are you sure you want to delete the user "{user?.username}"?
+        Are you sure you want to delete the selected users?
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>

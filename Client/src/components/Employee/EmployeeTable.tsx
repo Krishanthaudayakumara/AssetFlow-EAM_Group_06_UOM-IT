@@ -22,7 +22,6 @@ const EmployeeTable: React.FC<Props> = ({ employees, onEdit, onDelete }) => {
         {" "}
         <thead>
           <tr>
-            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Middle Name</th>
@@ -38,7 +37,6 @@ const EmployeeTable: React.FC<Props> = ({ employees, onEdit, onDelete }) => {
         <tbody>
           {employees.map((employee) => (
             <tr key={employee.id}>
-              <td>{employee.id}</td>
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
               <td>{employee.middleName}</td>

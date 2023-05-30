@@ -5,19 +5,45 @@ import { BsPencilSquare, BsTrash, BsArrowRepeat } from "react-icons/bs";
 
 interface Props {
   users: User[];
+  selectedUsers: User[];
+  onSelect: (user: User) => void;
   onEdit: (user: User) => void;
   onDelete: (user: User) => void;
   onRestore?: (user: User) => void;
   showRestoreButton?: boolean;
+  onSelectAll?: () => void;
 }
 
 const UserTable: React.FC<Props> = ({
   users,
+  selectedUsers,
+  onSelect,
   onEdit,
   onDelete,
   onRestore,
   showRestoreButton = true,
+  onSelectAll,
 }) => {
+  const handleCheckboxChange = (user: User) => {
+    onSelect(user);
+  };
+
+  const handleEditClick = (user: User) => {
+    onEdit(user);
+  };
+
+  const handleDeleteClick = (user: User) => {
+    onDelete(user);
+  };
+
+  const handleRestoreClick = (user: User) => {
+    onRestore && onRestore(user);
+  };
+
+  const handleSelectAllChange = () => {
+    onSelectAll && onSelectAll();
+  };
+
   return (
     <div className="table-container shadow p-3 bg-white rounded">
       <Table
@@ -27,65 +53,63 @@ const UserTable: React.FC<Props> = ({
       >
         <thead>
           <tr>
-            <th>ID</th>
+            <th>
+              <input
+                type="checkbox"
+                checked={selectedUsers.length === users.length}
+                onChange={handleSelectAllChange}
+              />
+            </th>
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
-            {showRestoreButton ? (
-              <>
-                <th>Restore</th>
-                <th>Delete</th>
-              </>
-            ) : (
-              <th>Action</th>
-            )}
+            {showRestoreButton ? <th>Restore</th> : <><th>Edit</th><th>Delete</th></>}
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
             <tr key={user.id}>
-              <td>{user.id}</td>
+              <td>
+                <input
+                  type="checkbox"
+                  checked={selectedUsers.includes(user)}
+                  onChange={() => handleCheckboxChange(user)}
+                />
+              </td>
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{user.role}</td>
-              <td>
-                {showRestoreButton ? (
+              {showRestoreButton ? (
+                <td>
                   <Button
                     variant="outline-success"
-                    onClick={() => onRestore && onRestore(user)}
+                    onClick={() => handleRestoreClick(user)}
                     className="btn-purple"
                   >
                     <BsArrowRepeat />
                   </Button>
-                ) : (
-                  <div>
+                  </td>
+              ) : (
+                <>
+                  <td>
                     <Button
                       variant="outline-primary"
-                      onClick={() => onEdit(user)}
+                      onClick={() => handleEditClick(user)}
                       className="btn-l-purple"
                     >
                       <BsPencilSquare />
                     </Button>
+                  </td>
+                  <td>
                     <Button
                       variant="outline-danger"
-                      onClick={() => onDelete(user)}
+                      onClick={() => handleDeleteClick(user)}
                       className="btn-orange"
                     >
                       <BsTrash />
                     </Button>
-                  </div>
-                )}
-              </td>
-              {showRestoreButton && (
-                <td>
-                  <Button
-                    variant="outline-danger"
-                    onClick={() => onDelete(user)}
-                    className="btn-orange"
-                  >
-                    <BsTrash />
-                  </Button>
-                </td>
+                  </td>
+                </>
               )}
             </tr>
           ))}
