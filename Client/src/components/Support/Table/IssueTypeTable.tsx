@@ -118,7 +118,7 @@ const IssueTypeTable = () => {
             <InputGroup style={{ width: "300px" }}>
               <Form.Control
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search Issue Types"
+                placeholder="Search Issue Type"
               />
               <InputGroup.Text>
                 <FaSearch />
