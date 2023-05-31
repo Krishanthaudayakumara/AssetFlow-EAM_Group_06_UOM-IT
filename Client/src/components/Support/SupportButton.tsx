@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NewAgentForm from "./Forms/NewAgentForm";
 import NewTicketForm from "./Forms/NewTicketForm";
 import NewTeamForm from "./Forms/NewTeamForm";
-import NewIssurTypeForm from "./Forms/NewIssueTypeForm";
+import NewIssurTypeForm from "./Forms/IssueType/NewIssueTypeForm";
 
 export default function SupportButton() {
   const [show, setshow] = useState(false);

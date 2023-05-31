@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
 import axios, { AxiosError } from "axios";
-import AddConfirmation from "../ConfirmMessages/AddConfirmation";
+import AddConfirmation from "../../ConfirmMessages/AddConfirmation";
 
 interface FormData {
   name: string;
@@ -23,7 +23,7 @@ const NewIssueTypeForm = () => {
       );
       console.log(response.data);
       setShowSuccessModal(true);
-    }catch (error) {
+    } catch (error) {
       console.log(error);
       const axiosError = error as AxiosError;
       if (axiosError.response && axiosError.response.status === 400) {
@@ -78,5 +78,3 @@ const NewIssueTypeForm = () => {
 };
 
 export default NewIssueTypeForm;
-
-

@@ -38,6 +38,7 @@ const EditIssueTypeForm = ({
                     name: e.target.value,
                   })
                 }
+                required
               />
             </Form.Group>
           </Form>

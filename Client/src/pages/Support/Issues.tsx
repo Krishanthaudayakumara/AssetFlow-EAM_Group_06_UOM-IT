@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import IssueTypeTable from "../../components/Support/Table/IssueTypeTable";
 import "./../../css/Support/Support.css";
-import NewIssurTypeForm from "../../components/Support/Forms/NewIssueTypeForm";
+import NewIssurTypeForm from "../../components/Support/Forms/IssueType/NewIssueTypeForm";
 
 const Issues: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -34,13 +34,15 @@ const Issues: React.FC = () => {
       </div>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header style={{ backgroundColor: "#482890" }}>
-          <Modal.Title style={{ color: 'white' }}>New Issue Type</Modal.Title>
+          <Modal.Title style={{ color: "white" }}>New Issue Type</Modal.Title>
         </Modal.Header>
-        <Modal.Body ><NewIssurTypeForm /></Modal.Body>
-        <Modal.Footer >
-        <Button variant="secondary" onClick={handleClose}>
+        <Modal.Body>
+          <NewIssurTypeForm />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>         
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>

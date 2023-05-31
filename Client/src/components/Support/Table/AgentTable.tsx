@@ -6,9 +6,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../../../css/Support/Support.css";
 
-interface agentType { profileImage: string; id: number; firstName: string; lastName: string; contact: string; position: string; email: string; joinDate: string; teamId: number; agentStatus: string;}
-interface TeamData  {  id: number;  name: string;};
-
+interface agentType {
+  profileImage: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  contact: string;
+  position: string;
+  email: string;
+  joinDate: string;
+  teamId: number;
+  agentStatus: string;
+}
+interface TeamData {
+  id: number;
+  name: string;
+}
 
 const AgentTable = () => {
   const [agents, setAgents] = useState<agentType[]>([]);
@@ -16,9 +29,7 @@ const AgentTable = () => {
   const [selectedAgent, setSelectedAgent] = useState<agentType | null>(null);
   const [teams, setTeams] = useState<TeamData[]>([]);
 
-  
-
-useEffect(() => {
+  useEffect(() => {
     const fetchTeams = async () => {
       const response = await axios.get("http://localhost:5087/Api/Team");
       setTeams(response.data);
@@ -87,12 +98,12 @@ useEffect(() => {
             <Table className="support-table">
               <thead>
                 <tr style={{ color: "#482890" }}>
-                  <th></th>                  
+                  <th></th>
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Contact</th>
                   <th>Position</th>
-                  <th>Email</th>                  
+                  <th>Email</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -100,7 +111,7 @@ useEffect(() => {
               <tbody>
                 {agents.map((agent) => (
                   <tr key={agent.id}>
-                    <td>                      
+                    <td>
                       <img
                         src={`http://localhost:5087/ProfileImages/${agent.profileImage}`}
                         alt="User profile"
@@ -111,13 +122,19 @@ useEffect(() => {
                           cursor: "pointer",
                         }}
                       />
-                    </td>                   
+                    </td>
                     <td>{agent.firstName}</td>
                     <td>{agent.lastName}</td>
                     <td>{agent.contact}</td>
                     <td>{agent.position}</td>
-                    <td>{agent.email}</td>                    
-                    <td>{agent.agentStatus === "Available" ? (<Badge className={"bg-success"}>Available</Badge>) : (<Badge className={"bg-warning"}>Not Available</Badge> )}</td>
+                    <td>{agent.email}</td>
+                    <td>
+                      {agent.agentStatus === "Available" ? (
+                        <Badge className={"bg-success"}>Available</Badge>
+                      ) : (
+                        <Badge className={"bg-warning"}>Not Available</Badge>
+                      )}
+                    </td>
                     <td>
                       {" "}
                       <FontAwesomeIcon
@@ -151,7 +168,6 @@ useEffect(() => {
                     alt="User profile"
                     className="rounded-circle"
                     style={{ width: "100px", height: "100px" }}
-                    
                   />
                 </div>
               </Modal.Title>
@@ -167,27 +183,76 @@ useEffect(() => {
               <Form>
                 <Form.Group>
                   <Form.Label>Contact</Form.Label>
-                  <Form.Control type="tel" value={selectedAgent.contact} onChange={(e) => setSelectedAgent({ ...selectedAgent,contact: e.target.value,})}/>
+                  <Form.Control
+                    type="tel"
+                    value={selectedAgent.contact}
+                    onChange={(e) =>
+                      setSelectedAgent({
+                        ...selectedAgent,
+                        contact: e.target.value,
+                      })
+                    }
+                  />
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Position</Form.Label>
-                  <Form.Control type="text" value={selectedAgent.position} onChange={(e) => setSelectedAgent({...selectedAgent, position: e.target.value,})}/>
+                  <Form.Control
+                    type="text"
+                    value={selectedAgent.position}
+                    onChange={(e) =>
+                      setSelectedAgent({
+                        ...selectedAgent,
+                        position: e.target.value,
+                      })
+                    }
+                  />
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" value={selectedAgent.email} onChange={(e) => setSelectedAgent({ ...selectedAgent, email: e.target.value,})} />
+                  <Form.Control
+                    type="email"
+                    value={selectedAgent.email}
+                    onChange={(e) =>
+                      setSelectedAgent({
+                        ...selectedAgent,
+                        email: e.target.value,
+                      })
+                    }
+                  />
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Team</Form.Label>
-                  <Form.Select  aria-label="Default select example"  name="teamId"  value={selectedAgent.teamId}  onChange={(e) => setSelectedAgent({...selectedAgent, teamId: Number(e.target.value), })} >
-                  <option value="">Select Team</option>
-                  {teams.map((team) => (
-                 <option key={team.id} value={team.id}>{team.name}</option> ))}
-               </Form.Select>
+                  <Form.Select
+                    aria-label="Default select example"
+                    name="teamId"
+                    value={selectedAgent.teamId}
+                    onChange={(e) =>
+                      setSelectedAgent({
+                        ...selectedAgent,
+                        teamId: Number(e.target.value),
+                      })
+                    }
+                  >
+                    <option value="">Select Team</option>
+                    {teams.map((team) => (
+                      <option key={team.id} value={team.id}>
+                        {team.name}
+                      </option>
+                    ))}
+                  </Form.Select>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Status</Form.Label>
-                  <Form.Select name="agentStatus" value={selectedAgent.agentStatus} onChange={(e) => setSelectedAgent({...selectedAgent, agentStatus: e.target.value, })}>
+                  <Form.Select
+                    name="agentStatus"
+                    value={selectedAgent.agentStatus}
+                    onChange={(e) =>
+                      setSelectedAgent({
+                        ...selectedAgent,
+                        agentStatus: e.target.value,
+                      })
+                    }
+                  >
                     <option value="Available">Available</option>{" "}
                     <option value="Not Available">Not Available</option>
                   </Form.Select>
@@ -195,7 +260,7 @@ useEffect(() => {
               </Form>
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={() => handleUpdateAgent()}>Update</Button>             
+              <Button onClick={() => handleUpdateAgent()}>Update</Button>
             </Modal.Footer>
           </>
         )}

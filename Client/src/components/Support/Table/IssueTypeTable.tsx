@@ -8,10 +8,10 @@ import "../../../css/Support/Support.css";
 import DefaultProfilePicture from "../DefaultProfilePicture";
 import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
 import { FaSearch } from "react-icons/fa";
-import EditIssueTypeForm from "../Forms/EditIssueTypeForm";
+import EditIssueTypeForm from "../Forms/IssueType/EditIssueTypeForm";
 import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
 import DeleteError from "../ConfirmMessages/DeleteError";
-
+import ViewIssueType from "../Forms/IssueType/ViewIssueType";
 interface issueType {
   id: number;
   name: string;
@@ -27,8 +27,7 @@ const IssueTypeTable = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  
-
+  const [showViewModal, setShowViewModal] = useState(false);
 
   const recordsPerPage = 4;
 
@@ -42,7 +41,7 @@ const IssueTypeTable = () => {
         alert(error);
       });
   }, []);
-  
+
   const handleUpdateIssue = () => {
     axios
       .put(
@@ -61,6 +60,11 @@ const IssueTypeTable = () => {
       .catch((error) => {
         alert("Not updated!");
       });
+  };
+
+  const handleViewIssueClick = (issue: issueType) => {
+    setSelectedIssue(issue);
+    setShowViewModal(true);
   };
 
   const handleEditIssueClick = (issue: issueType) => {
@@ -133,7 +137,7 @@ const IssueTypeTable = () => {
             <Table className="support-table">
               <thead>
                 <tr style={{ color: "#482890" }}>
-                  <th></th>
+                  <th style={{ width: "60px" }}></th>
                   <th>Issue Type</th>
                   <th>Action</th>
                 </tr>
@@ -152,7 +156,12 @@ const IssueTypeTable = () => {
                   .map((issue) => (
                     <tr key={issue.id}>
                       <td>{DefaultProfilePicture({ name: issue.name })}</td>
-                      <td >{issue.name}</td>
+                      <td
+                      onClick={() => handleViewIssueClick(issue)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {issue.name}
+                    </td>
                       <td>
                         <FontAwesomeIcon
                           icon={faPen}
@@ -178,8 +187,11 @@ const IssueTypeTable = () => {
             </Table>
           </div>
         </Fragment>
-      </div>      
-
+      </div>
+      <ViewIssueType
+        show={showViewModal}
+        onClose={() => setShowViewModal(false)}
+      />
       <EditIssueTypeForm
         show={showModal}
         onClose={handleModalClose}
