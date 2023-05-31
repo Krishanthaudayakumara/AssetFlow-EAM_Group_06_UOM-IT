@@ -12,6 +12,7 @@ import EditIssueTypeForm from "../Forms/IssueType/EditIssueTypeForm";
 import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
 import DeleteError from "../ConfirmMessages/DeleteError";
 import ViewIssueType from "../Forms/IssueType/ViewIssueType";
+import PaginationComponent from "../pagination";
 interface issueType {
   id: number;
   name: string;
@@ -102,6 +103,8 @@ const IssueTypeTable = () => {
   const resetErrorMessage = () => {
     setErrorMessage(null);
   };
+
+  const totalPages = Math.ceil(issues.length / recordsPerPage);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -211,23 +214,11 @@ const IssueTypeTable = () => {
         deletingIssueName={deletingIssue?.name || ""}
       />
       <div className="pagination-wrapper">
-        <Pagination className="custom-pagination">
-          {Array.from(
-            { length: Math.ceil(issues.length / recordsPerPage) },
-            (_, index) => {
-              const pageNumber = index + 1;
-              return (
-                <Pagination.Item
-                  key={pageNumber}
-                  active={pageNumber === currentPage}
-                  onClick={() => handlePageChange(pageNumber)}
-                >
-                  {pageNumber}
-                </Pagination.Item>
-              );
-            }
-          )}
-        </Pagination>
+      <PaginationComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );
