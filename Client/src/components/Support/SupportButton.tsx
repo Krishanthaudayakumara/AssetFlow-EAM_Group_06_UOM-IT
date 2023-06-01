@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NewAgentForm from "./Forms/NewAgentForm";
 import NewTicketForm from "./Forms/NewTicketForm";
-import NewTeamForm from "./Forms/NewTeamForm";
+import NewTeamForm from "./Forms/Team/NewTeamForm";
 import NewIssurTypeForm from "./Forms/IssueType/NewIssueTypeForm";
 
 export default function SupportButton() {

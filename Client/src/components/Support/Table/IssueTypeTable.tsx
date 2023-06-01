@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { Table, Form, InputGroup, Pagination } from "react-bootstrap";
+import { Table, Form, InputGroup} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../../../css/Support/Support.css";
@@ -11,7 +11,6 @@ import { FaSearch } from "react-icons/fa";
 import EditIssueTypeForm from "../Forms/IssueType/EditIssueTypeForm";
 import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
 import DeleteError from "../ConfirmMessages/DeleteError";
-import ViewIssueType from "../Forms/IssueType/ViewIssueType";
 import PaginationComponent from "../pagination";
 interface issueType {
   id: number;
@@ -28,7 +27,7 @@ const IssueTypeTable = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [showViewModal, setShowViewModal] = useState(false);
+ 
 
   const recordsPerPage = 4;
 
@@ -42,6 +41,11 @@ const IssueTypeTable = () => {
         alert(error);
       });
   }, []);
+
+  const handleEditIssueClick = (issue: issueType) => {
+    setSelectedIssue(issue);
+    setShowModal(true);
+  };
 
   const handleUpdateIssue = () => {
     axios
@@ -61,17 +65,7 @@ const IssueTypeTable = () => {
       .catch((error) => {
         alert("Not updated!");
       });
-  };
-
-  const handleViewIssueClick = (issue: issueType) => {
-    setSelectedIssue(issue);
-    setShowViewModal(true);
-  };
-
-  const handleEditIssueClick = (issue: issueType) => {
-    setSelectedIssue(issue);
-    setShowModal(true);
-  };
+  };    
 
   const handleModalClose = () => {
     setSelectedIssue(null);
@@ -159,9 +153,7 @@ const IssueTypeTable = () => {
                   .map((issue) => (
                     <tr key={issue.id}>
                       <td>{DefaultProfilePicture({ name: issue.name })}</td>
-                      <td
-                      onClick={() => handleViewIssueClick(issue)}
-                      style={{ cursor: "pointer" }}
+                      <td                  
                     >
                       {issue.name}
                     </td>
@@ -191,10 +183,7 @@ const IssueTypeTable = () => {
           </div>
         </Fragment>
       </div>
-      <ViewIssueType
-        show={showViewModal}
-        onClose={() => setShowViewModal(false)}
-      />
+      
       <EditIssueTypeForm
         show={showModal}
         onClose={handleModalClose}

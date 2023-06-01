@@ -1,4 +1,5 @@
 import { Modal, Button, Form } from "react-bootstrap";
+import DefaultProfilePicture from "../../DefaultProfilePicture";
 
 export interface issueType {
   id: number;
