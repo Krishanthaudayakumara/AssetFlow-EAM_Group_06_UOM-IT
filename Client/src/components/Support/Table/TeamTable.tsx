@@ -7,6 +7,9 @@ import { FaSearch } from "react-icons/fa";
 import EditTeamForm from "../Forms/Team/EditTeamForm";
 import "../../../css/Support/Support.css";
 import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
+import PaginationComponent from "../pagination";
+import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
+import DeleteError from "../ConfirmMessages/DeleteError";
 
 interface teamType {
   profileImage: string;
@@ -21,6 +24,9 @@ const TeamTable = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<teamType | null>(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deletingTeam, setDeletingTeam] = useState<teamType | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -65,15 +71,38 @@ const TeamTable = () => {
   };
 
   const handleDeleteTeam = (team: teamType) => {
+    setDeletingTeam(team);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteTeam = () => {
     axios
-      .delete(`http://localhost:5087/Api/Team/${team.id}`)
+      .delete(`http://localhost:5087/Api/Team/${deletingTeam?.id}`)
       .then((response) => {
-        setTeams(teams.filter((item) => item.id !== team.id));
-        alert("Successfully deleted!");
+        setTeams(teams.filter((item) => item.id !== deletingTeam?.id));        
       })
       .catch((error) => {
-        alert("Not deleted!");
+        if (error.response && error.response.status === 409) {
+          // Display the error message
+          setErrorMessage(error.response.data);
+        } else {
+          // Handle other errors
+        }
+      })
+      .finally(() => {
+        setDeletingTeam(null);
+        setShowDeleteModal(false);
       });
+  };
+
+  const resetErrorMessage = () => {
+    setErrorMessage(null);
+  };
+
+  const totalPages = Math.ceil(teams.length / recordsPerPage);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -96,6 +125,10 @@ const TeamTable = () => {
           </Form>
         </div>
       </div>
+      <DeleteError
+        errorMessage={errorMessage}
+        onResetError={resetErrorMessage}
+      />
       <div className="box-shadow">
         <Fragment>
           <div>
@@ -110,10 +143,10 @@ const TeamTable = () => {
               </thead>
               <tbody>
                 {teams
-                  .filter((issue) => {
+                  .filter((team) => {
                     return search.toLowerCase() === ""
-                      ? issue
-                      : issue.name.toLowerCase().includes(search);
+                      ? team
+                      : team.name.toLowerCase().includes(search);
                   })
                   .slice(
                     (currentPage - 1) * recordsPerPage,
@@ -167,6 +200,19 @@ const TeamTable = () => {
         onClose={() => setShowUpdateModal(false)}
         updatedName={selectedTeam?.name || ""}
       />
+      <DeleteConfirmation
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={confirmDeleteTeam}
+        deletingIssueName={deletingTeam?.name || ""}
+      />
+      <div className="pagination-wrapper">
+      <PaginationComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 };

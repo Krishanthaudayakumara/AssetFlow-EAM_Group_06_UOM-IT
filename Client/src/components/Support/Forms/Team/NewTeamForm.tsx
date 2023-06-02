@@ -99,6 +99,7 @@ const NewTeamForm = () => {
           type="file"
           placeholder="Image"
           name="image"
+          required
           onChange={handleChange}
         />{" "}
       </Form.Group>
@@ -133,6 +134,7 @@ const NewTeamForm = () => {
           aria-label="Default select example"
           name="issueTypeId"
           value={formData.issueTypeId}
+          required
           onChange={handleChange}
         >
           <option value="">Select Issue Type</option>

@@ -16,7 +16,7 @@ const DeleteConfirmation: React.FC<Props> = ({
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header style={{ backgroundColor: "#FF615A" }}>
-        <Modal.Title>Confirm Delete</Modal.Title>
+        <Modal.Title style={{ color: 'white' }}>Confirm Delete</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         Are you sure you want to delete {deletingIssueName}?

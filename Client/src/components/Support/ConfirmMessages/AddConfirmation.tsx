@@ -10,7 +10,7 @@ const AddConfirmation = ({ show, handleClose, formData }: SuccessModalProps) => 
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header style={{ backgroundColor: "#4CAF50" }}>
-        <Modal.Title>Success</Modal.Title>
+        <Modal.Title style={{ color: 'white' }}>Success</Modal.Title>
       </Modal.Header>
       <Modal.Body>Successfully added {formData} !</Modal.Body>
       <Modal.Footer>

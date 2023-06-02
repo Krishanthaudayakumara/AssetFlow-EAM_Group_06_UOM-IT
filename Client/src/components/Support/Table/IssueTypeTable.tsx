@@ -71,10 +71,12 @@ const IssueTypeTable = () => {
     setSelectedIssue(null);
     setShowModal(false);
   };
+
   const handleDeleteIssue = (issue: issueType) => {
     setDeletingIssue(issue);
     setShowDeleteModal(true);
   };
+
   const confirmDeleteIssue = () => {
     axios
       .delete(`http://localhost:5087/Api/IssueType/${deletingIssue?.id}`)
@@ -94,6 +96,7 @@ const IssueTypeTable = () => {
         setShowDeleteModal(false);
       });
   };
+  
   const resetErrorMessage = () => {
     setErrorMessage(null);
   };

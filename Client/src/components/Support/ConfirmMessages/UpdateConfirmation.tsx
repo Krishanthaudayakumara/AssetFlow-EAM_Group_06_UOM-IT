@@ -14,7 +14,7 @@ const UpdateConfirmation: React.FC<Props> = ({
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header style={{ backgroundColor: "#4CAF50" }}>
-        <Modal.Title>Update Successful</Modal.Title>
+      <Modal.Title style={{ color: 'white' }}>Update Successful</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         Successfully updated {updatedName}.
