@@ -109,7 +109,6 @@ const items = [
 
     ],
   },
-  { label: "Suppliers", link: "/supplier", icon: FaShippingFast },
   
   { label: "Calendar", link: "/calendar", icon: FaCalendarAlt },
 ];

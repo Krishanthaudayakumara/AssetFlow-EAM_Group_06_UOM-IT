@@ -44,7 +44,7 @@ const UserTable: React.FC<Props> = ({
     order: "asc",
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
 
   const handleCheckboxChange = (user: User) => {
     onSelect(user);
@@ -145,30 +145,52 @@ const UserTable: React.FC<Props> = ({
     <div className="table-container shadow p-3 bg-white rounded">
       <Row>
         <Col>
-        {/* <label htmlFor="search" className="sr-only">
+          {/* <label htmlFor="search" className="sr-only">
           Search
         </label> */}
+          <div className="pagination-container mt-3">
+            <Button
+              variant="secondary"
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)}
+            >
+              Previous
+            </Button>
+            <span className="mx-2">
+              Page {currentPage} of {pageCount}
+            </span>
+            <Button
+              variant="secondary"
+              disabled={currentPage === pageCount}
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              Next
+            </Button>
+          </div>
         </Col>
         <Col>
-        <div className="filter-container mb-3">
-        
-        <div className="input-group">
-          
-          <FormControl
-            id="search"
-            placeholder="Search"
-            value={filter}
-            onChange={handleFilterChange}
-          />
-          <div className="input-group-prepend">
-            <span className="input-group-text">
-              <BsSearch />
-            </span>
+          <div className="filter-container mb-3">
+            <div className="input-group">
+              <FormControl
+                id="search"
+                placeholder="Search"
+                value={filter}
+                onChange={handleFilterChange}
+              />
+              <div className="input-group-prepend">
+                <span className="input-group-text">
+                  <BsSearch />
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
-      </div></Col>
+        </Col>
       </Row>
-      <Table striped className="table w-100 small table-borderless table-responsive align-middle align-left" hover>
+      <Table
+        striped
+        className="table w-100 small table-borderless table-responsive align-middle align-left"
+        hover
+      >
         <thead>
           <tr>
             <th></th>
@@ -251,25 +273,6 @@ const UserTable: React.FC<Props> = ({
           ))}
         </tbody>
       </Table>
-      <div className="pagination-container mt-3">
-        <Button
-          variant="secondary"
-          disabled={currentPage === 1}
-          onClick={() => handlePageChange(currentPage - 1)}
-        >
-          Previous
-        </Button>
-        <span className="mx-2">
-          Page {currentPage} of {pageCount}
-        </span>
-        <Button
-          variant="secondary"
-          disabled={currentPage === pageCount}
-          onClick={() => handlePageChange(currentPage + 1)}
-        >
-          Next
-        </Button>
-      </div>
     </div>
   );
 };

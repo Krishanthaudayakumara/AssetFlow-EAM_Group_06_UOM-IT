@@ -1,5 +1,5 @@
-import React from "react";
-import { Modal, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Modal, Button, Alert, Spinner } from "react-bootstrap";
 import UserForm from "./UserForm";
 import { User } from "../../types";
 
@@ -10,7 +10,10 @@ interface Props {
 }
 
 const AddUserModal: React.FC<Props> = ({ show, onHide, onSubmit }) => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
@@ -20,17 +23,24 @@ const AddUserModal: React.FC<Props> = ({ show, onHide, onSubmit }) => {
 
     // Email validation
     if (!email || !email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
-      alert("Please enter a valid email address.");
+      setError("Please enter a valid email address.");
       return;
     }
 
-    // Password validation
-    // if (!password || password.length < 8 || !/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
-    //   alert("Password must contain at least 8 characters, 1 uppercase letter, 1 number, and 1 special character.");
-    //   return;
-    // }
+    setIsLoading(true);
+    setError(null);
 
-    onSubmit({ email, username, password, role } as User);
+    try {
+      // Make the API request
+      await onSubmit({ email, username, password, role } as User);
+      // Clear the form fields
+      e.currentTarget.reset();
+      onHide();
+    } catch (error) {
+      setError("An error occurred while adding the user.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -39,7 +49,14 @@ const AddUserModal: React.FC<Props> = ({ show, onHide, onSubmit }) => {
         <Modal.Title>Add User</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <UserForm onSubmit={handleSubmit} />
+        {error && <Alert variant="danger">{error}</Alert>}
+        {isLoading ? (
+          <div className="text-center">
+            <Spinner animation="border" />
+          </div>
+        ) : (
+          <UserForm onSubmit={handleSubmit} />
+        )}
       </Modal.Body>
       <Modal.Footer>
         <Button className="btn-l-purple" onClick={onHide}>
