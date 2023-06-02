@@ -78,6 +78,7 @@ namespace Server.Controllers
             return Ok(new AuthResponseDto { Message = "Registration successful" });
         }
 
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto model)
         {
@@ -92,6 +93,21 @@ namespace Server.Controllers
             {
                 return BadRequest(new AuthResponseDto { Message = "Invalid username or password", IsSuccess = false });
             }
+
+            // Update last access time
+            user.LastAccess = DateTime.UtcNow;
+            await _userManager.UpdateAsync(user);
+
+            // Create access log entry
+            var accessLog = new AccessLog
+            {
+                AccessTime = DateTime.UtcNow,
+                IPAddress = HttpContext.Connection.RemoteIpAddress.ToString(),
+                UserId = user.Id
+            };
+            await _context.AccessLogs.AddAsync(accessLog);
+            await _context.SaveChangesAsync();
+
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("very_secret_key_for_jwt_token");
@@ -149,7 +165,9 @@ namespace Server.Controllers
                 Id = u.Id,
                 Username = u.UserName,
                 Email = u.Email,
-                Role = u.Role
+                Role = u.Role,
+                LastAccess = u.LastAccess
+
             }).ToListAsync();
 
             return Ok(users);
@@ -308,6 +326,23 @@ namespace Server.Controllers
             }
 
             return Ok("Your password has been reset successfully.");
+        }
+
+
+        [HttpGet("users/{userId}/access-log")]
+        public async Task<IActionResult> GetUserAccessLog(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var accessLogs = await _context.AccessLogs
+                .Where(log => log.UserId == userId)
+                .ToListAsync();
+
+            return Ok(accessLogs);
         }
 
 

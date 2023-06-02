@@ -1,7 +1,16 @@
-import React from "react";
-import { Table, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Table, Button, FormControl, Col, Row } from "react-bootstrap";
 import { User } from "../../types";
-import { BsPencilSquare, BsTrash, BsArrowRepeat } from "react-icons/bs";
+import {
+  BsPencilSquare,
+  BsTrash,
+  BsArrowRepeat,
+  BsFillClipboard2Fill,
+  BsArrowUp,
+  BsArrowDown,
+  BsSearch,
+} from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 interface Props {
   users: User[];
@@ -14,6 +23,11 @@ interface Props {
   onSelectAll?: () => void;
 }
 
+interface SortConfig {
+  column: keyof User;
+  order: "asc" | "desc";
+}
+
 const UserTable: React.FC<Props> = ({
   users,
   selectedUsers,
@@ -24,6 +38,14 @@ const UserTable: React.FC<Props> = ({
   showRestoreButton = true,
   onSelectAll,
 }) => {
+  const [filter, setFilter] = useState("");
+  const [sortConfig, setSortConfig] = useState<SortConfig>({
+    column: "username",
+    order: "asc",
+  });
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   const handleCheckboxChange = (user: User) => {
     onSelect(user);
   };
@@ -41,33 +63,138 @@ const UserTable: React.FC<Props> = ({
   };
 
   const handleSelectAllChange = () => {
-    onSelectAll && onSelectAll();
+    if (selectedUsers.length === users.length) {
+      // Deselect all users
+      selectedUsers.forEach((user) => onSelect(user));
+    } else {
+      // Select all users
+      users.forEach((user) => onSelect(user));
+    }
+  };
+
+  const formatLastAccess = (lastAccess: string) => {
+    if (!lastAccess || lastAccess === "0001-01-01T00:00:00") {
+      return "Never";
+    }
+
+    const date = new Date(lastAccess);
+    return date.toLocaleString();
+  };
+
+  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(event.target.value);
+  };
+
+  const handleSort = (column: keyof User) => {
+    if (sortConfig.column === column) {
+      setSortConfig((prevConfig) => ({
+        column,
+        order: prevConfig.order === "asc" ? "desc" : "asc",
+      }));
+    } else {
+      setSortConfig({
+        column,
+        order: "asc",
+      });
+    }
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const filteredUsers = users.filter(
+    (user) =>
+      user.username.toLowerCase().includes(filter.toLowerCase()) ||
+      user.email.toLowerCase().includes(filter.toLowerCase()) ||
+      user.role.toLowerCase().includes(filter.toLowerCase())
+  );
+
+  const sortedUsers = [...filteredUsers].sort((a, b) => {
+    const columnA = a[sortConfig.column]?.toString().toLowerCase() || "";
+    const columnB = b[sortConfig.column]?.toString().toLowerCase() || "";
+
+    if (columnA < columnB) {
+      return sortConfig.order === "asc" ? -1 : 1;
+    } else if (columnA > columnB) {
+      return sortConfig.order === "asc" ? 1 : -1;
+    } else {
+      return 0;
+    }
+  });
+
+  const pageCount = Math.ceil(sortedUsers.length / itemsPerPage);
+  const visibleUsers = sortedUsers.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const renderSortIcon = (column: keyof User) => {
+    if (sortConfig.column === column) {
+      if (sortConfig.order === "asc") {
+        return <BsArrowUp />;
+      } else {
+        return <BsArrowDown />;
+      }
+    } else {
+      return null;
+    }
   };
 
   return (
     <div className="table-container shadow p-3 bg-white rounded">
-      <Table
-        striped
-        className="table w-100 small table-borderless table-responsive align-middle align-left"
-        hover
-      >
+      <Row>
+        <Col>
+        {/* <label htmlFor="search" className="sr-only">
+          Search
+        </label> */}
+        </Col>
+        <Col>
+        <div className="filter-container mb-3">
+        
+        <div className="input-group">
+          
+          <FormControl
+            id="search"
+            placeholder="Search"
+            value={filter}
+            onChange={handleFilterChange}
+          />
+          <div className="input-group-prepend">
+            <span className="input-group-text">
+              <BsSearch />
+            </span>
+          </div>
+        </div>
+      </div></Col>
+      </Row>
+      <Table striped className="table w-100 small table-borderless table-responsive align-middle align-left" hover>
         <thead>
           <tr>
-            <th>
-              <input
-                type="checkbox"
-                checked={selectedUsers.length === users.length}
-                onChange={handleSelectAllChange}
-              />
+            <th></th>
+            <th onClick={() => handleSort("username")}>
+              Username {renderSortIcon("username")}
             </th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Role</th>
-            {showRestoreButton ? <th>Restore</th> : <><th>Edit</th><th>Delete</th></>}
+            <th onClick={() => handleSort("email")}>
+              Email {renderSortIcon("email")}
+            </th>
+            <th onClick={() => handleSort("role")}>
+              Role {renderSortIcon("role")}
+            </th>
+            <th>Last Access</th>
+            {showRestoreButton ? (
+              <th>Restore</th>
+            ) : (
+              <>
+                <th>Edit</th>
+                <th>Delete</th>
+              </>
+            )}
+            <th>Access Log</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {visibleUsers.map((user) => (
             <tr key={user.id}>
               <td>
                 <input
@@ -79,6 +206,7 @@ const UserTable: React.FC<Props> = ({
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{user.role}</td>
+              <td>{formatLastAccess(user.lastAccess)}</td>
               {showRestoreButton ? (
                 <td>
                   <Button
@@ -88,7 +216,7 @@ const UserTable: React.FC<Props> = ({
                   >
                     <BsArrowRepeat />
                   </Button>
-                  </td>
+                </td>
               ) : (
                 <>
                   <td>
@@ -111,10 +239,37 @@ const UserTable: React.FC<Props> = ({
                   </td>
                 </>
               )}
+              <td>
+                <Link
+                  to={`/users/${user.id}/access-log`}
+                  className="btn btn-primary"
+                >
+                  <BsFillClipboard2Fill />
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
       </Table>
+      <div className="pagination-container mt-3">
+        <Button
+          variant="secondary"
+          disabled={currentPage === 1}
+          onClick={() => handlePageChange(currentPage - 1)}
+        >
+          Previous
+        </Button>
+        <span className="mx-2">
+          Page {currentPage} of {pageCount}
+        </span>
+        <Button
+          variant="secondary"
+          disabled={currentPage === pageCount}
+          onClick={() => handlePageChange(currentPage + 1)}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 };

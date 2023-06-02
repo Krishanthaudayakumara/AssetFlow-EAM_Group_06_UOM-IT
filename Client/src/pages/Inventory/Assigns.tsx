@@ -8,7 +8,6 @@ const Assigns: React.FC = () => {
       <Container>
           
             <div>
-              <MyNavbar />
   
               
               

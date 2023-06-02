@@ -40,3 +40,13 @@ export const deleteDeletedUser = async (userId: string): Promise<void> => {
   await axios.delete(`${API_URL}/users/deleted/${userId}`, config());
 };
 
+export const getAccessLog = async (userId: string | undefined) => {
+  try {
+    const response = await axios.get(`${API_URL}/users/${userId}/access-log`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching access log:", error);
+    return [];
+  }
+};
+

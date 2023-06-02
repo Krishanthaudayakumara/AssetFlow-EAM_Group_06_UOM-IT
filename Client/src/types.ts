@@ -41,6 +41,7 @@ export interface User {
     email: string;
     password: string;
     role: UserRole;
+    lastAccess: string;
   }
   
 

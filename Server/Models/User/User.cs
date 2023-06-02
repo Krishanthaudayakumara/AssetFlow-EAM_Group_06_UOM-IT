@@ -6,5 +6,7 @@ namespace Server.Models
     {
         public string? Role { get; set; }
         public bool IsDeleted { get; set; }
+        public DateTime LastAccess { get; set; }
+        public ICollection<AccessLog> AccessLogs { get; set; }
     }
 }

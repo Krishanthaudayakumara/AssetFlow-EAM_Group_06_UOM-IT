@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Authentication/Login";
 import Home from "./pages/General/Home";
 import User from "./pages/User/User";
+import UserAccessLogPage from "./pages/User/UserAccessLogPage";
 import AssignAsset from "./pages/Facility/AssignAsset";
 import BuildingFloor from "./pages/Facility/BuildingFloor";
 import Navbar from "./components/Navbar";
@@ -136,6 +137,16 @@ const App: React.FC = () => {
           />
         </Route>
 
+        <Route path="/users/:userId/access-log" element={<PrivateRoute />}>
+          <Route
+            path="/users/:userId/access-log"
+            element={
+              <Wrapper>
+                <UserAccessLogPage />
+              </Wrapper>
+            }
+          />
+        </Route>
 
         <Route path="/employee" element={<PrivateRoute />}>
           <Route

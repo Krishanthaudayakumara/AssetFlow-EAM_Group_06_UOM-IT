@@ -22,6 +22,8 @@ namespace Server.Data
 
         public DbSet<Supplier> Suppliers { get; set; }
 
+        public DbSet<AccessLog> AccessLogs { get; set; }
+
 
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Category> Categories { get; set; }
