@@ -93,15 +93,16 @@ const NewTeamForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group>
-        {" "}
+      <Form.Group>      
         <Form.Control
           type="file"
           placeholder="Image"
           name="image"
           required
           onChange={handleChange}
-        />{" "}
+          accept="image/jpeg, image/png, image/gif"
+        />
+        <label>( jpeg , png , gif )</label>
       </Form.Group>
       <br />
       <Form.Group>

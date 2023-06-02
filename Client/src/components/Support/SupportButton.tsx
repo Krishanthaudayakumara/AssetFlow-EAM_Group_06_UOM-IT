@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NewAgentForm from "./Forms/NewAgentForm";
+import NewAgentForm from "./Forms/Agent/NewAgentForm";
 import NewTicketForm from "./Forms/NewTicketForm";
 import NewTeamForm from "./Forms/Team/NewTeamForm";
 import NewIssurTypeForm from "./Forms/IssueType/NewIssueTypeForm";
