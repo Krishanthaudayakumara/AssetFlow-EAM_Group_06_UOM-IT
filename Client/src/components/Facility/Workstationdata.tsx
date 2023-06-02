@@ -22,7 +22,19 @@ const Workstation =[
     },
     {
         w_id:"5",
-        w_name:" workstation 5"
+        w_name:" meeting room"
+
+
+    },
+    {
+        w_id:"6",
+        w_name:" meeting room"
+
+
+    },
+    {
+        w_id:"7",
+        w_name:" meeting room"
 
 
     }

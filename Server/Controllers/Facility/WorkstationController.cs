@@ -18,19 +18,21 @@ namespace Server.Controllers.Facility
          public  WorkstationController(DataContext context){
             _context=context;
          }
+
          [HttpPost]
-         public async Task <IActionResult> AddWorkstation([FromBody] WorkstationToInsert wti){
-            if(wti is null){
+        public async Task<IActionResult>AddWorkstation([FromBody]WorkstationToInsert workstationToInsert){
+            if(workstationToInsert is null){
                 return BadRequest();
             }
-
-            var ws = new Workstation{
-                type = wti.type
-
+            var wti = new Workstation{
+                WorkstationName= workstationToInsert.WorkstationName,
+                 Floor=workstationToInsert.Floor,
+                 BuildingId=workstationToInsert.BuildingId
+                              
+                
             };
-            
             try{
-                await _context.Workstations.AddAsync(ws);
+                await _context.Workstations.AddAsync(wti);
                 await _context.SaveChangesAsync();
             }
             catch(System.Exception ex){
@@ -38,10 +40,11 @@ namespace Server.Controllers.Facility
                 return StatusCode(500) ;
 
             }
+             return Ok(wti);
 
-            return Ok(ws);
+            
+        }
 
-         }
 
          
           [HttpGet("{id}")]
@@ -53,7 +56,9 @@ namespace Server.Controllers.Facility
 
         var workstationToReturn = new WorkstationToReturn{
             Id= w.Id,   
-            type=w.type
+            WorkstationName=w.WorkstationName,
+            Floor=w.Floor,
+            BuildingId=w.BuildingId
                             
 
 
@@ -62,6 +67,12 @@ namespace Server.Controllers.Facility
         return Ok(w);
 
     }
+     [HttpGet]
+        public async Task<IActionResult> GetAllWorkstation()
+        {
+            var allworkstations = await _context.Workstations.ToListAsync();
+            return Ok(allworkstations);
+        }
 
     [HttpDelete("delete-asset-by-id/{id}")]
 
@@ -90,7 +101,7 @@ namespace Server.Controllers.Facility
             return NotFound();
         }
 
-        updateWorkstation.type=WorkstationToUpdate.type;
+        updateWorkstation.WorkstationName=WorkstationToUpdate.WorkstationName;
         
         
         await _context.SaveChangesAsync();

@@ -6,43 +6,17 @@ import { FaMouse } from "react-icons/fa";
 import { FaKeyboard } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 
-import Workstationdata from "./Workstationdata"
-
+<div className=""></div>
  type workstationprop = {
-  workstationno: string;
+  workstationName: string;
 };
 
 export default function WorkstationCard(props: workstationprop) {
   return (
     <div className="col-4 card-container">
       <div className="ws-card">
-        <h6 className="workstation"> {props.workstationno} </h6>
-        <div className="card-in">
-          <FaMouse size={45} style={{ paddingTop: "20px" }} />
-
-          <div className="sp1">
-            <FaStar size={15} style={{ color: "#ff615a" }} />
-            <FaStar size={15} style={{ color: "#ff615a" }} />
-            <FaStar size={15} style={{ color: "#ff615a" }} />
-          </div>
-        </div>
-        <div className="card-in">
-          <FaKeyboard size={45} style={{ paddingTop: "20px" }} />
-          <div className="sp1">
-            <FaStar size={15} style={{ color: "#ff615a" }} />
-            <FaStar size={15} style={{ color: "#ff615a" }} />
-          </div>
-        </div>
-
-        <div className="card-in">
-          <FaMouse size={45} style={{ paddingTop: "20px" }} />
-
-          <div className="sp1">
-            <FaStar size={15} style={{ color: "#ff615a" }} />
-            <FaStar size={15} style={{ color: "#ff615a" }} />
-            <FaStar size={15} style={{ color: "#ff615a" }} />
-          </div>
-        </div>
+        <h6 className="workstation"> {props.workstationName} </h6>
+        
       </div>
     </div>
   );
