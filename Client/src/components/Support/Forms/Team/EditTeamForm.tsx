@@ -1,15 +1,13 @@
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 interface teamType {
-    profileImage: string;
-    id: number;
-    name: string;
-    description: string;
-    issueTypeId: number;
-  }
+  profileImage: string;
+  id: number;
+  name: string;
+  description: string;
+  issueTypeId: number;
+}
 
 interface EditTeamFormProps {
   showModal: boolean;
@@ -103,7 +101,10 @@ const EditTeamForm: React.FC<EditTeamFormProps> = ({
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={handleUpdateTeam}>Update</Button>
+            <Button variant="secondary" onClick={handleModalClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleUpdateTeam}>Update Team</Button>
           </Modal.Footer>
         </>
       )}

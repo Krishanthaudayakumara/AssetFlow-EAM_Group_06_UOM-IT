@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
-import axios from "axios";
+import { Alert, Button, Form } from "react-bootstrap";
+import axios, { AxiosError } from "axios";
+import AddConfirmation from "../../ConfirmMessages/AddConfirmation";
 
 //Define form data types using interfaces
 interface FormData {
@@ -23,6 +24,8 @@ const NewTeamForm = () => {
   }); //Declare a use state variable & function
 
   const [issueTypes, setIssueTypes] = useState<IssueTypeData[]>([]);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchIssueTypes = async () => {
@@ -34,6 +37,7 @@ const NewTeamForm = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setErrorMessage(null);
 
     try {
       const formDataWithImage = new FormData();
@@ -54,12 +58,15 @@ const NewTeamForm = () => {
         }
       );
       console.log(response.data);
-      alert("Successfully added!");
-      // reset the form after successfully submitting the data
-      setFormData({ name: "", description: "", issueTypeId: "", image: null });
+      setShowSuccessModal(true);
     } catch (error) {
       console.log(error);
-      alert(" Not added!");
+      const axiosError = error as AxiosError;
+      if (axiosError.response && axiosError.response.status === 400) {
+        setErrorMessage(axiosError.response.data as string);
+      } else {
+        alert("Not added!");
+      }
     }
   };
 
@@ -77,6 +84,11 @@ const NewTeamForm = () => {
         [event.target.name]: event.target.value,
       });
     }
+  };
+
+  const handleCloseSuccessModal = () => {
+    setShowSuccessModal(false);
+    window.location.reload();
   };
 
   return (
@@ -130,12 +142,22 @@ const NewTeamForm = () => {
             </option>
           ))}
         </Form.Select>
+        {errorMessage && (
+          <Alert variant="danger" className="mt-2">
+            {errorMessage}
+          </Alert>
+        )}
       </Form.Group>
       <br />
       <Button variant="success" type="submit">
         {" "}
         Submit{" "}
       </Button>
+      <AddConfirmation
+        show={showSuccessModal}
+        handleClose={handleCloseSuccessModal}
+        formData={formData.name}
+      />
     </Form>
   );
 };

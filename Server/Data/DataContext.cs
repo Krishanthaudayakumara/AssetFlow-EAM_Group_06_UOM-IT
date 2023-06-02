@@ -77,6 +77,13 @@ namespace Server.Data
                    .HasForeignKey(a => a.IssueTypeId)
                    .OnDelete(DeleteBehavior.Restrict);
            });
+           modelBuilder.Entity<Agent>(entity =>
+           {
+               entity.HasOne(a => a.Team)
+                   .WithMany(e => e.Agents)
+                   .HasForeignKey(a => a.TeamId)
+                   .OnDelete(DeleteBehavior.Restrict);
+           });
         }
     }
 }

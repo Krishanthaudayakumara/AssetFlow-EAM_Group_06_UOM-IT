@@ -194,7 +194,7 @@ const IssueTypeTable = () => {
       <UpdateConfirmation
         show={showUpdateModal}
         onClose={() => setShowUpdateModal(false)}
-        updatedIssueName={selectedIssue?.name || ""}
+        updatedName={selectedIssue?.name || ""}
       />
       <DeleteConfirmation
         show={showDeleteModal}

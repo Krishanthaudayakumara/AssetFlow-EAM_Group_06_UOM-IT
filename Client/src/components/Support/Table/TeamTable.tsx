@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Form, InputGroup, Table } from "react-bootstrap";
+import { Form, InputGroup, Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FaSearch } from "react-icons/fa";
 import EditTeamForm from "../Forms/Team/EditTeamForm";
 import "../../../css/Support/Support.css";
+import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
 
 interface teamType {
   profileImage: string;
@@ -19,6 +20,7 @@ const TeamTable = () => {
   const [teams, setTeams] = useState<teamType[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<teamType | null>(null);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -50,7 +52,7 @@ const TeamTable = () => {
           )
         );
         setShowModal(false);
-        alert("Successfully updated!");
+        setShowUpdateModal(true);
       })
       .catch((error) => {
         alert("Not updated!");
@@ -159,6 +161,11 @@ const TeamTable = () => {
         handleModalClose={handleModalClose}
         handleUpdateTeam={handleUpdateTeam}
         setSelectedTeam={setSelectedTeam}
+      />
+       <UpdateConfirmation
+        show={showUpdateModal}
+        onClose={() => setShowUpdateModal(false)}
+        updatedName={selectedTeam?.name || ""}
       />
     </div>
   );

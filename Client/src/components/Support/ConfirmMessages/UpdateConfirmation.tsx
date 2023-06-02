@@ -3,13 +3,13 @@ import { Modal, Button } from "react-bootstrap";
 interface Props {
   show: boolean;
   onClose: () => void;
-  updatedIssueName: string;
+  updatedName: string;
 }
 
 const UpdateConfirmation: React.FC<Props> = ({
   show,
   onClose,
-  updatedIssueName,
+  updatedName,
 }) => {
   return (
     <Modal show={show} onHide={onClose}>
@@ -17,7 +17,7 @@ const UpdateConfirmation: React.FC<Props> = ({
         <Modal.Title>Update Successful</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Successfully updated {updatedIssueName}.
+        Successfully updated {updatedName}.
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>

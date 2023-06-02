@@ -246,7 +246,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/BuildingFloor" element={<PrivateRoute />}>
+        <Route path="/BuildingFloor">
           <Route
             path="/BuildingFloor"
             element={

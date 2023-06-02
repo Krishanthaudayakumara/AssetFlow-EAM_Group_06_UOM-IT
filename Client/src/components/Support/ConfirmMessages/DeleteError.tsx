@@ -12,7 +12,7 @@ interface DeleteErrorProps {
     }
   
     return (
-      <Alert variant="danger" onClose={onResetError} dismissible>
+      <Alert variant="danger" onClose={onResetError} dismissible style={{ marginLeft: '60px' }}>
         {errorMessage}
       </Alert>
     );
