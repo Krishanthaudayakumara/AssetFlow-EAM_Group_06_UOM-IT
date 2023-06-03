@@ -12,6 +12,7 @@ import LineChart from '../../components/Dashboard/LineChart';
 import Card from '../../components/Dashboard/Card';
 import '../../css/Home.css';
 import axios from 'axios';
+import FeedBackBarChart from '../../components/Dashboard/FeedBackBarChart';
 
 interface Employee {
   id: number;
@@ -20,6 +21,17 @@ interface Employee {
   department: string;
   email: string;
   hireDate: string;
+}
+
+interface FeedbackChartData {
+  goodCount: number;
+  betterCount: number;
+  worstCount: number;
+}
+interface FacilityStatusDTO {
+  newCount: number;
+  useCount: number;
+  damageCount: number;
 }
 
 const Linedata = {
@@ -70,7 +82,8 @@ const Dashboard: React.FC = () => {
   const [totalWorkstations, setTotalWorkstations] = useState(0);
   const [totalFacilityAssets, setFacilityAssets] = useState(0);
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
-
+  const [feedbackChartData, setFeedbackChartData] = useState<FeedbackChartData | null>(null);
+  const [facilityStatusData, setFacilityStatusData] = useState<FacilityStatusDTO | null>(null);
   useEffect(() => {
     axios
       .get('http://localhost:5087/MainDashboard/availableEmployeeCount')
@@ -116,6 +129,23 @@ const Dashboard: React.FC = () => {
       .catch((error) => {
         console.error(error);
       });
+
+    axios
+      .get('http://localhost:5087/MainDashboard/chartFeedback')
+      .then((response) => {
+        setFeedbackChartData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      axios
+      .get('http://localhost:5087/FacilityDashboard/asset-status')
+      .then((response) => {
+        setFacilityStatusData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
@@ -130,38 +160,7 @@ const Dashboard: React.FC = () => {
         </div>
         <h1 style={{ margin: '0px 0 0 65px' }}>Inventory Summary</h1>
 
-        <div
-          className="shadow p-3 mb-5 bg-white rounded"
-          style={{ margin: '0px 2px 2px 0px' }}
-        >
-          {/* code for BarChart component */}
-          <BarChart
-            data={{
-              labels: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-              ],
-              datasets: [
-                {
-                  label: 'Issued',
-                  data: [40, 20, 30, 50, 90, 10, 20],
-                  backgroundColor: '#482890',
-                },
-                {
-                  label: 'Returned',
-                  data: [20, 10, 2, 5, 2, 3, 8, 9],
-                  backgroundColor: '#ff615a',
-                },
-              ],
-            }}
-            options={options}
-          />
-        </div>
+       
         <h4
           className="second"
           style={{
@@ -177,7 +176,7 @@ const Dashboard: React.FC = () => {
                 className="shadow p-1 mb-2 bg-white rounded"
                 style={{
                   paddingTop: '50px',
-                  height: '450px',
+                  height: '470px',
                   margin: '0px 0 0 0px',
                   alignContent: 'center',
                 }}
@@ -190,22 +189,61 @@ const Dashboard: React.FC = () => {
               <div
                 className="shadow p-2 mb-5 bg-white rounded"
                 style={{
-                  height: '450px',
+                  height: '470px',
                   alignContent: 'center',
                 }}
               >
                 {/* code for PieChart component */}
-                <PieChart />
+                {facilityStatusData && (
+                  <PieChart
+                    data={{
+                      labels: ['New', 'Use', 'Damage'],
+                      datasets: [
+                        {
+                          label: 'Asset Status',
+                          data: [
+                            facilityStatusData.newCount,
+                            facilityStatusData.useCount,
+                            facilityStatusData.damageCount,
+                          ],
+                          backgroundColor: ['#482890', '#e2a9e5', '#632c65'],
+                          borderColor: ['#482890', '#e2a9e5', '#632c65'],
+                        },
+                      ],
+                    }}
+                  />
+                )}
               </div>
             </Col>
           </Row>
         </div>
-
+        <div
+          className="shadow p-3 mb-5 bg-white rounded"
+          style={{ margin: '0px 2px 2px 0px' }}
+        >
+          {/* code for BarChart component */}
+          <FeedBackBarChart
+            data={{
+              labels: ['Good', 'Better', 'Worst'],
+              datasets: [
+                {
+                  label: 'Count',
+                  data: [
+                    feedbackChartData?.goodCount || 0,
+                    feedbackChartData?.betterCount || 0,
+                    feedbackChartData?.worstCount || 0,
+                  ],
+                  backgroundColor: ['#482890', '#ff615a', '#3cba9f'],
+                  barThickness: 30,
+                },
+              ],
+            }}
+          />
+        </div>
         <div>
           <Table striped bordered hover>
             <thead>
               <tr>
-             
                 <th>Username</th>
                 <th>Role</th>
                 <th>Department</th>
@@ -216,7 +254,6 @@ const Dashboard: React.FC = () => {
             <tbody>
               {employeeData.map((employee) => (
                 <tr key={employee.id}>
-                  
                   <td>{employee.username}</td>
                   <td>{employee.role}</td>
                   <td>{employee.department}</td>
@@ -233,4 +270,5 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
 
