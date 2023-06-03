@@ -18,7 +18,7 @@ interface UserProfile {
     ipAddress: string;
     userId: string;
     user: null;
-  }>;
+  }> | null;
   employee: {
     id: number;
     firstName: string;
@@ -32,7 +32,7 @@ interface UserProfile {
     departmentId: number;
     userName: string;
     password: null;
-  };
+  } | null;
 }
 
 const ProfilePage: React.FC = () => {
@@ -83,7 +83,9 @@ const ProfilePage: React.FC = () => {
   }
 
   const { user, employee, accessLogs } = userProfile;
-  const fullName = `${employee.firstName} ${employee.middleName} ${employee.lastName}`;
+  const fullName = employee
+    ? `${employee.firstName} ${employee.middleName} ${employee.lastName}`
+    : "Unknown";
 
   return (
     <div className="profile-container">
@@ -93,8 +95,8 @@ const ProfilePage: React.FC = () => {
         </div>
         <div className="profile-details">
           <h2>{fullName}</h2>
-          <p>{employee.jobTitle}</p>
-          <p>Department: {employee.departmentId}</p>
+          <p>{employee?.jobTitle}</p>
+          <p>Department: {employee?.departmentId}</p>
           {isEditing ? (
             <button onClick={handleSaveClick}>Save</button>
           ) : (
@@ -105,61 +107,75 @@ const ProfilePage: React.FC = () => {
 
       <h3>Employee Details</h3>
       <div className="profile-details">
-        <p>
-          <span className="label">First Name:</span>{" "}
-          {isEditing ? (
-            <input type="text" value={employee.firstName} />
-          ) : (
-            employee.firstName
-          )}
-        </p>
-        <p>
-          <span className="label">Last Name:</span>{" "}
-          {isEditing ? (
-            <input type="text" value={employee.lastName} />
-          ) : (
-            employee.lastName
-          )}
-        </p>
-        <p>
-          <span className="label">Email:</span>{" "}
-          {isEditing ? (
-            <input type="text" value={employee.email} />
-          ) : (
-            employee.email
-          )}
-        </p>
-        <p>
-          <span className="label">Phone Number:</span>{" "}
-          {isEditing ? (
-            <input type="text" value={employee.phoneNumber} />
-          ) : (
-            employee.phoneNumber
-          )}
-        </p>
-        <p>
-          <span className="label">Date of Birth:</span>{" "}
-          {new Date(employee.dateOfBirth).toLocaleDateString()}
-        </p>
-        <p>
-          <span className="label">Hire Date:</span>{" "}
-          {new Date(employee.hireDate).toLocaleDateString()}
-        </p>
+        {employee ? (
+          <>
+            <p>
+              <span className="label">First Name:</span>{" "}
+              {isEditing ? (
+                <input type="text" value={employee.firstName} />
+              ) : (
+                employee.firstName
+              )}
+            </p>
+            <p>
+              <span className="label">Last Name:</span>{" "}
+              {isEditing ? (
+                <input type="text" value={employee.lastName} />
+              ) : (
+                employee.lastName
+              )}
+            </p>
+            <p>
+              <span className="label">Email:</span>{" "}
+              {isEditing ? (
+                <input type="text" value={employee.email} />
+              ) : (
+                employee.email
+              )}
+            </p>
+            <p>
+              <span className="label">Phone Number:</span>{" "}
+              {isEditing ? (
+                <input type="text" value={employee.phoneNumber} />
+              ) : (
+                employee.phoneNumber
+              )}
+            </p>
+            <p>
+              <span className="label">Date of Birth:</span>{" "}
+              {employee.dateOfBirth
+                ? new Date(employee.dateOfBirth).toLocaleDateString()
+                : "Not available"}
+            </p>
+            <p>
+              <span className="label">Hire Date:</span>{" "}
+              {employee.hireDate
+                ? new Date(employee.hireDate).toLocaleDateString()
+                : "Not available"}
+            </p>
+          </>
+        ) : (
+          <p>No employee details available.</p>
+        )}
       </div>
 
       <h3>Access Logs</h3>
       <div className="access-logs">
-        {accessLogs.map((log) => (
-          <div key={log.id} className="access-log">
-            <p>
-              <span className="label">Access Time:</span>{" "}
-              {new Date(log.accessTime).toLocaleString()}
-            </p>
-            <p>
-              <span className="label">IP Address:</span> {log.ipAddress}
-            </p>
-          </div>
-        ))}
+        {accessLogs ? (
+          accessLogs.map((log) => (
+            <div key={log.id} className="access-log">
+              <p>
+                <span className="label">Access Time:</span>{" "}
+                {new Date(log.accessTime).toLocaleString()}
+              </p>
+              <p>
+                <span className="label">IP Address:</span> {log.ipAddress}
+              </p>
+            </div>
+          ))
+        ) : (
+          <p>No access logs available.</p>
+        )}
       </div>
     </div>
   );

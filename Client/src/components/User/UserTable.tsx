@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Table, Button, FormControl, Col, Row } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Table, Button, FormControl, Col, Row, Spinner } from "react-bootstrap";
 import { User } from "../../types";
 import {
   BsPencilSquare,
@@ -45,6 +45,17 @@ const UserTable: React.FC<Props> = ({
   });
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
+
+  const [isLoading, setIsLoading] = useState(true); // Loading state
+
+  useEffect(() => {
+    // Simulating delay to demonstrate loading spinner
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleCheckboxChange = (user: User) => {
     onSelect(user);
@@ -143,136 +154,145 @@ const UserTable: React.FC<Props> = ({
 
   return (
     <div className="table-container shadow p-3 bg-white rounded">
-      <Row>
-        <Col>
-          {/* <label htmlFor="search" className="sr-only">
-          Search
-        </label> */}
-          <div className="pagination-container mt-3">
-            <Button
-              variant="secondary"
-              disabled={currentPage === 1}
-              onClick={() => handlePageChange(currentPage - 1)}
-            >
-              Previous
-            </Button>
-            <span className="mx-2">
-              Page {currentPage} of {pageCount}
-            </span>
-            <Button
-              variant="secondary"
-              disabled={currentPage === pageCount}
-              onClick={() => handlePageChange(currentPage + 1)}
-            >
-              Next
-            </Button>
-          </div>
-        </Col>
-        <Col>
-          <div className="filter-container mb-3">
-            <div className="input-group">
-              <FormControl
-                id="search"
-                placeholder="Search"
-                value={filter}
-                onChange={handleFilterChange}
-              />
-              <div className="input-group-prepend">
-                <span className="input-group-text">
-                  <BsSearch />
-                </span>
-              </div>
-            </div>
-          </div>
-        </Col>
-      </Row>
-      <Table
-        striped
-        className="table w-100 small table-borderless table-responsive align-middle align-left"
-        hover
-      >
-        <thead>
-          <tr>
-            <th></th>
-            <th onClick={() => handleSort("username")}>
-              Username {renderSortIcon("username")}
-            </th>
-            <th onClick={() => handleSort("email")}>
-              Email {renderSortIcon("email")}
-            </th>
-            <th onClick={() => handleSort("role")}>
-              Role {renderSortIcon("role")}
-            </th>
-            <th>Last Access</th>
-            {showRestoreButton ? (
-              <th>Restore</th>
-            ) : (
-              <>
-                <th>Edit</th>
-                <th>Delete</th>
-              </>
-            )}
-            <th>Access Log</th>
-          </tr>
-        </thead>
-        <tbody>
-          {visibleUsers.map((user) => (
-            <tr key={user.id}>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={selectedUsers.includes(user)}
-                  onChange={() => handleCheckboxChange(user)}
-                />
-              </td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-              <td>{formatLastAccess(user.lastAccess)}</td>
-              {showRestoreButton ? (
-                <td>
-                  <Button
-                    variant="outline-success"
-                    onClick={() => handleRestoreClick(user)}
-                    className="btn-purple"
-                  >
-                    <BsArrowRepeat />
-                  </Button>
-                </td>
-              ) : (
-                <>
-                  <td>
-                    <Button
-                      variant="outline-primary"
-                      onClick={() => handleEditClick(user)}
-                      className="btn-l-purple"
-                    >
-                      <BsPencilSquare />
-                    </Button>
-                  </td>
-                  <td>
-                    <Button
-                      variant="outline-danger"
-                      onClick={() => handleDeleteClick(user)}
-                      className="btn-orange"
-                    >
-                      <BsTrash />
-                    </Button>
-                  </td>
-                </>
-              )}
-              <td>
-                <Link
-                  to={`/users/${user.id}/access-log`}
-                  className="btn btn-primary"
+      {isLoading ? (
+        <>
+          <Spinner animation="border" role="status"></Spinner>
+          <span className="sr-only">Loading...</span>
+        </>
+      ) : (
+        <>
+          <Row>
+            <Col>
+              {/* <label htmlFor="search" className="sr-only">
+              Search
+            </label> */}
+              <div className="pagination-container mt-3">
+                <Button
+                  variant="secondary"
+                  disabled={currentPage === 1}
+                  onClick={() => handlePageChange(currentPage - 1)}
                 >
-                  <BsFillClipboard2Fill />
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+                  Previous
+                </Button>
+                <span className="mx-2">
+                  Page {currentPage} of {pageCount}
+                </span>
+                <Button
+                  variant="secondary"
+                  disabled={currentPage === pageCount}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                >
+                  Next
+                </Button>
+              </div>
+            </Col>
+            <Col>
+              <div className="filter-container mb-3">
+                <div className="input-group">
+                  <FormControl
+                    id="search"
+                    placeholder="Search"
+                    value={filter}
+                    onChange={handleFilterChange}
+                  />
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">
+                      <BsSearch />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <Table
+            striped
+            className="table w-100 small table-borderless table-responsive align-middle align-left"
+            hover
+          >
+            <thead>
+              <tr>
+                <th></th>
+                <th onClick={() => handleSort("username")}>
+                  Username {renderSortIcon("username")}
+                </th>
+                <th onClick={() => handleSort("email")}>
+                  Email {renderSortIcon("email")}
+                </th>
+                <th onClick={() => handleSort("role")}>
+                  Role {renderSortIcon("role")}
+                </th>
+                <th>Last Access</th>
+                {showRestoreButton ? (
+                  <th>Restore</th>
+                ) : (
+                  <>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </>
+                )}
+                <th>Access Log</th>
+              </tr>
+            </thead>
+            <tbody>
+              {visibleUsers.map((user) => (
+                <tr key={user.id}>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={selectedUsers.includes(user)}
+                      onChange={() => handleCheckboxChange(user)}
+                    />
+                  </td>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                  <td>{user.role}</td>
+                  <td>{formatLastAccess(user.lastAccess)}</td>
+                  {showRestoreButton ? (
+                    <td>
+                      <Button
+                        variant="outline-success"
+                        onClick={() => handleRestoreClick(user)}
+                        className="btn-purple"
+                      >
+                        <BsArrowRepeat />
+                      </Button>
+                    </td>
+                  ) : (
+                    <>
+                      <td>
+                        <Button
+                          variant="outline-primary"
+                          onClick={() => handleEditClick(user)}
+                          className="btn-l-purple"
+                        >
+                          <BsPencilSquare />
+                        </Button>
+                      </td>
+                      <td>
+                        <Button
+                          variant="outline-danger"
+                          onClick={() => handleDeleteClick(user)}
+                          className="btn-orange"
+                        >
+                          <BsTrash />
+                        </Button>
+                      </td>
+                    </>
+                  )}
+                  <td>
+                    <Link
+                      to={`/users/${user.id}/access-log`}
+                      className="btn btn-primary"
+                    >
+                      <BsFillClipboard2Fill />
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </>
+      )}
     </div>
   );
 };
