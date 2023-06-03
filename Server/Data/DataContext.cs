@@ -84,6 +84,13 @@ namespace Server.Data
                    .HasForeignKey(a => a.TeamId)
                    .OnDelete(DeleteBehavior.Restrict);
            });
+            modelBuilder.Entity<Ticket>(entity =>
+           {
+               entity.HasOne(a => a.Agent)
+                   .WithMany(e => e.Tickets)
+                   .HasForeignKey(a => a.AgentId)
+                   .OnDelete(DeleteBehavior.Restrict);
+           });
         }
     }
 }

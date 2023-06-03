@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
-import axios from "axios";
+import { Alert, Button, Form } from "react-bootstrap";
+import axios, { AxiosError } from "axios";
+import AddConfirmation from "../../ConfirmMessages/AddConfirmation";
 
 interface FormData {
   firstName: string;
@@ -29,6 +30,10 @@ const NewAgentForm = () => {
     image: null,
   });
   const [teams, setTeams] = useState<TeamData[]>([]);
+  const [contactError, setContactError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -40,6 +45,10 @@ const NewAgentForm = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setErrorMessage(null);
+    if (!validateContact() || !validateEmail()) {
+      return;
+    }
     try {
       const formDataWithImage = new FormData();
       formDataWithImage.append("firstName", formData.firstName);
@@ -63,11 +72,16 @@ const NewAgentForm = () => {
         }
       );
       console.log(response.data);
-      alert("Successfully added!");
+      setShowSuccessModal(true);
      
     } catch (error) {
       console.log(error);
-      alert(" Not added!");
+      const axiosError = error as AxiosError;
+      if (axiosError.response && axiosError.response.status === 400) {
+        setErrorMessage(axiosError.response.data as string);
+      } else {
+        alert("Not added!");
+      }
     }
   };
 
@@ -86,11 +100,44 @@ const NewAgentForm = () => {
       });
     }
   };
+
+  const validateContact = (): boolean => {
+    const contactRegex = /^\d{10}$/; // Regex to match a 10-digit phone number
+    const isValid = contactRegex.test(formData.contact);
+    if (!isValid) {
+      setContactError("Invalid contact number");
+    } else {
+      setContactError("");
+    }
+    return isValid;
+  };
+
+  const validateEmail = (): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex to match email format
+    const isValid = emailRegex.test(formData.email);
+    if (!isValid) {
+      setEmailError("Invalid email address");
+    } else {
+      setEmailError("");
+    }
+    return isValid;
+  };
+  const handleCloseSuccessModal = () => {
+    setShowSuccessModal(false);
+    window.location.reload();
+  };
+
+
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group>        
-        <Form.Control type="file" name="image" required onChange={handleChange} accept="image/jpeg, image/png, image/gif"/>
-        <label>( jpeg , png , gif )</label>
+      <Form.Group>
+        <Form.Control
+          type="file"
+          name="image"
+          required
+          onChange={handleChange}
+        />
+        <label>( jpeg, png, gif )</label>
       </Form.Group>
       <br />
       <Form.Group>
@@ -124,6 +171,10 @@ const NewAgentForm = () => {
           value={formData.contact}
           onChange={handleChange}
         />
+        <label>(10 digits only)</label>
+        {contactError && (
+          <Form.Text className="text-danger">{contactError}</Form.Text>
+        )}
       </Form.Group>
       <br />
       <Form.Group>
@@ -146,6 +197,9 @@ const NewAgentForm = () => {
           value={formData.email}
           onChange={handleChange}
         />
+        {emailError && (
+          <Form.Text className="text-danger">{emailError}</Form.Text>
+        )}
       </Form.Group>
       <br />
       <Form.Group>
@@ -174,13 +228,24 @@ const NewAgentForm = () => {
           <option value="Not Available">Not Available</option>
           <option value="Available">Available</option>
         </Form.Select>
+        {errorMessage && (
+          <Alert variant="danger" className="mt-2">
+            {errorMessage}
+          </Alert>
+        )}
       </Form.Group>
       <br />
       <Button variant="success" type="submit">
         Submit
       </Button>
+      <AddConfirmation
+        show={showSuccessModal}
+        handleClose={handleCloseSuccessModal}
+        formData={formData.firstName}
+      />
     </Form>
   );
 };
 
 export default NewAgentForm;
+

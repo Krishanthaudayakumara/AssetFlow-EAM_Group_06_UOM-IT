@@ -1,11 +1,16 @@
 import { Fragment, useEffect, useState } from "react";
-import { Table,Badge} from "react-bootstrap";
+import { Table,Badge,Form, InputGroup} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../../../css/Support/Support.css";
 import EditAgentForm from "../Forms/Agent/EditAgentForm";
+import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
+import DeleteError from "../ConfirmMessages/DeleteError";
+import { FaSearch } from "react-icons/fa";
+import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
+import PaginationComponent from "../pagination";
 
 interface agentType {
   profileImage: string;
@@ -29,6 +34,14 @@ const AgentTable = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedAgent, setSelectedAgent] = useState<agentType | null>(null);
   const [teams, setTeams] = useState<TeamData[]>([]);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deletingAgent, setDeletingAgent] = useState<agentType | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const recordsPerPage = 4;
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -71,28 +84,70 @@ const AgentTable = () => {
           )
         );
         setShowModal(false);
-        alert("Successfully updated!");
+        setShowUpdateModal(true);
       })
       .catch((error) => {
-        alert("Not updated!");
+        // Handle other errors
       });
   };
 
   const handleDeleteAgent = (agent: agentType) => {
+    setDeletingAgent(agent);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteAgent = () => {
     axios
-      .delete(`http://localhost:5087/Api/Agent/${agent.id}`)
+      .delete(`http://localhost:5087/Api/Agent/${deletingAgent?.id}`)
       .then((response) => {
-        setAgents(agents.filter((item) => item.id !== agent.id));
-        alert("Successfully deleted!");
+        setAgents(agents.filter((item) => item.id !== deletingAgent?.id));        
       })
       .catch((error) => {
-        alert("Not deleted!");
+        if (error.response && error.response.status === 409) {
+          // Display the error message
+          setErrorMessage(error.response.data);
+        } else {
+          // Handle other errors
+        }
+      })
+      .finally(() => {
+        setDeletingAgent(null);
+        setShowDeleteModal(false);
       });
+  };
+  const resetErrorMessage = () => {
+    setErrorMessage(null);
+  };
+  const totalPages = Math.ceil(agents.length / recordsPerPage);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
     <div>
-      <p className="table-heading">Support Agents</p>
+      <div className="row">
+        <div className="col-8">
+          <p className="table-heading">Support Agents</p>
+        </div>
+        <div className="col-1">
+          <Form>
+            <InputGroup style={{ width: "300px" }}>
+              <Form.Control
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search Agent"
+              />
+              <InputGroup.Text>
+                <FaSearch />
+              </InputGroup.Text>
+            </InputGroup>
+          </Form>
+        </div>
+      </div>
+      <DeleteError
+        errorMessage={errorMessage}
+        onResetError={resetErrorMessage}
+      />
       <div className="box-shadow">
         <Fragment>
           <div>
@@ -101,16 +156,24 @@ const AgentTable = () => {
                 <tr style={{ color: "#482890" }}>
                   <th></th>
                   <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Contact</th>
-                  <th>Position</th>
-                  <th>Email</th>
+                  <th>Last Name</th>                  
+                  <th>Position</th>                 
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {agents.map((agent) => (
+                {agents
+                .filter((agent) => {
+                  return search.toLowerCase() === ""
+                    ? agent
+                    : agent.firstName.toLowerCase().includes(search);
+                })
+                .slice(
+                  (currentPage - 1) * recordsPerPage,
+                  currentPage * recordsPerPage
+                )
+                .map((agent) => (
                   <tr key={agent.id}>
                     <td>
                       <img
@@ -125,10 +188,8 @@ const AgentTable = () => {
                       />
                     </td>
                     <td>{agent.firstName}</td>
-                    <td>{agent.lastName}</td>
-                    <td>{agent.contact}</td>
-                    <td>{agent.position}</td>
-                    <td>{agent.email}</td>
+                    <td>{agent.lastName}</td>                   
+                    <td>{agent.position}</td>                    
                     <td>
                       {agent.agentStatus === "Available" ? (
                         <Badge className={"bg-success"}>Available</Badge>
@@ -165,6 +226,24 @@ const AgentTable = () => {
           handleUpdateAgent={handleUpdateAgent}
           setSelectedAgent={setSelectedAgent}
         />
+        <UpdateConfirmation
+        show={showUpdateModal}
+        onClose={() => setShowUpdateModal(false)}
+        updatedName={selectedAgent?.firstName || ""}
+      />
+        <DeleteConfirmation
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={confirmDeleteAgent}
+        deletingIssueName={deletingAgent?.firstName || ""}
+      />
+      <div className="pagination-wrapper">
+      <PaginationComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
     
     </div>
   );

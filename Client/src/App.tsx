@@ -47,7 +47,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/" >
           <Route
             path="/"
             element={

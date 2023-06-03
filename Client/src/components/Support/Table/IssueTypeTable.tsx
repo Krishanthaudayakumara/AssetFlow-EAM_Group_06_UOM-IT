@@ -63,7 +63,7 @@ const IssueTypeTable = () => {
         setShowUpdateModal(true);
       })
       .catch((error) => {
-        alert("Not updated!");
+        // Handle other errors
       });
   };    
 
