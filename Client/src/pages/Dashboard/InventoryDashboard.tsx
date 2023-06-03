@@ -3,8 +3,6 @@ import { Container } from 'react-bootstrap'
 import BarChart from '../../components/Dashboard/BarChart'
 import '../../css/Home.css'
 import CardDashboard from '../../components/Dashboard/CardDashboard'
-import InventoryTable from '../../components/Report/InventoryTable'
-
 const options = {
   title: {
     display: true,
@@ -65,7 +63,7 @@ const InventoryDashboard: React.FC = () => {
           </h4>
           <div></div>
 
-          <InventoryTable />
+      
         </div>
       </Container>
     </div>
