@@ -70,5 +70,19 @@ namespace Server.Controllers
 
             return Ok(employeeTableData);
         }
+         [HttpGet("chartFeedback")]
+        public ActionResult<FeedBackChartDTO> GetFeedbackChart()
+        {
+            var feedbackList = _context.Feedbacks.ToList();
+
+            var chartData = new FeedBackChartDTO
+            {
+                GoodCount = feedbackList.Count(f => f.Rating == "Good"),
+                BetterCount = feedbackList.Count(f => f.Rating == "Better"),
+                WorstCount = feedbackList.Count(f => f.Rating == "Worst")
+            };
+
+            return chartData;
     }
+}
 }
