@@ -46,7 +46,7 @@ const ReportHistory = () => {
           console.log(response);
           setGeneratedReports(generatedReports.filter((report) => report.id !== selectedReportId));
           setShowModal(false);
-          window.alert('Data successfully deleted.');
+        
         })
         .catch((error) => {
           console.log(error);

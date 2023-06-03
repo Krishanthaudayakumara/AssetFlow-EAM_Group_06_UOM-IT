@@ -7,9 +7,6 @@ interface ReportFilterProps {
   onDateChange: (fromDate: string, toDate: string) => void;
   onDepartmentChange: (department: string) => void; // Add this line
   onSelectedReportTypeChange: (selectedReportType: string) => void; 
-
-
-  
 }
 
 const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateChange,onDepartmentChange,onSelectedReportTypeChange }) => {
@@ -59,14 +56,14 @@ const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateC
       return (
         <>
           <option value="Building">Building</option>
-          <option value="Workstation">Workstation</option>
+          <option value="Asset Assignment">Asset Assignment</option>
         </>
       )
     } else if (department === 'Inventory') {
       return (
         <>
-          <option value="Stock">Stock</option>
-          <option value="Category">Category</option>
+          <option value="Warrenty Expiration">Warrenty Expiration</option>
+        
         </>
       )
     } else {

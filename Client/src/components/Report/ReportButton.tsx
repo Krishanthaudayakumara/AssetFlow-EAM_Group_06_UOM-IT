@@ -3,9 +3,12 @@ import { Button, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import * as XLSX from 'xlsx';
+
 interface ReportButtonProps {
   departmentName: string;
   selectedReportType: string;
+  tableRef: React.RefObject<any>;
 }
 
 interface FormData {
@@ -16,7 +19,7 @@ interface FormData {
   note: string;
 }
 
-const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedReportType }) => {
+const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedReportType, tableRef }) => {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState<FormData>({ reportName: "", reportType: "", reportFormat: "", generatedBy: "", note: "" });
 
@@ -24,16 +27,39 @@ const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedRep
     setFormData(prev => ({ ...prev, reportName: departmentName, reportType: selectedReportType }));
     setShowModal(true);
   };
+  const downloadTableAsExcel = () => {
+    const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    const fileExtension = '.xlsx';
+
+    const ws = XLSX.utils.table_to_book(tableRef.current, { sheet: 'Sheet1' });
+    const wbout = XLSX.write(ws, { bookType: 'xlsx', type: 'binary' });
+
+    const buf = new ArrayBuffer(wbout.length);
+    const view = new Uint8Array(buf);
+    for (let i = 0; i < wbout.length; i++) {
+      view[i] = wbout.charCodeAt(i) & 0xff;
+    }
+    const blob = new Blob([buf], { type: fileType });
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${departmentName}-${selectedReportType}-${Date.now()}${fileExtension}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    downloadTableAsExcel();
+    setShowModal(false);
     try {
       const response = await axios.post("http://localhost:5087/api/GeneratedReport", formData);
       console.log(response.data);
-      alert("added!");
+      
     } catch (error) {
       console.log(error);
-      alert("Not added!");
+     
     }
   };
 
