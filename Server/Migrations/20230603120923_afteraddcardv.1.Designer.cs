@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230602150106_databaseafterimage1")]
-    partial class databaseafterimage1
+    [Migration("20230603120923_afteraddcardv.1")]
+    partial class afteraddcardv1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

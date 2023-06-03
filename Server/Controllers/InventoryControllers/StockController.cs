@@ -1,97 +1,140 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Server.Data;
 using Server.DTOs;
 using Server.Models;
-namespace Server.Data
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Server.Controllers
 {
     [ApiController]
-    [Route("api/[Controller]")]
+    [Route("api/[controller]")]
     public class StockController : ControllerBase
     {
         private readonly DataContext _context;
+
         public StockController(DataContext context)
         {
             _context = context;
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetAllStocks()
+        public async Task<ActionResult<IEnumerable<StockToReturn>>> GetStocks()
         {
-            var allStocks = await _context.Stocks.ToListAsync();
-            return Ok(allStocks);
+            var stocks = await _context.Stocks.ToListAsync();
+
+            var stockToReturnList = new List<StockToReturn>();
+
+            foreach (var stock in stocks)
+            {
+                var stockToReturn = new StockToReturn
+                {
+                    StockId = stock.StockId,
+                    SubCategoryId = stock.SubCategoryId,
+                    PurchasedDate = stock.PurchasedDate,
+                    Cost = stock.Cost,
+                    WarrantyExpiring = stock.WarrantyExpiring,
+                    SupplierId = stock.SupplierId,
+                    Amount = stock.Amount
+                };
+
+                stockToReturnList.Add(stockToReturn);
+            }
+
+            return Ok(stockToReturnList);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<StockToReturn>> GetStock(int id)
+        {
+            var stock = await _context.Stocks.FindAsync(id);
+
+            if (stock == null)
+            {
+                return NotFound();
+            }
+
+            var stockToReturn = new StockToReturn
+            {
+                StockId = stock.StockId,
+                SubCategoryId = stock.SubCategoryId,
+                PurchasedDate = stock.PurchasedDate,
+                Cost = stock.Cost,
+                WarrantyExpiring = stock.WarrantyExpiring,
+                SupplierId = stock.SupplierId,
+                Amount = stock.Amount
+            };
+
+            return Ok(stockToReturn);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddStock([FromBody] StockToInsert stockToInsert)
+        public async Task<ActionResult<StockToReturn>> AddStock(StockToInsert stockToInsert)
         {
-            if (stockToInsert is null)
+            var stock = new Stock
             {
-                return BadRequest();
-            }
-            var st = new Stock
-            {
-                StockId = stockToInsert.StockId,
                 SubCategoryId = stockToInsert.SubCategoryId,
                 PurchasedDate = stockToInsert.PurchasedDate,
+                Cost = stockToInsert.Cost,
                 WarrantyExpiring = stockToInsert.WarrantyExpiring,
                 SupplierId = stockToInsert.SupplierId,
                 Amount = stockToInsert.Amount
-
             };
-            try
-            {
-                await _context.Stocks.AddAsync(st);
-                await _context.SaveChangesAsync();
-            }
-            catch (System.Exception ex)
-            {
 
-                Console.Write(ex.Message);
-                return StatusCode(500);
-            }
-            return Ok(st);
+            _context.Stocks.Add(stock);
+            await _context.SaveChangesAsync();
+
+            var stockToReturn = new StockToReturn
+            {
+                StockId = stock.StockId,
+                SubCategoryId = stock.SubCategoryId,
+                PurchasedDate = stock.PurchasedDate,
+                Cost = stock.Cost,
+                WarrantyExpiring = stock.WarrantyExpiring,
+                SupplierId = stock.SupplierId,
+                Amount = stock.Amount
+            };
+
+            return CreatedAtAction(nameof(GetStock), new { id = stock.StockId }, stockToReturn);
         }
-        [HttpPut("{id}")]
 
-        public async Task<IActionResult> UpdateStock(int id, [FromBody] StockToUpdate stockToUpdate)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateStock(int id, StockToUpdate stockToUpdate)
         {
-            var UpdateStock = await _context.Stocks.FirstOrDefaultAsync(x => x.StockId == id);
-            if (UpdateStock is null)
+            var stock = await _context.Stocks.FindAsync(id);
+
+            if (stock == null)
             {
                 return NotFound();
             }
-            UpdateStock.PurchasedDate = stockToUpdate.PurchasedDate;
-            UpdateStock.Cost = stockToUpdate.Cost;
-            UpdateStock.WarrantyExpiring = stockToUpdate.WarrantyExpiring;
-            UpdateStock.SupplierId = stockToUpdate.SupplierId;
-            UpdateStock.Amount = stockToUpdate.Amount;
 
+            stock.PurchasedDate = stockToUpdate.PurchasedDate;
+            stock.Cost = stockToUpdate.Cost;
+            stock.WarrantyExpiring = stockToUpdate.WarrantyExpiring;
+            stock.SupplierId = stockToUpdate.SupplierId;
+            stock.Amount = stockToUpdate.Amount;
 
+            await _context.SaveChangesAsync();
 
-            try
-            {
-                _context.Update(UpdateStock);
-                await _context.SaveChangesAsync();
-            }
-            catch (System.Exception ex)
-            {
-
-                Console.Write(ex.Message);
-                return StatusCode(500);
-
-            }
-            return Ok();
+            return NoContent();
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStock(int id)
         {
-            var deleteStock = await _context.Stocks.FirstOrDefaultAsync(x => x.StockId == id);
-            if (deleteStock is null)
+            var stock = await _context.Stocks.FindAsync(id);
+
+            if (stock == null)
             {
                 return NotFound();
             }
-            _context.Stocks.Remove(deleteStock);
+
+            _context.Stocks.Remove(stock);
             await _context.SaveChangesAsync();
 
-            return Ok();
-            }
-    }}
+            return NoContent();
+        }
+    }
+}
