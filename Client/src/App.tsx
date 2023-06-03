@@ -213,7 +213,7 @@ const App: React.FC = () => {
         </Route>
 
         {/* Pages */}
-        <Route path="/Category" element={<PrivateRoute />}>
+        <Route path="/Category" >
           <Route
             path="/Category"
             element={
@@ -224,7 +224,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/SubCategory" element={<PrivateRoute />}>
+        <Route path="/SubCategory">
           <Route
             path="/SubCategory"
             element={
@@ -235,7 +235,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/Stock" element={<PrivateRoute />}>
+        <Route path="/Stock">
           <Route
             path="/Stock"
             element={

@@ -1,10 +1,12 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment, ChangeEvent } from "react";
 import { Container, Row, Col, Nav, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "../Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import "../Table/CategoryTable.css";
+import { colors } from "react-select/dist/declarations/src/theme";
 
 function CategoryTable() {
   const [categoryProduct, setCategoryProduct] = useState<any[]>([]);
@@ -76,6 +78,9 @@ function CategoryTable() {
   };
 
 
+
+
+
   return (
     <div>
       <p
@@ -89,37 +94,49 @@ function CategoryTable() {
         Latest Categories
       </p>
       <div
-        className="shadow p-3 bg-white rounded"
-        style={{ margin: "30px 0 0 65px" }}
+        className="shadow p-3 rounded"
+        style={{ margin: "30px 0 0 65px",
+                  backgroundColor: "#Fbf3F3"}}
       >
-        <Fragment>
+        <td>
           <div>
-            <Table
-              className="table w-100 small table-borderless table-responsiv align-middle align-left"
-              hover
-              style={{ fontSize: "14px" }}
-            >
-              <thead className="thead-light">
-                <tr style={{ color: "#482890" }}>
-                  <th>ID</th>
-                  <th>Category_type</th>
-                  <th>Description</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
+          
+              
+           
                 {categoryProduct && categoryProduct.length > 0 ? (
                   categoryProduct.map((category) => {
                     return (
-                      <tr key={category.id}>
-                        <td>{category.id}</td>
-                        <td className="text-secondary">
+                   
+                      <div className="flip-card">
+                      <div className="flip-card-inner">
+                        <div className="flip-card-front">
+
+                       <p> {category.categoryType}</p>
+                     
+                       {category.imageData && (
+                            <img className="img"
+                              src={`data:${category.imageContentType};base64,${category.imageData}`}
+                              alt="Category Image"
+                            />
+                          )}
+                      
+    
+                      </div>
+
+                        <div className="flip-card-back">
+
+                      <div key={category.id}>
+                     
+                        <p className="typeName">
                           {category.categoryType}
-                        </td>
-                        <td className="text-secondary">
+                        </p>
+                        <p className="description">
                           {category.description}
-                        </td>
-                        <td>
+                        </p>
+
+                      
+                       
+                        <p>
                         <FontAwesomeIcon
                             icon={faPen}
                             style={{ color: "482890", cursor: "pointer" }}
@@ -131,8 +148,14 @@ function CategoryTable() {
                             style={{ color: "#FF615A", cursor: "pointer" }}
                             onClick={() => handleDelete(category.id)}
                           />
-                        </td>
-                      </tr>
+                        </p>
+                      
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                      
+                      
                     );
                   })
                 ) : (
@@ -140,10 +163,12 @@ function CategoryTable() {
                     <td colSpan={4}>No data available</td>
                   </tr>
                 )}
-              </tbody>
-            </Table>
+        
+          
           </div>
-        </Fragment>
+          </td>
+          
+      
       </div>
     </div>
   );

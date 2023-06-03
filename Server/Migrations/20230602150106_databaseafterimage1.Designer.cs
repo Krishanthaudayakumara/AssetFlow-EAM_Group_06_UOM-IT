@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230412065547_init")]
-    partial class init
+    [Migration("20230602150106_databaseafterimage1")]
+    partial class databaseafterimage1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -271,7 +271,12 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ImageId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Categories");
                 });
@@ -483,6 +488,27 @@ namespace Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GeneratedReports");
+                });
+
+            modelBuilder.Entity("Server.Models.Image", b =>
+                {
+                    b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"));
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("ImageId");
+
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("Server.Models.Stock", b =>
@@ -953,6 +979,15 @@ namespace Server.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("EmployeeRequest");
+                });
+
+            modelBuilder.Entity("Server.Models.Category", b =>
+                {
+                    b.HasOne("Server.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("Server.Models.Employee", b =>
