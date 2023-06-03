@@ -50,3 +50,13 @@ export const getAccessLog = async (userId: string | undefined) => {
   }
 };
 
+export const getUserProfile = async (username: any, token:string) => {
+  const response = await axios.get(`${API_URL}/users/${username}`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+

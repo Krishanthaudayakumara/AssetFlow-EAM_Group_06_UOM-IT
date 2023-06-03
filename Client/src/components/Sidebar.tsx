@@ -1,54 +1,9 @@
 import React, { useState } from "react";
-import {
-  Nav,
-  Navbar,
-  NavbarBrand,
-  NavItem,
-  NavLink,
-  Dropdown,
-  Row,
-  Col,
-} from "react-bootstrap";
-import {
-  FaAngleDown,
-  FaThLarge,
-  FaBox,
-  FaBuilding,
-  FaFileAlt,
-  FaUsers,
-  FaShippingFast,
-  FaComments,
-  FaCalendarAlt,
-  FaAngleLeft,
-  FaAngleRight,
-  FaUserTie,
-  FaSuitcase,
-} from "react-icons/fa";
+import { Nav, Navbar, NavbarBrand, NavItem, NavLink, Dropdown, Row, Col } from "react-bootstrap";
+import { FaAngleDown, FaThLarge, FaBox, FaBuilding, FaFileAlt, FaUsers, FaShippingFast, FaComments, FaCalendarAlt, FaAngleLeft, FaAngleRight, FaUserTie, FaSuitcase } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 import "../css/Sidebar.css"; // import background image CSS file
-
-// interface SidebarProps {
-//   title: string;
-//   items: {
-//     label: string;
-//     link: string;
-//   }[];
-// }
-
-// const Sidebar: React.FC<SidebarProps> = (props) => {
-//   return (
-//     <Navbar bg="light" expand="lg" className="sidebar">
-//       <NavbarBrand>{props.title}</NavbarBrand>
-//       <Nav className="flex-column">
-//         {props.items.map((item) => (
-//           <NavItem key={item.link}>
-//             <NavLink href={item.link}>{item.label}</NavLink>
-//           </NavItem>
-//         ))}
-//       </Nav>
-//     </Navbar>
-//   );
-// };
 
 const items = [
   { label: "Dashboard", link: "/", icon: FaThLarge },
@@ -57,15 +12,12 @@ const items = [
     link: "/inventory",
     icon: FaBox,
     dropdownItems: [
-      
       { label: "Category", link: "/Category" },
       { label: "SubCategory", link: "/SubCategory" },
       { label: "Stock", link: "/Stock" },
       { label: "Asset", link: "/Asset" },
       { label: "Employee Request", link: "/EmployeeRequest" },
       { label: "Assign", link: "/Assign" },
-     
-
       { label: "Inventory Dashboard", link: "/InventoryDashboard" },
       { label: "Item", link: "/inventory/building2" },
     ],
@@ -75,26 +27,18 @@ const items = [
     icon: FaBuilding,
     link: "/facility",
     dropdownItems: [
-      {label :"Building",link :"/BuildingFloor" },
+      { label: "Building", link: "/BuildingFloor" },
       { label: "Facility Stock", link: "/FacilityStock" },
       { label: "Facility Asset", link: "/FacilityAsset" },
       { label: "Facility Dashboard", link: "/FacilityDashboard" },
-      
       { label: "Building 2", link: "/facility/building2" },
     ],
   },
   { label: "Reports", link: "/report", icon: FaFileAlt },
-  {
-    label: "Users",
-    link: "/user",
-
-    icon: FaUsers,
-  },
+  { label: "Users", link: "/user", icon: FaUsers },
   { label: "Employees", link: "/employee", icon: FaUserTie },
   { label: "Departments", link: "/department", icon: FaSuitcase },
-
   { label: "Suppliers", link: "/supplier", icon: FaShippingFast },
-
   {
     label: "Support",
     icon: FaComments,
@@ -106,15 +50,14 @@ const items = [
       { label: "Issues", link: "/Issues" },
       { label: "My Tickets", link: "/MyTickets" },
       { label: "IT Dashboard", link: "/ITDashboard" },
-
     ],
   },
-  
   { label: "Calendar", link: "/calendar", icon: FaCalendarAlt },
 ];
 
 interface SidebarProps {
   active: string;
+  theme: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
@@ -128,12 +71,11 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   const isMobile = () => {
     return window.innerWidth < 768;
   };
+
   const collapseSideBar = (collapsed: boolean) => {
     const sidebarCol = document.getElementsByClassName("sidebar-col")[0];
-    const comp_sidebar_col =
-      document.getElementsByClassName("comp-sidebar-col")[0];
-    const comp_collapse_col =
-      document.getElementsByClassName("comp-collapse-col")[0];
+    const comp_sidebar_col = document.getElementsByClassName("comp-sidebar-col")[0];
+    const comp_collapse_col = document.getElementsByClassName("comp-collapse-col")[0];
     const contentCol = document.getElementsByClassName("content-col")[0];
     if (collapsed) {
       sidebarCol.className = "sidebar-col col-3";
@@ -152,7 +94,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   return (
     <Row>
       <Col md={10} className="comp-sidebar-col">
-        <Navbar bg="light" expand="lg" className="sidebar">
+        <Navbar bg={props.theme === "dark" ? "dark" : "light"} expand="lg" className="sidebar">
           <div className="sidebar-logo">
             <img
               className="logo-img"
@@ -180,21 +122,18 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                       <span className={collapsed || isMobile() ? "hidden" : ""}>
                         {item.label}
                       </span>
-                      <FaAngleDown
-                        className="dropdown-icon"
-                        style={{ float: "right" }}
-                      />
+                      <FaAngleDown className="dropdown-icon" style={{ float: "right" }} />
                     </div>
                     {openKey === item.label && (
                       <div className="dropdown-collection">
                         {item.dropdownItems.map((dropdownItem) => (
-                          <a
+                          <Link
                             key={dropdownItem.link}
-                            href={dropdownItem.link}
+                            to={dropdownItem.link}
                             className="nav-link sidenav dropdown-item"
                           >
                             {dropdownItem.label}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     )}
@@ -203,19 +142,19 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
               } else {
                 return (
                   <NavItem key={item.link}>
-                    <NavLink
+                    <Link
                       className={`${
                         collapsed || isMobile()
                           ? "side-link-collapsed"
                           : "side-link"
                       } nav-link ${props.active === item.link ? "active" : ""}`}
-                      href={item.link}
+                      to={item.link}
                     >
                       <item.icon fontSize="1.2em" className="side-item mr-2" />
                       <span className={collapsed || isMobile() ? "hidden" : ""}>
                         {item.label}
                       </span>
-                    </NavLink>
+                    </Link>
                   </NavItem>
                 );
               }

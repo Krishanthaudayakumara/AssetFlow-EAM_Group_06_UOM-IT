@@ -43,6 +43,7 @@ import DeletedUsersPage from "./pages/User/DeletedUsersPage";
 import "./App.css";
 import "./css/Buttons.css";
 import jwtDecode from "jwt-decode";
+import ProfilePage from "./pages/User/ProfilePage";
 
 const RoutesConfig: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -66,10 +67,6 @@ const RoutesConfig: React.FC = () => {
   }
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-
-      <Route path="/login" element={<Login />} />
-
       <Route path="/" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/" element={defaultDashboard} />
       </Route>
@@ -103,6 +100,10 @@ const RoutesConfig: React.FC = () => {
         <Route path="/ReportHistory" element={<ReportHistory />} />
       </Route>
 
+
+      <Route path="/profile" element={<PrivateRoute allowedRoles="all" />}>
+        <Route path="/profile" element={<ProfilePage />} />
+      </Route>
       <Route path="/user" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/user" element={<User />} />
       </Route>

@@ -328,6 +328,25 @@ namespace Server.Controllers
             return Ok("Your password has been reset successfully.");
         }
 
+        [HttpPost("change-password")]
+        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDto model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Username);
+            if (user == null)
+            {
+                return BadRequest("Invalid username");
+            }
+
+            var result = await _userManager.ChangePasswordAsync(user, model.PreviousPassword, model.NewPassword);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok("Password changed successfully.");
+        }
+
 
         [HttpGet("users/{userId}/access-log")]
         public async Task<IActionResult> GetUserAccessLog(string userId)
@@ -345,6 +364,59 @@ namespace Server.Controllers
             return Ok(accessLogs);
         }
 
+
+        [HttpGet("users/{username}")]
+        public async Task<IActionResult> GetUserProfile(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userProfile = new UserProfileDto
+            {
+                User = new UserDto
+                {
+                    Id = user.Id,
+                    Username = user.UserName,
+                    Email = user.Email,
+                    Role = user.Role
+                },
+                AccessLogs = await _context.AccessLogs
+                    .Where(log => log.UserId == user.Id)
+                    .Select(log => new AccessLog
+                    {
+                        Id = log.Id,
+                        AccessTime = log.AccessTime,
+                        IPAddress = log.IPAddress,
+                        UserId = log.UserId
+                    })
+                    .ToListAsync(),
+                Employee = await _context.Employees
+                    .Where(e => e.UserId == user.Id)
+                    .Select(e => new EmployeeDto
+                    {
+                        Id = e.Id,
+                        FirstName = e.FirstName,
+                        LastName = e.LastName,
+                        MiddleName = e.MiddleName,
+                        Email = e.Email,
+                        PhoneNumber = e.PhoneNumber,
+                        DateOfBirth = e.DateOfBirth,
+                        HireDate = e.HireDate,
+                        JobTitle = e.JobTitle,
+                        DepartmentId = e.DepartmentId,
+                        UserName = e.User.UserName,
+                        Password = null
+                    })
+                    .FirstOrDefaultAsync()
+            };
+
+            Console.WriteLine(userProfile);
+
+            return Ok(userProfile);
+        }
 
 
     }
