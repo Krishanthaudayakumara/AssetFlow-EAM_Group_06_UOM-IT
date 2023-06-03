@@ -47,7 +47,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/" >
           <Route
             path="/"
             element={
@@ -69,7 +69,7 @@ const App: React.FC = () => {
             }
           />
         </Route>
-        <Route path="/FacilityDashboard" element={<PrivateRoute />}>
+        <Route path="/FacilityDashboard" >
           <Route
             path="/FacilityDashboard"
             element={
@@ -80,7 +80,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/InventoryDashboard" element={<PrivateRoute />}>
+        <Route path="/InventoryDashboard" >
           <Route
             path="/InventoryDashboard"
             element={
@@ -124,7 +124,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/employee" element={<PrivateRoute />}>
+        <Route path="/employee" >
           <Route
             path="/employee"
             element={
@@ -135,7 +135,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/department" element={<PrivateRoute />}>
+        <Route path="/department" >
           <Route
             path="/department"
             element={
@@ -157,7 +157,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/supplier" element={<PrivateRoute />}>
+        <Route path="/supplier" >
           <Route
             path="/supplier"
             element={
@@ -213,7 +213,7 @@ const App: React.FC = () => {
         </Route>
 
         {/* Pages */}
-        <Route path="/Category" element={<PrivateRoute />}>
+        <Route path="/Category" >
           <Route
             path="/Category"
             element={
@@ -224,7 +224,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/SubCategory" element={<PrivateRoute />}>
+        <Route path="/SubCategory" >
           <Route
             path="/SubCategory"
             element={
@@ -235,7 +235,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/Stock" element={<PrivateRoute />}>
+        <Route path="/Stock" >
           <Route
             path="/Stock"
             element={
@@ -246,7 +246,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/BuildingFloor" element={<PrivateRoute />}>
+        <Route path="/BuildingFloor" >
           <Route
             path="/BuildingFloor"
             element={
@@ -256,7 +256,7 @@ const App: React.FC = () => {
             }
           />
         </Route>
-        <Route path="/AssignAsset" element={<PrivateRoute />}>
+        <Route path="/AssignAsset" >
           <Route
             path="/AssignAsset"
             element={
@@ -266,7 +266,7 @@ const App: React.FC = () => {
             }
           />
         </Route>
-        <Route path="/FacilityAsset" element={<PrivateRoute />}>
+        <Route path="/FacilityAsset" >
           <Route
             path="/FacilityAsset"
             element={
@@ -277,7 +277,7 @@ const App: React.FC = () => {
           />
         </Route>
 
-        <Route path="/FacilityStock" element={<PrivateRoute />}>
+        <Route path="/FacilityStock" >
           <Route
             path="/FacilityStock"
             element={
