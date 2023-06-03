@@ -1,60 +1,26 @@
-import React from 'react'
-import { Container, Row, Col, Table } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Table } from 'react-bootstrap';
 import {
   faBox,
   faTicket,
   faUser,
   faWarehouse,
-} from '@fortawesome/free-solid-svg-icons'
-import PieChart from '../../components/Dashboard/PieChart'
-import BarChart from '../../components/Dashboard/BarChart'
-import LineChart from '../../components/Dashboard/LineChart'
-import Card from '../../components/Dashboard/Card'
-import '../../css/Home.css'
+} from '@fortawesome/free-solid-svg-icons';
+import PieChart from '../../components/Dashboard/PieChart';
+import BarChart from '../../components/Dashboard/BarChart';
+import LineChart from '../../components/Dashboard/LineChart';
+import Card from '../../components/Dashboard/Card';
+import '../../css/Home.css';
+import axios from 'axios';
 
-
-const data = [
-  {
-    id: '1',
-    User: 'Krish',
-    UserName: '@mark',
-    Role: 'krish',
-    Department: 'Krish',
-    Email: 'Krish',
-    JoinedDate: 'Krish',
-    Actions: 'Krish',
-  },
-  {
-    id: '2',
-    User: 'Vidath',
-    UserName: '@Sam',
-    Role: 'krish',
-    Department: 'Krish',
-    Email: 'Krish',
-    JoinedDate: 'Krish',
-    Actions: 'Krish',
-  },
-  {
-    id: '3',
-    User: 'Chamudi',
-    UserName: '@jane',
-    Role: 'krish',
-    Department: 'Krish',
-    Email: 'Krish',
-    JoinedDate: 'Krish',
-    Actions: 'Krish',
-  },
-  {
-    id: '1',
-    User: 'Krish',
-    UserName: '@mark',
-    Role: 'krish',
-    Department: 'Krish',
-    Email: 'Krish',
-    JoinedDate: 'Krish',
-    Actions: 'Krish',
-  },
-]
+interface Employee {
+  id: number;
+  username: string;
+  role: string;
+  department: string;
+  email: string;
+  hireDate: string;
+}
 
 const Linedata = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -66,7 +32,8 @@ const Linedata = {
       backgroundColor: '#482890',
     },
   ],
-}
+};
+
 const Lineoptions = {
   responsive: true,
   plugins: {
@@ -78,7 +45,7 @@ const Lineoptions = {
       text: 'Line Chart',
     },
   },
-}
+};
 
 const options = {
   scales: {
@@ -91,29 +58,83 @@ const options = {
     y: {
       title: {
         display: true,
-        text: 'Quanty',
+        text: 'Quantity',
       },
     },
   },
-}
+};
 
 const Dashboard: React.FC = () => {
- return (
+  const [availableEmployeeCount, setAvailableEmployeeCount] = useState<number>(0);
+  const [availableAgentCount, setAvailableAgentCount] = useState<number>(0);
+  const [totalWorkstations, setTotalWorkstations] = useState(0);
+  const [totalFacilityAssets, setFacilityAssets] = useState(0);
+  const [employeeData, setEmployeeData] = useState<Employee[]>([]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:5087/MainDashboard/availableEmployeeCount')
+      .then((response) => {
+        setAvailableEmployeeCount(response.data.availableEmployeeCount);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    axios
+      .get('http://localhost:5087/ITDashboard/available-agent-count')
+      .then((response) => {
+        setAvailableAgentCount(response.data.availableAgentCount);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    axios
+      .get('http://localhost:5087/FacilityDashboard/total-workstations')
+      .then((response) => {
+        setTotalWorkstations(response.data.totalWorkstations);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
+      .get('http://localhost:5087/FacilityDashboard/total-facility-assets')
+      .then((response) => {
+        setFacilityAssets(response.data.totalFacilityAssets);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    axios
+      .get('http://localhost:5087/MainDashboard/employee-table')
+      .then((response) => {
+        setEmployeeData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  return (
     <div>
       <Container>
-         {/* code for Card component */}
-        <div className="row mb-3" style={{ margin: '0px 0 0 65px' }}>
-          <Card name="Available userss" quantity={87} icon={faUser} />
-          <Card name="Toatal Inventory" quantity={67} icon={faBox} />
-          <Card name="Asign assets" quantity={57} icon={faWarehouse} />
-          <Card name="Toatal Inventory" quantity={87} icon={faTicket} />
+        {/* code for Card component */}
+        <div className="row mb-3" style={{ margin: '0px 0 0 0px' }}>
+          <Card name="Available users" quantity={availableEmployeeCount} icon={faUser} />
+          <Card name="Available Agents" quantity={availableAgentCount} icon={faBox} />
+          <Card name="Total Workstation" quantity={totalWorkstations} icon={faWarehouse} />
+          <Card name="Total Facility Assets" quantity={totalFacilityAssets} icon={faTicket} />
         </div>
         <h1 style={{ margin: '0px 0 0 65px' }}>Inventory Summary</h1>
 
         <div
           className="shadow p-3 mb-5 bg-white rounded"
-          style={{ margin: '0px 2px 2px 65px' }}
-        > {/* code for BarChart component */}
+          style={{ margin: '0px 2px 2px 0px' }}
+        >
+          {/* code for BarChart component */}
           <BarChart
             data={{
               labels: [
@@ -153,53 +174,54 @@ const Dashboard: React.FC = () => {
           <Row>
             <Col md={6}>
               <div
-                className="shadow p-3 mb-5 bg-white rounded"
+                className="shadow p-1 mb-2 bg-white rounded"
                 style={{
-                  paddingTop: '100px',
-                  height: '400px',
-                  margin: '0px 0 0 65px',
+                  paddingTop: '50px',
+                  height: '450px',
+                  margin: '0px 0 0 0px',
                   alignContent: 'center',
                 }}
-              > {/* code for LineChart component */}
+              >
+                {/* code for LineChart component */}
                 <LineChart Linedata={Linedata} Lineoptions={Lineoptions} />
               </div>
             </Col>
             <Col md={6}>
-              <div className="shadow p-3 mb-5 bg-white rounded">
-                 {/* code for PieChart component */}
+              <div
+                className="shadow p-2 mb-5 bg-white rounded"
+                style={{
+                  height: '450px',
+                  alignContent: 'center',
+                }}
+              >
+                {/* code for PieChart component */}
                 <PieChart />
               </div>
             </Col>
           </Row>
         </div>
 
-        <hr />
-
         <div>
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>id</th>
-                <th>User</th>
-                <th>User Name</th>
+             
+                <th>Username</th>
                 <th>Role</th>
                 <th>Department</th>
                 <th>Email</th>
-                <th>Joined date</th>
-                <th>Actions</th>
+                <th>Join date</th>
               </tr>
             </thead>
             <tbody>
-              {data.map((item) => (
-                <tr>
-                  <td>{item.id}</td>
-                  <td>{item.User}</td>
-                  <td>{item.UserName}</td>
-                  <td>{item.Role}</td>
-                  <td>{item.Department}</td>
-                  <td>{item.Email}</td>
-                  <td>{item.JoinedDate}</td>
-                  <td>{item.Actions}</td>
+              {employeeData.map((employee) => (
+                <tr key={employee.id}>
+                  
+                  <td>{employee.username}</td>
+                  <td>{employee.role}</td>
+                  <td>{employee.department}</td>
+                  <td>{employee.email}</td>
+                  <td>{employee.hireDate}</td>
                 </tr>
               ))}
             </tbody>
@@ -207,7 +229,8 @@ const Dashboard: React.FC = () => {
         </div>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
+
