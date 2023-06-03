@@ -35,5 +35,32 @@ namespace Server.Controllers
             TotalWorkstation totalWorkstationDTO = new TotalWorkstation { TotalWorkstations = totalWorkstations };
             return Ok(totalWorkstationDTO);
         }
+         [HttpGet("asset-status")]
+        public ActionResult<FacilityStatusDTO> GetAssetStatusCounts()
+        {
+            var assetStatusCounts = new FacilityStatusDTO
+            {
+                NewCount = _context.FacilityAssets.Count(asset => asset.AssetConditionStatus == "New"),
+                UseCount = _context.FacilityAssets.Count(asset => asset.AssetConditionStatus == "Use"),
+                DamageCount = _context.FacilityAssets.Count(asset => asset.AssetConditionStatus == "Damage")
+            };
+
+            return Ok(assetStatusCounts);
+        }
+         [HttpGet("workstation-asset-count")]
+        public ActionResult<List<WorkstationAssetCountDTO>> GetWorkstationAssetCounts()
+        {
+            // Retrieve the data from the database
+            var workstationAssetCounts = _context.Workstations
+                .Select(w => new WorkstationAssetCountDTO
+                {
+                    WorkstationId = w.Id,
+                    NotAssignedCount = w.FacilityAssets.Count(a => a.AssignStatus == null),
+                    AssignedCount = w.FacilityAssets.Count(a => a.AssignStatus != null)
+                })
+                .ToList();
+
+            return workstationAssetCounts;
+        }
     }
 }

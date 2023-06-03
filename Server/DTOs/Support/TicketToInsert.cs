@@ -9,7 +9,6 @@ namespace Server.DTOs.Support
         public int IssueTypeId { get; set; }
         public string Problem { get; set; }
         public DateTime SubmitDate { get; set; }
-        public int AgentId { get; set; }
         public string TicketStatus { get; set; }
 
     }

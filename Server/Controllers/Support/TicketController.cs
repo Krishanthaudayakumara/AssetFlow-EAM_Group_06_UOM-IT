@@ -48,7 +48,6 @@ namespace Server.Controllers.Support
                 IssueTypeId = ticketToInsert.IssueTypeId,
                 Problem = ticketToInsert.Problem,
                 SubmitDate = ticketToInsert.SubmitDate,
-                AgentId = null,
                 TicketStatus = ticketToInsert.TicketStatus,             
 
             };
