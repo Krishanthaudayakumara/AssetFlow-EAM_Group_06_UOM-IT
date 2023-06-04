@@ -218,109 +218,109 @@ namespace Server.Controllers.InventoryControllers
             return File(imageData, "image/png");
         }
 
-        // POST: api/assets/stock
-       [HttpPost("stock")]
-       public async Task<ActionResult<StockToReturn>> AddStock([FromBody] StockToInsert stockToInsert)
-        {
-            var stock = new Stock
-            {
-                SubCategoryId = stockToInsert.SubCategoryId,
-                PurchasedDate = stockToInsert.PurchasedDate,
-                Cost = stockToInsert.Cost,
-                WarrantyExpiring = stockToInsert.WarrantyExpiring,
-                SupplierId = stockToInsert.SupplierId,
-                Amount = stockToInsert.Amount
-            };
+    //     // POST: api/assets/stock
+    //    [HttpPost("stock")]
+    //    public async Task<ActionResult<StockToReturn>> AddStock([FromBody] StockToInsert stockToInsert)
+    //     {
+    //         var stock = new Stock
+    //         {
+    //             SubCategoryId = stockToInsert.SubCategoryId,
+    //             PurchasedDate = stockToInsert.PurchasedDate,
+    //             Cost = stockToInsert.Cost,
+    //             WarrantyExpiring = stockToInsert.WarrantyExpiring,
+    //             SupplierId = stockToInsert.SupplierId,
+    //             Amount = stockToInsert.Amount
+    //         };
 
-            _context.Stocks.Add(stock);
-            await _context.SaveChangesAsync();
+    //         _context.Stocks.Add(stock);
+    //         await _context.SaveChangesAsync();
 
-            // Create asset records based on the stock amount
-            for (int i = 0; i < stock.Amount; i++)
-            {
-                var assetToCreate = new AssetToCreate
-                {
-                    Description = stockToInsert.Description,
-                    Vendor = stockToInsert.Vendor,
-                    Status = stockToInsert.Status,
-                    Condition = stockToInsert.Condition,
-                    WarrantyExpiration = stockToInsert.WarrantyExpiration,
-                    StockId = stock.StockId
-                };
+    //         // Create asset records based on the stock amount
+    //         for (int i = 0; i < stock.Amount; i++)
+    //         {
+    //             var assetToCreate = new AssetToCreate
+    //             {
+    //                 Description = stockToInsert.Description,
+    //                 Vendor = stockToInsert.Vendor,
+    //                 Status = stockToInsert.Status,
+    //                 Condition = stockToInsert.Condition,
+    //                 WarrantyExpiration = stockToInsert.WarrantyExpiration,
+    //                 StockId = stock.StockId
+    //             };
 
-                await CreateAsset(assetToCreate);
-            }
+    //             await CreateAsset(assetToCreate);
+    //         }
 
-            var stockToReturn = new StockToReturn
-            {
-                StockId = stock.StockId,
-                SubCategoryId = stock.SubCategoryId,
-                PurchasedDate = stock.PurchasedDate,
-                Cost = stock.Cost,
-                WarrantyExpiring = stock.WarrantyExpiring,
-                SupplierId = stock.SupplierId,
-                Amount = stock.Amount
-            };
+    //         var stockToReturn = new StockToReturn
+    //         {
+    //             StockId = stock.StockId,
+    //             SubCategoryId = stock.SubCategoryId,
+    //             PurchasedDate = stock.PurchasedDate,
+    //             Cost = stock.Cost,
+    //             WarrantyExpiring = stock.WarrantyExpiring,
+    //             SupplierId = stock.SupplierId,
+    //             Amount = stock.Amount
+    //         };
 
-            return CreatedAtAction(nameof(GetStock), new { id = stock.StockId }, stockToReturn);
-        }
+    //         return CreatedAtAction(nameof(GetStock), new { id = stock.StockId }, stockToReturn);
+    //     }
 
-        private async Task CreateAsset(AssetToCreate assetToCreate)
-        {
-            // Generate barcode image
-            var writer = new BarcodeWriterPixelData
-            {
-                Format = BarcodeFormat.CODE_128,
-                Options = new EncodingOptions
-                {
-                    Width = 400,
-                    Height = 200
-                }
-            };
+    //     private async Task CreateAsset(AssetToCreate assetToCreate)
+    //     {
+    //         // Generate barcode image
+    //         var writer = new BarcodeWriterPixelData
+    //         {
+    //             Format = BarcodeFormat.CODE_128,
+    //             Options = new EncodingOptions
+    //             {
+    //                 Width = 400,
+    //                 Height = 200
+    //             }
+    //         };
 
-            // Generate a random barcode value
-            var barcodeValue = GenerateRandomBarcode();
+    //         // Generate a random barcode value
+    //         var barcodeValue = GenerateRandomBarcode();
 
-            // Create the barcode image
-            var pixelData = writer.Write(barcodeValue);
+    //         // Create the barcode image
+    //         var pixelData = writer.Write(barcodeValue);
 
-            // Convert the BarcodeWriterPixelData to a Bitmap
-            using (var bitmap = new Bitmap(pixelData.Width, pixelData.Height, PixelFormat.Format32bppRgb))
-            {
-                using (var ms = new MemoryStream())
-                {
-                    var bitmapData = bitmap.LockBits(new Rectangle(0, 0, pixelData.Width, pixelData.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppRgb);
-                    try
-                    {
-                        System.Runtime.InteropServices.Marshal.Copy(pixelData.Pixels, 0, bitmapData.Scan0, pixelData.Pixels.Length);
-                    }
-                    finally
-                    {
-                        bitmap.UnlockBits(bitmapData);
-                    }
+    //         // Convert the BarcodeWriterPixelData to a Bitmap
+    //         using (var bitmap = new Bitmap(pixelData.Width, pixelData.Height, PixelFormat.Format32bppRgb))
+    //         {
+    //             using (var ms = new MemoryStream())
+    //             {
+    //                 var bitmapData = bitmap.LockBits(new Rectangle(0, 0, pixelData.Width, pixelData.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppRgb);
+    //                 try
+    //                 {
+    //                     System.Runtime.InteropServices.Marshal.Copy(pixelData.Pixels, 0, bitmapData.Scan0, pixelData.Pixels.Length);
+    //                 }
+    //                 finally
+    //                 {
+    //                     bitmap.UnlockBits(bitmapData);
+    //                 }
 
-                    // Save the Bitmap as PNG and convert to Base64 string
-                    bitmap.Save(ms, ImageFormat.Png);
-                    var base64Image = Convert.ToBase64String(ms.ToArray());
-                    assetToCreate.BarcodeImageBase64 = base64Image;
-                }
-            }
+    //                 // Save the Bitmap as PNG and convert to Base64 string
+    //                 bitmap.Save(ms, ImageFormat.Png);
+    //                 var base64Image = Convert.ToBase64String(ms.ToArray());
+    //                 assetToCreate.BarcodeImageBase64 = base64Image;
+    //             }
+    //         }
 
-            var asset = new Asset
-            {
-                Barcode = barcodeValue,
-                Description = assetToCreate.Description,
-                Vendor = assetToCreate.Vendor,
-                Status = assetToCreate.Status,
-                Condition = assetToCreate.Condition,
-                WarrantyExpiration = assetToCreate.WarrantyExpiration,
-                StockId = assetToCreate.StockId,
-                BarcodeImageBase64 = assetToCreate.BarcodeImageBase64
-            };
+    //         var asset = new Asset
+    //         {
+    //             Barcode = barcodeValue,
+    //             Description = assetToCreate.Description,
+    //             Vendor = assetToCreate.Vendor,
+    //             Status = assetToCreate.Status,
+    //             Condition = assetToCreate.Condition,
+    //             WarrantyExpiration = assetToCreate.WarrantyExpiration,
+    //             StockId = assetToCreate.StockId,
+    //             BarcodeImageBase64 = assetToCreate.BarcodeImageBase64
+    //         };
 
-            _context.Assets.Add(asset);
-            await _context.SaveChangesAsync();
-        }
+    //         _context.Assets.Add(asset);
+    //         await _context.SaveChangesAsync();
+    //     }
 
 
         // DELETE: api/assets/{id}
