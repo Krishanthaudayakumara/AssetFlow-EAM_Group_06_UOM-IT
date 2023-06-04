@@ -9,16 +9,19 @@ interface chartData {
         label: string
         data: number[]
         backgroundColor: string
+        barThickness: number;
       },
       {
         label: string
         data: number[]
         backgroundColor: string
+        barThickness: number;
       },
       {
         label: string
         data: number[]
         backgroundColor: string
+        barThickness: number;
       },
     ]
   }
