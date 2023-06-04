@@ -19,18 +19,6 @@ import Supplier from "./pages/Supplier/Supplier";
 import "./App.css";
 import "./css/Buttons.css";
 
-import CategoryTable from "./components/Inventory/Table/CategoryTable";
-import Category from "./pages/Inventory/Category";
-import CategoryPopupForm from "./components/Inventory/Form/CategoryPopupForm";
-
-import SubCategoryTable from "./components/Inventory/Table/SubCategoryTable";
-import SubCategory from "./pages/Inventory/SubCategory";
-import SubCategoryPopupForm from "./components/Inventory/Form/SubCategoryPopupForm";
-
-import StockTable from "./components/Inventory/Table/StockTable";
-import Stock from "./pages/Inventory/Stock";
-import StockPopupForm from "./components/Inventory/Form/StockPopupForm";
-
 import FacilityAsset from "./pages/Facility/FacilityAsset";
 import FacilityStock from "./pages/Facility/FacilityStock";
 
@@ -40,6 +28,9 @@ import FacilityDashboard from "./pages/Dashboard/FacilityDashboard";
 import InventoryDashboard from "./pages/Dashboard/InventoryDashboard";
 import ITDashboard from "./pages/Dashboard/ITDashboard";
 import ReportHistory from "./components/Report/ReportHistory";
+import CategoryPage from "./pages/Inventory/Category/CategoryPage";
+import SubCategoryPage from "./pages/Inventory/Category/SubCategoryPage";
+import CategoryDetailPage from "./pages/Inventory/Category/CategoryDetailPage";
 
 const App: React.FC = () => {
   return (
@@ -58,8 +49,39 @@ const App: React.FC = () => {
           />
         </Route>
 
+        <Route path="category" element={<PrivateRoute />}>
+          <Route
+            path="/category"
+            element={
+              <Wrapper>
+                <CategoryPage />
+              </Wrapper>
+            }
+          />
+        </Route>
+        <Route path="subcategory" element={<PrivateRoute />}>
+          <Route
+            path="/subcategory"
+            element={
+              <Wrapper>
+                <SubCategoryPage />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/categories/:id" element={<PrivateRoute />}>
+          <Route
+            path="/categories/:id"
+            element={
+              <Wrapper>
+                <CategoryDetailPage />
+              </Wrapper>
+            }
+          />
+        </Route>
+
         <Route path="Report" element={<PrivateRoute />}>
-          "
           <Route
             path="/Report"
             element={
@@ -207,40 +229,6 @@ const App: React.FC = () => {
             element={
               <Wrapper>
                 <Issues />
-              </Wrapper>
-            }
-          />
-        </Route>
-
-        {/* Pages */}
-        <Route path="/Category" >
-          <Route
-            path="/Category"
-            element={
-              <Wrapper>
-                <Category />
-              </Wrapper>
-            }
-          />
-        </Route>
-
-        <Route path="/SubCategory">
-          <Route
-            path="/SubCategory"
-            element={
-              <Wrapper>
-                <SubCategory />
-              </Wrapper>
-            }
-          />
-        </Route>
-
-        <Route path="/Stock">
-          <Route
-            path="/Stock"
-            element={
-              <Wrapper>
-                <Stock />
               </Wrapper>
             }
           />

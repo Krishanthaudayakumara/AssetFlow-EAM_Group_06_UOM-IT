@@ -1,0 +1,22 @@
+.subcategory-card {
+    width: 18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  
+  .subcategory-card img {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .subcategory-card .card-body {
+    padding: 1rem;
+  }
+  
+  .subcategory-card .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  

@@ -67,7 +67,6 @@ namespace Server.Controllers
                         {
                             AssetId = asset.Asset.Id,
                             Description = asset.Asset.Description,
-                            Vendor = asset.Asset.Vendor,
                             SubCategoryId = asset.Asset.StockId,
                             CategoryId = asset.Asset.Stock.SubCategoryId,
                             FacilityAssetId = asset.Id

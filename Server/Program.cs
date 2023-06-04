@@ -17,6 +17,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using CloudinaryDotNet;
+using Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +36,6 @@ builder.Services.AddControllers().AddJsonOptions(o =>
     o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     o.JsonSerializerOptions.IgnoreReadOnlyProperties = true;
 });
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -56,8 +57,6 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -77,8 +76,17 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
 });
+
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
+
+// Cloudinary Configuration
+var cloudinaryConfig = builder.Configuration.GetSection("Cloudinary");
+var cloudName = cloudinaryConfig["CloudName"];
+var apiKey = cloudinaryConfig["ApiKey"];
+var apiSecret = cloudinaryConfig["ApiSecret"];
+
+builder.Services.AddScoped<CloudinaryService>(sp => new CloudinaryService(cloudName, apiKey, apiSecret));
 
 var app = builder.Build();
 
@@ -88,6 +96,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseStaticFiles(); // For the wwwroot folder
 
 app.UseStaticFiles(new StaticFileOptions()
@@ -97,12 +106,9 @@ app.UseStaticFiles(new StaticFileOptions()
     RequestPath = new PathString("/ProfileImages")
 });
 
-
 app.UseCors("AllowAll");
 
 app.UseRouting();
-
-
 
 app.UseAuthorization();
 
@@ -112,8 +118,5 @@ app.UseEndpoints(endpoints =>
 });
 
 app.UseHttpsRedirection();
-
-
-app.MapControllers();
 
 app.Run();

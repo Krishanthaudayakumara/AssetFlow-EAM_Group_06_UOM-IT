@@ -1,123 +1,123 @@
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using Server.Data;
 using Server.DTOs;
 using Server.Models;
-namespace Server.Data
+using Server.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Server.Controllers
 {
     [ApiController]
-    [Route("api/[Controller]")]
+    [Route("api/[controller]")]
     public class SubCategoryController : ControllerBase
     {
         private readonly DataContext _context;
-        public SubCategoryController(DataContext context)
+        private readonly CloudinaryService _cloudinaryService;
+
+        public SubCategoryController(DataContext context, CloudinaryService cloudinaryService)
         {
             _context = context;
-        }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSubCategory(int id)
-        {
-            var subcategory = await _context.SubCategories.FirstOrDefaultAsync(X => X.Id == id);
-            if (subcategory is null)
-            {
-                return NotFound();
-            }
-            var subCategoryToReturn = new SubCategoryToReturn
-            {
-                Id = subcategory.Id,
-                SubCategoryType = subcategory.SubCategoryType,
-                CategoryId = subcategory.CategoryId,
-            };
-
-            return Ok(subCategoryToReturn);
-
+            _cloudinaryService = cloudinaryService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetSubCategories()
+        public async Task<ActionResult<IEnumerable<SubCategory>>> GetSubCategories()
         {
             var subCategories = await _context.SubCategories.ToListAsync();
+            return Ok(subCategories);
+        }
 
-            if (subCategories is null)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SubCategory>> GetSubCategory(int id)
+        {
+            var subCategory = await _context.SubCategories.FindAsync(id);
+
+            if (subCategory == null)
             {
                 return NotFound();
             }
 
-            foreach (var subCategory in subCategories)
-            {
-                var SubCategoryToReturn = new SubCategoryToReturn
-                {
-                    Id = subCategory.Id,
-                    SubCategoryType = subCategory.SubCategoryType,
-                    CategoryId = subCategory.CategoryId,
-                };
-            }
+            return Ok(subCategory);
+        }
+
+
+        [HttpGet("category/{categoryId}")]
+        public async Task<ActionResult<IEnumerable<SubCategory>>> GetSubCategoriesByCategoryId(int categoryId)
+        {
+            var subCategories = await _context.SubCategories
+                .Where(sc => sc.CategoryId == categoryId)
+                .ToListAsync();
 
             return Ok(subCategories);
         }
 
 
 
-        [HttpPost] 
-       public async Task<IActionResult> AddSubCategory([FromBody]  SubCategoryToInsert subcategoryToInsert){
-        if(subcategoryToInsert is null){
-            return BadRequest();
-        }
-        var sub = new SubCategory{
-                SubCategoryType = subcategoryToInsert.SubCategoryType,
-                CategoryId = subcategoryToInsert.CategoryId,
-           
-        };
-        try{
-            await _context.SubCategories.AddAsync(sub);
-            await _context.SaveChangesAsync();
-        }
-        catch (System.Exception ex){
-            Console.Write(ex.Message);
-            return StatusCode(500);
-        }
-        return Ok(sub);
-       }
-       [HttpPut("{id}")]
-
-        public async Task<IActionResult> UpdateSubCategory(int id, [FromBody] SubCategoryToUpdate subCategoryToUpdate)
+        [HttpPost]
+        public async Task<ActionResult<SubCategory>> CreateSubCategory([FromForm] SubCategoryDTO subCategoryDTO)
         {
-            var UpdateSubCategory = await _context.SubCategories.FirstOrDefaultAsync(x => x.Id == id);
-            if (UpdateSubCategory is null)
+            var imageUrl = await _cloudinaryService.UploadImage(subCategoryDTO.Image);
+
+            var subCategory = new SubCategory
+            {
+                Name = subCategoryDTO.Name,
+                ImageUrl = imageUrl,
+                CategoryId = subCategoryDTO.CategoryId
+            };
+
+            _context.SubCategories.Add(subCategory);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetSubCategory", new { id = subCategory.Id }, subCategory);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditSubCategory(int id, [FromForm] SubCategoryDTO subCategoryDTO)
+        {
+            if (id != subCategoryDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            var subCategory = await _context.SubCategories.FindAsync(id);
+            if (subCategory == null)
             {
                 return NotFound();
             }
-                UpdateSubCategory.SubCategoryType = subCategoryToUpdate.SubCategoryType;
-               
 
-            try
+            subCategory.Name = subCategoryDTO.Name;
+            subCategory.CategoryId = subCategoryDTO.CategoryId;
+
+            if (subCategoryDTO.Image != null)
             {
-                _context.Update(UpdateSubCategory);
-                await _context.SaveChangesAsync();
+                subCategory.ImageUrl = await _cloudinaryService.UploadImage(subCategoryDTO.Image);
             }
-            catch (System.Exception ex)
-            {
 
-                Console.Write(ex.Message);
-                return StatusCode(500);
+            _context.Entry(subCategory).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
-            }
-            return Ok();
+            return NoContent();
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSubCategory(int id)
         {
-            var deleteSubCategory = await _context.SubCategories.FirstOrDefaultAsync(x => x.Id == id);
-            if (deleteSubCategory is null)
+            var subCategory = await _context.SubCategories.FindAsync(id);
+            if (subCategory == null)
             {
                 return NotFound();
             }
-            _context.SubCategories.Remove(deleteSubCategory);
+
+            _context.SubCategories.Remove(subCategory);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return NoContent();
         }
-
     }
-
 }

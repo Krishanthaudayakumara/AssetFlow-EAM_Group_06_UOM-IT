@@ -20,15 +20,13 @@ namespace Server.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<ExternalWorker> ExternalWorkers { get; set; }
 
-        public DbSet<Supplier> Suppliers { get; set; }
-
-
-        public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<Asset> Assets { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Stock> Stocks { get; set; }
-        public DbSet<Asset> Assets { get; set; }
-        public DbSet<EmployeeRequest> EmployeeRequests { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Assign> Assigns { get; set; }
+        public DbSet<EmployeeRequest> EmployeeRequests { get; set; }
 
         public DbSet<FacilityAsset> FacilityAssets { get; set; }
 
@@ -44,22 +42,20 @@ namespace Server.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Assign>(entity =>
-            {
-                entity.HasOne(a => a.Employee)
-                    .WithMany(e => e.Assigns)
-                    .HasForeignKey(a => a.EmployeeId)
-                    .OnDelete(DeleteBehavior.Restrict);
+    {
+        modelBuilder.Entity<Asset>()
+            .HasOne(a => a.Stock)
+            .WithMany(s => s.Assets)
+            .HasForeignKey(a => a.StockId)
+            .OnDelete(DeleteBehavior.Cascade);
+    });
 
-                entity.HasOne(a => a.Asset)
-                    .WithMany()
-                    .HasForeignKey(a => a.AssetId)
-                    .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(a => a.EmployeeRequest)
-                    .WithMany(er => er.Assigns)
-                    .HasForeignKey(a => a.ReqID)
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
+            // Remove cascade behavior for SubCategories
+            modelBuilder.Entity<Stock>()
+                .HasOne(s => s.SubCategory)
+                .WithMany()
+                .HasForeignKey(s => s.SubCategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
