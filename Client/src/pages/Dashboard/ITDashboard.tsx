@@ -201,6 +201,7 @@ const ITDashboard = () => {
                     (satisfaction) => satisfaction.goodCount,
                   ),
                   backgroundColor: '#482890',
+                  barThickness: 50,
                 },
                 {
                   label: 'Better',
@@ -208,6 +209,7 @@ const ITDashboard = () => {
                     (satisfaction) => satisfaction.betterCount,
                   ),
                   backgroundColor: '#ff615a',
+                  barThickness: 50,
                 },
                 {
                   label: 'Worst',
@@ -215,6 +217,7 @@ const ITDashboard = () => {
                     (satisfaction) => satisfaction.worstCount,
                   ),
                   backgroundColor: 'yellow',
+                  barThickness: 50,
                 },
               ],
             }}
