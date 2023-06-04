@@ -8,10 +8,14 @@ interface teamType {
   description: string;
   issueTypeId: number;
 }
-
+interface issueType{
+  id: number;
+  name: string;
+}
 interface EditTeamFormProps {
   showModal: boolean;
   selectedTeam: teamType | null;
+  issues: issueType[];
   handleModalClose: () => void;
   handleUpdateTeam: () => void;
   setSelectedTeam: React.Dispatch<React.SetStateAction<teamType | null>>;
@@ -20,6 +24,7 @@ interface EditTeamFormProps {
 const EditTeamForm: React.FC<EditTeamFormProps> = ({
   showModal,
   selectedTeam,
+  issues,
   handleModalClose,
   handleUpdateTeam,
   setSelectedTeam,
@@ -84,11 +89,9 @@ const EditTeamForm: React.FC<EditTeamFormProps> = ({
               <Form.Group>
                 {" "}
                 <Form.Label>Issue Type</Form.Label>{" "}
-                <Form.Control
-                  type="number"
-                  placeholder="Issue Type *"
-                  required
-                  name="issueTypeId"
+                <Form.Select
+                  aria-label="Default select example"
+                  name="teamId"
                   value={selectedTeam.issueTypeId}
                   onChange={(e) =>
                     setSelectedTeam({
@@ -96,7 +99,14 @@ const EditTeamForm: React.FC<EditTeamFormProps> = ({
                       issueTypeId: Number(e.target.value),
                     })
                   }
-                />{" "}
+                >
+                  <option value="">Select Team</option>
+                  {issues.map((issue) => (
+                    <option key={issue.id} value={issue.id}>
+                      {issue.name}
+                    </option>
+                  ))}
+                </Form.Select>{" "}
               </Form.Group>
             </form>
           </Modal.Body>

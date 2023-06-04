@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import "../../../css/Support/Support.css";
+import DefaultProfilePicture from "../DefaultProfilePicture";
 
 interface ticketType {
   id: number;
@@ -16,8 +17,22 @@ interface ticketType {
   agentId: number;
   ticketStatus: number;
 }
+interface agentType{
+  id: number;
+  name: string;
+}
 const TicketTable = () => {
   const [tickets, setTickets] = useState<ticketType[]>([]);
+  const [agents, setAgents] = useState<agentType[]>([]);
+
+  useEffect(() => {
+    const fetchAgents = async () => {
+      const response = await axios.get("http://localhost:5087/Api/Agent");
+      setAgents(response.data);
+    };
+    fetchAgents();
+  }, []);
+  
   useEffect(() => {
     axios
       .get("http://localhost:5087/Api/Ticket")
@@ -35,9 +50,10 @@ const TicketTable = () => {
           <div>
             <Table className="support-table">
               <thead>
-                <tr style={{ color: "#482890" }}>                  
+                <tr style={{ color: "#482890" }}>
+                <th style={{ width: "60px" }}></th>                  
                   <th>Problem</th>
-                  <th>Submit Date</th>
+                  <th>Submit Date & Time</th>
                   <th>Assign Agent</th>
                   <th>Status</th>
                   <th>Action</th>
@@ -45,7 +61,8 @@ const TicketTable = () => {
               </thead>
               <tbody>
                 {tickets.map((ticket) => (
-                  <tr key={ticket.id}>                    
+                  <tr key={ticket.id}>
+                     <td>{DefaultProfilePicture({ name: ticket.problem })}</td>                    
                     <td> {ticket.problem} </td>
                     <td> {ticket.submitDate} </td>
                     <td> {ticket.agentId} </td>

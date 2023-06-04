@@ -46,9 +46,9 @@ namespace Server.Controllers.Support
                 EmployeeId = ticketToInsert.EmployeeId,
                 Email = ticketToInsert.Email,
                 IssueTypeId = ticketToInsert.IssueTypeId,
-                Problem = ticketToInsert.Problem,
-                SubmitDate = ticketToInsert.SubmitDate,
-                TicketStatus = ticketToInsert.TicketStatus,             
+                Problem = ticketToInsert.Problem,                
+                TicketStatus = "Not Assign",   
+                SubmitDate = DateTime.UtcNow,          
 
             };
             try

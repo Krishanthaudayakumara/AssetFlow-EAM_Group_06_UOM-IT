@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal} from "react-bootstrap";
 import TicketTable from '../../components/Support/Table/TicketTable';
-import NewTicketForm from '../../components/Support/Forms/NewTicketForm';
+import NewTicketForm from '../../components/Support/Forms/Ticket/NewTicketForm';
 
 const Tickets: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -33,7 +33,7 @@ const Tickets: React.FC = () => {
       </div>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header style={{ backgroundColor: "#482890" }}>
-          <Modal.Title style={{ color: "white" }}>New Issue Type</Modal.Title>
+          <Modal.Title style={{ color: "white" }}>New Ticket</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <NewTicketForm />

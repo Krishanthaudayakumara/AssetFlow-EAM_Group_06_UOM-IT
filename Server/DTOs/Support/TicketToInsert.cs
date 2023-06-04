@@ -8,8 +8,8 @@ namespace Server.DTOs.Support
         public string Email { get; set; }
         public int IssueTypeId { get; set; }
         public string Problem { get; set; }
-        public DateTime SubmitDate { get; set; }
-        public string TicketStatus { get; set; }
+       
+
 
     }
 }

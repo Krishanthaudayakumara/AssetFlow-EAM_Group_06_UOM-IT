@@ -18,11 +18,15 @@ interface teamType {
   description: string;
   issueTypeId: number;
 }
-
+interface issueType{
+  id: number;
+  name: string;
+}
 const TeamTable = () => {
   const [teams, setTeams] = useState<teamType[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<teamType | null>(null);
+  const [issues, setIssues] = useState<issueType[]>([]);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletingTeam, setDeletingTeam] = useState<teamType | null>(null);
@@ -31,6 +35,14 @@ const TeamTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const recordsPerPage = 4;
+
+  useEffect(() => {
+    const fetchIssues = async () => {
+      const response = await axios.get("http://localhost:5087/Api/IssueType");
+      setIssues(response.data);
+    };
+    fetchIssues();
+  }, []);
 
   useEffect(() => {
     axios
@@ -191,6 +203,7 @@ const TeamTable = () => {
       <EditTeamForm
         showModal={showModal}
         selectedTeam={selectedTeam}
+        issues={issues}
         handleModalClose={handleModalClose}
         handleUpdateTeam={handleUpdateTeam}
         setSelectedTeam={setSelectedTeam}
