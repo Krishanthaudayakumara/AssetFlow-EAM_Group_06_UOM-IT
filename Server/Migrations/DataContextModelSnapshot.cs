@@ -167,6 +167,14 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("BarcodeImageBase64")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Condition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -182,10 +190,7 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("WarrentyExpiration")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("condition")
+                    b.Property<string>("WarrantyExpiration")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1047,17 +1052,21 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Stock", b =>
                 {
-                    b.HasOne("Server.Models.SubCategory", null)
+                    b.HasOne("Server.Models.SubCategory", "SubCategory")
                         .WithMany("Stocks")
                         .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Server.Models.Supplier", null)
+                    b.HasOne("Server.Models.Supplier", "Supplier")
                         .WithMany("Stocks")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("SubCategory");
+
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("Server.Models.SubCategory", b =>

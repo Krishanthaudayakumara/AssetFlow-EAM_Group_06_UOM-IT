@@ -31,6 +31,10 @@ import StockTable from "./components/Inventory/Table/StockTable";
 import Stock from "./pages/Inventory/Stock";
 import StockPopupForm from "./components/Inventory/Form/StockPopupForm";
 
+import Assetable from "./components/Inventory/Table/AssetTable";
+import Asset from "./pages/Inventory/Asset";
+//import AssetPopupForm from "./components/Inventory/Form/AssetPopupForm";
+
 import FacilityAsset from "./pages/Facility/FacilityAsset";
 import FacilityStock from "./pages/Facility/FacilityStock";
 
@@ -241,6 +245,17 @@ const App: React.FC = () => {
             element={
               <Wrapper>
                 <Stock />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/Asset" >
+          <Route
+            path="/Asset"
+            element={
+              <Wrapper>
+                <Asset />
               </Wrapper>
             }
           />
