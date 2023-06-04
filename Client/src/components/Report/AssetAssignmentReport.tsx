@@ -69,7 +69,7 @@ const AssetAssignmentReport: React.FC<AssetAssignmentReportProps> = ({ fromDate,
         <Table className="table w-100 small table-borderless table-responsive align-middle align-left" hover style={{ fontSize: '13px' }}>
           <thead>
             <tr style={{ color: '#482890' }}>
-              <th></th>
+              
               <th>AssetId</th>
               <th>AssetConditionStatus</th>
               <th>WorkstationType</th>
@@ -83,7 +83,7 @@ const AssetAssignmentReport: React.FC<AssetAssignmentReportProps> = ({ fromDate,
           <tbody>
             {filteredReports.map((report, index) => (
               <tr key={index}>
-                <td className="text-secondary">{index + 1}</td>
+              
                 <td className="text-secondary">{report.assetId}</td>
                 <td className="text-secondary">{report.assetConditionStatus}</td>
                 <td className="text-secondary">{report.workstationType}</td>
