@@ -154,7 +154,7 @@ return (
                 <th>status</th>
                 <th>condition</th>
                 <th>warrantyExpiration</th>
-                <th>stockid</th>
+                <th>stockId</th>
                 <th>Barcode</th>
               </tr>
             </thead>
