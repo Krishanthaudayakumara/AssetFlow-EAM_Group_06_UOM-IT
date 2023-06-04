@@ -6,7 +6,7 @@ namespace Server.DTOs.Report
 
         public string AgentLastName { get; set; }
 
-        public int TeamId { get; set; }
+        public string TeamName { get; set; }
 
         public int OpenedTickets { get; set; }
 

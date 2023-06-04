@@ -4,7 +4,7 @@ namespace Server.DTOs.Report
     {
         public int TicketId { get; set; }
 
-        public int CreatedByEmployeeId { get; set; }
+        public string  CreatedByEmployeeFirstName { get; set; }
 
         public string Problem { get; set; }
 

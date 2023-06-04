@@ -17,34 +17,25 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SupportAgentReportToReturn>>>
-        GetSupportAgentReport()
+        public async Task<ActionResult<IEnumerable<SupportAgentReportToReturn>>> GetSupportAgentReport()
         {
-            var supportAgentReports =
-                await _context
-                    .Agents
-                    .Select(a =>
-                        new SupportAgentReportToReturn {
-                            AgentFirstName = a.FirstName,
-                            AgentLastName = a.LastName,
-                            TeamId = a.TeamId,
-                            JoinDate = a.JoinDate,
-                            OpenedTickets =
-                                a
-                                    .Tickets
-                                    .Count(t => t.TicketStatus == "Opened"),
-                            SolvedTickets =
-                                a
-                                    .Tickets
-                                    .Count(t => t.TicketStatus == "Solved"),
-                            PendingTickets =
-                                a
-                                    .Tickets
-                                    .Count(t => t.TicketStatus == "Pending")
-                        })
-                    .ToListAsync();
+            var supportAgentReports = await _context.Agents
+                .Include(a => a.Team) // Include the Team navigation property
+                .Select(a => new SupportAgentReportToReturn
+                {
+                    AgentFirstName = a.FirstName,
+                    AgentLastName = a.LastName,
+                    TeamName = a.Team.Name, // Retrieve the Team name
+                    JoinDate = a.JoinDate,
+                    OpenedTickets = a.Tickets.Count(t => t.TicketStatus == "Opened"),
+                    SolvedTickets = a.Tickets.Count(t => t.TicketStatus == "Solved"),
+                    PendingTickets = a.Tickets.Count(t => t.TicketStatus == "Pending")
+                })
+                .ToListAsync();
 
             return supportAgentReports;
         }
+
+        }
     }
-}
+
