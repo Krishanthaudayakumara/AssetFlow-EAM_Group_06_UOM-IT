@@ -11,7 +11,7 @@ interface Agent {
   id: number
   agentFirstName: String
   agentLastName: String
-  teamId: number
+  teamName: string
   openedTickets: number
   solvedTickets: number
   pendingTickets: number
@@ -66,7 +66,7 @@ const AgentReport: React.FC<AgentReportProps> = ({ fromDate, toDate }) => {
               <th></th>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Team ID</th>
+              <th>Team Name</th>
               <th>Open Tickets</th>
               <th>Solved Tickets</th>
               <th>Pending Tickets</th>
@@ -79,7 +79,7 @@ const AgentReport: React.FC<AgentReportProps> = ({ fromDate, toDate }) => {
                 <td className="text-secondary">{agentReport.id}</td>
                 <td className="text-secondary">{agentReport.agentFirstName}</td>
                 <td className="text-secondary">{agentReport.agentLastName}</td>
-                <td className="text-secondary">{agentReport.teamId}</td>
+                <td className="text-secondary">{agentReport.teamName}</td>
                 <td className="text-secondary">{agentReport.openedTickets}</td>
                 <td className="text-secondary">{agentReport.solvedTickets}</td>
                 <td className="text-secondary">{agentReport.pendingTickets}</td>
