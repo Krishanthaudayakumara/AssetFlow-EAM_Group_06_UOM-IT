@@ -4,12 +4,14 @@ import { Form, InputGroup, Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import EditTeamForm from "../Forms/Team/EditTeamForm";
 import "../../../css/Support/Support.css";
 import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
 import PaginationComponent from "../pagination";
 import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
 import DeleteError from "../ConfirmMessages/DeleteError";
+import TeamToTicket from "./TeamToTicket"; // Import the TeamToTicket component
 
 interface teamType {
   profileImage: string;
@@ -18,11 +20,14 @@ interface teamType {
   description: string;
   issueTypeId: number;
 }
-interface issueType{
+
+interface issueType {
   id: number;
   name: string;
 }
+
 const TeamTable = () => {
+  const navigate = useNavigate();
   const [teams, setTeams] = useState<teamType[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<teamType | null>(null);
@@ -33,6 +38,7 @@ const TeamTable = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [showTeamToTicketTable, setShowTeamToTicketTable] = useState(false); // State to control rendering of TeamToTicket table
 
   const recordsPerPage = 4;
 
@@ -55,6 +61,10 @@ const TeamTable = () => {
       });
   }, []);
 
+  const handleTeamClick = (team: teamType) => {
+    setSelectedTeam(team);
+    setShowTeamToTicketTable(true); // Show the TeamToTicket table
+  };
   const handleEditTeamClick = (team: teamType) => {
     setSelectedTeam(team);
     setShowModal(true);
@@ -91,7 +101,7 @@ const TeamTable = () => {
     axios
       .delete(`http://localhost:5087/Api/Team/${deletingTeam?.id}`)
       .then((response) => {
-        setTeams(teams.filter((item) => item.id !== deletingTeam?.id));        
+        setTeams(teams.filter((item) => item.id !== deletingTeam?.id));
       })
       .catch((error) => {
         if (error.response && error.response.status === 409) {
@@ -119,113 +129,122 @@ const TeamTable = () => {
 
   return (
     <div>
-      <div className="row">
-        <div className="col-8">
-          <p className="table-heading">Support Teams</p>
-        </div>
-        <div className="col-1">
-          <Form>
-            <InputGroup style={{ width: "300px" }}>
-              <Form.Control
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search Support Team"
-              />
-              <InputGroup.Text>
-                <FaSearch />
-              </InputGroup.Text>
-            </InputGroup>
-          </Form>
-        </div>
-      </div>
-      <DeleteError
-        errorMessage={errorMessage}
-        onResetError={resetErrorMessage}
-      />
-      <div className="box-shadow">
-        <Fragment>
-          <div>
-            <Table className="support-table">
-              <thead>
-                <tr style={{ color: "#482890" }}>
-                  <th></th>
-                  <th>Team Name</th>
-                  <th>Team Description</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {teams
-                  .filter((team) => {
-                    return search.toLowerCase() === ""
-                      ? team
-                      : team.name.toLowerCase().includes(search);
-                  })
-                  .slice(
-                    (currentPage - 1) * recordsPerPage,
-                    currentPage * recordsPerPage
-                  )
-                  .map((team) => (
-                    <tr key={team.id}>
-                      <td>
-                        <img
-                          src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
-                          alt="User profile"
-                          className="rounded-circle"
-                          style={{
-                            width: "45px",
-                            height: "45px",
-                            cursor: "pointer",
-                          }}
-                        />
-                      </td>
-                      <td>{team.name}</td>
-                      <td>{team.description}</td>
-                      <td>
-                        <FontAwesomeIcon
-                          icon={faPen}
-                          style={{ color: "#482890", cursor: "pointer" }}
-                          onClick={() => handleEditTeamClick(team)}
-                        />
-                        &nbsp; &nbsp; &nbsp;
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          style={{ color: "#FF615A", cursor: "pointer" }}
-                          onClick={() => handleDeleteTeam(team)}
-                        />
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </Table>
+      {showTeamToTicketTable ? (
+         <TeamToTicket teamId={selectedTeam?.id ?? 0} /> // Use nullish coalescing operator to provide a default value
+      ) : (
+        <div>
+          <div className="row">
+            <div className="col-8">
+              <p className="table-heading">Support Teams</p>
+            </div>
+            <div className="col-1">
+              <Form>
+                <InputGroup style={{ width: "300px" }}>
+                  <Form.Control
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search Support Team"
+                  />
+                  <InputGroup.Text>
+                    <FaSearch />
+                  </InputGroup.Text>
+                </InputGroup>
+              </Form>
+            </div>
           </div>
-        </Fragment>
-      </div>
-      <EditTeamForm
-        showModal={showModal}
-        selectedTeam={selectedTeam}
-        issues={issues}
-        handleModalClose={handleModalClose}
-        handleUpdateTeam={handleUpdateTeam}
-        setSelectedTeam={setSelectedTeam}
-      />
-       <UpdateConfirmation
-        show={showUpdateModal}
-        onClose={() => setShowUpdateModal(false)}
-        updatedName={selectedTeam?.name || ""}
-      />
-      <DeleteConfirmation
-        show={showDeleteModal}
-        onClose={() => setShowDeleteModal(false)}
-        onConfirm={confirmDeleteTeam}
-        deletingIssueName={deletingTeam?.name || ""}
-      />
-      <div className="pagination-wrapper">
-      <PaginationComponent
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
-      </div>
+          <DeleteError
+            errorMessage={errorMessage}
+            onResetError={resetErrorMessage}
+          />
+          <div className="box-shadow">
+            <Fragment>
+              <div>
+                <Table className="support-table">
+                  <thead>
+                    <tr style={{ color: "#482890" }}>
+                      <th></th>
+                      <th>Team Name</th>
+                      <th>Team Description</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {teams
+                      .filter((team) => {
+                        return search.toLowerCase() === ""
+                          ? team
+                          : team.name.toLowerCase().includes(search);
+                      })
+                      .slice(
+                        (currentPage - 1) * recordsPerPage,
+                        currentPage * recordsPerPage
+                      )
+                      .map((team) => (
+                        <tr key={team.id}>
+                          <td>
+                            <img
+                              src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
+                              alt="User profile"                             
+                              className="rounded-circle"
+                              style={{
+                                width: "45px",
+                                height: "45px",
+                                cursor: "pointer",
+                              }}
+                            />
+                          </td>
+                          <td style={{ color: "#482890", cursor: "pointer" }}  onClick={() => handleTeamClick(team)}>
+                            {team.name}
+                            
+                          </td>
+                          <td>{team.description}</td>
+                          <td>
+                            <FontAwesomeIcon
+                              icon={faPen}
+                              style={{ color: "#482890", cursor: "pointer" }}
+                              onClick={() => handleEditTeamClick(team)}
+                            />
+                            &nbsp; &nbsp; &nbsp;
+                            <FontAwesomeIcon
+                              icon={faTrash}
+                              style={{ color: "#FF615A", cursor: "pointer" }}
+                              onClick={() => handleDeleteTeam(team)}
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </Table>
+              </div>
+            </Fragment>
+          </div>
+          <EditTeamForm
+            showModal={showModal}
+            selectedTeam={selectedTeam}
+            issues={issues}
+            handleModalClose={handleModalClose}
+            handleUpdateTeam={handleUpdateTeam}
+            setSelectedTeam={setSelectedTeam}
+          />
+          <UpdateConfirmation
+            show={showUpdateModal}
+            onClose={() => setShowUpdateModal(false)}
+            updatedName={selectedTeam?.name || ""}
+          />
+          <DeleteConfirmation
+            show={showDeleteModal}
+            onClose={() => setShowDeleteModal(false)}
+            onConfirm={confirmDeleteTeam}
+            deletingIssueName={deletingTeam?.name || ""}
+          />
+          <div className="pagination-wrapper">
+            <PaginationComponent
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

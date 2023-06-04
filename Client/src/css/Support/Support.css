@@ -68,6 +68,23 @@
     color: rgb(255, 255, 255);
   }
   
+  .ticket-details-container {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .ticket-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .ticket-detail span {
+    font-weight: bold;
+    margin-right: 10px;
+  }
   
   
 

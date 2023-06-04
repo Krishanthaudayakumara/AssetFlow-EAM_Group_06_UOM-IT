@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs.Support;
 using Server.Models.Support;
+using System.Linq;
 namespace Server.Controllers.Support
 {
     [ApiController]
@@ -21,6 +22,7 @@ namespace Server.Controllers.Support
             var allTickets = await _context.Tickets.ToListAsync();
             return Ok(allTickets);
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTicket(int id)
         {
@@ -33,8 +35,26 @@ namespace Server.Controllers.Support
 
 
             return Ok(ticket);
-        }  
-         [HttpPost]
+        }
+        [HttpGet("team/{teamId}")]
+        public IActionResult GetTicketsByTeam(int teamId)
+        {
+            var team = _context.Teams
+                .Include(t => t.IssueType)
+                .FirstOrDefault(t => t.Id == teamId);
+
+            if (team != null)
+            {
+                var tickets = _context.Tickets
+                    .Where(t => t.IssueTypeId == team.IssueTypeId)
+                    .ToList();
+
+                return Ok(tickets);
+            }
+
+            return NotFound();
+        }
+        [HttpPost]
         public async Task<IActionResult> AddTicket([FromBody] TicketToInsert ticketToInsert)
         {
             if (ticketToInsert is null)
@@ -46,9 +66,9 @@ namespace Server.Controllers.Support
                 EmployeeId = ticketToInsert.EmployeeId,
                 Email = ticketToInsert.Email,
                 IssueTypeId = ticketToInsert.IssueTypeId,
-                Problem = ticketToInsert.Problem,                
-                TicketStatus = "Not Assign",   
-                SubmitDate = DateTime.UtcNow,          
+                Problem = ticketToInsert.Problem,
+                TicketStatus = "Not Assign",
+                SubmitDate = DateTime.UtcNow,
 
             };
             try
@@ -63,7 +83,7 @@ namespace Server.Controllers.Support
                 return StatusCode(500);
             }
             return Ok(ticket);
-        }   
+        }
         [HttpPut("{id}")]
 
         public async Task<IActionResult> UpdateTicket(int id, [FromBody] TicketToUpdate ticketToUpdate)
@@ -89,7 +109,7 @@ namespace Server.Controllers.Support
 
             }
             return Ok();
-        }  
+        }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTicket(int id)
         {
