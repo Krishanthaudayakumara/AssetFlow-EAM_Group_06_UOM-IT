@@ -1,5 +1,5 @@
 import { useState, useEffect, Fragment } from "react";
-import { Container, Row, Col, Nav, Table, Modal, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Nav, Table, Modal, Button, Form, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -184,7 +184,7 @@ function SubCategoryTable() {
         </Modal.Header>
         <Modal.Body>
           {validationError && (
-            <div className="text-danger">{validationError}</div>
+            <Alert variant="danger">{validationError}</Alert>
           )}
           <Form.Group>
             <Form.Label>Subcategory Type:</Form.Label>

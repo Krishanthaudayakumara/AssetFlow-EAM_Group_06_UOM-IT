@@ -218,6 +218,8 @@ function CategoryTable() {
           </Button>
         </Modal.Footer>
       </Modal>
+
+
     </div>
   );
 }

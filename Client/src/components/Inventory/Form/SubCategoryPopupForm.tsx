@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Alert } from "react-bootstrap";
 
 function AddSubCategory() {
   const [categoryProduct, setCategoryProduct] = useState<any[]>([]);
@@ -39,10 +39,12 @@ function AddSubCategory() {
     const categoryType = selectedCategoryId;
 
       // Validate the inputs
-      if (!subCategoryType || !categoryType || categoryType=="Choose a category ...") {
+      if (!subCategoryType||categoryType=="Choose a category ..." || !categoryType) {
         setValidationError("Please fill in all required fields.");
         return;
       }
+
+     
  
 
       const data = {
@@ -75,9 +77,9 @@ function AddSubCategory() {
         </Modal.Header>
         <Modal.Body>
         {validationError && (
-            <div className="text-danger">{validationError}</div>
+            <Alert variant="danger">{validationError}</Alert>
           )}
-       
+    
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Label>SubCategory Type</Form.Label>
