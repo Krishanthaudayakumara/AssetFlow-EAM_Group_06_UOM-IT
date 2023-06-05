@@ -230,6 +230,7 @@ C:\Users\HP\Desktop\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Micros
 C:\Users\HP\Desktop\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\HP\Desktop\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Mono.TextTemplating.dll
 C:\Users\HP\Desktop\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\SkiaSharp.dll
+C:\Users\HP\Desktop\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.Annotations.dll
 C:\Users\HP\Desktop\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\HP\Desktop\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\HP\Desktop\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll

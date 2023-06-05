@@ -33,6 +33,11 @@ function StockTable() {
     //   "Enter updated sub category id:",
     //   stockToEdit?.subCategoryId
     // );
+    const updatedSubCategoryType = prompt(
+      "Enter updated subCategory:",
+      stockToEdit?.subCategoryType
+    );
+
     const updatePurchasedDate = prompt(
       "Enter updated purchased date:",
       stockToEdit?.purchasedDate
@@ -42,9 +47,9 @@ function StockTable() {
       "Enter updated warranty expiring date:",
       stockToEdit?.warrantyExpiring
     );
-    const updatedSupplierId = prompt(
-      "Enter updated supplier id:",
-      stockToEdit?.supplierId
+    const updatedSupplierName = prompt(
+      "Enter updated supplier :",
+      stockToEdit?.supplierName
     );
     const updatedAmount = prompt("Enter updated Amount:", stockToEdit?.amount);
 
@@ -53,10 +58,11 @@ function StockTable() {
       const response = await axios.put(
         `http://localhost:5087/api/Stock/${stockId}`,
         {
+          subCategoryType : updatedSubCategoryType,
           purchasedDate: updatePurchasedDate,
           cost: updateCost,
           warrantyExpiring: updatedWarrantyExpiring,
-          supplierId: updatedSupplierId,
+          supplierName: updatedSupplierName,
           amount: updatedAmount,
         }
       );
@@ -110,11 +116,11 @@ function StockTable() {
               <thead className="thead-light">
                 <tr style={{ color: "#482890" }}>
                   <th>StockId</th>
-                  <th>SubCategoryId</th>
+                  <th>SubCategory</th>
                   <th>PurchasedDate</th>
                   <th>Cost</th>
                   <th>WarrantyExpiring</th>
-                  <th>SupplierId</th>
+                  <th>Supplier</th>
                   <th>Amount</th>
                   <th>Action</th>
                 </tr>
@@ -127,7 +133,7 @@ function StockTable() {
                         <td>{stock.stockId}</td>
                         
                         <td className="text-secondary">
-                          {stock.subCategoryId}
+                          {stock.subCategoryType}
                         </td>
                         <td className="text-secondary">
                           {stock.purchasedDate}
@@ -139,7 +145,7 @@ function StockTable() {
                           {stock.warrantyExpiring}
                         </td>
                         <td className="text-secondary">
-                          {stock.supplierId}
+                          {stock.supplierName}
                         </td>
                         <td className="text-secondary">
                           {stock.amount}

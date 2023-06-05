@@ -32,11 +32,11 @@ namespace Server.Controllers
                 var stockToReturn = new StockToReturn
                 {
                     StockId = stock.StockId,
-                    SubCategoryId = stock.SubCategoryId,
+                    SubCategoryType = stock.SubCategoryType,
                     PurchasedDate = stock.PurchasedDate,
                     Cost = stock.Cost,
                     WarrantyExpiring = stock.WarrantyExpiring,
-                    SupplierId = stock.SupplierId,
+                    SupplierName = stock.SupplierName,
                     Amount = stock.Amount
                 };
 
@@ -59,11 +59,11 @@ namespace Server.Controllers
             var stockToReturn = new StockToReturn
             {
                 StockId = stock.StockId,
-                SubCategoryId = stock.SubCategoryId,
+                SubCategoryType = stock.SubCategoryType,
                 PurchasedDate = stock.PurchasedDate,
                 Cost = stock.Cost,
                 WarrantyExpiring = stock.WarrantyExpiring,
-                SupplierId = stock.SupplierId,
+                SupplierName = stock.SupplierName,
                 Amount = stock.Amount
             };
 
@@ -75,11 +75,11 @@ namespace Server.Controllers
         {
             var stock = new Stock
             {
-                SubCategoryId = stockToInsert.SubCategoryId,
+                SubCategoryType = stockToInsert.SubCategoryType,
                 PurchasedDate = stockToInsert.PurchasedDate,
                 Cost = stockToInsert.Cost,
                 WarrantyExpiring = stockToInsert.WarrantyExpiring,
-                SupplierId = stockToInsert.SupplierId,
+                SupplierName = stockToInsert.SupplierName,
                 Amount = stockToInsert.Amount
             };
 
@@ -89,11 +89,11 @@ namespace Server.Controllers
             var stockToReturn = new StockToReturn
             {
                 StockId = stock.StockId,
-                SubCategoryId = stock.SubCategoryId,
+                SubCategoryType = stock.SubCategoryType,
                 PurchasedDate = stock.PurchasedDate,
                 Cost = stock.Cost,
                 WarrantyExpiring = stock.WarrantyExpiring,
-                SupplierId = stock.SupplierId,
+                SupplierName = stock.SupplierName,
                 Amount = stock.Amount
             };
 
@@ -109,11 +109,12 @@ namespace Server.Controllers
             {
                 return NotFound();
             }
-
+            
+            stock.SubCategoryType= stockToUpdate.SubCategoryType;
             stock.PurchasedDate = stockToUpdate.PurchasedDate;
             stock.Cost = stockToUpdate.Cost;
             stock.WarrantyExpiring = stockToUpdate.WarrantyExpiring;
-            stock.SupplierId = stockToUpdate.SupplierId;
+            stock.SupplierName = stockToUpdate.SupplierName;
             stock.Amount = stockToUpdate.Amount;
 
             await _context.SaveChangesAsync();

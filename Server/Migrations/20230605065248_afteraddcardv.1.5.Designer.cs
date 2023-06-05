@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Data;
 
@@ -11,9 +12,11 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230605065248_afteraddcardv.1.5")]
+    partial class afteraddcardv15
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -531,22 +534,19 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SubCategoryType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SupplierId")
+                    b.Property<int>("SubCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("SupplierName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
 
                     b.Property<string>("WarrantyExpiring")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StockId");
+
+                    b.HasIndex("SubCategoryId");
 
                     b.HasIndex("SupplierId");
 
@@ -561,7 +561,7 @@ namespace Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("CategoryType")
@@ -1059,16 +1059,32 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Stock", b =>
                 {
-                    b.HasOne("Server.Models.Supplier", null)
+                    b.HasOne("Server.Models.SubCategory", "SubCategory")
                         .WithMany("Stocks")
-                        .HasForeignKey("SupplierId");
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.Supplier", "Supplier")
+                        .WithMany("Stocks")
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SubCategory");
+
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("Server.Models.SubCategory", b =>
                 {
-                    b.HasOne("Server.Models.Category", null)
+                    b.HasOne("Server.Models.Category", "Category")
                         .WithMany("SubCategories")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Server.Models.Support.Agent", b =>
@@ -1181,6 +1197,11 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Models.EmployeeRequest", b =>
                 {
                     b.Navigation("Assigns");
+                });
+
+            modelBuilder.Entity("Server.Models.SubCategory", b =>
+                {
+                    b.Navigation("Stocks");
                 });
 
             modelBuilder.Entity("Server.Models.Supplier", b =>

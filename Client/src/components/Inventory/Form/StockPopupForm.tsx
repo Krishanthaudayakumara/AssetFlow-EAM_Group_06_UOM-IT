@@ -14,7 +14,7 @@ function AddStock() {
   const [purchasedDate, setPurchasedDate] = useState<Date | null>(null);
   const [warrantyExpiring, setWarrantyExpiring] = useState<Date | null>(null);
 
-  const [selectedSubCategoryId, setSelectedSubCategoryId] = useState<string>("");
+  const [selectedSubCategoryType, setSelectedSubCategoryType] = useState<string>("");
   const [subCategoryProduct, setSubCategoryProduct] = useState<any[]>([]);
 
   useEffect(() => {
@@ -30,18 +30,18 @@ function AddStock() {
     }
   };
 
-  const handleSubCategoryIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedSubCategoryId(event.target.value);
+  const handleSubCategoryTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedSubCategoryType(event.target.value);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = {
-      subCategoryId: event.currentTarget.subCategoryId.value,
+      subCategoryType: event.currentTarget.subCategoryType.value,
       purchasedDate: event.currentTarget.purchasedDate.value,
       cost: event.currentTarget.cost.value,
       warrantyExpiring: event.currentTarget.warrantyExpiring.value,
-      supplierId: event.currentTarget.supplierId.value,
+      supplierName: event.currentTarget.supplierName.value,
       amount: event.currentTarget.amount.value,
 
  
@@ -71,11 +71,11 @@ function AddStock() {
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
           <Form.Group>
-              <Form.Label>SubCategory id</Form.Label>
-              <Form.Control as="select" name="subCategoryId" value={selectedSubCategoryId} onChange={handleSubCategoryIdChange}>
-                <option>Choose an existing subcategory id...</option>
+              <Form.Label>SubCategory</Form.Label>
+              <Form.Control as="select" name="subCategoryType" value={selectedSubCategoryType} onChange={handleSubCategoryTypeChange}>
+                <option>Choose an existing subcategory ...</option>
                 {subCategoryProduct.map((subcategory) => (
-                  <option key={subcategory.subCategoryId} value={subcategory.subCategoryId}>{subcategory.id}</option>
+                  <option key={subcategory.subCategoryType} value={subcategory.subCategoryType}>{subcategory.subCategoryType}</option>
                 ))}
               </Form.Control>
             </Form.Group>
@@ -108,8 +108,8 @@ function AddStock() {
 </Form.Group>
 
             <Form.Group>
-              <Form.Label>SupplierId</Form.Label>
-              <Form.Control type="text" name="supplierId" placeholder="Enter supplier id" />
+              <Form.Label>Supplier</Form.Label>
+              <Form.Control type="text" name="supplierName" placeholder="Enter supplier " />
             </Form.Group>
 
             <Form.Group>

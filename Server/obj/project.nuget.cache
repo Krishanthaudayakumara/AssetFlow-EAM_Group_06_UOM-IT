@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zeqNQuvP7RCVdyLPre7SjCousv4NgDyxjeMXOocmK5GPtVIjy4m6Xiyo9lSsTJ+wq/VOe/Px4a6LBWM6eVB2Uw==",
+  "dgSpecHash": "zyCeD4x+c3UJYpOWgK4kgG9+2CnQdpeRcGfjqnODv3qtbhEeEuwzRTaPCUk8+oL6lSbIsc5CMMIHHineCh68BA==",
   "success": true,
   "projectFilePath": "C:\\Users\\HP\\Desktop\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
   "expectedPackageFiles": [
@@ -86,6 +86,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.3\\skiasharp.nativeassets.macos.2.88.3.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.3\\skiasharp.nativeassets.win32.2.88.3.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.2.3\\swashbuckle.aspnetcore.annotations.6.2.3.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",

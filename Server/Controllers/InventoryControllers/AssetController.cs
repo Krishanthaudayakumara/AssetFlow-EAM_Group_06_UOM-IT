@@ -82,7 +82,7 @@ namespace Server.Controllers.InventoryControllers
         {
             if (ModelState.IsValid)
             {
-                // Generate barcode image
+                //Generate barcode image
                 var writer = new BarcodeWriterPixelData
                 {
                     Format = BarcodeFormat.CODE_128,

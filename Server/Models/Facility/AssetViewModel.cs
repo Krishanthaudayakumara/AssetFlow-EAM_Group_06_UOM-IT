@@ -8,7 +8,7 @@ namespace Server.Models
      public string Description{ get; set; }
      public string Vendor { get; set; }
      public int  SubCategoryId { get; set; }
-     public int CategoryId{ get; set; }
+     public string CategoryId{ get; set; }/// int -> string 
      public int FacilityAssetId { get; set; }
     }
 }

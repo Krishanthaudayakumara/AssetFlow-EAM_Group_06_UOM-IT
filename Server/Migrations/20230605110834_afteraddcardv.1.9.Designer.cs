@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Data;
 
@@ -11,9 +12,11 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230605110834_afteraddcardv.1.9")]
+    partial class afteraddcardv19
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -535,12 +538,8 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SupplierId")
+                    b.Property<int>("SupplierId")
                         .HasColumnType("int");
-
-                    b.Property<string>("SupplierName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WarrantyExpiring")
                         .IsRequired()
@@ -1059,9 +1058,13 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Stock", b =>
                 {
-                    b.HasOne("Server.Models.Supplier", null)
+                    b.HasOne("Server.Models.Supplier", "Supplier")
                         .WithMany("Stocks")
-                        .HasForeignKey("SupplierId");
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("Server.Models.SubCategory", b =>

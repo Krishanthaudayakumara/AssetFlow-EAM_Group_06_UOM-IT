@@ -26,7 +26,7 @@ namespace Server.Data
             {
                 Id = subcategory.Id,
                 SubCategoryType = subcategory.SubCategoryType,
-                CategoryId = subcategory.CategoryId,
+                CategoryType = subcategory.CategoryType,
             };
 
             return Ok(subCategoryToReturn);
@@ -49,7 +49,7 @@ namespace Server.Data
                 {
                     Id = subCategory.Id,
                     SubCategoryType = subCategory.SubCategoryType,
-                    CategoryId = subCategory.CategoryId,
+                    CategoryType = subCategory.CategoryType,
                 };
             }
 
@@ -65,7 +65,7 @@ namespace Server.Data
         }
         var sub = new SubCategory{
                 SubCategoryType = subcategoryToInsert.SubCategoryType,
-                CategoryId = subcategoryToInsert.CategoryId,
+                CategoryType = subcategoryToInsert.CategoryType,
            
         };
         try{
@@ -88,7 +88,7 @@ namespace Server.Data
                 return NotFound();
             }
                 UpdateSubCategory.SubCategoryType = subCategoryToUpdate.SubCategoryType;
-               
+                UpdateSubCategory.CategoryType = subCategoryToUpdate.CategoryType;
 
             try
             {
