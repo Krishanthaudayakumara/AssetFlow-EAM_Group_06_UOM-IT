@@ -21,12 +21,20 @@ interface FormData {
 
 const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedReportType, tableRef }) => {
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState<FormData>({ reportName: "", reportType: "", reportFormat: "", generatedBy: "", note: "" });
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
+    reportName: '',
+    reportType: '',
+    reportFormat: '',
+    generatedBy: '',
+    note: '',
+  });
 
   const openModal = () => {
-    setFormData(prev => ({ ...prev, reportName: departmentName, reportType: selectedReportType }));
+    setFormData((prev) => ({ ...prev, reportName: departmentName, reportType: selectedReportType }));
     setShowModal(true);
   };
+
   const downloadTableAsExcel = () => {
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     const fileExtension = '.xlsx';
@@ -48,24 +56,50 @@ const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedRep
     link.click();
     document.body.removeChild(link);
   };
-  
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    downloadTableAsExcel();
-    setShowModal(false);
-    try {
-      const response = await axios.post("http://localhost:5087/api/GeneratedReport", formData);
-      console.log(response.data);
-      
-    } catch (error) {
-      console.log(error);
-     
+
+  const downloadTableAsPDF = () => {
+    const tableElement = tableRef.current; // Assuming the tableRef.current represents the HTML table element
+
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write('<html><head><title>Table PDF</title></head><body>');
+      printWindow.document.write('<style>table {border-collapse: collapse; width: 100%;} th, td {border: 1px solid black; padding: 8px;}</style>');
+      printWindow.document.write('<table>');
+      printWindow.document.write(tableElement.innerHTML);
+      printWindow.document.write('</table>');
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+
+      printWindow.onload = () => {
+        printWindow.print();
+      };
     }
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement|HTMLSelectElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (formData.reportFormat === 'excel') {
+      downloadTableAsExcel();
+    } else if (formData.reportFormat === 'pdf') {
+      downloadTableAsPDF();
+    }
+    setShowModal(false);
+    try {
+      const response = await axios.post('http://localhost:5087/api/GeneratedReport', formData);
+      console.log(response.data);
+      // Show success modal
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+
   return (
     <div>
       <div className="container">
@@ -79,7 +113,7 @@ const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedRep
                 borderColor: '#331c7a',
                 color: '#331c7a',
               }}
-              onClick={openModal}// Show modal when export to excel button is clicked
+              onClick={openModal}
             >
               Export to Excel
             </Button>
@@ -102,14 +136,13 @@ const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedRep
         </div>
       </div>
 
-      {/* Modal for export to excel */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Export to Excel</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit}>
-          <div className="form-group">
+            <div className="form-group">
               <label htmlFor="reportName">Report Name:</label>
               <input type="text" className="form-control" name="reportName" onChange={handleChange} value={formData.reportName} />
             </div>
@@ -135,13 +168,24 @@ const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedRep
               <textarea className="form-control" name="note" onChange={handleChange} rows={3}></textarea>
             </div>
             <Button variant="primary" type="submit">
-           Submit
-          </Button>
+              Submit
+            </Button>
           </form>
         </Modal.Body>
+        <Modal.Footer></Modal.Footer>
+      </Modal>
+
+      <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Report successfully added!</p>
+        </Modal.Body>
         <Modal.Footer>
-          
-         
+          <Button variant="primary" onClick={() => setShowSuccessModal(false)}>
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
@@ -149,3 +193,6 @@ const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedRep
 };
 
 export default ReportButton;
+
+
+
