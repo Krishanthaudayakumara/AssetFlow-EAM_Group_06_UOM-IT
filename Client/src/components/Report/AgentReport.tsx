@@ -63,7 +63,7 @@ const AgentReport: React.FC<AgentReportProps> = ({ fromDate, toDate }) => {
         >
           <thead>
             <tr style={{ color: '#482890' }}>
-              <th></th>
+             
               <th>First Name</th>
               <th>Last Name</th>
               <th>Team Name</th>
@@ -76,7 +76,7 @@ const AgentReport: React.FC<AgentReportProps> = ({ fromDate, toDate }) => {
           <tbody>
             {agentReports.map((agentReport) => (
               <tr key={agentReport.id}>
-                <td className="text-secondary">{agentReport.id}</td>
+                
                 <td className="text-secondary">{agentReport.agentFirstName}</td>
                 <td className="text-secondary">{agentReport.agentLastName}</td>
                 <td className="text-secondary">{agentReport.teamName}</td>
