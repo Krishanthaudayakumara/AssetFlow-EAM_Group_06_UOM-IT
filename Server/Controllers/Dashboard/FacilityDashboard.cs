@@ -47,20 +47,20 @@ namespace Server.Controllers
 
             return Ok(assetStatusCounts);
         }
-[HttpGet("workstation-asset-count")]
-public ActionResult<List<WorkstationAssetCountDTO>> GetWorkstationAssetCounts()
-{
-    var workstationAssetCounts = _context.Workstations
-        .Select(w => new WorkstationAssetCountDTO
+        [HttpGet("workstation-asset-count")]
+        public ActionResult<List<WorkstationAssetCountDTO>> GetWorkstationAssetCounts()
         {
-            WorkstationId = w.Id,
-            NotAssignedCount = w.FacilityAssets.Count(a => a.AssignStatus == "Not Assign"),
-            AssignedCount = w.FacilityAssets.Count(a => a.AssignStatus == "Assign")
-        })
-        .ToList();
+            var workstationAssetCounts = _context.Workstations
+                .Select(w => new WorkstationAssetCountDTO
+                {
+                    WorkstationId = w.Id,
+                    NotAssignedCount = w.FacilityAssets.Count(a => a.AssignStatus == "Not Assign"),
+                    AssignedCount = w.FacilityAssets.Count(a => a.AssignStatus == "Assign")
+                })
+                .ToList();
 
-    return workstationAssetCounts;
-}
+            return workstationAssetCounts;
+        }
 
 
     }
