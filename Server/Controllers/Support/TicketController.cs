@@ -110,6 +110,38 @@ namespace Server.Controllers.Support
             }
             return Ok();
         }
+        [HttpPut("team/{teamId}")]
+        public async Task<IActionResult> UpdateTicketsByTeam(int teamId, [FromBody] TicketToUpdate ticketToUpdate)
+        {
+            var tickets = _context.Tickets
+                .Where(t => t.IssueTypeId == teamId)
+                .ToList();
+
+            if (tickets.Count == 0)
+            {
+                return NotFound();
+            }
+
+            foreach (var ticket in tickets)
+            {
+                ticket.AgentId = ticketToUpdate.AgentId;
+                ticket.TicketStatus = ticketToUpdate.TicketStatus;
+            }
+
+            try
+            {
+                _context.UpdateRange(tickets);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                return StatusCode(500);
+            }
+
+            return Ok();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTicket(int id)
         {

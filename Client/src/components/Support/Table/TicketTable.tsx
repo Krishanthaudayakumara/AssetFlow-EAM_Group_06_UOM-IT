@@ -2,12 +2,12 @@ import { Fragment, useEffect, useState } from "react";
 import { Badge, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import "../../../css/Support/Support.css";
 import DefaultProfilePicture from "../DefaultProfilePicture";
-import EditTicketForm from "../Forms/Ticket/EditTicketForm";
-import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
+import ViewTicketForm from "../Forms/Ticket/ViewTicketForm";
+
 
 interface TicketType {
   id: number;
@@ -20,11 +20,14 @@ interface TicketType {
   ticketStatus: string;
 }
 
+
+
 const TicketTable = () => {
   const [tickets, setTickets] = useState<TicketType[]>([]);
   const [agents, setAgents] = useState<any[]>([]);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [issueTypes, setIssueTypes] = useState<any[]>([]);
+  const [employees, setEmployees] = useState<any[]>([]);
+  const [showEditModal, setShowEditModal] = useState(false);  
   const [selectedTicket, setSelectedTicket] = useState<TicketType | null>(null);
 
   useEffect(() => {
@@ -37,6 +40,28 @@ const TicketTable = () => {
       }
     };
     fetchAgents();
+  }, []);
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const response = await axios.get("http://localhost:5087/Api/Employee");
+        setEmployees(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchEmployees();
+  }, []);
+  useEffect(() => {
+    const fetchIssueTypes = async () => {
+      try {
+        const response = await axios.get("http://localhost:5087/Api/IssueType");
+        setIssueTypes(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchIssueTypes();
   }, []);
 
   useEffect(() => {
@@ -60,26 +85,12 @@ const TicketTable = () => {
     setSelectedTicket(ticket);
     setShowEditModal(true);
   };
-
-  const handleDeleteTicket = (ticket: TicketType) => {
-    setSelectedTicket(ticket);
-    setShowDeleteModal(true);
+  const getIssueTypeName = (issueTypeId: number) => {
+    const issueType = issueTypes.find((issueType) => issueType.id === issueTypeId);
+    return issueType ? issueType.name : "N/A";
   };
 
-  const confirmDeleteTicket = () => {
-    if (selectedTicket) {
-      axios
-        .delete(`http://localhost:5087/Api/Ticket/${selectedTicket.id}`)
-        .then((response) => {
-          setTickets(tickets.filter((item) => item.id !== selectedTicket.id));
-          setShowDeleteModal(false);
-          setSelectedTicket(null);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
+  
 
   return (
     <div>
@@ -118,7 +129,7 @@ const TicketTable = () => {
                     </td>                   
                     <td>
                         <FontAwesomeIcon
-                          icon={faPen}
+                          icon={faEye}
                           style={{
                             color: "#482890",
                             cursor: "pointer",
@@ -132,7 +143,7 @@ const TicketTable = () => {
                             color: "#FF615A",
                             cursor: "pointer",
                           }}
-                          onClick={() => handleDeleteTicket(ticket)}
+                          
                         />
                       </td>
                   </tr>
@@ -141,14 +152,13 @@ const TicketTable = () => {
             </Table>
           </div>
           {showEditModal && (
-            <EditTicketForm
+            <ViewTicketForm
               showModal={showEditModal}
               selectedTicket={selectedTicket}
               agents={agents}
-              handleModalClose={() => setShowEditModal(false)}
-              handleUpdateTicket={() => {
-                // Logic to update the ticket
-              }}
+              issueTypes={issueTypes}
+              employees={employees}
+              handleModalClose={() => setShowEditModal(false)}             
               setSelectedTicket={setSelectedTicket}
             />
           )}
