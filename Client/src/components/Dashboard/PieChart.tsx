@@ -18,7 +18,8 @@ interface PieChartProps {
 const PieChart: React.FC<PieChartProps> = ({ data }) => {
   return (
     <>
-      <div className="class1">
+      <div style={{ alignContent: 'center'
+                }}>
         <Pie data={data} />
       </div>
     </>
