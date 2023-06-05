@@ -7,8 +7,8 @@ interface FacilityStockData {
     assetId: number;
     description: string;
     vendor: string;
-    subCategoryId: number;
-    categoryId: number;
+    subCategoryType: string;
+    categoryType: string;
     facilityAssetId: number;
 }
 
@@ -66,8 +66,8 @@ function FacilityAssetStock() {
                     <td>{item.facilityAssetId}</td>
                     <td>{item.description}</td>
                     <td>{item.vendor}</td>
-                    <td>{item.subCategoryId}</td>
-                    <td>{item.categoryId}</td>
+                    <td>{item.subCategoryType}</td>
+                    <td>{item.categoryType}</td>
                     <td>{item.assetId}</td>
                   </tr>
                 );

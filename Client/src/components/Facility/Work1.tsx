@@ -71,11 +71,13 @@ export default function Work1() {
       }
       return true;
     });
-
+  
     return filteredWorkArr.map((w) => (
-      <WorkstationCard key={w.id} workstationName={w.workstationName} />
+      <WorkstationCard key={w.id} workstationName={w.workstationName} id={w.id} /> // Pass the id prop
     ));
   };
+  
+  
 
   const handleBuildingIdChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const buildingId = parseInt(event.target.value);
@@ -166,7 +168,7 @@ export default function Work1() {
             handleFilterWorkstations()
           ) : workArr && workArr.length > 0 ? (
             workArr.map((w) => (
-              <WorkstationCard key={w.id} workstationName={w.workstationName} />
+              <WorkstationCard key={w.id} workstationName={w.workstationName} id={w.id} />
             ))
           ) : (
             <div className="col-12">No data available</div>
