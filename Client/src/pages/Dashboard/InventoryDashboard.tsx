@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import axios from 'axios';
-import BarChart from '../../components/Dashboard/BarChart';
+
 import '../../css/Home.css';
 import CardDashboard from '../../components/Dashboard/CardDashboard';
 import PieChart from '../../components/Dashboard/PieChart';
@@ -99,8 +99,8 @@ const InventoryDashboard: React.FC = () => {
             {
               label: 'Subcategory Types',
               data: subcategoryData.map((subcategory: { count: number }) => subcategory.count),
-              backgroundColor: Array(subcategoryData.length).fill('#482890'), // Customize the background color as needed
-              barThickness: 20, // Customize the bar thickness as needed
+              backgroundColor: Array(subcategoryData.length).fill('#632c65'), // Customize the background color as needed
+              barThickness: 40, // Customize the bar thickness as needed
             },
           ],
         };
@@ -115,15 +115,31 @@ const InventoryDashboard: React.FC = () => {
     <div>
       <Container>
         <div>
-          <h1 style={{ margin: '0px 0 0 65px' }}>Inventory Summary</h1>
+          <h1 style={{ margin: '0px 0 0 65px' }}>Inventory Dashboard</h1>
           <div className="row mb-6" style={{ margin: '0px 0 0 65px' }}>
             <CardDashboard name="Total assets" count={assetCount} />
             <CardDashboard name="Total Categories" count={categoryCount} />
             <CardDashboard name="Total Subcategories" count={subCategoryCount} />
           </div>
-
+          <h4 style={{ margin: '0px 0 0 65px' }}>SubCategorey Count</h4>
           <div className="shadow p-3 mb-5 bg-white rounded" style={{ margin: '0px 2px 2px 65px' }}>
-            <InventoryBarchart data={subcategoryTypeData} options={options} />
+            <InventoryBarchart data={subcategoryTypeData}  options={{
+      ...options,
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Subcategory Type',
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Count',
+          },
+        },
+      },
+    }} />
           </div>
           <h4
             className="second"
@@ -131,15 +147,8 @@ const InventoryDashboard: React.FC = () => {
               textAlign: 'center',
             }}
           ></h4>
-          <h4
-            className="second"
-            style={{
-              textAlign: 'center',
-            }}
-          >
-            Data in Chart
-          </h4>
-          <div style={{ margin: '0px 2px 2px 200px', width: '500px', height: '300px', alignContent: 'center' }}>
+         <h4 style={{ margin: '0px 0 0 65px' }}>Categorey Count</h4>
+          <div  style={{ margin: '0px 2px 2px 200px', width: '500px', height: '300px', alignContent: 'center' }}>
             <PieChart
               data={{
                 labels: categoryType,
@@ -148,16 +157,16 @@ const InventoryDashboard: React.FC = () => {
                     label: 'Category Types',
                     data: categoryTypeCount,
                     backgroundColor: [
-                      '#ffcd56',
-                      '#ff6384',
+                      '#482890',
+                      '#ff615a',
                       '#36a2eb',
                       '#fd6b19',
                       '#4bc0c0',
                       '#9966ff',
                     ],
                     borderColor: [
-                      '#ffcd56',
-                      '#ff6384',
+                      '#482890',
+                      '#ff615a',
                       '#36a2eb',
                       '#fd6b19',
                       '#4bc0c0',
