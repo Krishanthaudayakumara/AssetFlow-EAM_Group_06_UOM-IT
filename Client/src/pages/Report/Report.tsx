@@ -36,7 +36,7 @@ const Report: React.FC = () => {
   
     return (
       <>
-        <div ref={tableRef}>
+       {<div ref={tableRef}>
           {selectedReportType === 'Agent' ? (
             <AgentReport fromDate={fromDate} toDate={toDate} />
           ) : selectedReportType === 'Support Ticket' ? (
@@ -48,7 +48,7 @@ const Report: React.FC = () => {
           ) : selectedReportType === 'Warrenty Expiration' ? (
             <WarrentyExpirationReport fromDate={fromDate} toDate={toDate} />
           ) : null}
-        </div>
+          </div>}
       </>
     );
   };
