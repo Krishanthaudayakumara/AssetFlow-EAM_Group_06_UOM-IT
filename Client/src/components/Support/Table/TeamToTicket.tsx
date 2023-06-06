@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Fragment } from "react";
-import { Badge, Button, Table, Modal, Form } from "react-bootstrap";
+import { Badge, Button, Table, Modal, Form , InputGroup} from "react-bootstrap";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,6 +12,7 @@ import {
 import DefaultProfilePicture from "../DefaultProfilePicture";
 import "../../../css/Support/Support.css";
 import { Alert } from "react-bootstrap";
+import { FaSearch } from "react-icons/fa";
 
 interface Ticket {
   id: number;
@@ -43,6 +44,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
   const [showReplyModal, setShowReplyModal] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchTickets = async () => {
@@ -172,11 +174,24 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
   return (
     <div>
       <div className="row">
-        <div className="col-10">
+        <div className="col-6">
           <p className="table-heading">{getTeamName(teamId)}</p>
         </div>
         <div className="col-1">
           <Button onClick={handleBackClick}>Back</Button>
+        </div>
+        <div className="col-1">
+          <Form>
+            <InputGroup style={{ width: "300px" }}>
+              <Form.Control
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Enter Agent Name"
+              />
+              <InputGroup.Text>
+                <FaSearch />
+              </InputGroup.Text>
+            </InputGroup>
+          </Form>
         </div>
       </div>
       {/* Success Alert */}
@@ -214,7 +229,12 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
                 </tr>
               </thead>
               <tbody>
-                {tickets.map((ticket) => (
+                {tickets
+                .filter((ticket) => {
+                  const agentName = getAgentName(ticket.agentId);
+                  return search.toLowerCase() === "" || agentName.toLowerCase().includes(search);
+                })
+                .map((ticket) => (
                   <tr key={ticket.id}>
                     <td>{DefaultProfilePicture({ name: ticket.problem })}</td>
                     <td>{ticket.problem}</td>
