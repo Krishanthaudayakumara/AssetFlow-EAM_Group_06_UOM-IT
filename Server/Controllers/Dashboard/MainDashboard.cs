@@ -84,5 +84,19 @@ namespace Server.Controllers
 
             return chartData;
     }
+       [HttpGet("subcategory-types")]
+        public ActionResult<IEnumerable<SubCategoryTypeDTO>> GetSubCategoryTypesWithCount()
+        {
+            var subCategoryTypes = _context.SubCategories
+                .GroupBy(s => s.SubCategoryType)
+                .Select(g => new SubCategoryTypeDTO
+                {
+                    SubCategoryType = g.Key,
+                    Count = g.Count()
+                })
+                .ToList();
+
+            return Ok(subCategoryTypes);
+        }
 }
 }

@@ -15,6 +15,7 @@ namespace Server.Controllers.Report
         {
             _context = context;
         }
+        
         [HttpGet]
         public IActionResult GetWarrantyExpirationReport()
         {
