@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.DTOs;
 using Server.Models;
+
+
 namespace Server.Data
 {
     [ApiController]
@@ -26,56 +28,77 @@ namespace Server.Data
                 Id = category.Id,
                 CategoryType = category.CategoryType,
                 Description = category.Description,
+            //    Image = category.Image // Include the image data in the response
+
             };
             return Ok(CategoryToReturn);
         }
-        [HttpGet]
-        public async Task<IActionResult> GetCategories()
-        {
-            var categories = await _context.Categories.ToListAsync();
+       [HttpGet]
+public async Task<IActionResult> GetCategories()
+{
+    var categories = await _context.Categories.Include(c => c.Image).ToListAsync();
 
-            if (categories is null)
-            {
-                return NotFound();
-            }
+    if (categories is null)
+    {
+        return NotFound();
+    }
 
-            // foreach (var category in categories)
-            // {
-            //     var CategoryToReturn = new CategoryToReturn
-            //     {
-            //         Id = category.Id,
-            //         CategoryType = category.CategoryType,
-            //         Description = category.Description,
-            //     };
-            // }
+    var categoriesToReturn = categories.Select(category => new CategoryToReturn
+    {
+        Id = category.Id,
+        CategoryType = category.CategoryType,
+        Description = category.Description,
+        ImageData = category.Image?.Data,
+        ImageContentType = category.Image?.ContentType
+    }).ToList();
 
-            return Ok(categories);
-        }
-        [HttpPost]
-        public async Task<IActionResult> AddCategory([FromBody] CategoryToInsert categoryToInsert)
+    return Ok(categoriesToReturn);
+}
+
+      [HttpPost]
+        public async Task<IActionResult> AddCategory([FromForm] CategoryToInsert categoryToInsert)
         {
             if (categoryToInsert is null)
             {
                 return BadRequest();
             }
-            var cti = new Category
+
+            var category = new Category
             {
                 CategoryType = categoryToInsert.CategoryType,
                 Description = categoryToInsert.Description,
-
             };
+
+            if (categoryToInsert.Image != null && categoryToInsert.Image.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await categoryToInsert.Image.CopyToAsync(memoryStream);
+                    var image = new Image
+                    {
+                        Data = memoryStream.ToArray(),
+                        ContentType = categoryToInsert.Image.ContentType
+                    };
+
+                    category.Image = image;
+                }
+            }
+
             try
             {
-                await _context.Categories.AddAsync(cti);
+                await _context.Categories.AddAsync(category);
                 await _context.SaveChangesAsync();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Console.Write(ex.Message);
                 return StatusCode(500);
             }
-            return Ok(cti);
+
+            return Ok(category);
         }
+
+
         [HttpPut("{id}")]
 
         public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryToUpdate categoryToUpdate)

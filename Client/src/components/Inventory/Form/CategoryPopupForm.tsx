@@ -46,6 +46,13 @@ function AddCategory() {
               <Form.Control type="text" name="description" placeholder="Enter description" />
             </Form.Group>
 
+            <Form.Group>
+              <Form.Label>Description</Form.Label>
+              <Form.Control type="text" name="description" placeholder="Enter description" />
+            </Form.Group>
+
+
+
             <Button variant="primary" type="submit">
               Submit
             </Button>
