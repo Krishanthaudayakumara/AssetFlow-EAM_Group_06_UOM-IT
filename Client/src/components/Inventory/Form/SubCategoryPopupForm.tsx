@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Alert } from "react-bootstrap";
 
 function AddSubCategory() {
   const [categoryProduct, setCategoryProduct] = useState<any[]>([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
+
+  const [validationError, setValidationError] = useState("");
+
 
   useEffect(() => {
     fetchCategories();
@@ -31,10 +34,25 @@ function AddSubCategory() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = {
-      subCategoryType: event.currentTarget.subCategoryType.value,
-      categoryId: selectedCategoryId,
-    };
+
+    const subCategoryType = event.currentTarget.subCategoryType.value;
+    const categoryType = selectedCategoryId;
+
+      // Validate the inputs
+      if (!subCategoryType||categoryType=="Choose a category ..." || !categoryType) {
+        setValidationError("Please fill in all required fields.");
+        return;
+      }
+
+     
+ 
+
+      const data = {
+        subCategoryType: subCategoryType,
+        categoryType: categoryType,
+      };
+
+
     try {
       const response = await axios.post("http://localhost:5087/api/SubCategory", data);
       console.log(response);
@@ -44,6 +62,8 @@ function AddSubCategory() {
       console.log(error);
     }
   };
+
+  
 
   return (
     <>
@@ -56,18 +76,23 @@ function AddSubCategory() {
           <Modal.Title>Add SubCategory</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        {validationError && (
+            <Alert variant="danger">{validationError}</Alert>
+          )}
+    
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Label>SubCategory Type</Form.Label>
-              <Form.Control type="text" name="subCategoryType" placeholder="Enter sub category type(int error)" />
+              <Form.Control type="text" name="subCategoryType" placeholder="Enter sub category type" 
+              required/>
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Category id</Form.Label>
-              <Form.Control as="select" name="categoryId" value={selectedCategoryId} onChange={handleCategoryIdChange}>
-                <option>Choose a category id...</option>
+              <Form.Label>Category</Form.Label>
+              <Form.Control as="select" name="categoryId" value={selectedCategoryId} onChange={handleCategoryIdChange} required>
+                <option>Choose a category ...</option>
                 {categoryProduct.map((category) => (
-                  <option key={category.categoryId} value={category.categoryId}>{category.id}</option>
+                  <option key={category.categoryType} value={category.categoryType}>{category.categoryType}</option>
                 ))}
               </Form.Control>
             </Form.Group>

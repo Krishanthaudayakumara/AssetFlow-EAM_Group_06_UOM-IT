@@ -193,6 +193,14 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("BarcodeImageBase64")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Condition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -208,10 +216,7 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("WarrentyExpiration")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("condition")
+                    b.Property<string>("WarrantyExpiration")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -593,8 +598,16 @@ namespace Server.Migrations
                     b.Property<int>("SubCategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("SubCategoryType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("SupplierId")
                         .HasColumnType("int");
+
+                    b.Property<string>("SupplierName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WarrantyExpiring")
                         .IsRequired()
@@ -619,6 +632,10 @@ namespace Server.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CategoryType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubCategoryType")
                         .IsRequired()
@@ -1050,7 +1067,7 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Models.Asset", b =>
                 {
                     b.HasOne("Server.Models.Stock", "Stock")
-                        .WithMany("Assets")
+                        .WithMany()
                         .HasForeignKey("StockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1318,11 +1335,6 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Models.Notification", b =>
                 {
                     b.Navigation("UserNotifications");
-                });
-
-            modelBuilder.Entity("Server.Models.Stock", b =>
-                {
-                    b.Navigation("Assets");
                 });
 
             modelBuilder.Entity("Server.Models.SubCategory", b =>

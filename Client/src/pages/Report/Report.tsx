@@ -7,7 +7,7 @@ import AgentReport from '../../components/Report/AgentReport'
 import TicketReport from '../../components/Report/TicketReport'
 import BuildingReport from '../../components/Report/BuildingReport';
 import AssetAssignmentReport from '../../components/Report/AssetAssignmentReport';
-import WarrentyExpirationReport from '../../components/Report/WarrentyExpirationReport';
+import WarrantyExpirationReport from '../../components/Report/WarrantyExpirationReport';
 
 const Report: React.FC = () => {
   const [selectedReportType, setSelectedReportType] = useState<string>('')
@@ -46,7 +46,7 @@ const Report: React.FC = () => {
           ) : selectedReportType === 'Asset Assignment' ? (
             <AssetAssignmentReport fromDate={fromDate} toDate={toDate} />
           ) : selectedReportType === 'Warrenty Expiration' ? (
-            <WarrentyExpirationReport fromDate={fromDate} toDate={toDate} />
+            <WarrantyExpirationReport fromDate={fromDate} toDate={toDate} />
           ) : null}
           </div>}
       </>
