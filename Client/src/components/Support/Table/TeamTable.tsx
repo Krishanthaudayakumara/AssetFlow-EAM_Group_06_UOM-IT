@@ -199,18 +199,21 @@ const TeamTable = () => {
                           <FontAwesomeIcon
                               icon={faHome}
                               style={{ cursor: "pointer" }}
+                              title="Team Tickets"
                               onClick={() => handleTeamClick(team)}
                             />
                             &nbsp; &nbsp; &nbsp;
                             <FontAwesomeIcon
                               icon={faPen}
                               style={{ color: "#482890", cursor: "pointer" }}
+                              title="Edit Team"
                               onClick={() => handleEditTeamClick(team)}
                             />
                             &nbsp; &nbsp; &nbsp;
                             <FontAwesomeIcon
                               icon={faTrash}
                               style={{ color: "#FF615A", cursor: "pointer" }}
+                              title="Delete Team"
                               onClick={() => handleDeleteTeam(team)}
                             />
                           </td>

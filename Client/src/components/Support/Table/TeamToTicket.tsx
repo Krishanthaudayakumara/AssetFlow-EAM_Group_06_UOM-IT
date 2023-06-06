@@ -238,6 +238,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
                         <FontAwesomeIcon
                           icon={faUser}
                           style={{ color: "#482890", cursor: "pointer" }}
+                          title="Assign Agent To Ticket"
                           onClick={() => handleAssignClick(ticket)}
                         />
                       ) : ticket.ticketStatus === "Opened" ||
@@ -246,12 +247,14 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
                           <FontAwesomeIcon
                             icon={faUser}
                             style={{ color: "#482890", cursor: "pointer" }}
+                            title="Assign Agent To Ticket"
                             onClick={() => handleAssignClick(ticket)}
                           />
                           &nbsp; &nbsp; &nbsp;
                           <FontAwesomeIcon
                             icon={faComment}
                             style={{ color: "#FF615A", cursor: "pointer" }}
+                            title="Reply To Ticket"
                             onClick={() => {
                               setSelectedTicketId(ticket.id);
                               setShowReplyModal(true);
@@ -262,6 +265,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
                         <FontAwesomeIcon
                           icon={faEnvelope}
                           style={{ color: "#FF615A", cursor: "pointer" }}
+                          title="Edit the Reply"
                         />
                       ) : null}
                     </td>

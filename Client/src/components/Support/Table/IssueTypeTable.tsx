@@ -167,6 +167,7 @@ const IssueTypeTable = () => {
                             color: "#482890",
                             cursor: "pointer",
                           }}
+                          title="Edit Issue Type"
                           onClick={() => handleEditIssueClick(issue)}
                         />
                         &nbsp; &nbsp; &nbsp;
@@ -176,6 +177,7 @@ const IssueTypeTable = () => {
                             color: "#FF615A",
                             cursor: "pointer",
                           }}
+                          title="Delete Issue Type"
                           onClick={() => handleDeleteIssue(issue)}
                         />
                       </td>

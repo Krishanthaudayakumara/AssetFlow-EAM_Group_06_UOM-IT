@@ -193,6 +193,7 @@ const TicketTable = () => {
                             color: "#482890",
                             cursor: "pointer",
                           }}
+                          title="View Ticket"
                           onClick={() => handleEditTicketClick(ticket)}
                         />
                         &nbsp; &nbsp; &nbsp;
@@ -202,6 +203,7 @@ const TicketTable = () => {
                             color: "#FF615A",
                             cursor: "pointer",
                           }}
+                          title="Delete Ticket"
                           onClick={() => handleDeleteTicket(ticket)}
                         />
                       </td>

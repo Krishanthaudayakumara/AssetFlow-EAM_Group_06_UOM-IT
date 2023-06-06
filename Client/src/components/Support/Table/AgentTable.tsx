@@ -202,13 +202,15 @@ const AgentTable = () => {
                       <FontAwesomeIcon
                         icon={faPen}
                         style={{ color: "#482890", cursor: "pointer" }}
+                        title="Edit Agent"
                         onClick={() => handleEditAgentClick(agent)}
                       />
-                      &nbsp; &nbsp;
+                      &nbsp; &nbsp; &nbsp;
                       <FontAwesomeIcon
                         icon={faTrash}
                         style={{ color: "#FF615A", cursor: "pointer" }}
                         onClick={() => handleDeleteAgent(agent)}
+                        title="Delete Agent"
                       />
                     </td>
                   </tr>
