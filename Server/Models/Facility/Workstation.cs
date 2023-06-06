@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-
 namespace Server.Models
 {
     public class Workstation
     {
-        
-
         public int Id{get; set;}
     
         public string WorkstationName {get; set;}

@@ -6,7 +6,7 @@ import axios from 'axios'
 interface Ticket {
   id: number
   ticketId: number
-  createdByEmployeeId: number
+  createdByEmployeeFirstName: string
   problem: String
   reply: String
   agentFirstName: String
@@ -39,7 +39,7 @@ const TicketReport = () => {
             <tr style={{ color: '#482890' }}>
               <th></th>
               <th>Ticket Id</th>
-              <th>Ticket CreatedByEmployeeId</th>
+              <th>Ticket CreatedByEmployeeFirstName</th>
               <th>Problem</th>
               <th>Reply</th>
               <th>Agent FirstName</th>
@@ -52,7 +52,7 @@ const TicketReport = () => {
                 <td className="text-secondary">{TicketReport.id}</td>
                 <td className="text-secondary">{TicketReport.ticketId}</td>
                 <td className="text-secondary">
-                  {TicketReport.createdByEmployeeId}
+                  {TicketReport.createdByEmployeeFirstName}
                 </td>
                 <td className="text-secondary">{TicketReport.problem}</td>
                 <td className="text-secondary">{TicketReport.reply}</td>

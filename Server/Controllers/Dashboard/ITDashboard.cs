@@ -67,21 +67,21 @@ namespace Server.Controllers
         }
  // code for average response time
         [HttpGet("avg-response-time")]
-        public async Task<ActionResult<IEnumerable<TimeSpan>>>
-        GetAverageResponseTime()
+        public async Task<ActionResult<IEnumerable<TimeSpan>>> GetAverageResponseTime()
         {
-            var tickets =
-                await _context
-                    .Tickets
-                    .Include(t => t.Reply)
-                    .Where(t => t.Reply != null)
-                    .ToListAsync();
+            var tickets = await _context.Tickets
+                .Include(t => t.Reply)
+                .Where(t => t.Reply != null)
+                .ToListAsync();
 
-            var avgResponseTimes =
-                tickets.Select(t => t.Reply.ReplyDate - t.SubmitDate).ToList();
+            var avgResponseTimes = tickets.Select(t => t.Reply.ReplyDate - t.SubmitDate).ToList();
+
+            // Remove fractional seconds from TimeSpan values
+            avgResponseTimes = avgResponseTimes.Select(timeSpan => timeSpan - TimeSpan.FromTicks(timeSpan.Ticks % TimeSpan.TicksPerSecond)).ToList();
 
             return Ok(avgResponseTimes);
         }
+
  // code for monthly ticket satisfaction
         [HttpGet]
         public ActionResult<IEnumerable<TicketSatisfactionDTO>>

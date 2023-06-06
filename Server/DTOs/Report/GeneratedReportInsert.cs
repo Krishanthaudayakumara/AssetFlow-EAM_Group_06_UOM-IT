@@ -6,7 +6,7 @@ namespace Server.DTOs.Report
 {
     public class GeneratedReportInsert
     {
-        public DateTime Date { get; set; }
+        
 
         public string ReportName { get; set; }
 

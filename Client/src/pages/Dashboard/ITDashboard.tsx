@@ -201,6 +201,7 @@ const ITDashboard = () => {
                     (satisfaction) => satisfaction.goodCount,
                   ),
                   backgroundColor: '#482890',
+                  barThickness: 50,
                 },
                 {
                   label: 'Better',
@@ -208,13 +209,15 @@ const ITDashboard = () => {
                     (satisfaction) => satisfaction.betterCount,
                   ),
                   backgroundColor: '#ff615a',
+                  barThickness: 50,
                 },
                 {
                   label: 'Worst',
                   data: ticketSatisfaction.map(
                     (satisfaction) => satisfaction.worstCount,
                   ),
-                  backgroundColor: 'yellow',
+                  backgroundColor: '#632c65',
+                  barThickness: 50,
                 },
               ],
             }}
