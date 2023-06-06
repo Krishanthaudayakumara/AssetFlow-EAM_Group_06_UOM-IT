@@ -7,7 +7,6 @@ import {
   faWarehouse,
 } from '@fortawesome/free-solid-svg-icons';
 import PieChart from '../../components/Dashboard/PieChart';
-import BarChart from '../../components/Dashboard/BarChart';
 import LineChart from '../../components/Dashboard/LineChart';
 import Card from '../../components/Dashboard/Card';
 import '../../css/Home.css';
@@ -34,47 +33,13 @@ interface FacilityStatusDTO {
   damageCount: number;
 }
 
-const Linedata = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'Line Chart Data',
-      data: [1200, 1900, 300, 500, 2000, 305, 100],
-      borderColor: '#482890',
-      backgroundColor: '#482890',
-    },
-  ],
-};
 
-const Lineoptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Line Chart',
-    },
-  },
-};
+interface SubCategoryTypeDTO {
+  subCategoryType: string;
+  count: number;
+}
 
-const options = {
-  scales: {
-    x: {
-      title: {
-        display: true,
-        text: 'Month',
-      },
-    },
-    y: {
-      title: {
-        display: true,
-        text: 'Quantity',
-      },
-    },
-  },
-};
+
 
 const Dashboard: React.FC = () => {
   const [availableEmployeeCount, setAvailableEmployeeCount] = useState<number>(0);
@@ -84,6 +49,7 @@ const Dashboard: React.FC = () => {
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
   const [feedbackChartData, setFeedbackChartData] = useState<FeedbackChartData | null>(null);
   const [facilityStatusData, setFacilityStatusData] = useState<FacilityStatusDTO | null>(null);
+  const [subcategoryTypes, setSubcategoryTypes] = useState<SubCategoryTypeDTO[]>([]);
   useEffect(() => {
     axios
       .get('http://localhost:5087/MainDashboard/availableEmployeeCount')
@@ -146,6 +112,14 @@ const Dashboard: React.FC = () => {
       .catch((error) => {
         console.error(error);
       });
+      axios
+      .get('http://localhost:5087/MainDashboard/subcategory-types')
+      .then((response) => {
+        setSubcategoryTypes(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
@@ -158,31 +132,64 @@ const Dashboard: React.FC = () => {
           <Card name="Total Workstation" quantity={totalWorkstations} icon={faWarehouse} />
           <Card name="Total Facility Assets" quantity={totalFacilityAssets} icon={faTicket} />
         </div>
-        <h1 style={{ margin: '0px 0 0 65px' }}>Inventory Summary</h1>
+       
 
        
-        <h4
-          className="second"
-          style={{
-            textAlign: 'center',
-          }}
-        >
-          Data in Chart
-        </h4>
+   
         <div>
           <Row>
             <Col md={6}>
               <div
                 className="shadow p-1 mb-2 bg-white rounded"
                 style={{
-                  paddingTop: '50px',
+                  paddingTop: '500px',
                   height: '470px',
                   margin: '0px 0 0 0px',
                   alignContent: 'center',
                 }}
               >
                 {/* code for LineChart component */}
-                <LineChart Linedata={Linedata} Lineoptions={Lineoptions} />
+                {subcategoryTypes.length > 0 && (
+                  <LineChart
+                    Linedata={{
+                      labels: subcategoryTypes.map((subcategory) => subcategory.subCategoryType),
+                      datasets: [
+                        {
+                          label: 'Inventory subCategory Types',
+                          data: subcategoryTypes.map((subcategory) => subcategory.count),
+                          borderColor: '#ff615a',
+                          backgroundColor: '#ff615a',
+                        },
+                      ],
+                    }}
+                    Lineoptions={{
+                      responsive: true,
+                      plugins: {
+                        legend: {
+                          position: 'top' as const,
+                        },
+                        title: {
+                          display: true,
+                          
+                        },
+                      },
+                      scales: {
+                        x: {
+                          title: {
+                            display: true,
+                            text: 'Subcategory Types',
+                          },
+                        },
+                        y: {
+                          title: {
+                            display: true,
+                            text: 'Count',
+                          },
+                        },
+                      },
+                    }}
+                  />
+                )}
               </div>
             </Col>
             <Col md={6}>
@@ -206,11 +213,12 @@ const Dashboard: React.FC = () => {
                             facilityStatusData.useCount,
                             facilityStatusData.damageCount,
                           ],
-                          backgroundColor: ['#482890', '#e2a9e5', '#632c65'],
-                          borderColor: ['#482890', '#e2a9e5', '#632c65'],
+                          backgroundColor: ['#482890', '#ff615a', '#632c65'],
+                          borderColor: ['#482890', '#ff615a', '#632c65'],
                         },
                       ],
                     }}
+                    
                   />
                 )}
               </div>
@@ -227,21 +235,42 @@ const Dashboard: React.FC = () => {
               labels: ['Good', 'Better', 'Worst'],
               datasets: [
                 {
-                  label: 'Count',
+                  label: 'count',
                   data: [
                     feedbackChartData?.goodCount || 0,
                     feedbackChartData?.betterCount || 0,
                     feedbackChartData?.worstCount || 0,
                   ],
                   backgroundColor: ['#482890', '#ff615a', '#3cba9f'],
-                  barThickness: 30,
+                  barThickness: 40,
                 },
               ],
             }}
+            options={{
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Feedback Status',
+                  },
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Count',
+                  },
+                },
+              },
+            }}
           />
         </div>
-        <div>
-          <Table striped bordered hover>
+        <div
+        className="shadow p-3 bg-white rounded"
+        style={{ margin: '30px 0 0 0px' }}
+      >
+          <Table className="table w-100 small table-borderless table-responsiv align-middle align-left"
+          hover
+          style={{ fontSize: '13px' }}>
             <thead>
               <tr>
                 <th>Username</th>
