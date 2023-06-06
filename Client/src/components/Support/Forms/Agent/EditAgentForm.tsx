@@ -1,22 +1,23 @@
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import "../../../../css/Support/Support.css";
 
 interface agentType {
-    profileImage: string;
-    id: number;
-    firstName: string;
-    lastName: string;
-    contact: string;
-    position: string;
-    email: string;
-    joinDate: string;
-    teamId: number;
-    agentStatus: string;
-  }
+  profileImage: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  contact: string;
+  position: string;
+  email: string;
+  joinDate: string;
+  teamId: number;
+  agentStatus: string;
+}
 interface TeamData {
-    id: number;
-    name: string;
-  }
+  id: number;
+  name: string;
+}
 interface EditAgentFormProps {
   showModal: boolean;
   selectedAgent: agentType | null;
@@ -56,8 +57,12 @@ const EditAgentForm: React.FC<EditAgentFormProps> = ({
                 {selectedAgent.firstName}&nbsp;{selectedAgent.lastName}
               </div>
             </h3>
-            <p>Agent ID: {selectedAgent.id}</p>
-            <p>Join Date: {selectedAgent.joinDate}</p>
+            <div className="details-container">
+              <div className="detail"><span>Agent ID:</span> {selectedAgent.id}</div>
+              <div className="detail">                
+                <span>Join Date:</span> {selectedAgent.joinDate}
+              </div>
+            </div>
             <Form>
               <Form.Group>
                 <Form.Label>Contact</Form.Label>

@@ -60,35 +60,35 @@ const ViewTicketForm: React.FC<EditTicketFormProps> = ({
     <Modal show={showModal} onHide={handleModalClose}>
       {selectedTicket && (
         <>
-          <Modal.Header style={{ backgroundColor: "#482890" }}>
+          <Modal.Header style={{ backgroundColor: "#482890" }}  closeButton>
             <Modal.Title style={{ color: "white" }}>
               Ticket Details
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="ticket-details-container">
+            <div className="details-container">
               
-              <div className="ticket-detail">
+              <div className="detail">
                 <span>Ticket ID:</span>
                 {selectedTicket.id}
               </div><br/>
-              <div className="ticket-detail">
+              <div className="detail">
                 <span>Employee:</span>
                 {getEmployeeName(selectedTicket.employeeId)}
               </div><br/>
-              <div className="ticket-detail">
+              <div className="detail">
                 <span>Issue Type:</span>
                 {getIssueTypeName(selectedTicket.issueTypeId)}
               </div><br/>
-              <div className="ticket-detail">
+              <div className="detail">
                 <span>Problem:</span>
                 {selectedTicket.problem}
               </div><br/>
-              <div className="ticket-detail">
+              <div className="detail">
                 <span>Submit Date:</span>
                 {selectedTicket.submitDate}
               </div><br/>
-              <div className="ticket-detail">
+              <div className="detail">
                 <span>Assign Agent:</span>
                 {getAgentName(selectedTicket.agentId)}
               </div>

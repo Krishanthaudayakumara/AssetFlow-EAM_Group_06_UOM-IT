@@ -99,7 +99,7 @@ const NewTicketForm = () => {
         <Form.Group>
           <Form.Control
             type="text"
-            placeholder="Email *"
+            placeholder="Enter your valid Email *"
             required
             name="email"
             onChange={handleChange}

@@ -143,7 +143,7 @@ const NewAgentForm = () => {
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="First Name *"
+          placeholder="Agent First Name *"
           required
           name="firstName"
           value={formData.firstName}
@@ -154,7 +154,7 @@ const NewAgentForm = () => {
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Last Name *"
+          placeholder="Agent Last Name *"
           required
           name="lastName"
           value={formData.lastName}
@@ -165,7 +165,7 @@ const NewAgentForm = () => {
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Contact *"
+          placeholder="Valid Contact *"
           required
           name="contact"
           value={formData.contact}
@@ -180,7 +180,7 @@ const NewAgentForm = () => {
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Position *"
+          placeholder="Job Position *"
           required
           name="position"
           value={formData.position}
@@ -191,7 +191,7 @@ const NewAgentForm = () => {
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Email *"
+          placeholder="Valid Email *"
           required
           name="email"
           value={formData.email}

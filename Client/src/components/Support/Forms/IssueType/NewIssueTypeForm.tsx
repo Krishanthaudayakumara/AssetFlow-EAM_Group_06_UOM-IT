@@ -49,10 +49,10 @@ const NewIssueTypeForm = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group>
-        <Form.Label>Issue Type *</Form.Label>
+        <Form.Label>Issue Type</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter the Issue Type"
+          placeholder="Enter the Issue Type *"
           required
           name="name"
           onChange={handleChange}

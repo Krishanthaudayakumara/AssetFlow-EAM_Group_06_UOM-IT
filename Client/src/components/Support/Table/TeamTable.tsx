@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { Form, InputGroup, Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import EditTeamForm from "../Forms/Team/EditTeamForm";
@@ -130,7 +130,7 @@ const TeamTable = () => {
   return (
     <div>
       {showTeamToTicketTable ? (
-         <TeamToTicket teamId={selectedTeam?.id ?? 0} /> // Use nullish coalescing operator to provide a default value
+        <TeamToTicket teamId={selectedTeam?.id ?? 0} /> // Use nullish coalescing operator to provide a default value
       ) : (
         <div>
           <div className="row">
@@ -183,8 +183,9 @@ const TeamTable = () => {
                           <td>
                             <img
                               src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
-                              alt="User profile"                             
+                              alt="User profile"
                               className="rounded-circle"
+                              onClick={() => handleTeamClick(team)}
                               style={{
                                 width: "45px",
                                 height: "45px",
@@ -192,14 +193,11 @@ const TeamTable = () => {
                               }}
                             />
                           </td>
-                          <td style={{ color: "#482890", cursor: "pointer" }}  onClick={() => handleTeamClick(team)}>
-                            {team.name}
-                            
-                          </td>
+                          <td style={{ cursor: "pointer" }}>{team.name}</td>
                           <td>{team.description}</td>
                           <td>
                             <FontAwesomeIcon
-                              icon={faPen}
+                              icon={faUser}
                               style={{ color: "#482890", cursor: "pointer" }}
                               onClick={() => handleEditTeamClick(team)}
                             />

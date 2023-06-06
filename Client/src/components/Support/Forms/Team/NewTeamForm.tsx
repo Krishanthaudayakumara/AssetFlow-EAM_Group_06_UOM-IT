@@ -109,7 +109,7 @@ const NewTeamForm = () => {
         {" "}
         <Form.Control
           type="text"
-          placeholder="Name *"
+          placeholder="Team Name *"
           required
           name="name"
           value={formData.name}
@@ -121,7 +121,7 @@ const NewTeamForm = () => {
         {" "}
         <Form.Control
           type="text"
-          placeholder="Description *"
+          placeholder="Team Description *"
           required
           name="description"
           value={formData.description}

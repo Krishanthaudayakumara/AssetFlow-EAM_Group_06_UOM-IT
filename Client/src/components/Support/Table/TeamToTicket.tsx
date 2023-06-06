@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Fragment } from "react";
-import { Badge, Button, Table, Modal } from "react-bootstrap";
+import { Badge, Button, Table, Modal, Form } from "react-bootstrap";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComment, faEnvelope, faUser } from "@fortawesome/free-solid-svg-icons";
+import DefaultProfilePicture from "../DefaultProfilePicture";
+import "../../../css/Support/Support.css";
+import { Alert } from "react-bootstrap";
 
 interface Ticket {
   id: number;
@@ -16,6 +21,10 @@ interface Ticket {
 interface Props {
   teamId: number;
 }
+interface ReplyToInsert {
+  TicketId: number;
+  Text: string;
+}
 
 const TeamToTicket: React.FC<Props> = ({ teamId }) => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
@@ -24,6 +33,11 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
   const [assignedAgentId, setAssignedAgentId] = useState<number | null>(null);
+  const [selectedStatus, setSelectedStatus] = useState<string>("");
+  const [selectedTicketId, setSelectedTicketId] = useState<number | null>(null);
+  const [replyText, setReplyText] = useState<string>("");
+  const [showReplyModal, setShowReplyModal] = useState<boolean>(false);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchTickets = async () => {
@@ -81,6 +95,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
 
   const handleAssignClick = (ticket: Ticket) => {
     setSelectedTicket(ticket);
+    setAssignedAgentId(ticket.agentId); // Set the assigned agent ID
     setShowModal(true);
   };
 
@@ -91,13 +106,13 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
   };
 
   const handleUpdateTicket = async () => {
-    if (selectedTicket && assignedAgentId !== null) {
+    if (selectedTicket && assignedAgentId !== null && selectedStatus) {
       try {
         await axios.put(
           `http://localhost:5087/Api/Ticket/${selectedTicket.id}`,
           {
             agentId: assignedAgentId,
-            ticketStatus: "Pending",
+            ticketStatus: selectedStatus,
           }
         );
         // Refresh tickets after successful update
@@ -106,10 +121,44 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
         );
         setTickets(response.data);
         handleModalClose();
+        setShowAlert(true);
       } catch (error) {
         console.log(error);
       }
     }
+  };
+
+  const handleReplySubmit = async () => {
+    if (!selectedTicketId || !replyText) {
+      return;
+    }
+
+    const replyToInsert: ReplyToInsert = {
+      TicketId: selectedTicketId,
+      Text: replyText,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5087/Api/Reply",
+        replyToInsert
+      );
+      console.log(response.data);
+      // Handle the successful reply submission as desired
+    } catch (error) {
+      console.log(error);
+      // Handle the error case
+    }
+
+    setSelectedTicketId(null);
+    setReplyText("");
+    setShowReplyModal(false);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedTicketId(null);
+    setReplyText("");
+    setShowReplyModal(false);
   };
 
   return (
@@ -122,7 +171,17 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
           <Button onClick={handleBackClick}>Back</Button>
         </div>
       </div>
-
+      {/* Success Alert */}
+      {showAlert && (
+        <Alert
+          variant="success"
+          onClose={() => setShowAlert(false)}
+          dismissible
+          style={{ marginLeft: "200px", marginRight: "200px" }}
+        >
+          Successfully Updated
+        </Alert>
+      )}
       <div className="box-shadow">
         <Fragment>
           <div>
@@ -139,37 +198,54 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
               <tbody>
                 {tickets.map((ticket) => (
                   <tr key={ticket.id}>
-                    <td></td>
+                    <td>{DefaultProfilePicture({ name: ticket.problem })}</td>
                     <td>{ticket.problem}</td>
                     <td>{getAgentName(ticket.agentId)}</td>
                     <td>
-                      {ticket.ticketStatus === "Opened" ? (
-                        <Badge className={"bg-info"}>Opened</Badge>
-                      ) : ticket.ticketStatus === "Solved" ? (
-                        <Badge className={"bg-success"}>Solved</Badge>
-                      ) : ticket.ticketStatus === "Pending" ? (
-                        <Badge className={"bg-warning"}>Pending</Badge>
-                      ) : (
-                        <Badge className={"bg-danger"}>Not Assign</Badge>
-                      )}
+                      {ticket.ticketStatus ? (
+                        ticket.ticketStatus === "Opened" ? (
+                          <Badge className={"bg-info"}>Opened</Badge>
+                        ) : ticket.ticketStatus === "Solved" ? (
+                          <Badge className={"bg-success"}>Solved</Badge>
+                        ) : ticket.ticketStatus === "Pending" ? (
+                          <Badge className={"bg-warning"}>Pending</Badge>
+                        ) : ticket.ticketStatus === "Not Assign" ? (
+                          <Badge className={"bg-danger"}>Not Assign</Badge>
+                        ) : null
+                      ) : null}
                     </td>
+
                     <td>
                       {ticket.ticketStatus === "Not Assign" ? (
-                        <button
-                          type="button"
-                          className="btn btn-secondary btn-sm"
+                        <FontAwesomeIcon
+                          icon={faUser}
+                          style={{ color: "#482890", cursor: "pointer" }}
                           onClick={() => handleAssignClick(ticket)}
-                        >
-                          Assign
-                        </button>
-                      ) : (
-                        <button
-                          type="button"
-                          className="btn btn-secondary btn-sm"
-                        >
-                          Reply
-                        </button>
-                      )}
+                        />
+                      ) : ticket.ticketStatus === "Opened" ||
+                        ticket.ticketStatus === "Pending" ? (
+                        <>
+                          <FontAwesomeIcon
+                            icon={faUser}
+                            style={{ color: "#482890", cursor: "pointer" }}
+                            onClick={() => handleAssignClick(ticket)}
+                          />
+                          &nbsp; &nbsp; &nbsp;
+                          <FontAwesomeIcon
+                            icon={faComment}
+                            style={{ color: "#FF615A", cursor: "pointer" }}
+                            onClick={() => {
+                              setSelectedTicketId(ticket.id);
+                              setShowReplyModal(true);
+                            }}
+                          />
+                        </>
+                      ) : ticket.ticketStatus === "Solved" ? (
+                        <FontAwesomeIcon
+                          icon={faEnvelope}
+                          style={{ color: "#FF615A", cursor: "pointer" }}
+                        />
+                      ) : null}
                     </td>
                   </tr>
                 ))}
@@ -181,16 +257,17 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
 
       {/* Assign Ticket Modal */}
       <Modal show={showModal} onHide={handleModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Assign Ticket</Modal.Title>
+        <Modal.Header style={{ backgroundColor: "#482890" }}>
+          <Modal.Title style={{ color: "white" }}>Assign To Agent</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
-            <label htmlFor="agent">Assign Agent:</label>
+            <label htmlFor="agent">Assign Agent Name:</label>
             <select
               className="form-select"
               id="agent"
               onChange={(e) => setAssignedAgentId(Number(e.target.value))}
+              value={assignedAgentId || ""}
             >
               <option value="">Select an Agent</option>
               {agents.map((agent) => (
@@ -200,6 +277,32 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
               ))}
             </select>
           </div>
+          <div>
+            <label htmlFor="status">Ticket Status:</label>
+            <select
+              className="form-select"
+              id="status"
+              onChange={(e) => setSelectedStatus(e.target.value)}
+              value={selectedStatus}
+            >
+              <option value="">Select a Status</option>
+              <option value="Opened" selected={selectedStatus === "Opened"}>
+                Opened
+              </option>
+              <option value="Solved" selected={selectedStatus === "Solved"}>
+                Solved
+              </option>
+              <option value="Pending" selected={selectedStatus === "Pending"}>
+                Pending
+              </option>
+              <option
+                value="Not Assign"
+                selected={selectedStatus === "Not Assign"}
+              >
+                Not Assign
+              </option>
+            </select>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
@@ -207,6 +310,46 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
           </Button>
           <Button variant="primary" onClick={handleUpdateTicket}>
             Assign
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* Reply Modal */}
+      <Modal show={showReplyModal} onHide={handleCloseModal}>
+        <Modal.Header style={{ backgroundColor: "#482890" }}>
+          <Modal.Title style={{ color: "white" }}>Reply to Ticket</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="replyText">
+              <div className="details-container">
+                <div className="detail">
+                  <span>Problem : </span>
+
+                  {
+                    tickets.find((ticket) => ticket.id === selectedTicketId)
+                      ?.problem
+                  }
+                </div>
+              </div>
+            </Form.Group>
+            <Form.Group controlId="replyInput">
+              <Form.Label>Your Reply</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={replyText}
+                onChange={(e) => setReplyText(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleReplySubmit}>
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>
