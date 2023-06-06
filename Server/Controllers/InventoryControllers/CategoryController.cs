@@ -99,32 +99,47 @@ public async Task<IActionResult> GetCategories()
         }
 
 
-        [HttpPut("{id}")]
-
-        public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryToUpdate categoryToUpdate)
+            [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCategory(int id, [FromForm] CategoryToUpdate categoryToUpdate)
         {
-            var UpdateCategory = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
-            if (UpdateCategory is null)
+            var updateCategory = await _context.Categories.Include(c => c.Image).FirstOrDefaultAsync(x => x.Id == id);
+            if (updateCategory is null)
             {
                 return NotFound();
             }
-            UpdateCategory.CategoryType = categoryToUpdate.CategoryType;
-            UpdateCategory.Description = categoryToUpdate.Description;
+
+            updateCategory.CategoryType = categoryToUpdate.CategoryType;
+            updateCategory.Description = categoryToUpdate.Description;
+
+            if (categoryToUpdate.Image != null && categoryToUpdate.Image.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await categoryToUpdate.Image.CopyToAsync(memoryStream);
+                    if (updateCategory.Image == null)
+                    {
+                        updateCategory.Image = new Image();
+                    }
+                    updateCategory.Image.Data = memoryStream.ToArray();
+                    updateCategory.Image.ContentType = categoryToUpdate.Image.ContentType;
+                }
+            }
 
             try
             {
-                _context.Update(UpdateCategory);
+                _context.Update(updateCategory);
                 await _context.SaveChangesAsync();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-
                 Console.Write(ex.Message);
                 return StatusCode(500);
-
             }
+
             return Ok();
         }
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {

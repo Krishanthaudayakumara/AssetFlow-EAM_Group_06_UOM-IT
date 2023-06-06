@@ -148,6 +148,126 @@
           "lib/net7.0/EPPlus.System.Drawing.dll": {}
         }
       },
+      "Google.Api.Gax/4.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.1/Google.Api.Gax.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/Google.Api.Gax.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Google.Api.Gax.Rest/4.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Api.Gax": "4.4.0",
+          "Google.Apis.Auth": "[1.60.0, 2.0.0)",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/Google.Api.Gax.Rest.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/Google.Api.Gax.Rest.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Google.Apis/1.60.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Apis.Core": "1.60.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Google.Apis.Auth/1.60.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Apis": "1.60.0",
+          "Google.Apis.Core": "1.60.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {},
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {},
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Google.Apis.Core/1.60.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Google.Apis.Storage.v1/1.60.0.2981": {
+        "type": "package",
+        "dependencies": {
+          "Google.Apis": "1.60.0",
+          "Google.Apis.Auth": "1.60.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Storage.v1.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Storage.v1.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Google.Cloud.Storage.V1/4.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Api.Gax.Rest": "[4.4.0, 5.0.0)",
+          "Google.Apis.Storage.v1": "[1.60.0.2981, 2.0.0)"
+        },
+        "compile": {
+          "lib/netstandard2.1/Google.Cloud.Storage.V1.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/Google.Cloud.Storage.V1.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -499,10 +619,12 @@
           }
         }
       },
-      "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
+      "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
         "type": "package",
         "compile": {
-          "ref/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {}
+          "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
@@ -1353,6 +1475,19 @@
           "lib/netstandard2.0/Mono.TextTemplating.dll": {}
         }
       },
+      "Newtonsoft.Json/13.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "SkiaSharp/2.88.3": {
         "type": "package",
         "dependencies": {
@@ -2194,6 +2329,159 @@
         "readme.md"
       ]
     },
+    "Google.Api.Gax/4.4.0": {
+      "sha512": "vkqxzz54dRdl3uUmz0hOhMfR9EjGrWJI+SeOl3UC1Gr/mHfHOwYiRPnJbub+77/xS0lAJBs02iOh3ay9zgzW4Q==",
+      "type": "package",
+      "path": "google.api.gax/4.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.api.gax.4.4.0.nupkg.sha512",
+        "google.api.gax.nuspec",
+        "lib/net462/Google.Api.Gax.dll",
+        "lib/net462/Google.Api.Gax.pdb",
+        "lib/net462/Google.Api.Gax.xml",
+        "lib/netstandard2.1/Google.Api.Gax.dll",
+        "lib/netstandard2.1/Google.Api.Gax.pdb",
+        "lib/netstandard2.1/Google.Api.Gax.xml"
+      ]
+    },
+    "Google.Api.Gax.Rest/4.4.0": {
+      "sha512": "L4sJluVTLMy5cqFR439c2UNuWU20Wqh6yatY455rRwRlfdQlCc7Z4TdYphj2qH3cLo5NCPGQM37r/uQDLzF3eA==",
+      "type": "package",
+      "path": "google.api.gax.rest/4.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.api.gax.rest.4.4.0.nupkg.sha512",
+        "google.api.gax.rest.nuspec",
+        "lib/net462/Google.Api.Gax.Rest.dll",
+        "lib/net462/Google.Api.Gax.Rest.pdb",
+        "lib/net462/Google.Api.Gax.Rest.xml",
+        "lib/netstandard2.1/Google.Api.Gax.Rest.dll",
+        "lib/netstandard2.1/Google.Api.Gax.Rest.pdb",
+        "lib/netstandard2.1/Google.Api.Gax.Rest.xml"
+      ]
+    },
+    "Google.Apis/1.60.0": {
+      "sha512": "T8ojAsKlsMkt5nZhTQuocqHYzm/knVm8o2/JMm4louEjaKzT4x0FihoCIxCYSTRGWkYC27LPWspyG4p76+bMzA==",
+      "type": "package",
+      "path": "google.apis/1.60.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.apis.1.60.0.nupkg.sha512",
+        "google.apis.nuspec",
+        "lib/net45/Google.Apis.PlatformServices.dll",
+        "lib/net45/Google.Apis.dll",
+        "lib/net45/Google.Apis.pdb",
+        "lib/net45/Google.Apis.xml",
+        "lib/netstandard1.3/Google.Apis.dll",
+        "lib/netstandard1.3/Google.Apis.pdb",
+        "lib/netstandard1.3/Google.Apis.xml",
+        "lib/netstandard2.0/Google.Apis.dll",
+        "lib/netstandard2.0/Google.Apis.pdb",
+        "lib/netstandard2.0/Google.Apis.xml"
+      ]
+    },
+    "Google.Apis.Auth/1.60.0": {
+      "sha512": "AUuWniIf2muns/9hesiF7yCKeQN+PbdTU864Rb2wDzW4xmepO6tEnoqREPeow95qIAgkOlL/byKeU65d3ox5Ng==",
+      "type": "package",
+      "path": "google.apis.auth/1.60.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.apis.auth.1.60.0.nupkg.sha512",
+        "google.apis.auth.nuspec",
+        "lib/net45/Google.Apis.Auth.PlatformServices.dll",
+        "lib/net45/Google.Apis.Auth.dll",
+        "lib/net45/Google.Apis.Auth.pdb",
+        "lib/net45/Google.Apis.Auth.xml",
+        "lib/net461/Google.Apis.Auth.PlatformServices.dll",
+        "lib/net461/Google.Apis.Auth.dll",
+        "lib/net461/Google.Apis.Auth.pdb",
+        "lib/net461/Google.Apis.Auth.xml",
+        "lib/netstandard1.3/Google.Apis.Auth.PlatformServices.dll",
+        "lib/netstandard1.3/Google.Apis.Auth.dll",
+        "lib/netstandard1.3/Google.Apis.Auth.pdb",
+        "lib/netstandard1.3/Google.Apis.Auth.xml",
+        "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll",
+        "lib/netstandard2.0/Google.Apis.Auth.dll",
+        "lib/netstandard2.0/Google.Apis.Auth.pdb",
+        "lib/netstandard2.0/Google.Apis.Auth.xml"
+      ]
+    },
+    "Google.Apis.Core/1.60.0": {
+      "sha512": "NOkjqMQblYEZXt2OEgshWayveYW11Pi+Uz0I30Kzl9BvL4TZLJzMqtiu1EdV8XkyyjGuAUgANdi4BOqRDlbVEw==",
+      "type": "package",
+      "path": "google.apis.core/1.60.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.apis.core.1.60.0.nupkg.sha512",
+        "google.apis.core.nuspec",
+        "lib/net45/Google.Apis.Core.dll",
+        "lib/net45/Google.Apis.Core.pdb",
+        "lib/net45/Google.Apis.Core.xml",
+        "lib/netstandard1.3/Google.Apis.Core.dll",
+        "lib/netstandard1.3/Google.Apis.Core.pdb",
+        "lib/netstandard1.3/Google.Apis.Core.xml",
+        "lib/netstandard2.0/Google.Apis.Core.dll",
+        "lib/netstandard2.0/Google.Apis.Core.pdb",
+        "lib/netstandard2.0/Google.Apis.Core.xml"
+      ]
+    },
+    "Google.Apis.Storage.v1/1.60.0.2981": {
+      "sha512": "YcUvDcg0hV5hAFPYwLwg15pmObxjJEhH/9mkiNxpQ/vYfwPfIH/s2PeIEzdnDkQlE4kPyoJdA9cIYIXnC1s5Qg==",
+      "type": "package",
+      "path": "google.apis.storage.v1/1.60.0.2981",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.apis.storage.v1.1.60.0.2981.nupkg.sha512",
+        "google.apis.storage.v1.nuspec",
+        "lib/net45/Google.Apis.Storage.v1.dll",
+        "lib/net45/Google.Apis.Storage.v1.pdb",
+        "lib/net45/Google.Apis.Storage.v1.xml",
+        "lib/netstandard1.3/Google.Apis.Storage.v1.dll",
+        "lib/netstandard1.3/Google.Apis.Storage.v1.pdb",
+        "lib/netstandard1.3/Google.Apis.Storage.v1.xml",
+        "lib/netstandard2.0/Google.Apis.Storage.v1.dll",
+        "lib/netstandard2.0/Google.Apis.Storage.v1.pdb",
+        "lib/netstandard2.0/Google.Apis.Storage.v1.xml"
+      ]
+    },
+    "Google.Cloud.Storage.V1/4.6.0": {
+      "sha512": "pNV9H+LElfumLs7k8GDf8vltQ+fpq59oklCncBu5FPTzmwNGryT3VMaTU8+xV3VnWN44vNyPYz1tiOiF0F/5Xw==",
+      "type": "package",
+      "path": "google.cloud.storage.v1/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.cloud.storage.v1.4.6.0.nupkg.sha512",
+        "google.cloud.storage.v1.nuspec",
+        "lib/net462/Google.Cloud.Storage.V1.dll",
+        "lib/net462/Google.Cloud.Storage.V1.pdb",
+        "lib/net462/Google.Cloud.Storage.V1.xml",
+        "lib/netstandard2.1/Google.Cloud.Storage.V1.dll",
+        "lib/netstandard2.1/Google.Cloud.Storage.V1.pdb",
+        "lib/netstandard2.1/Google.Cloud.Storage.V1.xml"
+      ]
+    },
     "Humanizer.Core/2.14.1": {
       "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "type": "package",
@@ -2477,10 +2765,10 @@
         "microsoft.aspnetcore.webutilities.nuspec"
       ]
     },
-    "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
-      "sha512": "yuvf07qFWFqtK3P/MRkEKLhn5r2UbSpVueRziSqj0yJQIKFwG1pq9mOayK3zE5qZCTs0CbrwL9M6R8VwqyGy2w==",
+    "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
+      "sha512": "UcSjPsst+DfAdJGVDsu346FX0ci0ah+lw3WRtn18NUwEqRt70HaOQ7lI72vy3+1LxtqI3T5GWwV39rQSrCzAeg==",
       "type": "package",
-      "path": "microsoft.bcl.asyncinterfaces/1.1.1",
+      "path": "microsoft.bcl.asyncinterfaces/6.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2493,13 +2781,9 @@
         "lib/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.xml",
         "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll",
         "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.xml",
-        "microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
+        "microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
         "microsoft.bcl.asyncinterfaces.nuspec",
-        "ref/net461/Microsoft.Bcl.AsyncInterfaces.dll",
-        "ref/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.dll",
-        "ref/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "useSharedDesignerContext.txt"
       ]
     },
     "Microsoft.CSharp/4.7.0": {
@@ -3889,6 +4173,36 @@
         "lib/netstandard2.0/Mono.TextTemplating.dll",
         "mono.texttemplating.2.2.1.nupkg.sha512",
         "mono.texttemplating.nuspec"
+      ]
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
     "SkiaSharp/2.88.3": {
@@ -5636,6 +5950,7 @@
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.0",
       "BarcodeLib >= 3.0.0",
       "EPPlus >= 6.2.0",
+      "Google.Cloud.Storage.V1 >= 4.6.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.2",
       "Microsoft.AspNetCore.Identity >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 7.0.4",
@@ -5702,6 +6017,10 @@
           "EPPlus": {
             "target": "Package",
             "version": "[6.2.0, )"
+          },
+          "Google.Cloud.Storage.V1": {
+            "target": "Package",
+            "version": "[4.6.0, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",

@@ -4,7 +4,7 @@ import Sidebar from "../../components/Sidebar";
 import MyNavbar from "../../components/Navbar";
 //import CategoryTable from "../../components/Inventory/Table/CategoryTable";
 //import SubCategoryPopupForm from "../../components/Inventory/Form/SubCategoryPopupForm";
-import AssetTable from "../../components/Inventory/Table/AssetTable";
+import EmployeeRequestTable from "../../components/Inventory/Table/EmployeeRequestTable";
 
 
 const Asset: React.FC = () => {
@@ -12,7 +12,7 @@ const Asset: React.FC = () => {
     <Container>
       <div>
        {/* <SubCategoryPopupForm/> */}
-       {<AssetTable /> }
+       {<EmployeeRequestTable /> }
 
       </div>
     </Container>

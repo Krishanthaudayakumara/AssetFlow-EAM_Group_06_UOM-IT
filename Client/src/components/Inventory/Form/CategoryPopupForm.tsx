@@ -1,22 +1,43 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Alert } from "react-bootstrap";
 
 function AddCategory() {
   const [show, setShow] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [validationError, setValidationError] = useState("");
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setValidationError("");
+  };
+
   const handleShow = () => setShow(true);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // Perform client-side validation
+    const categoryType = event.currentTarget.categoryType.value;
+    const description = event.currentTarget.description.value;
+
+    if (!categoryType || !description) {
+      setValidationError("Please fill in all the fields");
+      return;
+    }
+
+    if(selectedImage==null){
+      setValidationError("Please Choose A Image");
+      return;
+    }
+
     const data = new FormData();
-    data.append("categoryType", event.currentTarget.categoryType.value);
-    data.append("description", event.currentTarget.description.value);
+    data.append("categoryType", categoryType);
+    data.append("description", description);
     if (selectedImage) {
       data.append("image", selectedImage);
     }
+
     try {
       const response = await axios.post(
         "http://localhost:5087/api/Category",
@@ -48,6 +69,9 @@ function AddCategory() {
           <Modal.Title>Add Category</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        {validationError && (
+              <Alert variant="danger">{validationError}</Alert>
+            )}
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Label>Category Type</Form.Label>
@@ -76,6 +100,8 @@ function AddCategory() {
                 onChange={handleImageChange}
               />
             </Form.Group>
+
+           
 
             <Button variant="primary" type="submit">
               Submit

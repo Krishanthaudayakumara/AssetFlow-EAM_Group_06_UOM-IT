@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230605121037_afteraddcardv.1.0.5")]
-    partial class afteraddcardv105
+    [Migration("20230606103715_afteraddcardv.1.0.6")]
+    partial class afteraddcardv106
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

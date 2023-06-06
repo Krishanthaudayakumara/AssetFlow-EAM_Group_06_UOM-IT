@@ -31,9 +31,13 @@ import StockTable from "./components/Inventory/Table/StockTable";
 import Stock from "./pages/Inventory/Stock";
 import StockPopupForm from "./components/Inventory/Form/StockPopupForm";
 
-import Assetable from "./components/Inventory/Table/AssetTable";
+import AsseTable from "./components/Inventory/Table/AssetTable";
 import Asset from "./pages/Inventory/Asset";
 //import AssetPopupForm from "./components/Inventory/Form/AssetPopupForm";
+
+import EmployeeRequestTable from "./components/Inventory/Table/EmployeeRequestTable";
+import EmployeeRequest from "./pages/Inventory/EmployeeRequest";
+//import EmployeeRequestPopupForm from "./components/Inventory/Form/EmployeeRequestPopupForm";
 
 import FacilityAsset from "./pages/Facility/FacilityAsset";
 import FacilityStock from "./pages/Facility/FacilityStock";
@@ -256,6 +260,17 @@ const App: React.FC = () => {
             element={
               <Wrapper>
                 <Asset />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/EmployeeRequest" >
+          <Route
+            path="/EmployeeRequest"
+            element={
+              <Wrapper>
+                <EmployeeRequest />
               </Wrapper>
             }
           />

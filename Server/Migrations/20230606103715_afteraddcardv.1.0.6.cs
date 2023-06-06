@@ -5,7 +5,7 @@
 namespace Server.Migrations
 {
     /// <inheritdoc />
-    public partial class afteraddcardv105 : Migration
+    public partial class afteraddcardv106 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

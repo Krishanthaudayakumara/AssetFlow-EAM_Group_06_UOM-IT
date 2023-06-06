@@ -140,6 +140,10 @@ function StockTable() {
       const updatedAmount = document.getElementById(
         "amountInput"
       ) as HTMLInputElement;
+
+
+      const costValue = parseFloat(updatedCost.value);
+      const amountValue = parseFloat(updatedAmount.value);
   
       // Validate the input fields
       if (
@@ -154,6 +158,15 @@ function StockTable() {
         return;
       }
 
+      if (isNaN(costValue)) {
+        setErrorMessage("Cost must be a Number.");
+        return;
+      }
+      if (isNaN(amountValue)) {
+        setErrorMessage("Amount must be a Number.");
+        return;
+      }
+
       if( updatedSupplierName.value=="Choose a supplier ..."){
         setErrorMessage("Please Choose a Supplier.");
         return;
@@ -164,13 +177,15 @@ function StockTable() {
         return;
       }
 
-      const costValue = parseFloat(updatedCost.value);
-      const amountValue = parseFloat(updatedAmount.value);
+     
 
       if(costValue<=0 ){
         setErrorMessage("Cost Must Be Greater than zero.");
         return;
       }
+  
+      
+
 
       if(amountValue<=0 ){
         setErrorMessage("Amount Must Be Greater than zero.");
