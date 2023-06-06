@@ -42,8 +42,10 @@ function AssetCard({ workstationId, subcategoryCount }: AssetCardProps) {
             <div className="Ellipseicon-cantainer">
               <IoEllipsisHorizontalSharp />
             </div>
-            <div className="Subcategory">{subCategoryCount.subCategoryType}</div>
-            <div className="ItemCount">{subCategoryCount.itemCount}</div>
+            <div className="Asset_info">
+              <div className="Subcategory">{subCategoryCount.subCategoryType}</div>
+              <div className="ItemCount">{subCategoryCount.itemCount}</div>
+            </div>
           </div>
         </div>
       ))}
