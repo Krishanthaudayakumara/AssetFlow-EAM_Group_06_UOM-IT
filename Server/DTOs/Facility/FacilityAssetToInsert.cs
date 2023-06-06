@@ -9,7 +9,12 @@ namespace Server.DTOs
 
        public string? AssetConditionStatus { get; set; }
        public DateTime? ReceivedDate { get; set; }
-        public String? AssignStatus { get; set; }
+        public string? AssignStatus { get; set; }
+        public int? WorkstationId { get; set; }
+
+        public DateTime? AssignedDate { get; set; }
+
+
 
 
 

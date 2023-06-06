@@ -204,6 +204,17 @@ const RoutesConfig: React.FC = () => {
       >
         <Route path="/FacilityStock" element={<FacilityStock />} />
       </Route>
+
+      <Route path="/AssignAsset" element={<PrivateRoute allowedRoles="all" />} >
+          <Route
+            path="/AssignAsset"
+            element={
+             
+                <AssignAsset />
+            }
+          />
+          </Route>
+
     </Routes>
   );
 };

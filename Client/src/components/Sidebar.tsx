@@ -31,6 +31,8 @@ const items = [
       { label: "Facility Stock", link: "/FacilityStock" },
       { label: "Facility Asset", link: "/FacilityAsset" },
       { label: "Facility Dashboard", link: "/FacilityDashboard" },
+      { label: "Assign Asset", link: "/AssignAsset" },
+      
       { label: "Building 2", link: "/facility/building2" },
     ],
   },

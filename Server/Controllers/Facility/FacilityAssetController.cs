@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs;
+using Server.DTOs.Facility;
 using Server.Models;
 using Server.Models;
 
@@ -20,29 +21,38 @@ namespace Server.Controllers
 
 
         private readonly DataContext _context;
-        
+
 
         public FacilityAssetController(DataContext context)
         {
-            
+
             _context = context;
         }
 
         [HttpPost]
-        public async Task<Boolean> CreateAssetsInFacility()
+        public async Task<bool> CreateAssetsInFacility()
         {
             try
             {
-                var assets = (await _context.Assets.ToListAsync()).FindAll(a => a.Status == "Issued");
-                assets.ForEach(async a =>
+                var assets = await _context.Assets.Where(a => a.Status == "Issued").ToListAsync();
+
+                foreach (var asset in assets)
                 {
-                    Console.WriteLine(a.Description);
-                    var fa = new FacilityAsset();
-                    fa.Asset = a;
-                    var result = await _context.FacilityAssets.AddAsync(fa);
-                    Console.WriteLine(result);
-                });
+                    Console.WriteLine(asset.Description);
+
+                    var fa = new FacilityAsset
+                    {
+                        Asset = asset,
+                        AssetConditionStatus = "New",
+                        AssignStatus = "Not Assign",
+                        ReceivedDate = DateTime.Today
+                    };
+
+                    await _context.FacilityAssets.AddAsync(fa);
+                }
+
                 await _context.SaveChangesAsync();
+
                 return true;
             }
             catch
@@ -57,7 +67,12 @@ namespace Server.Controllers
             try
             {
                 List<AssetViewModel> assetViewsList = new List<AssetViewModel>();
-                var assets = await _context.FacilityAssets.Include(a => a.Asset).ThenInclude(a => a.Stock).ToListAsync();
+                var assets = await _context.FacilityAssets
+                    .Include(a => a.Asset)
+                    .ThenInclude(a => a.Stock)
+                    .ThenInclude(s => s.SubCategory)
+                    .ThenInclude(sc => sc.Category)
+                    .ToListAsync();
 
                 if (assets != null)
                 {
@@ -68,13 +83,12 @@ namespace Server.Controllers
                             AssetId = asset.Asset.Id,
                             Description = asset.Asset.Description,
                             Vendor = asset.Asset.Vendor,
-                            SubCategoryId = asset.Asset.StockId,
-                            CategoryId = asset.Asset.Stock.SubCategoryId,
+                            SubCategoryType = asset.Asset.Stock.SubCategory.SubCategoryType,
+                            CategoryType = asset.Asset.Stock.SubCategory.Category.CategoryType,
                             FacilityAssetId = asset.Id
                         };
 
                         assetViewsList.Add(assetView);
-
                     }
                 }
 
@@ -87,33 +101,10 @@ namespace Server.Controllers
             }
         }
 
-        [HttpPost("FacilityAsset")]
-        public async Task<IActionResult> AddFacAsset([FromBody]FacilityAssetToInsert facilityAssetToInsert){
-            if(facilityAssetToInsert is null){
-                return BadRequest();
-            }
 
-            var fAsset = await _context.FacilityAssets.Where(fa => fa.AssetId== facilityAssetToInsert.AssetId).FirstOrDefaultAsync();
-            
-            try{
-                if (fAsset == null)
-                    return BadRequest();
+       
 
-                fAsset.AssetConditionStatus = facilityAssetToInsert.AssetConditionStatus;
-                fAsset.ReceivedDate = facilityAssetToInsert.ReceivedDate;
-                fAsset.AssignStatus=facilityAssetToInsert.AssignStatus;
-
-                await _context.SaveChangesAsync();
-            }
-            catch(System.Exception ex){
-                Console.Write(ex.Message);
-                return BadRequest(ex.Message);
-            }
-
-            return Ok(fAsset);
-        }
-
-         [HttpGet("GetAllFacilityAssets")]
+        [HttpGet("GetAllFacilityAssets")]
         public async Task<IActionResult> GetAllFacilityAssets()
         {
             var allFacilityAssets = await _context.FacilityAssets.ToListAsync();
@@ -121,8 +112,30 @@ namespace Server.Controllers
         }
 
 
+ [HttpPut("{id}")]
 
-       
+     
+
+        public async Task <IActionResult> UpdateFacilityAsset(int id,FacilityToUpdate FacilityAssetToUpdate){
+        var updateFacAsset= await _context.FacilityAssets .FirstOrDefaultAsync(x => x.Id==id);
+        if(updateFacAsset is null){
+            return NotFound();
+        }
+
+        updateFacAsset.AssignedDate=FacilityAssetToUpdate.AssignedDate;
+        updateFacAsset.WorkstationId=FacilityAssetToUpdate.WorkstationId;
+        updateFacAsset.AssignStatus="Assigned";
+        
+        
+        await _context.SaveChangesAsync();
+        
+
+        
+        return Ok(updateFacAsset);
+        }
+
+
+
 
         /*  [HttpGet("{id}")]
           public async Task<IActionResult> GetAsset(int id)

@@ -7,12 +7,14 @@ import axios from "axios";
 interface BuildingData {
   buildingName: string;
   floorNo: number;
+  address:string
 }
 
 function Forms() {
   const [formData, setFormData] = useState<BuildingData>({
     buildingName: "",
     floorNo: 0,
+    address:""
   });
 
   
@@ -35,6 +37,7 @@ function Forms() {
       setFormData({
         buildingName: "",
         floorNo: 0,
+        address:""
       });
       alert("Data saved successfully!");
     } catch (error) {
@@ -69,6 +72,19 @@ function Forms() {
           onChange={handleInputChange}
         />
       </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="name">Address</Form.Label>
+        <Form.Control
+          type="text"
+          id="address"
+          name="address"
+          value={formData.address}
+          placeholder="Enter Building Address"
+          required
+          onChange={handleInputChange}
+        />
+      </Form.Group>
+
 
 
       <Button variant="success" type="submit">

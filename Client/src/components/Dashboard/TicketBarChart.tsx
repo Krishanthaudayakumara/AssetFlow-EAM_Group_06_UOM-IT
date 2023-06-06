@@ -6,7 +6,7 @@ interface chartData {
     labels: string[]
     datasets: [
       {
-        label: string
+        label: string                  
         data: number[]
         backgroundColor: string
       },

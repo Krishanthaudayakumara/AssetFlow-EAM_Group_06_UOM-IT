@@ -16,7 +16,7 @@ interface FacilityAssetData {
 }
 
 function FacilityAssetTable() {
-  const [facilityData, setFacilityData] = useState<FacilityAssetData[]>( []);
+  const [facilityData, setFacilityData] = useState<FacilityAssetData[]>([]);
    
  
 

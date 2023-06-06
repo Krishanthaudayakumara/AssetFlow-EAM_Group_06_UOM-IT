@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 import axios from "axios";
@@ -6,26 +6,24 @@ import moment from "moment";
 
 function FacilityAssetForm() {
   const [selectedOption, setSelectedOption] = useState("");
-  const [selectAssignOption,setSelectAssignOption]=useState("");
+  const [selectAssignOption, setSelectAssignOption] = useState("");
 
-  // model to crate the object related to facility asset data
+  // model to create the object related to facility asset data
   interface FacilityAssetData {
     assetConditionStatus: string;
     receivedDate: string;
     assetId: number;
-    assignStatus:string;
+    assignStatus: string;
   }
 
   const [formData, setFormData] = useState<FacilityAssetData>({
-    assetConditionStatus: "New", // Set the initial value to "new"
-    assignStatus:"Not Assign",
+    assetConditionStatus: "New",
+    assignStatus: "Not Assign",
     receivedDate: "",
     assetId: 0,
   });
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLSelectElement & HTMLInputElement>
-  ): void => {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement & HTMLInputElement>): void => {
     const { name, value } = event.target;
     setSelectedOption(event.target.value);
     setSelectAssignOption(event.target.value);
@@ -35,22 +33,17 @@ function FacilityAssetForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (
-    e: React.FocusEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const handleSubmit = async (e: React.FocusEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
-      console.log("form data" + formData);
-      const response = await axios.post(
-        "http://localhost:5087/api/FacilityAsset/FacilityAsset",
-        formData
-      );
+      console.log("form data", formData);
+      const response = await axios.post("http://localhost:5087/api/FacilityAsset/FacilityAsset", formData);
 
       console.log(response.data);
       setFormData({
         assetId: 0,
-        assignStatus:"Not Assign",
-        assetConditionStatus: "New", // Set the initial value to "new"
+        assignStatus: "Not Assign",
+        assetConditionStatus: "New",
         receivedDate: "",
       });
     } catch (error) {
@@ -58,10 +51,6 @@ function FacilityAssetForm() {
     }
     console.log("formData");
   };
-
-  // const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) =>:void {
-  //   setSelectedOption(event.target.value);
-  // };
 
   return (
     <div>
@@ -72,10 +61,14 @@ function FacilityAssetForm() {
           value={formData.assetId}
           onChange={handleChange}
           style={{
-            border: "1px solid #c4c4c4",
+            border: "2px solid #482890",
+
             borderRadius: "5px",
             borderColor: "#aaa",
             padding: "8px 10px 7px 0px",
+            width: "150px", // Reduce input field width
+            marginBottom: "10px", // Adjust the margin to balance the layout
+            marginLeft: "10px", // Move the input field further to the left
           }}
         />
 
@@ -85,12 +78,14 @@ function FacilityAssetForm() {
           onChange={handleChange}
           autoFocus={true}
           style={{
-            width: "200px",
+            width: "150px", // Reduce select field width
             height: "40px",
-            borderColor: "#aaa",
-            borderRadius: "5px",
+            border: "2px solid #482890",
 
-            margin: "50px 0px 0px 20px",
+            borderRadius: "5px",
+            marginTop: "50px",
+            marginLeft: "10px", // Move the select field further to the left
+            marginBottom: "10px", // Adjust the margin to balance the layout
           }}
         >
           <option value="New">New</option>
@@ -105,28 +100,30 @@ function FacilityAssetForm() {
           max={moment().format("YYYY-MM-DD")}
           onChange={handleChange}
           style={{
-            border: "1px solid #c4c4c4",
+            border: "2px solid #482890",
             borderRadius: "5px",
             borderColor: "#aaa",
             padding: "8px 30px",
-            marginLeft: "20px",
+            marginLeft: "10px", // Move the received date input further to the left
+            marginBottom: "10px", // Adjust the margin to balance the layout
           }}
         />
 
         <select
           name="assignStatus"
           style={{
-            border: "1px solid #c4c4c4",
+            border: "2px solid #ff615a",
             borderRadius: "5px",
             borderColor: "#aaa",
             padding: "8px 30px",
-            marginLeft: "20px",
+            marginLeft: "10px", // Move the assign status select field further to the left
+            marginBottom: "10px", // Adjust the margin to balance the layout
           }}
         >
-          
           <option value="Assign">Assign</option>
-          <option value="not Assign">Not Assign</option>
+          <option value="Not Assign">Not Assign</option>
         </select>
+
         <Button
           type="submit"
           style={{
@@ -134,20 +131,24 @@ function FacilityAssetForm() {
             width: "100px",
             left: "30px",
             backgroundColor: "#482890",
-            
-            borderColor: "#482890!important",
+            borderColor: "#482890",
+            marginLeft:"-20px"
           }}
         >
           Add
         </Button>
       </form>
+
       <Button
         style={{
+          float: "right",
           
-          float:"right",
-          marginTop: "-40px",
-          backgroundColor: "#ff615a ",
-          borderColor: "#ff615a ",
+          backgroundColor: "#ff615a",
+          borderColor: "#ff615a",
+          marginRight: "20px",
+          marginTop:"-47px",
+           
+
         }}
       >
         Assign Asset

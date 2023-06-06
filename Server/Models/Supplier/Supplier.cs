@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Server.Models
 {
     public class Supplier
