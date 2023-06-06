@@ -12,9 +12,10 @@ type AssignAssetFormProps = {
 interface SubcategoryOption {
   assetId: number;
   subCategoryType: string;
+  facilityAssetId:number;
 }
 
-function AssignAssetform(props: AssignAssetFormProps) {
+function AssignAssetForm(props: AssignAssetFormProps) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const [subCategory, setSubCategory] = useState<SubcategoryOption[]>([]);
@@ -66,29 +67,41 @@ function AssignAssetform(props: AssignAssetFormProps) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevent default form submission behavior
-    if (selectedSubCategory === "" || selectedAssetId === null ) {
+    if (selectedSubCategory === "" || selectedAssetId === undefined) {
       alert("Please fill out all the fields.");
       return;
     }
 
     try {
+      const selectedFacilityAsset = subCategory.find(
+        (s) => s.assetId === selectedAssetId
+      );
+      if (!selectedFacilityAsset) {
+        alert("Selected AssetId is invalid.");
+        return;
+      }
+
       const updateData = {
         AssignedDate: selectedDate,
         WorkstationId: props.id,
-        
-
+        FacilityAssetId: selectedFacilityAsset.facilityAssetId,
       };
-  
-      await axios.put(`http://localhost:5087/api/FacilityAsset/${selectedAssetId}`, updateData);
-  
+
+      await axios.put(
+        `http://localhost:5087/api/FacilityAsset/${selectedFacilityAsset.facilityAssetId}`,
+        updateData
+      );
+
       alert("Facility Asset updated successfully!");
-  
+
       // Optionally, you can reset the form fields or perform any other actions after successful update
     } catch (error) {
       alert("An error occurred while updating the Facility Asset.");
       console.error(error);
     }
-  }
+  };
+
+   
 
 
   return (
@@ -110,10 +123,12 @@ function AssignAssetform(props: AssignAssetFormProps) {
       </Form.Group>
       <Form.Group className="mb-3" controlId="AssetId">
         <Form.Label>Asset Id</Form.Label>
-        <Form.Select  value={selectedAssetId} onChange={(e) => handleAssetIdChange(e)}>
-        <option value="0">-- Please Select a Asset Id --</option>
-
-        {assetIds.map((assetId) => (
+        <Form.Select
+          value={selectedAssetId}
+          onChange={(e) => handleAssetIdChange(e)}
+        >
+          <option value="0">-- Please Select an Asset Id --</option>
+          {assetIds.map((assetId) => (
             <option key={assetId} value={assetId}>
               {assetId}
             </option>
@@ -138,4 +153,4 @@ function AssignAssetform(props: AssignAssetFormProps) {
   );
 }
 
-export default AssignAssetform;
+export default AssignAssetForm;

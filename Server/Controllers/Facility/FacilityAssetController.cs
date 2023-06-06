@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs;
+using Server.DTOs.Facility;
 using Server.Models;
 using Server.Models;
 
@@ -115,7 +116,7 @@ namespace Server.Controllers
 
      
 
-        public async Task <IActionResult> UpdateFacilityAsset(int id,FacilityAssetToInsert FacilityAssetToUpdate){
+        public async Task <IActionResult> UpdateFacilityAsset(int id,FacilityToUpdate FacilityAssetToUpdate){
         var updateFacAsset= await _context.FacilityAssets .FirstOrDefaultAsync(x => x.Id==id);
         if(updateFacAsset is null){
             return NotFound();
@@ -123,7 +124,7 @@ namespace Server.Controllers
 
         updateFacAsset.AssignedDate=FacilityAssetToUpdate.AssignedDate;
         updateFacAsset.WorkstationId=FacilityAssetToUpdate.WorkstationId;
-        updateFacAsset.AssignStatus=FacilityAssetToUpdate.AssignStatus;
+        updateFacAsset.AssignStatus="Assigned";
         
         
         await _context.SaveChangesAsync();
