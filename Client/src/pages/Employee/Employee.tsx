@@ -1,13 +1,24 @@
 // Employee.tsx
 
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Form,
+  Modal,
+  Alert,
+} from "react-bootstrap";
 import axios from "axios";
 import EmployeeTable from "../../components/Employee/EmployeeTable";
 import AddEmployeeModal from "../../components/Employee/AddEmployeeModal";
 import EmployeeModal from "../../components/Employee/EmployeeModal";
 
 import { Employee } from "../../types";
+import { AxiosError } from "axios";
+import DeleteConfirmationModal from "../../components/Employee/DeleteConfirmationModal";
+import { BsTrash } from "react-icons/bs";
 
 const EmployeePage: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -17,6 +28,11 @@ const EmployeePage: React.FC = () => {
     null
   );
   const [showUploadModal, setShowUploadModal] = useState(false);
+  const [error, setError] = useState<string | null>(null); // Error state
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); // Delete confirmation state
+  const [employeeToDelete, setEmployeeToDelete] = useState<Employee | null>(null); // Employee to delete state
+  
+  const timeout = 4000; // Timeout for error alert
 
   const uploadFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -35,6 +51,10 @@ const EmployeePage: React.FC = () => {
       setShowUploadModal(false); // close the modal
     } catch (error) {
       console.error(error);
+      setError("An error occurred while uploading the file."); // Set error message
+      setTimeout(() => {
+        setError(null); // Clear error message after 5 seconds
+      }, timeout);
     }
   };
 
@@ -54,6 +74,10 @@ const EmployeePage: React.FC = () => {
       link.click();
     } catch (error) {
       console.error(error);
+      setError("An error occurred while downloading the sample file."); // Set error message
+      setTimeout(() => {
+        setError(null); // Clear error message after 5 seconds
+      }, timeout);
     }
   };
 
@@ -83,7 +107,13 @@ const EmployeePage: React.FC = () => {
         }));
         setEmployees(employees);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        setError("An error occurred while fetching employees."); // Set error message
+        setTimeout(() => {
+          setError(null); // Clear error message after 5 seconds
+        }, timeout);
+      });
   };
 
   const handleAddEmployee = (employee: Employee) => {
@@ -93,8 +123,23 @@ const EmployeePage: React.FC = () => {
         fetchEmployees();
         setShowAddModal(false);
       })
-      .catch((error) => console.error(error));
+      .catch((error: AxiosError<any>) => {
+        console.error(error);
+        const errorResponse = error.response?.data;
+  
+        if (errorResponse && typeof errorResponse === "object") {
+          const errorMessages = Object.values(errorResponse.errors || {}).join(", ");
+          setError(errorMessages || "An error occurred while adding the employee.");
+        } else {
+          setError("An error occurred while adding the employee.");
+        }
+  
+        setTimeout(() => {
+          setError(null);
+        }, timeout);
+      });
   };
+  
 
   const handleEditEmployee = (employee: Employee) => {
     axios
@@ -104,17 +149,45 @@ const EmployeePage: React.FC = () => {
         setShowEditModal(false);
         setSelectedEmployee(null);
       })
-      .catch((error) => console.error(error));
+      .catch((error: AxiosError<any>) => {
+        console.error(error);
+        const errorMessage =
+          error.response?.data && typeof error.response.data === "object"
+            ? JSON.stringify(error.response.data)
+            : "An error occurred while updating the employee.";
+
+        setError(errorMessage); // Set error message
+        setTimeout(() => {
+          setError(null); // Clear error message after 5 seconds
+        }, timeout);
+      });
   };
 
   const handleDeleteEmployee = (employee: Employee) => {
-    if (window.confirm("Are you sure you want to delete this employee?")) {
+    setEmployeeToDelete(employee);
+    setShowDeleteConfirmation(true);
+  };
+
+  const confirmDeleteEmployee = () => {
+    if (employeeToDelete) {
       axios
-        .delete(`http://localhost:5087/api/Employee/${employee.id}`)
+        .delete(`http://localhost:5087/api/Employee/${employeeToDelete.id}`)
         .then(() => {
           fetchEmployees();
+          setShowDeleteConfirmation(false);
         })
-        .catch((error) => console.error(error));
+        .catch((error: AxiosError<any>) => {
+          console.error(error);
+          const errorMessage =
+            error.response?.data && typeof error.response.data === "object"
+              ? JSON.stringify(error.response.data)
+              : "An error occurred while deleting the employee.";
+
+          setError(errorMessage); // Set error message
+          setTimeout(() => {
+            setError(null); // Clear error message after 5 seconds
+          }, timeout);
+        });
     }
   };
 
@@ -123,37 +196,69 @@ const EmployeePage: React.FC = () => {
       url: "http://localhost:5087/api/Employee/export",
       method: "GET",
       responseType: "blob",
-    }).then((response) => {
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "employees.xlsx");
-      document.body.appendChild(link);
-      link.click();
-    });
+    })
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "employees.xlsx");
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((error) => {
+        console.error(error);
+        setError("An error occurred while exporting to Excel."); // Set error message
+        setTimeout(() => {
+          setError(null); // Clear error message after 5 seconds
+        }, timeout);
+      });
   };
 
   return (
     <Container>
       <Row>
         <Col>
-          <Button variant="primary" onClick={() => setShowAddModal(true)} className="btn-l-purple">
+          {error && ( // Display error alert if error message exists
+            <Alert variant="danger" onClose={() => setError(null)} dismissible>
+              {error}
+            </Alert>
+          )}
+          <Button
+            variant="primary"
+            onClick={() => setShowAddModal(true)}
+            className="btn-l-purple"
+          >
             Add Employee
           </Button>
 
-          <Button variant="primary" onClick={() => setShowUploadModal(true)} className="btn-l-purple">
+          <Button
+            variant="primary"
+            onClick={() => setShowUploadModal(true)}
+            className="btn-l-purple"
+          >
             Upload Excel
           </Button>
 
-          <Button variant="primary" onClick={() => downloadExcel()} className="btn-purple">
+          <Button
+            variant="primary"
+            onClick={() => downloadExcel()}
+            className="btn-purple"
+          >
             Export to Excel
           </Button>
 
-          <Button variant="primary" onClick={() => downloadSample()} className="btn-orange">
+          <Button
+            variant="primary"
+            onClick={() => downloadSample()}
+            className="btn-orange"
+          >
             Download Sample Excel
           </Button>
 
-          
+          <a href="/deleted-employee" className="btn-purple"  style={
+            { textDecoration:"none"}
+          }> <BsTrash/> Trash
+          </a>
 
           <Modal
             show={showUploadModal}
@@ -203,6 +308,12 @@ const EmployeePage: React.FC = () => {
           />
         </Col>
       </Row>
+      <DeleteConfirmationModal
+        show={showDeleteConfirmation}
+        employee={employeeToDelete}
+        onClose={() => setShowDeleteConfirmation(false)}
+        onDelete={confirmDeleteEmployee}
+      />
     </Container>
   );
 };

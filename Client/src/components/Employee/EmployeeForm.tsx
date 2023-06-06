@@ -1,8 +1,9 @@
 // EmployeeForm.tsx
 
-import React from "react";
+import React, { useState } from "react";
 import { Employee } from "../../types";
-import { Form } from "react-bootstrap";
+import { Form, Button, InputGroup } from "react-bootstrap";
+import { FiEye, FiEyeOff, FiKey } from "react-icons/fi";
 
 interface Props {
   employee: Partial<Employee>;
@@ -10,6 +11,53 @@ interface Props {
 }
 
 const EmployeeForm: React.FC<Props> = ({ employee, onChange }) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [generatedPassword, setGeneratedPassword] = useState("");
+
+  const generatePassword = () => {
+    const length = 12; // Minimum password length
+    const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+    const numberChars = '0123456789';
+    const specialChars = '!@#$%^&*()-=_+[]{}|;:,.<>?';
+
+    let password = '';
+    let charSet = '';
+
+    // Include at least one character from each character set
+    password += getRandomCharFromSet(uppercaseChars);
+    password += getRandomCharFromSet(lowercaseChars);
+    password += getRandomCharFromSet(numberChars);
+    password += getRandomCharFromSet(specialChars);
+
+    // Generate remaining characters
+    const remainingLength = length - password.length;
+    charSet = uppercaseChars + lowercaseChars + numberChars + specialChars;
+    for (let i = 0; i < remainingLength; i++) {
+      password += getRandomCharFromSet(charSet);
+    }
+
+    setGeneratedPassword(password);
+    onChange({
+      target: {
+        name: "password",
+        value: password,
+      },
+    } as React.ChangeEvent<HTMLInputElement>);  };
+
+  const getRandomCharFromSet = (charSet: string | any[]) => {
+    const randomIndex = Math.floor(Math.random() * charSet.length);
+    return charSet[randomIndex];
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGeneratedPassword(e.target.value);
+    onChange(e);
+  };
   return (
     <Form>
       <Form.Group>
@@ -20,6 +68,7 @@ const EmployeeForm: React.FC<Props> = ({ employee, onChange }) => {
           name="firstName"
           value={employee.firstName || ""}
           onChange={onChange}
+          required
         />
       </Form.Group>
 
@@ -31,6 +80,7 @@ const EmployeeForm: React.FC<Props> = ({ employee, onChange }) => {
           name="lastName"
           value={employee.lastName || ""}
           onChange={onChange}
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -51,6 +101,7 @@ const EmployeeForm: React.FC<Props> = ({ employee, onChange }) => {
           name="email"
           value={employee.email || ""}
           onChange={onChange}
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -61,6 +112,7 @@ const EmployeeForm: React.FC<Props> = ({ employee, onChange }) => {
           name="phoneNumber"
           value={employee.phoneNumber || ""}
           onChange={onChange}
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -91,6 +143,7 @@ const EmployeeForm: React.FC<Props> = ({ employee, onChange }) => {
           name="jobTitle"
           value={employee.jobTitle || ""}
           onChange={onChange}
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -101,6 +154,7 @@ const EmployeeForm: React.FC<Props> = ({ employee, onChange }) => {
           name="departmentId"
           value={employee.departmentId || ""}
           onChange={onChange}
+          required
         />
       </Form.Group>
       <Form.Group>
@@ -111,18 +165,37 @@ const EmployeeForm: React.FC<Props> = ({ employee, onChange }) => {
           name="userName"
           value={employee.userName || ""}
           onChange={onChange}
+          required
+          
         />
       </Form.Group>
 
       <Form.Group>
         <Form.Label htmlFor="password">Password:</Form.Label>
-        <Form.Control
-          type="password"
-          id="password"
-          name="password"
-          value={employee.password || ""}
-          onChange={onChange}
-        />
+        <InputGroup>
+          <Form.Control
+            type={passwordVisible ? "text" : "password"}
+            id="password"
+            name="password"
+            value={generatedPassword || (employee ? employee.password : "")}
+            onChange={handlePasswordChange}
+            required
+          />
+          <Button
+            variant="secondary"
+            onClick={togglePasswordVisibility}
+            className="toggle-password-visibility-btn"
+          >
+            {passwordVisible ? <FiEyeOff /> : <FiEye />}
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={generatePassword}
+            className="generate-password-btn"
+          >
+            <FiKey />
+          </Button>
+        </InputGroup>
       </Form.Group>
     </Form>
   );

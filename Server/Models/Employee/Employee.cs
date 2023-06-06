@@ -25,11 +25,14 @@ namespace Server.Models
         public string UserId { get; set; }
         public User User { get; set; }
 
+        public bool Deleted { get; set; }
+
+
         public ICollection<Ticket> Tickets { get; set; }
 
-        
+
         public ICollection<Assign> Assigns { get; set; }
-         public ICollection<EmployeeRequest> employeeRequests { get; set; }
+        public ICollection<EmployeeRequest> employeeRequests { get; set; }
 
     }
 }

@@ -44,6 +44,7 @@ import "./App.css";
 import "./css/Buttons.css";
 import jwtDecode from "jwt-decode";
 import ProfilePage from "./pages/User/ProfilePage";
+import DeletedEmployeePage from "./pages/Employee/DeletedEmployeePage";
 
 const RoutesConfig: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -127,6 +128,10 @@ const RoutesConfig: React.FC = () => {
 
       <Route path="/employee" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/employee" element={<Employee />} />
+      </Route>
+
+      <Route path="/deleted-employee" element={<PrivateRoute allowedRoles="all" />}>
+        <Route path="/deleted-employee" element={<DeletedEmployeePage />} />
       </Route>
 
       <Route path="/department" element={<PrivateRoute allowedRoles="all" />}>

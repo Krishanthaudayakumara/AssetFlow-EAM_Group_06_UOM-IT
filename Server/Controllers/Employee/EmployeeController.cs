@@ -25,14 +25,21 @@ namespace Server.Controllers
 
         // GET: api/Employee
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees(bool includeDeleted = false)
         {
-            var employees = await _context.Employees
+            IQueryable<Employee> query = _context.Employees
                 .Include(e => e.User)
-                .Include(e => e.Department)
-                .ToListAsync();
+                .Include(e => e.Department);
+
+            if (!includeDeleted)
+            {
+                query = query.Where(e => !e.Deleted);
+            }
+
+            var employees = await query.ToListAsync();
             return employees;
         }
+
 
 
         // GET: api/Employee/5
@@ -50,6 +57,19 @@ namespace Server.Controllers
             }
 
             return employee;
+        }
+
+        // GET: api/Employee/deleted
+        [HttpGet("deleted")]
+        public async Task<ActionResult<IEnumerable<Employee>>> GetDeletedEmployees()
+        {
+            var deletedEmployees = await _context.Employees
+                .Include(e => e.User)
+                .Include(e => e.Department)
+                .Where(e => e.Deleted)
+                .ToListAsync();
+
+            return deletedEmployees;
         }
 
 
@@ -142,11 +162,47 @@ namespace Server.Controllers
                 return NotFound();
             }
 
+            employee.Deleted = true;
+            await _context.SaveChangesAsync();
+
+            return Ok(employee);
+        }
+
+        // PUT: api/Employee/Restore/5
+        [HttpPut("Restore/{id}")]
+        public async Task<IActionResult> RestoreEmployee(int id)
+        {
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            // Restore the employee by setting the delete status to false
+            employee.Deleted = false;
+            await _context.SaveChangesAsync();
+
+            return Ok(employee);
+        }
+
+        // DELETE: api/Employee/Delete/5
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> DeleteDeletedEmployee(int id)
+        {
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null || !employee.Deleted)
+            {
+                return NotFound();
+            }
+
+            // Remove the employee from the database
             _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
 
             return Ok(employee);
         }
+
+
 
         [HttpGet("export")]
         public async Task<IActionResult> ExportEmployees()

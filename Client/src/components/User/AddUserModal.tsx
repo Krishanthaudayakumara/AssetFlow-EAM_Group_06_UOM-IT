@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Alert, Spinner } from "react-bootstrap";
 import UserForm from "./UserForm";
 import { User } from "../../types";
+import { AxiosError } from "axios";
 
 interface Props {
   show: boolean;
@@ -12,6 +13,26 @@ interface Props {
 const AddUserModal: React.FC<Props> = ({ show, onHide, onSubmit }) => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    if (error) {
+      timer = setTimeout(() => {
+        setError(null);
+      }, 3000);
+    }
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [error]);
+
+  const handleAlertClose = () => {
+    setError(null);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,8 +57,15 @@ const AddUserModal: React.FC<Props> = ({ show, onHide, onSubmit }) => {
       // Clear the form fields
       e.currentTarget.reset();
       onHide();
-    } catch (error) {
-      setError("An error occurred while adding the user.");
+    } catch (error: unknown) {
+      const axiosError = error as AxiosError;
+      if (axiosError.isAxiosError && axiosError.response && axiosError.response.data) {
+        console.log(axiosError.response.data);
+        setError("Error: " + axiosError.response.data as string); // Explicitly cast to string
+      } else {
+        console.log(axiosError);
+        setError("An error occurred while adding the user");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -49,7 +77,11 @@ const AddUserModal: React.FC<Props> = ({ show, onHide, onSubmit }) => {
         <Modal.Title>Add User</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {error && <Alert variant="danger">{error}</Alert>}
+        {error && (
+          <Alert variant="danger" onClose={handleAlertClose} dismissible>
+            {error}
+          </Alert>
+        )}
         {isLoading ? (
           <div className="text-center">
             <Spinner animation="border" />

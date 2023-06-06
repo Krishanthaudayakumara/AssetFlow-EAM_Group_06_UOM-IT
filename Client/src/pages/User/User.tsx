@@ -45,6 +45,7 @@ const UserPage: React.FC = () => {
 
   const handleCloseModal = () => {
     setSelectedUsers([]);
+    setShowAddModal(false);
     setShowEditModal(false);
     setShowDeleteConfirmation(false);
   };
@@ -124,8 +125,7 @@ const UserPage: React.FC = () => {
           }>
           <a href="/deleted-users" className="btn-purple"  style={
             { textDecoration:"none"}
-          }> <BsTrash/> Deleted
-            Users
+          }> <BsTrash/> Trash
           </a>
         </Col>
       </Row>
