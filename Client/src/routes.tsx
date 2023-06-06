@@ -45,6 +45,7 @@ import "./css/Buttons.css";
 import jwtDecode from "jwt-decode";
 import ProfilePage from "./pages/User/ProfilePage";
 import DeletedEmployeePage from "./pages/Employee/DeletedEmployeePage";
+import MyTickets from "./pages/Support/MyTickets";
 
 const RoutesConfig: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -101,7 +102,6 @@ const RoutesConfig: React.FC = () => {
         <Route path="/ReportHistory" element={<ReportHistory />} />
       </Route>
 
-
       <Route path="/profile" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/profile" element={<ProfilePage />} />
       </Route>
@@ -130,7 +130,10 @@ const RoutesConfig: React.FC = () => {
         <Route path="/employee" element={<Employee />} />
       </Route>
 
-      <Route path="/deleted-employee" element={<PrivateRoute allowedRoles="all" />}>
+      <Route
+        path="/deleted-employee"
+        element={<PrivateRoute allowedRoles="all" />}
+      >
         <Route path="/deleted-employee" element={<DeletedEmployeePage />} />
       </Route>
 
@@ -160,6 +163,10 @@ const RoutesConfig: React.FC = () => {
 
       <Route path="/Issues" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/Issues" element={<Issues />} />
+      </Route>
+
+      <Route path="/MyTickets" element={<PrivateRoute allowedRoles="all" />}>
+        <Route path="/MyTickets" element={<MyTickets />} />
       </Route>
 
       {/* Pages */}

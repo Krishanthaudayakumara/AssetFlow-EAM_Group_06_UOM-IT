@@ -44,9 +44,9 @@ const items = [
     icon: FaComments,
     link: "/support",
     dropdownItems: [
-      { label: "Tickets", link: "/Tickets" },
-      { label: "Agents", link: "/Agents" },
+      { label: "Tickets", link: "/Tickets" },     
       { label: "Teams", link: "/Teams" },
+      { label: "Agents", link: "/Agents" },
       { label: "Issues", link: "/Issues" },
       { label: "My Tickets", link: "/MyTickets" },
       { label: "IT Dashboard", link: "/ITDashboard" },

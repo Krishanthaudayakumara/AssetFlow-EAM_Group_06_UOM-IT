@@ -34,7 +34,7 @@ namespace Server.Controllers.Support
             {
                 TicketId = replyToInsert.TicketId,
                 Text = replyToInsert.Text,
-                ReplyDate = replyToInsert.ReplyDate,
+                ReplyDate = DateTime.UtcNow,
                 
 
             };

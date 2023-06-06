@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
-import TeamTable from "../../components/Support/Table/TeamTable";
-import "./../../css/Support/Support.css";
-import NewTeamForm from "../../components/Support/Forms/Team/NewTeamForm";
+import React, { useState } from 'react';
+import { Button, Modal} from "react-bootstrap";
 
+import NewTicketForm from '../../components/Support/Forms/Ticket/NewTicketForm';
 
-const Teams: React.FC = () => {
+const MyTickets: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-  return (
-    <div className="container">
+    return(
+      <div className="container">
       <div className="row">
         <div className="col">
           <p className="page-heading">SUPPORT</p>
@@ -22,7 +20,7 @@ const Teams: React.FC = () => {
             onClick={handleShow}
             style={{ backgroundColor: "#FF615A" }}
           >
-            + Add New Team
+            + Add New Ticket
           </button>
         </div>
       </div>
@@ -30,15 +28,15 @@ const Teams: React.FC = () => {
       <div className="row">
         <div>
           <br />
-          <TeamTable />
+         
         </div>
       </div>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header style={{ backgroundColor: "#482890" }}>
-          <Modal.Title style={{ color: "white" }}>New Team</Modal.Title>
+          <Modal.Title style={{ color: "white" }}>New Ticket</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <NewTeamForm />
+          <NewTicketForm />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -47,6 +45,6 @@ const Teams: React.FC = () => {
         </Modal.Footer>
       </Modal>
     </div>
-  );
+    );
 };
-export default Teams;
+export default MyTickets;

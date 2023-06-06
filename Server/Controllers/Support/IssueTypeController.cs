@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs.Support;
 using Server.Models.Support;
+using Microsoft.Data.SqlClient;
 
 namespace Server.Controllers.Support
 {
@@ -41,10 +42,15 @@ namespace Server.Controllers.Support
             {
                 return BadRequest();
             }
+            var existingIssueType = await _context.IssueTypes.FirstOrDefaultAsync(x => x.Name == issueTypeToInsert.Name);
+
+            if (existingIssueType != null)
+            {
+                return BadRequest("An Issue Type with the same name already exists.");
+            }
             var issue = new IssueType
             {
                 Name = issueTypeToInsert.Name,
-                
 
             };
             try
@@ -70,7 +76,7 @@ namespace Server.Controllers.Support
                 return NotFound();
             }
             updateIssueType.Name = issueTypeToUpdate.Name;
-           
+
             try
             {
                 _context.Update(updateIssueType);
@@ -93,11 +99,26 @@ namespace Server.Controllers.Support
             {
                 return NotFound();
             }
-            _context.IssueTypes.Remove(deleteIssueType);
-            await _context.SaveChangesAsync();
+
+            try
+            {
+                _context.IssueTypes.Remove(deleteIssueType);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is SqlException sqlEx && sqlEx.Number == 547)
+                {
+                    return Conflict("Unable to delete the Issue Type as it is being used by a another table.");
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok();
-
         }
+
     }
 }

@@ -1,24 +1,49 @@
 import { Fragment, useEffect, useState } from "react";
-import { Table, Modal, Button, Badge, Form } from "react-bootstrap";
+import { Table,Badge,Form, InputGroup} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../../../css/Support/Support.css";
+import EditAgentForm from "../Forms/Agent/EditAgentForm";
+import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
+import DeleteError from "../ConfirmMessages/DeleteError";
+import { FaSearch } from "react-icons/fa";
+import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
+import PaginationComponent from "../pagination";
 
-interface agentType { profileImage: string; id: number; firstName: string; lastName: string; contact: string; position: string; email: string; joinDate: string; teamId: number; agentStatus: string;}
-interface TeamData  {  id: number;  name: string;};
-
+interface agentType {
+  profileImage: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  contact: string;
+  position: string;
+  email: string;
+  joinDate: string;
+  teamId: number;
+  agentStatus: string;
+}
+interface TeamData {
+  id: number;
+  name: string;
+}
 
 const AgentTable = () => {
   const [agents, setAgents] = useState<agentType[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedAgent, setSelectedAgent] = useState<agentType | null>(null);
   const [teams, setTeams] = useState<TeamData[]>([]);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deletingAgent, setDeletingAgent] = useState<agentType | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  
+  const recordsPerPage = 4;
 
-useEffect(() => {
+  useEffect(() => {
     const fetchTeams = async () => {
       const response = await axios.get("http://localhost:5087/Api/Team");
       setTeams(response.data);
@@ -59,48 +84,98 @@ useEffect(() => {
           )
         );
         setShowModal(false);
-        alert("Successfully updated!");
+        setShowUpdateModal(true);
       })
       .catch((error) => {
-        alert("Not updated!");
+        // Handle other errors
       });
   };
 
   const handleDeleteAgent = (agent: agentType) => {
+    setDeletingAgent(agent);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteAgent = () => {
     axios
-      .delete(`http://localhost:5087/Api/Agent/${agent.id}`)
+      .delete(`http://localhost:5087/Api/Agent/${deletingAgent?.id}`)
       .then((response) => {
-        setAgents(agents.filter((item) => item.id !== agent.id));
-        alert("Successfully deleted!");
+        setAgents(agents.filter((item) => item.id !== deletingAgent?.id));        
       })
       .catch((error) => {
-        alert("Not deleted!");
+        if (error.response && error.response.status === 409) {
+          // Display the error message
+          setErrorMessage(error.response.data);
+        } else {
+          // Handle other errors
+        }
+      })
+      .finally(() => {
+        setDeletingAgent(null);
+        setShowDeleteModal(false);
       });
+  };
+  const resetErrorMessage = () => {
+    setErrorMessage(null);
+  };
+  const totalPages = Math.ceil(agents.length / recordsPerPage);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
     <div>
-      <p className="table-heading">Support Agents</p>
+      <div className="row">
+        <div className="col-8">
+          <p className="table-heading">Support Agents</p>
+        </div>
+        <div className="col-1">
+          <Form>
+            <InputGroup style={{ width: "300px" }}>
+              <Form.Control
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search Agent"
+              />
+              <InputGroup.Text>
+                <FaSearch />
+              </InputGroup.Text>
+            </InputGroup>
+          </Form>
+        </div>
+      </div>
+      <DeleteError
+        errorMessage={errorMessage}
+        onResetError={resetErrorMessage}
+      />
       <div className="box-shadow">
         <Fragment>
           <div>
             <Table className="support-table">
               <thead>
                 <tr style={{ color: "#482890" }}>
-                  <th></th>                  
+                  <th></th>
                   <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Contact</th>
-                  <th>Position</th>
-                  <th>Email</th>                  
+                  <th>Last Name</th>                  
+                  <th>Position</th>                 
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {agents.map((agent) => (
+                {agents
+                .filter((agent) => {
+                  return search.toLowerCase() === ""
+                    ? agent
+                    : agent.firstName.toLowerCase().includes(search);
+                })
+                .slice(
+                  (currentPage - 1) * recordsPerPage,
+                  currentPage * recordsPerPage
+                )
+                .map((agent) => (
                   <tr key={agent.id}>
-                    <td>                      
+                    <td>
                       <img
                         src={`http://localhost:5087/ProfileImages/${agent.profileImage}`}
                         alt="User profile"
@@ -111,25 +186,31 @@ useEffect(() => {
                           cursor: "pointer",
                         }}
                       />
-                    </td>                   
+                    </td>
                     <td>{agent.firstName}</td>
-                    <td>{agent.lastName}</td>
-                    <td>{agent.contact}</td>
-                    <td>{agent.position}</td>
-                    <td>{agent.email}</td>                    
-                    <td>{agent.agentStatus === "Available" ? (<Badge className={"bg-success"}>Available</Badge>) : (<Badge className={"bg-warning"}>Not Available</Badge> )}</td>
+                    <td>{agent.lastName}</td>                   
+                    <td>{agent.position}</td>                    
+                    <td>
+                      {agent.agentStatus === "Available" ? (
+                        <Badge className={"bg-success"}>Available</Badge>
+                      ) : (
+                        <Badge className={"bg-warning"}>Not Available</Badge>
+                      )}
+                    </td>
                     <td>
                       {" "}
                       <FontAwesomeIcon
                         icon={faPen}
                         style={{ color: "#482890", cursor: "pointer" }}
+                        title="Edit Agent"
                         onClick={() => handleEditAgentClick(agent)}
                       />
-                      &nbsp; &nbsp;
+                      &nbsp; &nbsp; &nbsp;
                       <FontAwesomeIcon
                         icon={faTrash}
                         style={{ color: "#FF615A", cursor: "pointer" }}
                         onClick={() => handleDeleteAgent(agent)}
+                        title="Delete Agent"
                       />
                     </td>
                   </tr>
@@ -139,67 +220,33 @@ useEffect(() => {
           </div>
         </Fragment>
       </div>
-
-      <Modal show={showModal} onHide={handleModalClose}>
-        {selectedAgent && (
-          <>
-            <Modal.Header style={{ backgroundColor: "#482890" }}>
-              <Modal.Title>
-                <div style={{ margin: "20px 180px" }}>
-                  <img
-                    src={`http://localhost:5087/ProfileImages/${selectedAgent.profileImage}`}
-                    alt="User profile"
-                    className="rounded-circle"
-                    style={{ width: "100px", height: "100px" }}
-                    
-                  />
-                </div>
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <h3>
-                <div>
-                  {selectedAgent.firstName}&nbsp;{selectedAgent.lastName}
-                </div>
-              </h3>
-              <p>Agent ID: {selectedAgent.id}</p>{" "}
-              <p>Join Date: {selectedAgent.joinDate}</p>
-              <Form>
-                <Form.Group>
-                  <Form.Label>Contact</Form.Label>
-                  <Form.Control type="tel" value={selectedAgent.contact} onChange={(e) => setSelectedAgent({ ...selectedAgent,contact: e.target.value,})}/>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Position</Form.Label>
-                  <Form.Control type="text" value={selectedAgent.position} onChange={(e) => setSelectedAgent({...selectedAgent, position: e.target.value,})}/>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" value={selectedAgent.email} onChange={(e) => setSelectedAgent({ ...selectedAgent, email: e.target.value,})} />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Team</Form.Label>
-                  <Form.Select  aria-label="Default select example"  name="teamId"  value={selectedAgent.teamId}  onChange={(e) => setSelectedAgent({...selectedAgent, teamId: Number(e.target.value), })} >
-                  <option value="">Select Team</option>
-                  {teams.map((team) => (
-                 <option key={team.id} value={team.id}>{team.name}</option> ))}
-               </Form.Select>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Status</Form.Label>
-                  <Form.Select name="agentStatus" value={selectedAgent.agentStatus} onChange={(e) => setSelectedAgent({...selectedAgent, agentStatus: e.target.value, })}>
-                    <option value="Available">Available</option>{" "}
-                    <option value="Not Available">Not Available</option>
-                  </Form.Select>
-                </Form.Group>
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={() => handleUpdateAgent()}>Update</Button>             
-            </Modal.Footer>
-          </>
-        )}
-      </Modal>
+      <EditAgentForm
+          showModal={showModal}
+          selectedAgent={selectedAgent}
+          teams={teams}
+          handleModalClose={handleModalClose}
+          handleUpdateAgent={handleUpdateAgent}
+          setSelectedAgent={setSelectedAgent}
+        />
+        <UpdateConfirmation
+        show={showUpdateModal}
+        onClose={() => setShowUpdateModal(false)}
+        updatedName={selectedAgent?.firstName || ""}
+      />
+        <DeleteConfirmation
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={confirmDeleteAgent}
+        deletingIssueName={deletingAgent?.firstName || ""}
+      />
+      <div className="pagination-wrapper">
+      <PaginationComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
+    
     </div>
   );
 };

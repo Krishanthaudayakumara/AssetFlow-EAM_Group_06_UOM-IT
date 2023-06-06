@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs.Support;
@@ -42,7 +43,7 @@ namespace Server.Controllers.Support
             {
                 Id = agent.Id,
                 FirstName = agent.FirstName,
-                
+
 
             };
             return Ok(agentToReturn);
@@ -54,6 +55,23 @@ namespace Server.Controllers.Support
             if (agentToInsert is null)
             {
                 return BadRequest();
+            }
+
+            var existingAgent = await _context.Agents.FirstOrDefaultAsync(x => x.FirstName == agentToInsert.FirstName && x.LastName == agentToInsert.LastName);
+            if (existingAgent != null)
+            {
+                return BadRequest("An agent with the same name already exists.");
+            }
+
+            var existingEmail = await _context.Agents.FirstOrDefaultAsync(x => x.Email == agentToInsert.Email);
+            if (existingEmail != null)
+            {
+                return BadRequest("This email address already exists.");
+            }
+            var existingContact = await _context.Agents.FirstOrDefaultAsync(x => x.Contact == agentToInsert.Contact);
+            if (existingContact != null)
+            {
+                return BadRequest("This contact number already exists.");
             }
 
             var agent = new Agent
@@ -112,7 +130,7 @@ namespace Server.Controllers.Support
             if (updateAgent is null)
             {
                 return NotFound();
-            }           
+            }
 
             updateAgent.Contact = agentToUpdate.Contact;
             updateAgent.Position = agentToUpdate.Position;
@@ -144,9 +162,22 @@ namespace Server.Controllers.Support
             {
                 return NotFound();
             }
-
-            _context.Agents.Remove(agentDelete);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Agents.Remove(agentDelete);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is SqlException sqlEx && sqlEx.Number == 547)
+                {
+                    return Conflict("Unable to delete the Agent as it is being used by a another table.");
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok();
         }

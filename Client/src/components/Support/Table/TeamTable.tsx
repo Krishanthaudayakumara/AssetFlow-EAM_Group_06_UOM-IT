@@ -1,159 +1,259 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Form, Modal, Table } from "react-bootstrap";
+import { Form, InputGroup, Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faPen, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import EditTeamForm from "../Forms/Team/EditTeamForm";
 import "../../../css/Support/Support.css";
+import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
+import PaginationComponent from "../pagination";
+import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
+import DeleteError from "../ConfirmMessages/DeleteError";
+import TeamToTicket from "./TeamToTicket"; // Import the TeamToTicket component
+
 interface teamType {
-    profileImage:string,
-    id:number,
-    name:string,
-    description:string,
-    issueTypeId:number
-    
+  profileImage: string;
+  id: number;
+  name: string;
+  description: string;
+  issueTypeId: number;
 }
+
+interface issueType {
+  id: number;
+  name: string;
+}
+
 const TeamTable = () => {
-    const [teams,setTeams]=useState<teamType[]>([])
-    const [showModal, setShowModal] = useState(false);
-    const [selectedTeam, setSelectedTeam] = useState<teamType | null>(null);
+  const navigate = useNavigate();
+  const [teams, setTeams] = useState<teamType[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedTeam, setSelectedTeam] = useState<teamType | null>(null);
+  const [issues, setIssues] = useState<issueType[]>([]);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deletingTeam, setDeletingTeam] = useState<teamType | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [showTeamToTicketTable, setShowTeamToTicketTable] = useState(false); // State to control rendering of TeamToTicket table
 
-    useEffect(()=>{
-        axios.get("http://localhost:5087/Api/Team").then((response)=>{
-        setTeams(response.data) 
-        }).catch((error)=>{
-            alert(error)
-        })
-    },[])
+  const recordsPerPage = 4;
 
-    const handleEditTeamClick = (team: teamType) => {
-      setSelectedTeam(team);
-      setShowModal(true);
+  useEffect(() => {
+    const fetchIssues = async () => {
+      const response = await axios.get("http://localhost:5087/Api/IssueType");
+      setIssues(response.data);
     };
+    fetchIssues();
+  }, []);
 
-    const handleModalClose = () => {
-      setSelectedTeam(null);
-      setShowModal(false);
-    };
+  useEffect(() => {
+    axios
+      .get("http://localhost:5087/Api/Team")
+      .then((response) => {
+        setTeams(response.data);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, []);
 
-    const handleUpdateTeam = () => {
-      axios
-        .put(
-          `http://localhost:5087/Api/Team/${selectedTeam?.id}`,
-          selectedTeam
-        )
-        .then((response) => {
-          setTeams(
-            teams.map((team) =>
-              team.id === selectedTeam?.id ? selectedTeam : team
-            )
-          );
-          setShowModal(false);
-          alert("Successfully updated!");
-        })
-        .catch((error) => {
-          alert("Not updated!");
-        });
-    };
+  const handleTeamClick = (team: teamType) => {
+    setSelectedTeam(team);
+    setShowTeamToTicketTable(true); // Show the TeamToTicket table
+  };
+  const handleEditTeamClick = (team: teamType) => {
+    setSelectedTeam(team);
+    setShowModal(true);
+  };
 
-    const handleDeleteTeam = (team: teamType) => {
-      axios
-        .delete(`http://localhost:5087/Api/Team/${team.id}`)
-        .then((response) => {
-          setTeams(teams.filter((item) => item.id !== team.id));
-          alert("Successfully deleted!");
-        })
-        .catch((error) => {
-          alert("Not deleted!");
-        });
-    };
-    return(
+  const handleUpdateTeam = () => {
+    axios
+      .put(`http://localhost:5087/Api/Team/${selectedTeam?.id}`, selectedTeam)
+      .then((response) => {
+        setTeams(
+          teams.map((team) =>
+            team.id === selectedTeam?.id ? selectedTeam : team
+          )
+        );
+        setShowModal(false);
+        setShowUpdateModal(true);
+      })
+      .catch((error) => {
+        alert("Not updated!");
+      });
+  };
+
+  const handleModalClose = () => {
+    setSelectedTeam(null);
+    setShowModal(false);
+  };
+
+  const handleDeleteTeam = (team: teamType) => {
+    setDeletingTeam(team);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteTeam = () => {
+    axios
+      .delete(`http://localhost:5087/Api/Team/${deletingTeam?.id}`)
+      .then((response) => {
+        setTeams(teams.filter((item) => item.id !== deletingTeam?.id));
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 409) {
+          // Display the error message
+          setErrorMessage(error.response.data);
+        } else {
+          // Handle other errors
+        }
+      })
+      .finally(() => {
+        setDeletingTeam(null);
+        setShowDeleteModal(false);
+      });
+  };
+
+  const resetErrorMessage = () => {
+    setErrorMessage(null);
+  };
+
+  const totalPages = Math.ceil(teams.length / recordsPerPage);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  return (
+    <div>
+      {showTeamToTicketTable ? (
+        <TeamToTicket teamId={selectedTeam?.id ?? 0} /> // Use nullish coalescing operator to provide a default value
+      ) : (
         <div>
-             <p className="table-heading">Support Teams</p>
-             <div className="box-shadow">
-             <Fragment>
-             <div>
-             <Table className="support-table">
-                <thead>
-                <tr style={{ color: "#482890" }}> 
-                  <th></th>        
-                  <th>Team Name</th>
-                  <th>Team Descrption</th>                   
-                  <th>Action</th>                
-                </tr>
-                </thead>
-                <tbody>
-                {teams.map((team)=>(<tr key={team.id}>
-                  <td>                
-                      <img
-                        src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
-                        alt="User profile"
-                        className="rounded-circle"
-                        style={{
-                          width: "45px",
-                          height: "45px",
-                          cursor: "pointer",
-                        }}
-                      />
-                    </td>               
-                 <td>{team.name}</td>
-                 <td>{team.description}</td>                 
-                 <td>
-                            <FontAwesomeIcon                              
+          <div className="row">
+            <div className="col-8">
+              <p className="table-heading">Support Teams</p>
+            </div>
+            <div className="col-1">
+              <Form>
+                <InputGroup style={{ width: "300px" }}>
+                  <Form.Control
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search Support Team"
+                  />
+                  <InputGroup.Text>
+                    <FaSearch />
+                  </InputGroup.Text>
+                </InputGroup>
+              </Form>
+            </div>
+          </div>
+          <DeleteError
+            errorMessage={errorMessage}
+            onResetError={resetErrorMessage}
+          />
+          <div className="box-shadow">
+            <Fragment>
+              <div>
+                <Table className="support-table">
+                  <thead>
+                    <tr style={{ color: "#482890" }}>
+                      <th></th>
+                      <th>Team Name</th>
+                      <th>Team Description</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {teams
+                      .filter((team) => {
+                        return search.toLowerCase() === ""
+                          ? team
+                          : team.name.toLowerCase().includes(search);
+                      })
+                      .slice(
+                        (currentPage - 1) * recordsPerPage,
+                        currentPage * recordsPerPage
+                      )
+                      .map((team) => (
+                        <tr key={team.id}>
+                          <td>
+                            <img
+                              src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
+                              alt="User profile"
+                              className="rounded-circle"
+                             
+                              style={{
+                                width: "45px",
+                                height: "45px",
+                                cursor: "pointer",
+                              }}
+                            />
+                          </td>
+                          <td style={{ cursor: "pointer" }}>{team.name}</td>
+                          <td>{team.description}</td>
+                          <td>
+                          <FontAwesomeIcon
+                              icon={faHome}
+                              style={{ cursor: "pointer" }}
+                              title="Team Tickets"
+                              onClick={() => handleTeamClick(team)}
+                            />
+                            &nbsp; &nbsp; &nbsp;
+                            <FontAwesomeIcon
                               icon={faPen}
                               style={{ color: "#482890", cursor: "pointer" }}
+                              title="Edit Team"
                               onClick={() => handleEditTeamClick(team)}
                             />
                             &nbsp; &nbsp; &nbsp;
                             <FontAwesomeIcon
                               icon={faTrash}
                               style={{ color: "#FF615A", cursor: "pointer" }}
+                              title="Delete Team"
                               onClick={() => handleDeleteTeam(team)}
                             />
                           </td>
-                </tr> ))}
-                </tbody>
-             </Table>
-             </div>
-             </Fragment>
-             </div>
-             <Modal show={showModal} onHide={handleModalClose}>
-             {selectedTeam && (
-              <>
-              <Modal.Header style={{ backgroundColor: "#482890" }}>
-              <Modal.Title>
-                <div style={{ margin: "20px 180px" }}>
-                  <img
-                    src={`http://localhost:5087/ProfileImages/${selectedTeam.profileImage}`}
-                    alt="User profile"
-                    className="rounded-circle"
-                    style={{ width: "100px", height: "100px" }}                    
-                  />
-                </div>
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>             
-            <h3>
-                <div>
-                  {selectedTeam.name}
-                </div>
-              </h3>
-              <form>
-              <Form.Group> <Form.Label>Name</Form.Label> <Form.Control type="text" placeholder="Name *"  required  name="name" value={selectedTeam.name} onChange={(e) =>  setSelectedTeam({...selectedTeam,name: e.target.value, })}/>  </Form.Group>
-             <br />
-             <Form.Group> <Form.Label>Description</Form.Label> <Form.Control type="text" placeholder="Description *"  required  name="description" value={selectedTeam.description} onChange={(e) =>  setSelectedTeam({...selectedTeam,description: e.target.value, })} />  </Form.Group>
-             <br/>
-             <Form.Group> <Form.Label>Issue Type</Form.Label> <Form.Control type="number" placeholder="Issue Type *"  required  name="issueTypeId" value={selectedTeam.issueTypeId} onChange={(e) =>  setSelectedTeam({...selectedTeam,issueTypeId: Number(e.target.value,) })} />  </Form.Group>
-              </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={() => handleUpdateTeam()}>Update</Button>             
-            </Modal.Footer>
-              </>
-             )}
-             </Modal>
-    
-    
+                        </tr>
+                      ))}
+                  </tbody>
+                </Table>
+              </div>
+            </Fragment>
+          </div>
+          <EditTeamForm
+            showModal={showModal}
+            selectedTeam={selectedTeam}
+            issues={issues}
+            handleModalClose={handleModalClose}
+            handleUpdateTeam={handleUpdateTeam}
+            setSelectedTeam={setSelectedTeam}
+          />
+          <UpdateConfirmation
+            show={showUpdateModal}
+            onClose={() => setShowUpdateModal(false)}
+            updatedName={selectedTeam?.name || ""}
+          />
+          <DeleteConfirmation
+            show={showDeleteModal}
+            onClose={() => setShowDeleteModal(false)}
+            onConfirm={confirmDeleteTeam}
+            deletingIssueName={deletingTeam?.name || ""}
+          />
+          <div className="pagination-wrapper">
+            <PaginationComponent
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        </div>
+      )}
     </div>
-    ) 
+  );
 };
+
 export default TeamTable;

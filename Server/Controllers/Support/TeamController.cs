@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs.Support;
@@ -55,6 +56,12 @@ namespace Server.Controllers.Support
             if (teamToInsert is null)
             {
                 return BadRequest();
+            }
+             var existingTeam = await _context.Teams.FirstOrDefaultAsync(x => x.Name == teamToInsert.Name);
+
+            if (existingTeam != null)
+            {
+                return BadRequest("A team with the same name already exists.");
             }
             var tm = new Team
             {
@@ -125,8 +132,21 @@ namespace Server.Controllers.Support
             {
                 return NotFound();
             }
-            _context.Teams.Remove(deleteTeam);
-            await _context.SaveChangesAsync();
+            try{
+                _context.Teams.Remove(deleteTeam);
+                await _context.SaveChangesAsync();
+            } 
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is SqlException sqlEx && sqlEx.Number == 547)
+                {
+                    return Conflict("Unable to delete the Team as it is being used by a another table.");
+                }
+                else
+                {
+                    throw;
+                }
+            }        
 
             return Ok();
 
