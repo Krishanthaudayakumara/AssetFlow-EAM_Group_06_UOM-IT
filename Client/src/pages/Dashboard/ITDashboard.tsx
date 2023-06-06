@@ -216,7 +216,7 @@ const ITDashboard = () => {
                   data: ticketSatisfaction.map(
                     (satisfaction) => satisfaction.worstCount,
                   ),
-                  backgroundColor: 'yellow',
+                  backgroundColor: '#632c65',
                   barThickness: 50,
                 },
               ],
