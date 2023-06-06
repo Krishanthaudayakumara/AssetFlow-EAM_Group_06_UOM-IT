@@ -11,6 +11,7 @@ import Tickets from "./pages/Support/Tickets";
 import Agents from "./pages/Support/Agents";
 import Teams from "./pages/Support/Teams";
 import Issues from "./pages/Support/Issues";
+import MyTickets from "./pages/Support/MyTickets";
 import PrivateRoute from "./PrivateRoute";
 import Employee from "./pages/Employee/Employee";
 import Department from "./pages/Department/Department";
@@ -207,6 +208,17 @@ const App: React.FC = () => {
             element={
               <Wrapper>
                 <Issues />
+              </Wrapper>
+            }
+          />
+        </Route>
+
+        <Route path="/MyTickets" >
+          <Route
+            path="/MyTickets"
+            element={
+              <Wrapper>
+                <MyTickets />
               </Wrapper>
             }
           />

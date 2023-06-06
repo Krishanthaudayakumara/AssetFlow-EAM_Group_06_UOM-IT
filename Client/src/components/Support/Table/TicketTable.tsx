@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { Badge, Table } from "react-bootstrap";
+import { Badge, Table, Form, InputGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +8,8 @@ import "../../../css/Support/Support.css";
 import DefaultProfilePicture from "../DefaultProfilePicture";
 import ViewTicketForm from "../Forms/Ticket/ViewTicketForm";
 import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
+import { FaSearch } from "react-icons/fa";
+import PaginationComponent from "../pagination";
 
 interface TicketType {
   id: number;
@@ -29,6 +31,10 @@ const TicketTable = () => {
   const [selectedTicket, setSelectedTicket] = useState<TicketType | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deletingTicket, setDeletingTicket] = useState<TicketType | null>(null);
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const recordsPerPage = 4;
 
   useEffect(() => {
     const fetchAgents = async () => {
@@ -112,9 +118,32 @@ const TicketTable = () => {
       });
   };
 
+  const totalPages = Math.ceil(tickets.length / recordsPerPage);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div>
-      <p className="table-heading">Support Tickets</p>
+      <div className="row">
+        <div className="col-8">
+          <p className="table-heading">Support Tickets</p>
+        </div>
+        <div className="col-1">
+          <Form>
+            <InputGroup style={{ width: "300px" }}>
+              <Form.Control
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search Ticket"
+              />
+              <InputGroup.Text>
+                <FaSearch />
+              </InputGroup.Text>
+            </InputGroup>
+          </Form>
+        </div>
+      </div>
       <div className="box-shadow">
         <Fragment>
           <div>
@@ -130,44 +159,54 @@ const TicketTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {tickets.map((ticket) => (
-                  <tr key={ticket.id}>
-                    <td>{DefaultProfilePicture({ name: ticket.problem })}</td>
-                    <td>{ticket.problem}</td>
-                    <td>{ticket.submitDate}</td>
-                    <td>{getAgentName(ticket.agentId)}</td>
-                    <td>
-                      {ticket.ticketStatus === "Opened" ? (
-                        <Badge className={"bg-info"}>Opened</Badge>
-                      ) : ticket.ticketStatus === "Solved" ? (
-                        <Badge className={"bg-success"}>Solved</Badge>
-                      ) : ticket.ticketStatus === "Pending" ? (
-                        <Badge className={"bg-warning"}>Pending</Badge>
-                      ) : (
-                        <Badge className={"bg-danger"}>Not Assign</Badge>
-                      )}
-                    </td>
-                    <td>
-                      <FontAwesomeIcon
-                        icon={faEye}
-                        style={{
-                          color: "#482890",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => handleEditTicketClick(ticket)}
-                      />
-                      &nbsp; &nbsp; &nbsp;
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        style={{
-                          color: "#FF615A",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => handleDeleteTicket(ticket)}
-                      />
-                    </td>
-                  </tr>
-                ))}
+                {tickets
+                  .filter((ticket) => {
+                    return search.toLowerCase() === ""
+                      ? ticket
+                      : ticket.problem.toLowerCase().includes(search);
+                  })
+                  .slice(
+                    (currentPage - 1) * recordsPerPage,
+                    currentPage * recordsPerPage
+                  )
+                  .map((ticket) => (
+                    <tr key={ticket.id}>
+                      <td>{DefaultProfilePicture({ name: ticket.problem })}</td>
+                      <td>{ticket.problem}</td>
+                      <td>{ticket.submitDate}</td>
+                      <td>{getAgentName(ticket.agentId)}</td>
+                      <td>
+                        {ticket.ticketStatus === "Opened" ? (
+                          <Badge className={"bg-info"}>Opened</Badge>
+                        ) : ticket.ticketStatus === "Solved" ? (
+                          <Badge className={"bg-success"}>Solved</Badge>
+                        ) : ticket.ticketStatus === "Pending" ? (
+                          <Badge className={"bg-warning"}>Pending</Badge>
+                        ) : (
+                          <Badge className={"bg-danger"}>Not Assign</Badge>
+                        )}
+                      </td>
+                      <td>
+                        <FontAwesomeIcon
+                          icon={faEye}
+                          style={{
+                            color: "#482890",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleEditTicketClick(ticket)}
+                        />
+                        &nbsp; &nbsp; &nbsp;
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          style={{
+                            color: "#FF615A",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleDeleteTicket(ticket)}
+                        />
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </Table>
           </div>
@@ -189,6 +228,13 @@ const TicketTable = () => {
             deletingIssueName={deletingTicket?.problem || ""}
           />
         </Fragment>
+      </div>
+      <div className="pagination-wrapper">
+        <PaginationComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );
