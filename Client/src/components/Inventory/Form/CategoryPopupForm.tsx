@@ -41,10 +41,6 @@ function AddCategory() {
               <Form.Control type="text" name="categoryType" placeholder="Enter category type" />
             </Form.Group>
 
-            <Form.Group>
-              <Form.Label>Description</Form.Label>
-              <Form.Control type="text" name="description" placeholder="Enter description" />
-            </Form.Group>
 
             <Form.Group>
               <Form.Label>Description</Form.Label>
