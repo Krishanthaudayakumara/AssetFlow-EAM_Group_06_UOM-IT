@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { Form, InputGroup, Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faPen, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import EditTeamForm from "../Forms/Team/EditTeamForm";
@@ -185,7 +185,7 @@ const TeamTable = () => {
                               src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
                               alt="User profile"
                               className="rounded-circle"
-                              onClick={() => handleTeamClick(team)}
+                             
                               style={{
                                 width: "45px",
                                 height: "45px",
@@ -196,8 +196,14 @@ const TeamTable = () => {
                           <td style={{ cursor: "pointer" }}>{team.name}</td>
                           <td>{team.description}</td>
                           <td>
+                          <FontAwesomeIcon
+                              icon={faHome}
+                              style={{ cursor: "pointer" }}
+                              onClick={() => handleTeamClick(team)}
+                            />
+                            &nbsp; &nbsp; &nbsp;
                             <FontAwesomeIcon
-                              icon={faUser}
+                              icon={faPen}
                               style={{ color: "#482890", cursor: "pointer" }}
                               onClick={() => handleEditTeamClick(team)}
                             />

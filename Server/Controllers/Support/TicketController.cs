@@ -54,6 +54,25 @@ namespace Server.Controllers.Support
 
             return NotFound();
         }
+        [HttpGet("api/tickets/{id}/reply")]
+        public async Task<IActionResult> GetTicketReply(int id)
+        {
+            var ticket = await _context.Tickets
+                .Include(t => t.Reply)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (ticket == null)
+            {
+                return NotFound(); // Ticket with the given ID was not found
+            }
+
+            if (ticket.Reply == null)
+            {
+                return NotFound(); // Ticket has no associated reply
+            }
+
+            return Ok(ticket.Reply);
+        }
         [HttpPost]
         public async Task<IActionResult> AddTicket([FromBody] TicketToInsert ticketToInsert)
         {

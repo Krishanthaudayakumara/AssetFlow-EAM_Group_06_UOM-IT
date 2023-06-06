@@ -7,7 +7,7 @@ import axios from "axios";
 import "../../../css/Support/Support.css";
 import DefaultProfilePicture from "../DefaultProfilePicture";
 import ViewTicketForm from "../Forms/Ticket/ViewTicketForm";
-
+import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
 
 interface TicketType {
   id: number;
@@ -20,15 +20,15 @@ interface TicketType {
   ticketStatus: string;
 }
 
-
-
 const TicketTable = () => {
   const [tickets, setTickets] = useState<TicketType[]>([]);
   const [agents, setAgents] = useState<any[]>([]);
   const [issueTypes, setIssueTypes] = useState<any[]>([]);
   const [employees, setEmployees] = useState<any[]>([]);
-  const [showEditModal, setShowEditModal] = useState(false);  
+  const [showEditModal, setShowEditModal] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState<TicketType | null>(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deletingTicket, setDeletingTicket] = useState<TicketType | null>(null);
 
   useEffect(() => {
     const fetchAgents = async () => {
@@ -86,11 +86,31 @@ const TicketTable = () => {
     setShowEditModal(true);
   };
   const getIssueTypeName = (issueTypeId: number) => {
-    const issueType = issueTypes.find((issueType) => issueType.id === issueTypeId);
+    const issueType = issueTypes.find(
+      (issueType) => issueType.id === issueTypeId
+    );
     return issueType ? issueType.name : "N/A";
   };
 
-  
+  const handleDeleteTicket = (ticket: TicketType) => {
+    setDeletingTicket(ticket);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteTicket = () => {
+    axios
+      .delete(`http://localhost:5087/Api/Ticket/${deletingTicket?.id}`)
+      .then((response) => {
+        setTickets(tickets.filter((item) => item.id !== deletingTicket?.id));
+      })
+      .catch((error) => {
+        // Handle errors
+      })
+      .finally(() => {
+        setDeletingTicket(null);
+        setShowDeleteModal(false);
+      });
+  };
 
   return (
     <div>
@@ -126,26 +146,26 @@ const TicketTable = () => {
                       ) : (
                         <Badge className={"bg-danger"}>Not Assign</Badge>
                       )}
-                    </td>                   
+                    </td>
                     <td>
-                        <FontAwesomeIcon
-                          icon={faEye}
-                          style={{
-                            color: "#482890",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => handleEditTicketClick(ticket)}
-                        />
-                        &nbsp; &nbsp; &nbsp;
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          style={{
-                            color: "#FF615A",
-                            cursor: "pointer",
-                          }}
-                          
-                        />
-                      </td>
+                      <FontAwesomeIcon
+                        icon={faEye}
+                        style={{
+                          color: "#482890",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleEditTicketClick(ticket)}
+                      />
+                      &nbsp; &nbsp; &nbsp;
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        style={{
+                          color: "#FF615A",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleDeleteTicket(ticket)}
+                      />
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -158,11 +178,16 @@ const TicketTable = () => {
               agents={agents}
               issueTypes={issueTypes}
               employees={employees}
-              handleModalClose={() => setShowEditModal(false)}             
+              handleModalClose={() => setShowEditModal(false)}
               setSelectedTicket={setSelectedTicket}
             />
           )}
-          
+          <DeleteConfirmation
+            show={showDeleteModal}
+            onClose={() => setShowDeleteModal(false)}
+            onConfirm={confirmDeleteTicket}
+            deletingIssueName={deletingTicket?.problem || ""}
+          />
         </Fragment>
       </div>
     </div>
@@ -170,4 +195,3 @@ const TicketTable = () => {
 };
 
 export default TicketTable;
-

@@ -4,7 +4,11 @@ import { Fragment } from "react";
 import { Badge, Button, Table, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment, faEnvelope, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faComment,
+  faEnvelope,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import DefaultProfilePicture from "../DefaultProfilePicture";
 import "../../../css/Support/Support.css";
 import { Alert } from "react-bootstrap";
@@ -38,6 +42,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
   const [replyText, setReplyText] = useState<string>("");
   const [showReplyModal, setShowReplyModal] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchTickets = async () => {
@@ -124,6 +129,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
         setShowAlert(true);
       } catch (error) {
         console.log(error);
+        setShowErrorAlert(true);
       }
     }
   };
@@ -144,9 +150,11 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
         replyToInsert
       );
       console.log(response.data);
+      setShowAlert(true);
       // Handle the successful reply submission as desired
     } catch (error) {
       console.log(error);
+      setShowErrorAlert(true);
       // Handle the error case
     }
 
@@ -177,9 +185,19 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
           variant="success"
           onClose={() => setShowAlert(false)}
           dismissible
-          style={{ marginLeft: "200px", marginRight: "200px" }}
+          style={{ marginLeft: "100px", marginRight: "100px" }}
         >
-          Successfully Updated
+          <div style={{ textAlign: "center" }}>Successfully !!!</div>
+        </Alert>
+      )}
+      {showErrorAlert && (
+        <Alert
+          variant="danger"
+          onClose={() => setShowErrorAlert(false)}
+          dismissible
+          style={{ marginLeft: "100px", marginRight: "100px" }}
+        >
+          <div style={{ textAlign: "center" }}>Already Submit Reply !!!</div>
         </Alert>
       )}
       <div className="box-shadow">
