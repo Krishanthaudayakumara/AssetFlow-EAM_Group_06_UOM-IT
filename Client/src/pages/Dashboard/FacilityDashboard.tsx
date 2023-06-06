@@ -4,8 +4,7 @@ import FacilityBarChart from '../../components/Dashboard/FacilityBarChart';
 import '../../css/Home.css';
 import CardDashboard from '../../components/Dashboard/CardDashboard';
 import axios from 'axios';
-
-import FacilityLineChart from '../../components/Dashboard/FacilityLineChart';
+import LineChart from '../../components/Dashboard/LineChart';
 
 const FacilityDashboard: React.FC = () => {
   const [totalBuildings, setTotalBuildings] = useState(0);
@@ -61,13 +60,23 @@ const FacilityDashboard: React.FC = () => {
       });
   }, []);
 
-  const options = {
-    title: {
-      display: true,
-      text: 'Asset Status Counts',
+ 
+  const options={
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Asset Status',
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Count',
+        },
+      },
     },
-  };
-
+  }
   return (
     <div>
       <Container>
@@ -92,7 +101,7 @@ const FacilityDashboard: React.FC = () => {
                 }}
               >
                 {lineChartData && (
-                  <FacilityLineChart
+                  <LineChart
                     Linedata={{
                       labels: lineChartData.map((data: any) => data.workstationId),
                       datasets: [
@@ -145,6 +154,7 @@ const FacilityDashboard: React.FC = () => {
             </Col>
           </Row>
         </div>
+        <h4 style={{ margin: '0px 0 0 65px' }}>Asset Status</h4>
         <div
           className="shadow p-3 mb-5 bg-white rounded"
           style={{ margin: '0px 2px 2px 65px' }}
@@ -156,7 +166,7 @@ const FacilityDashboard: React.FC = () => {
                 {
                   label: 'Asset Status Counts',
                   data: assetStatusCounts,
-                  backgroundColor: ['#482890', '#ff615a', '#FDB45C'],
+                  backgroundColor: ['#482890', '#ff615a', '#632c65'],
                   barThickness: 50,
                 },
               ],
