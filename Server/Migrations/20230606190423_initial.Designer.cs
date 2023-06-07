@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230603150652_afteraddcardv.1.2")]
-    partial class afteraddcardv12
+    [Migration("20230606190423_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -534,19 +534,22 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SubCategoryId")
+                    b.Property<string>("SubCategoryType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SupplierId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("int");
+                    b.Property<string>("SupplierName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WarrantyExpiring")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("StockId");
-
-                    b.HasIndex("SubCategoryId");
 
                     b.HasIndex("SupplierId");
 
@@ -561,8 +564,12 @@ namespace Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CategoryType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubCategoryType")
                         .IsRequired()
@@ -1055,32 +1062,16 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Stock", b =>
                 {
-                    b.HasOne("Server.Models.SubCategory", "SubCategory")
+                    b.HasOne("Server.Models.Supplier", null)
                         .WithMany("Stocks")
-                        .HasForeignKey("SubCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Server.Models.Supplier", "Supplier")
-                        .WithMany("Stocks")
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SubCategory");
-
-                    b.Navigation("Supplier");
+                        .HasForeignKey("SupplierId");
                 });
 
             modelBuilder.Entity("Server.Models.SubCategory", b =>
                 {
-                    b.HasOne("Server.Models.Category", "Category")
+                    b.HasOne("Server.Models.Category", null)
                         .WithMany("SubCategories")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Server.Models.Support.Agent", b =>
@@ -1193,11 +1184,6 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Models.EmployeeRequest", b =>
                 {
                     b.Navigation("Assigns");
-                });
-
-            modelBuilder.Entity("Server.Models.SubCategory", b =>
-                {
-                    b.Navigation("Stocks");
                 });
 
             modelBuilder.Entity("Server.Models.Supplier", b =>
