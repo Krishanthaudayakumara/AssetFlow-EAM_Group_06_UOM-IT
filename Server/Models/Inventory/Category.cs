@@ -8,6 +8,6 @@ namespace Server.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        public ICollection<Asset> Assets { get; set; }
+        public ICollection<SubCategory> SubCategories { get; set; }
     }
 }

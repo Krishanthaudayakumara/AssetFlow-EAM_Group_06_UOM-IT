@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Data;
 
@@ -11,9 +12,11 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230607052239_database")]
+    partial class database
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,6 +195,9 @@ namespace Server.Migrations
                     b.Property<string>("Barcode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -218,6 +224,8 @@ namespace Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("StockId");
 
@@ -1041,6 +1049,10 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Asset", b =>
                 {
+                    b.HasOne("Server.Models.Category", null)
+                        .WithMany("Assets")
+                        .HasForeignKey("CategoryId");
+
                     b.HasOne("Server.Models.Stock", "Stock")
                         .WithMany("Assets")
                         .HasForeignKey("StockId")
@@ -1169,7 +1181,7 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Models.SubCategory", b =>
                 {
                     b.HasOne("Server.Models.Category", "Category")
-                        .WithMany("SubCategories")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1289,7 +1301,7 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Category", b =>
                 {
-                    b.Navigation("SubCategories");
+                    b.Navigation("Assets");
                 });
 
             modelBuilder.Entity("Server.Models.Employee", b =>

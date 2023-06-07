@@ -1,0 +1,38 @@
+.employee-request {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    display: flex; /* Add flex display */
+  }
+  
+  .vertical-line {
+    border-left: 2px solid #f70d0d;
+   
+  }
+  
+  
+  
+  h4 {
+    cursor: pointer;
+    color: #333;
+  }
+  
+  h5 {
+    cursor: pointer;
+    color: #777;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding-left: 20px;
+  }
+  
+  ul ul {
+    padding-left: 20px;
+    border-left: 1px solid #ccc;
+    margin-top: 5px;
+  }
+  
+  li {
+    margin-bottom: 30px;
+  }
+  

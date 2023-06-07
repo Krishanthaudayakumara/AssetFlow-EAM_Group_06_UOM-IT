@@ -8,6 +8,7 @@ import UserAccessLogPage from "./pages/User/UserAccessLogPage";
 import StockPage from "./pages/Inventory/Stock/StockPage";
 import SubCategoryPage from "./pages/Inventory/Category/SubCategoryPage";
 import CategoryPage from "./pages/Inventory/Category/CategoryPage";
+import EmployeeRequest from "./pages/Inventory/EmployeeRequest/EmployeeRequest";
 
 
 import AssignAsset from "./pages/Facility/AssignAsset";
@@ -67,7 +68,7 @@ const RoutesConfig: React.FC = () => {
         <Route path="/" element={defaultDashboard} />
       </Route>
 
-      <Route path="Report" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="Report" >
         "
         <Route path="/Report" element={<Report />} />
       </Route>
@@ -80,12 +81,12 @@ const RoutesConfig: React.FC = () => {
 
       <Route
         path="/InventoryDashboard"
-        element={<PrivateRoute allowedRoles="all" />}
+       
       >
         <Route path="/InventoryDashboard" element={<InventoryDashboard />} />
       </Route>
 
-      <Route path="/ITDashboard" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/ITDashboard" >
         <Route path="/ITDashboard" element={<ITDashboard />} />
       </Route>
 
@@ -120,7 +121,7 @@ const RoutesConfig: React.FC = () => {
         />
       </Route>
 
-      <Route path="/employee" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/employee" >
         <Route path="/employee" element={<Employee />} />
       </Route>
 
@@ -131,7 +132,7 @@ const RoutesConfig: React.FC = () => {
         <Route path="/deleted-employee" element={<DeletedEmployeePage />} />
       </Route>
 
-      <Route path="/department" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/department" >
         <Route path="/department" element={<Department />} />
       </Route>
 
@@ -139,67 +140,71 @@ const RoutesConfig: React.FC = () => {
         <Route path="/calendar" element={<Calendar />} />
       </Route>
 
-      <Route path="/supplier" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/supplier" >
         <Route path="/supplier" element={<Supplier />} />
       </Route>
 
-      <Route path="/Tickets" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Tickets" >
         <Route path="/Tickets" element={<Tickets />} />
       </Route>
 
-      <Route path="/Agents" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Agents" >
         <Route path="/Agents" element={<Agents />} />
       </Route>
 
-      <Route path="/Teams" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Teams" >
         <Route path="/Teams" element={<Teams />} />
       </Route>
 
-      <Route path="/Issues" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Issues">
         <Route path="/Issues" element={<Issues />} />
       </Route>
 
-      <Route path="/MyTickets" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/MyTickets">
         <Route path="/MyTickets" element={<MyTickets />} />
       </Route>
 
       {/* Pages */}
-      <Route path="/Category" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Category" >
         <Route path="/Category" element={<CategoryPage />} />
       </Route>
 
-      <Route path="/SubCategory" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/SubCategory" >
         <Route path="/SubCategory" element={<SubCategoryPage />} />
       </Route>
 
-      <Route path="/Stock" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/EmployeeRequest" >
+        <Route path="/EmployeeRequest" element={<EmployeeRequest />} />
+      </Route>
+
+      <Route path="/" >
         <Route path="/Stock" element={<StockPage />} />
       </Route>
 
       <Route
         path="/BuildingFloor"
-        element={<PrivateRoute allowedRoles="all" />}
+        
       >
         <Route path="/BuildingFloor" element={<BuildingFloor />} />
       </Route>
-      <Route path="/AssignAsset" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/AssignAsset" >
         <Route path="/AssignAsset" element={<AssignAsset />} />
       </Route>
       <Route
         path="/FacilityAsset"
-        element={<PrivateRoute allowedRoles="all" />}
+        
       >
         <Route path="/FacilityAsset" element={<FacilityAsset />} />
       </Route>
 
       <Route
         path="/FacilityStock"
-        element={<PrivateRoute allowedRoles="all" />}
+       
       >
         <Route path="/FacilityStock" element={<FacilityStock />} />
       </Route>
 
-      <Route path="/AssignAsset" element={<PrivateRoute allowedRoles="all" />} >
+      <Route path="/AssignAsset"  >
           <Route
             path="/AssignAsset"
             element={
