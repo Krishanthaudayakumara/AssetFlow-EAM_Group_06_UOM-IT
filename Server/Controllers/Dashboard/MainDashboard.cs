@@ -88,7 +88,7 @@ namespace Server.Controllers
         public ActionResult<IEnumerable<SubCategoryTypeDTO>> GetSubCategoryTypesWithCount()
         {
             var subCategoryTypes = _context.SubCategories
-                .GroupBy(s => s.SubCategoryType)
+                .GroupBy(s => s.Name)
                 .Select(g => new SubCategoryTypeDTO
                 {
                     SubCategoryType = g.Key,

@@ -10,6 +10,10 @@ namespace Server.Models
      public string SubCategoryType { get; set; }
 
      public string CategoryType{ get; set; }
+   
+     // public string Supplier { get; set; }
+     // public int  SubCategoryId { get; set; }
+     // public int CategoryId{ get; set; }
      public int FacilityAssetId { get; set; }
     }
 }

@@ -82,9 +82,9 @@ namespace Server.Controllers
                         {
                             AssetId = asset.Asset.Id,
                             Description = asset.Asset.Description,
-                            Vendor = asset.Asset.Vendor,
-                            SubCategoryType = asset.Asset.Stock.SubCategory.SubCategoryType,
-                            CategoryType = asset.Asset.Stock.SubCategory.Category.CategoryType,
+                            Vendor = asset.Asset.Stock.Supplier.Name,
+                            SubCategoryType = asset.Asset.Stock.SubCategory.Name,
+                            CategoryType = asset.Asset.Stock.SubCategory.Category.Name,
                             FacilityAssetId = asset.Id
                         };
 

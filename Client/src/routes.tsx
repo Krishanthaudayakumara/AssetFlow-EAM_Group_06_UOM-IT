@@ -4,6 +4,12 @@ import Login from "./pages/Authentication/Login";
 import Home from "./pages/General/Home";
 import User from "./pages/User/User";
 import UserAccessLogPage from "./pages/User/UserAccessLogPage";
+
+import StockPage from "./pages/Inventory/Stock/StockPage";
+import SubCategoryPage from "./pages/Inventory/Category/SubCategoryPage";
+import CategoryPage from "./pages/Inventory/Category/CategoryPage";
+
+
 import AssignAsset from "./pages/Facility/AssignAsset";
 import BuildingFloor from "./pages/Facility/BuildingFloor";
 import Navbar from "./components/Navbar";
@@ -17,18 +23,6 @@ import Employee from "./pages/Employee/Employee";
 import Department from "./pages/Department/Department";
 import Calendar from "./pages/General/Calendar";
 import Supplier from "./pages/Supplier/Supplier";
-
-import CategoryTable from "./components/Inventory/Table/CategoryTable";
-import Category from "./pages/Inventory/Category";
-import CategoryPopupForm from "./components/Inventory/Form/CategoryPopupForm";
-
-import SubCategoryTable from "./components/Inventory/Table/SubCategoryTable";
-import SubCategory from "./pages/Inventory/SubCategory";
-import SubCategoryPopupForm from "./components/Inventory/Form/SubCategoryPopupForm";
-
-import StockTable from "./components/Inventory/Table/StockTable";
-import Stock from "./pages/Inventory/Stock";
-import StockPopupForm from "./components/Inventory/Form/StockPopupForm";
 
 import FacilityAsset from "./pages/Facility/FacilityAsset";
 import FacilityStock from "./pages/Facility/FacilityStock";
@@ -171,15 +165,15 @@ const RoutesConfig: React.FC = () => {
 
       {/* Pages */}
       <Route path="/Category" element={<PrivateRoute allowedRoles="all" />}>
-        <Route path="/Category" element={<Category />} />
+        <Route path="/Category" element={<CategoryPage />} />
       </Route>
 
       <Route path="/SubCategory" element={<PrivateRoute allowedRoles="all" />}>
-        <Route path="/SubCategory" element={<SubCategory />} />
+        <Route path="/SubCategory" element={<SubCategoryPage />} />
       </Route>
 
       <Route path="/Stock" element={<PrivateRoute allowedRoles="all" />}>
-        <Route path="/Stock" element={<Stock />} />
+        <Route path="/Stock" element={<StockPage />} />
       </Route>
 
       <Route

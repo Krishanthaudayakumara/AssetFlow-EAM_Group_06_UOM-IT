@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230606172414_initial")]
-    partial class initial
+    [Migration("20230607041753_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -193,18 +193,20 @@ namespace Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Barcode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BarcodeImageBase64")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Condition")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -215,53 +217,45 @@ namespace Server.Migrations
                     b.Property<int>("StockId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Vendor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("SubCategoryId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("WarrantyExpiration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("WarrantyExpiration")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("StockId");
+
+                    b.HasIndex("SubCategoryId");
 
                     b.ToTable("Assets");
                 });
 
             modelBuilder.Entity("Server.Models.Assign", b =>
                 {
-                    b.Property<int>("AssignId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AssignId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AssetId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AssetId1")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("AssignTime")
+                    b.Property<DateTime>("AssignedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReqID")
-                        .HasColumnType("int");
-
-                    b.HasKey("AssignId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AssetId");
 
-                    b.HasIndex("AssetId1");
-
                     b.HasIndex("EmployeeId");
-
-                    b.HasIndex("ReqID");
 
                     b.ToTable("Assigns");
                 });
@@ -298,20 +292,19 @@ namespace Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CategoryType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
 
                     b.ToTable("Categories");
                 });
@@ -400,14 +393,18 @@ namespace Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AssetId")
+                        .HasColumnType("int");
+
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Request")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AssetId");
 
                     b.HasIndex("EmployeeId");
 
@@ -531,27 +528,6 @@ namespace Server.Migrations
                     b.ToTable("GeneratedReports");
                 });
 
-            modelBuilder.Entity("Server.Models.Image", b =>
-                {
-                    b.Property<int>("ImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"));
-
-                    b.Property<string>("ContentType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Data")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("ImageId");
-
-                    b.ToTable("Image");
-                });
-
             modelBuilder.Entity("Server.Models.Notification", b =>
                 {
                     b.Property<int>("Id")
@@ -582,41 +558,45 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Stock", b =>
                 {
-                    b.Property<int>("StockId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StockId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Amount")
+                    b.Property<DateTime>("ArrivalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("Cost")
                         .HasColumnType("int");
 
-                    b.Property<string>("PurchasedDate")
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SubCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("SubCategoryType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
-                    b.Property<string>("SupplierName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Id");
 
-                    b.Property<string>("WarrantyExpiring")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("StockId");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("SubCategoryId");
 
@@ -636,11 +616,11 @@ namespace Server.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CategoryType")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SubCategoryType")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1069,11 +1049,19 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Asset", b =>
                 {
+                    b.HasOne("Server.Models.Category", null)
+                        .WithMany("Assets")
+                        .HasForeignKey("CategoryId");
+
                     b.HasOne("Server.Models.Stock", "Stock")
-                        .WithMany()
+                        .WithMany("Assets")
                         .HasForeignKey("StockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Server.Models.SubCategory", null)
+                        .WithMany("Assets")
+                        .HasForeignKey("SubCategoryId");
 
                     b.Navigation("Stock");
                 });
@@ -1086,36 +1074,15 @@ namespace Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Server.Models.Asset", null)
-                        .WithMany("Assigns")
-                        .HasForeignKey("AssetId1");
-
                     b.HasOne("Server.Models.Employee", "Employee")
                         .WithMany("Assigns")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Server.Models.EmployeeRequest", "EmployeeRequest")
-                        .WithMany("Assigns")
-                        .HasForeignKey("ReqID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Asset");
 
                     b.Navigation("Employee");
-
-                    b.Navigation("EmployeeRequest");
-                });
-
-            modelBuilder.Entity("Server.Models.Category", b =>
-                {
-                    b.HasOne("Server.Models.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("Server.Models.Employee", b =>
@@ -1139,11 +1106,19 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.EmployeeRequest", b =>
                 {
+                    b.HasOne("Server.Models.Asset", "Asset")
+                        .WithMany()
+                        .HasForeignKey("AssetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Server.Models.Employee", "Employee")
                         .WithMany("employeeRequests")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Asset");
 
                     b.Navigation("Employee");
                 });
@@ -1178,25 +1153,35 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Stock", b =>
                 {
-                    b.HasOne("Server.Models.SubCategory", "SubCategory")
-                        .WithMany("Stocks")
-                        .HasForeignKey("SubCategoryId")
+                    b.HasOne("Server.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Server.Models.Supplier", null)
+                    b.HasOne("Server.Models.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.Supplier", "Supplier")
                         .WithMany("Stocks")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Category");
+
                     b.Navigation("SubCategory");
+
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("Server.Models.SubCategory", b =>
                 {
                     b.HasOne("Server.Models.Category", "Category")
-                        .WithMany("SubCategories")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1305,8 +1290,6 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Asset", b =>
                 {
-                    b.Navigation("Assigns");
-
                     b.Navigation("FacilityAsset")
                         .IsRequired();
                 });
@@ -1318,7 +1301,7 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Category", b =>
                 {
-                    b.Navigation("SubCategories");
+                    b.Navigation("Assets");
                 });
 
             modelBuilder.Entity("Server.Models.Employee", b =>
@@ -1330,19 +1313,19 @@ namespace Server.Migrations
                     b.Navigation("employeeRequests");
                 });
 
-            modelBuilder.Entity("Server.Models.EmployeeRequest", b =>
-                {
-                    b.Navigation("Assigns");
-                });
-
             modelBuilder.Entity("Server.Models.Notification", b =>
                 {
                     b.Navigation("UserNotifications");
                 });
 
+            modelBuilder.Entity("Server.Models.Stock", b =>
+                {
+                    b.Navigation("Assets");
+                });
+
             modelBuilder.Entity("Server.Models.SubCategory", b =>
                 {
-                    b.Navigation("Stocks");
+                    b.Navigation("Assets");
                 });
 
             modelBuilder.Entity("Server.Models.Supplier", b =>

@@ -52,18 +52,20 @@ namespace Server.Controllers.Dashboard
             var categoryTypes = _context.Categories
                 .Select(c => new CategoryTypeDTO
                 {
-                    CategoryType = c.CategoryType,
-                    Count = c.SubCategories.Count
+                    CategoryType = c.Name,
+                    // Count = c.SubCategories.Count
                 })
                 .ToList();
 
             return Ok(categoryTypes);
         }
+
+
         [HttpGet("subcategory-types")]
         public ActionResult<IEnumerable<SubCategoryTypeDTO>> GetSubCategoryTypesWithCount()
         {
             var subCategoryTypes = _context.SubCategories
-                .GroupBy(s => s.SubCategoryType)
+                .GroupBy(s => s.Name)
                 .Select(g => new SubCategoryTypeDTO
                 {
                     SubCategoryType = g.Key,

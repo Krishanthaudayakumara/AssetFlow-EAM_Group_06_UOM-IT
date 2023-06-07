@@ -161,7 +161,7 @@ public async Task<IActionResult> GetItemCountPerSubCategory(int workstationId)
             .GroupBy(a => a.Asset.Stock.SubCategory)
             .Select(g => new SubCategoryCountDto
             {
-                SubCategoryType = g.Key.SubCategoryType,
+                SubCategoryType = g.Key.Name,
                 ItemCount = g.Count()
             })
             .ToListAsync();

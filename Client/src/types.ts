@@ -46,3 +46,51 @@ export interface User {
   
 
 export { UserRole };
+
+
+export interface Stock {
+  id: number;
+  name: string;
+  description: string;
+  categoryId: number;
+  category: Category | null;
+  subCategoryId: number;
+  subCategory: SubCategory | null;
+  supplierId: number;
+  supplier: Supplier | null;
+  imageUrl: string;
+  arrivalDate: string;
+  assets: Asset[] | null;
+}
+
+export interface Category {
+  id: number;
+  name: string;
+  description: string;
+  imageUrl: string;
+  assets: Asset[] | null;
+}
+
+export interface SubCategory {
+  id: number;
+  name: string;
+  imageUrl: string;
+  categoryId: number;
+  category: Category | null;
+  assets: Asset[] | null;
+}
+
+
+
+export interface Asset {
+  id: number;
+  name: string;
+  description: string;
+  barcode: string;
+  stockId: number;
+  status: string;
+  warrantyExpiration: string;
+  stock: Stock | null;
+  imageUrl: string;
+  facilityAsset: any;
+}
