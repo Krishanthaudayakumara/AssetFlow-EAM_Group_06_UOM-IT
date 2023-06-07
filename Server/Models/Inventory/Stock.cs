@@ -14,7 +14,7 @@ namespace Server.Models
         [Required]
         public string Description { get; set; }
 
-        public int Count { get; set; }
+        public int Quantity { get; set; }
 
         public int CategoryId { get; set; }
 
@@ -30,7 +30,7 @@ namespace Server.Models
 
         public string ImageUrl { get; set; }
 
-        public int Cost { get; set; }
+        public float Cost { get; set; }
 
         public DateTime ArrivalDate { get; set; }
 

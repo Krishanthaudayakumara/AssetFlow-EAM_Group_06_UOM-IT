@@ -42,7 +42,7 @@ namespace Server.Controllers.Report
                         PurchasedDate = asset.Stock.ArrivalDate,
                         Cost = asset.Stock.Cost,
                         SupplierId = asset.Stock.SupplierId,
-                        Amount = asset.Stock.Count
+                        Amount = asset.Stock.Quantity
                     };
 
                     report.Add(dto);

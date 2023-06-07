@@ -9,7 +9,7 @@ namespace Server.DTOs.Report
         public DateTime WarrantyExpiration { get; set; }
         public string Status { get; set; }
         public DateTime PurchasedDate { get; set; }
-        public int Cost { get; set; }
+        public float Cost { get; set; }
         public int SupplierId { get; set; }
         public int Amount { get; set; }  
     }

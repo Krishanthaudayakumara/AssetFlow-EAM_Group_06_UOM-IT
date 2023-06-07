@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs;
 using Server.Models;
+using Server.Services;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,46 +18,116 @@ namespace Server.Controllers
     {
         private readonly DataContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly CloudinaryService _cloudinaryService;
 
-        public AssetController(DataContext context, IWebHostEnvironment hostEnvironment)
+        public AssetController(DataContext context, IWebHostEnvironment hostEnvironment, CloudinaryService cloudinaryService)
         {
             _context = context;
             _hostEnvironment = hostEnvironment;
+            _cloudinaryService = cloudinaryService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Asset>>> GetAssets()
+        public async Task<ActionResult<IEnumerable<GetAssetDTO>>> GetAssets()
         {
-            var assets = await _context.Assets.Include(a => a.Stock).ToListAsync();
-            return Ok(assets);
+            var assets = await _context.Assets
+                .Include(a => a.Stock)
+                    .ThenInclude(s => s.Supplier)
+                .ToListAsync();
+
+            var assetDTOs = assets.Select(asset => new GetAssetDTO
+            {
+                Id = asset.Id,
+                Name = asset.Name,
+                Description = asset.Description,
+                Barcode = asset.Barcode,
+                StockId = asset.StockId,
+                Status = asset.Status,
+                Condition = asset.Condition,
+                WarrantyExpiration = asset.WarrantyExpiration,
+                ImageUrl = asset.ImageUrl,
+                Stock = new AssetStockDTO
+                {
+                    Id = asset.Stock.Id,
+                    Name = asset.Stock.Name,
+                    ArrivalDate = asset.Stock.ArrivalDate,
+                    SupplierId = asset.Stock.SupplierId,
+                    SupplierName = asset.Stock.Supplier.Name,
+                    ImageUrl = asset.Stock.ImageUrl
+                }
+            }).ToList();
+
+            return Ok(assetDTOs);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Asset>> GetAsset(int id)
+        public async Task<ActionResult<GetAssetDTO>> GetAsset(int id)
         {
-            var asset = await _context.Assets.Include(a => a.Stock).FirstOrDefaultAsync(a => a.Id == id);
+            var asset = await _context.Assets
+                .Include(a => a.Stock)
+                    .ThenInclude(s => s.Supplier)
+                .FirstOrDefaultAsync(a => a.Id == id);
 
             if (asset == null)
             {
                 return NotFound();
             }
 
-            return Ok(asset);
+            var assetDTO = new GetAssetDTO
+            {
+                Id = asset.Id,
+                Name = asset.Name,
+                Description = asset.Description,
+                Barcode = asset.Barcode,
+                StockId = asset.StockId,
+                Status = asset.Status,
+                Condition = asset.Condition,
+                WarrantyExpiration = asset.WarrantyExpiration,
+                ImageUrl = asset.ImageUrl,
+                Stock = new AssetStockDTO
+                {
+                    Id = asset.Stock.Id,
+                    Name = asset.Stock.Name,
+                    ArrivalDate = asset.Stock.ArrivalDate,
+                    SupplierId = asset.Stock.SupplierId,
+                    SupplierName = asset.Stock.Supplier.Name,
+                    ImageUrl = asset.Stock.ImageUrl
+                }
+            };
+
+            return Ok(assetDTO);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Asset>> CreateAsset(AssetDTO assetDTO)
+        public async Task<ActionResult<Asset>> CreateAsset([FromForm] AssetDTO assetDTO)
         {
+            if (assetDTO.StockId <= 0)
+            {
+                return BadRequest("Invalid StockId");
+            }
+
+            var stock = await _context.Stocks.FindAsync(assetDTO.StockId);
+            if (stock == null)
+            {
+                return NotFound("Stock not found");
+            }
+
             var asset = new Asset
             {
                 Name = assetDTO.Name,
                 Description = assetDTO.Description,
                 Barcode = GenerateBarcode(assetDTO.StockId),
                 StockId = assetDTO.StockId,
-                Status = "In Stock",
+                Status = assetDTO.Status,
+                Condition = assetDTO.Condition,
                 WarrantyExpiration = assetDTO.WarrantyExpiration,
-                ImageUrl = assetDTO.ImageUrl
+                Stock = stock
             };
+
+            if (assetDTO.Image != null)
+            {
+                asset.ImageUrl = await _cloudinaryService.UploadImage(assetDTO.Image);
+            }
 
             _context.Assets.Add(asset);
             await _context.SaveChangesAsync();
@@ -66,7 +136,7 @@ namespace Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditAsset(int id, AssetDTO assetDTO)
+        public async Task<IActionResult> EditAsset(int id, [FromForm] AssetDTO assetDTO)
         {
             if (id != assetDTO.Id)
             {
@@ -79,11 +149,29 @@ namespace Server.Controllers
                 return NotFound();
             }
 
+            if (assetDTO.StockId <= 0)
+            {
+                return BadRequest("Invalid StockId");
+            }
+
+            var stock = await _context.Stocks.FindAsync(assetDTO.StockId);
+            if (stock == null)
+            {
+                return NotFound("Stock not found");
+            }
+
             asset.Name = assetDTO.Name;
             asset.Description = assetDTO.Description;
             asset.Status = assetDTO.Status;
+            asset.Condition = assetDTO.Condition;
             asset.WarrantyExpiration = assetDTO.WarrantyExpiration;
-            asset.ImageUrl = assetDTO.ImageUrl;
+            asset.StockId = assetDTO.StockId;
+            asset.Stock = stock;
+
+            if (assetDTO.Image != null)
+            {
+                asset.ImageUrl = await _cloudinaryService.UploadImage(assetDTO.Image);
+            }
 
             _context.Entry(asset).State = EntityState.Modified;
             await _context.SaveChangesAsync();

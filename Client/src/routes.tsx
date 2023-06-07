@@ -9,7 +9,6 @@ import StockPage from "./pages/Inventory/Stock/StockPage";
 import SubCategoryPage from "./pages/Inventory/Category/SubCategoryPage";
 import CategoryPage from "./pages/Inventory/Category/CategoryPage";
 
-
 import AssignAsset from "./pages/Facility/AssignAsset";
 import BuildingFloor from "./pages/Facility/BuildingFloor";
 import Navbar from "./components/Navbar";
@@ -40,6 +39,8 @@ import jwtDecode from "jwt-decode";
 import ProfilePage from "./pages/User/ProfilePage";
 import DeletedEmployeePage from "./pages/Employee/DeletedEmployeePage";
 import MyTickets from "./pages/Support/MyTickets";
+import CategoryDetailPage from "./pages/Inventory/Category/CategoryDetailPage";
+import AssetPage from "./pages/Inventory/Asset/AssetPage";
 
 const RoutesConfig: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -176,6 +177,17 @@ const RoutesConfig: React.FC = () => {
         <Route path="/Stock" element={<StockPage />} />
       </Route>
 
+      <Route path="/Asset" element={<PrivateRoute allowedRoles="all" />}>
+        <Route path="/Asset" element={<AssetPage />} />
+      </Route>
+
+      <Route
+        path="/categories/:id"
+        element={<PrivateRoute allowedRoles="all" />}
+      >
+        <Route path="/categories/:id" element={<CategoryDetailPage />} />
+      </Route>
+
       <Route
         path="/BuildingFloor"
         element={<PrivateRoute allowedRoles="all" />}
@@ -199,16 +211,9 @@ const RoutesConfig: React.FC = () => {
         <Route path="/FacilityStock" element={<FacilityStock />} />
       </Route>
 
-      <Route path="/AssignAsset" element={<PrivateRoute allowedRoles="all" />} >
-          <Route
-            path="/AssignAsset"
-            element={
-             
-                <AssignAsset />
-            }
-          />
-          </Route>
-
+      <Route path="/AssignAsset" element={<PrivateRoute allowedRoles="all" />}>
+        <Route path="/AssignAsset" element={<AssignAsset />} />
+      </Route>
     </Routes>
   );
 };

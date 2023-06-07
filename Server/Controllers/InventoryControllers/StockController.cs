@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs;
 using Server.Models;
-using Server.Services; // Add the namespace for the CloudinaryService
+using Server.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,26 +19,35 @@ namespace Server.Controllers
     {
         private readonly DataContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
-        private readonly CloudinaryService _cloudinaryService; // Add the CloudinaryService
+        private readonly CloudinaryService _cloudinaryService;
 
         public StockController(DataContext context, IWebHostEnvironment hostEnvironment, CloudinaryService cloudinaryService)
         {
             _context = context;
             _hostEnvironment = hostEnvironment;
-            _cloudinaryService = cloudinaryService; // Inject the CloudinaryService
+            _cloudinaryService = cloudinaryService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Stock>>> GetStocks()
         {
-            var stocks = await _context.Stocks.Include(s => s.Category).Include(s => s.SubCategory).Include(s => s.Supplier).ToListAsync();
+            var stocks = await _context.Stocks
+                .Include(s => s.Category)
+                .Include(s => s.SubCategory)
+                .Include(s => s.Supplier)
+                .ToListAsync();
+
             return Ok(stocks);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Stock>> GetStock(int id)
         {
-            var stock = await _context.Stocks.Include(s => s.Category).Include(s => s.SubCategory).Include(s => s.Supplier).FirstOrDefaultAsync(s => s.Id == id);
+            var stock = await _context.Stocks
+                .Include(s => s.Category)
+                .Include(s => s.SubCategory)
+                .Include(s => s.Supplier)
+                .FirstOrDefaultAsync(s => s.Id == id);
 
             if (stock == null)
             {
@@ -55,15 +64,17 @@ namespace Server.Controllers
             {
                 Name = stockDTO.Name,
                 Description = stockDTO.Description,
+                Quantity = stockDTO.Quantity,
                 CategoryId = stockDTO.CategoryId,
                 SubCategoryId = stockDTO.SubCategoryId,
                 SupplierId = stockDTO.SupplierId,
-                ArrivalDate = DateTime.Now
+                Cost = stockDTO.Cost,
+                ArrivalDate = stockDTO.ArrivalDate
             };
 
             if (stockDTO.Image != null)
             {
-                stock.ImageUrl = await _cloudinaryService.UploadImage(stockDTO.Image); // Use the CloudinaryService to upload the image
+                stock.ImageUrl = await _cloudinaryService.UploadImage(stockDTO.Image);
             }
             else
             {
@@ -83,7 +94,8 @@ namespace Server.Controllers
                     Status = "In Stock",
                     WarrantyExpiration = DateTime.Now.AddYears(1),
                     ImageUrl = stock.ImageUrl,
-                    Description = stockDTO.Description
+                    Description = stockDTO.Description,
+                    Condition = "new"
                 };
                 _context.Assets.Add(asset);
                 assets.Add(asset);
@@ -126,15 +138,29 @@ namespace Server.Controllers
             stock.CategoryId = stockDTO.CategoryId;
             stock.SubCategoryId = stockDTO.SubCategoryId;
             stock.SupplierId = stockDTO.SupplierId;
+            stock.Cost = stockDTO.Cost;
+            stock.ArrivalDate = stockDTO.ArrivalDate;
 
-            // Update the stock's image if a new image is provided
             if (stockDTO.Image != null)
             {
-                stock.ImageUrl = await _cloudinaryService.UploadImage(stockDTO.Image); // Use the CloudinaryService to upload the image
+                stock.ImageUrl = await _cloudinaryService.UploadImage(stockDTO.Image);
             }
 
-            _context.Entry(stock).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!StockExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return NoContent();
         }
@@ -152,6 +178,11 @@ namespace Server.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        private bool StockExists(int id)
+        {
+            return _context.Stocks.Any(s => s.Id == id);
         }
     }
 }

@@ -82,6 +82,7 @@ export interface SubCategory {
 
 
 
+
 export interface Asset {
   id: number;
   name: string;
@@ -89,8 +90,32 @@ export interface Asset {
   barcode: string;
   stockId: number;
   status: string;
+  condition: string;
   warrantyExpiration: string;
-  stock: Stock | null;
   imageUrl: string;
-  facilityAsset: any;
+  stock: {
+    id: number;
+    name: string;
+    arrivalDate: string;
+    supplierId: number;
+    supplierName: string;
+    imageUrl: string;
+  };
+}
+
+
+export interface EditAsset {
+  id: number;
+  name: string;
+  description: string;
+  stockId: number;
+  status: string;
+  condition: string;
+  warrantyExpiration: string;
+  image: File | null; 
+}
+
+export interface DeleteAsset {
+  id: number;
+  name: string;
 }

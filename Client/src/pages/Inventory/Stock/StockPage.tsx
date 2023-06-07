@@ -1,8 +1,10 @@
+// StockPage.jsx
 import React, { useState } from 'react';
 import StockTable from '../../../components/Inventory/Stock/StockTable';
 import StockModal from '../../../components/Inventory/Stock/StockModal';
 import { Button } from 'react-bootstrap';
 import { Stock } from '../../../types';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const StockPage: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -20,11 +22,9 @@ const StockPage: React.FC = () => {
   return (
     <div>
       <h1>Stock Page</h1>
-      <Button variant="primary" onClick={() => setShowModal(true)}>
-        Add Stock
-      </Button>
-      <StockTable />
       <StockModal />
+
+      <StockTable />
     </div>
   );
 };

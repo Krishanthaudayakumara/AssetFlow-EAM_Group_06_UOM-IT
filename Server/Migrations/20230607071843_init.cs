@@ -449,12 +449,12 @@ namespace Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Count = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     SubCategoryId = table.Column<int>(type: "int", nullable: false),
                     SupplierId = table.Column<int>(type: "int", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cost = table.Column<int>(type: "int", nullable: false),
+                    Cost = table.Column<float>(type: "real", nullable: false),
                     ArrivalDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -517,19 +517,14 @@ namespace Server.Migrations
                     Barcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StockId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Condition = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WarrantyExpiration = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
                     SubCategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Assets", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Assets_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Assets_Stocks_StockId",
                         column: x => x.StockId,
@@ -753,11 +748,6 @@ namespace Server.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Assets_CategoryId",
-                table: "Assets",
-                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Assets_StockId",

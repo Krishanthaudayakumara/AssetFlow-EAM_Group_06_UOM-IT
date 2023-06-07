@@ -12,13 +12,16 @@ namespace Server.Models
 
         public string Description { get; set; }
 
-        public string ? Barcode { get; set; }
+        public string? Barcode { get; set; }
 
-        public int StockId { get; set; }
 
         public string Status { get; set; }
 
+        public string Condition { get; set; }
+
         public DateTime WarrantyExpiration { get; set; }
+
+        public int StockId { get; set; }
 
         public Stock Stock { get; set; }
 

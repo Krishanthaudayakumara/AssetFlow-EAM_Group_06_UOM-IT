@@ -7,11 +7,22 @@ namespace Server.DTOs
     {
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
+
         public string Description { get; set; }
+
+        [Required]
         public int StockId { get; set; }
+
         public string Status { get; set; }
+
+        public string Condition { get; set; }
+
+        [Required]
         public DateTime WarrantyExpiration { get; set; }
-        public string ImageUrl { get; set; }
+
+        public IFormFile Image { get; set; }
     }
 }
+
