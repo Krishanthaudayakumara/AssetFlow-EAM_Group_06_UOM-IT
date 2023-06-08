@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaTrashAlt, FaPen } from "react-icons/fa";
 import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
+import AssignAssetUpdateForm from "./AsssignAssetUpdateForm";
 
 interface FacilityAssetData {
   id: number;
@@ -12,24 +13,18 @@ interface FacilityAssetData {
   assignedDate: string;
   receivedDate: string;
   assignStatus: string;
-  workstationId:number;
+  workstationId: number;
 }
 
 function FacilityAssetTable() {
   const [facilityData, setFacilityData] = useState<FacilityAssetData[]>([]);
-   
- 
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchFacilityAssetData = async () => {
       try {
         const response = await axios.get<FacilityAssetData[]>(
-        "http://localhost:5087/api/FacilityAsset/GetAllFacilityAssets"
-        
-
-          
-          
-          
+          "http://localhost:5087/api/FacilityAsset/GetAllFacilityAssets"
         );
         console.log(response);
         setFacilityData(response.data);
@@ -41,31 +36,27 @@ function FacilityAssetTable() {
     fetchFacilityAssetData();
   }, []);
 
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div style={{ margin: "4rem" }}>
-      
-      <div
-        className="shadow p-2 mb- bg-white rounded"
-        style={{ width: "950px" }}
-      >
-        <Table
-          className="table w-100 small text-center"
-          hover
-          align="center"
-          style={{ fontSize: "14px", width: "500px" }}
-        >
+      <div className="shadow p-2 mb- bg-white rounded" style={{ width: "950px" }}>
+        <Table className="table w-100 small text-center" hover align="center" style={{ fontSize: "14px", width: "500px" }}>
           <thead>
             <tr style={{ color: "#482890" }}>
               <th>FacilityAsset id</th>
               <th>Asset id</th>
               <th colSpan={1}>Assetcondition status</th>
-
               <th>Received date</th>
               <th>Assign Status</th>
               <th>Assigned date</th>
               <th>workstationId</th>
-            
-
               <th>Action</th>
             </tr>
           </thead>
@@ -73,10 +64,7 @@ function FacilityAssetTable() {
             {facilityData && facilityData.length > 0 ? (
               facilityData.map((item) => {
                 return (
-                  <tr
-                    key={item.id}
-                    style={{ textAlign: "center" }}
-                  >
+                  <tr key={item.id} style={{ textAlign: "center" }}>
                     <td>{item.id}</td>
                     <td>{item.assetId}</td>
                     <td>{item.assetConditionStatus}</td>
@@ -84,12 +72,9 @@ function FacilityAssetTable() {
                     <td>{item.assignStatus}</td>
                     <td>{item.assignedDate}</td>
                     <td>{item.workstationId}</td>
-                    
                     <td>
-                      <FaTrashAlt style={{ color: " #ff615a " }} />
-                      <FaPen
-                        style={{ color: " #482890", marginLeft: "10px" }}
-                      />
+                      <FaTrashAlt style={{ color: "#ff615a" }} />
+                      <FaPen style={{ color: "#482890", marginLeft: "10px" }} onClick={openModal} />
                     </td>
                   </tr>
                 );
@@ -102,9 +87,16 @@ function FacilityAssetTable() {
           </tbody>
         </Table>
       </div>
-
-     
+      <Modal show={showModal} onHide={closeModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Assign Asset Update Form</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <AssignAssetUpdateForm />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }
+
 export default FacilityAssetTable;
