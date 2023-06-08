@@ -10,6 +10,5 @@ namespace Server.Models
         public string Description { get; set; }
         public ICollection<SubCategory> SubCategories { get; set; }
         
-        
     }
 }
