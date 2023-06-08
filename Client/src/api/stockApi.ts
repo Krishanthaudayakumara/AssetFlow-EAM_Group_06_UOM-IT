@@ -18,6 +18,11 @@ export const getStockById = (stockId: any) => {
   return axios.get(`${baseUrl}/${stockId}`);
 };
 
+export const getStockBarcodes = (stockId: number) => {
+  return axios.get(`${baseUrl}/${stockId}/barcode`);
+};
+
+
 export const updateStock = (stockId: any, formData: any) => {
   return axios.put(`${baseUrl}/${stockId}`, formData, {
     headers: {

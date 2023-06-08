@@ -1,5 +1,5 @@
-// StockTable.jsx
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getStock, deleteStock } from '../../../api/stockApi';
 import { Table, Button } from 'react-bootstrap';
 
@@ -83,6 +83,11 @@ const StockTable = () => {
               <Button variant="danger" onClick={() => handleDeleteStock(stock.id)}>
                 Delete
               </Button>
+              <Link to={`/stock/${stock.id}/barcodes`}>
+                <Button variant="primary">
+                  <i className="bi bi-barcode"></i> Barcodes
+                </Button>
+              </Link>
             </td>
           </tr>
         ))}

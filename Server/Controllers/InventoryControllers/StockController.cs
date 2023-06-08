@@ -113,6 +113,29 @@ namespace Server.Controllers
             return CreatedAtAction("GetStock", new { id = stock.Id }, stock);
         }
 
+        [HttpGet("{id}/barcode")]
+        public async Task<ActionResult<IEnumerable<BarCodeDTO>>> GetStockAssets(int id)
+        {
+            var stock = await _context.Stocks
+                .Include(s => s.Assets)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (stock == null)
+            {
+                return NotFound();
+            }
+
+            var assetInfoList = stock.Assets.Select(asset => new BarCodeDTO
+            {
+                Id = asset.Id,
+                Barcode = asset.Barcode,
+                Name = asset.Name
+            }).ToList();
+
+            return Ok(assetInfoList);
+        }
+
+
         private string GenerateBarcode(int subcategoryId, int assetId)
         {
             var barcode = $"cat-{subcategoryId}-ast-{assetId}";

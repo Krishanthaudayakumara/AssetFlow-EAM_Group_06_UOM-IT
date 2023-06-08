@@ -41,6 +41,7 @@ import DeletedEmployeePage from "./pages/Employee/DeletedEmployeePage";
 import MyTickets from "./pages/Support/MyTickets";
 import CategoryDetailPage from "./pages/Inventory/Category/CategoryDetailPage";
 import AssetPage from "./pages/Inventory/Asset/AssetPage";
+import StockBarcodesPage from "./pages/Inventory/Stock/StockBarcodesPage";
 
 const RoutesConfig: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -186,6 +187,12 @@ const RoutesConfig: React.FC = () => {
         element={<PrivateRoute allowedRoles="all" />}
       >
         <Route path="/categories/:id" element={<CategoryDetailPage />} />
+      </Route>
+      <Route
+        path="/stock/:id/barcodes"
+        element={<PrivateRoute allowedRoles="all" />}
+      >
+      <Route path="/stock/:id/barcodes" element={<StockBarcodesPage />} />
       </Route>
 
       <Route
