@@ -16,6 +16,6 @@ namespace Server.Models
 
         public Asset Asset { get; set; }
 
-        public bool IsAccepted { get; set; }
+        public bool? IsAccepted { get; set; }
     }
 }
