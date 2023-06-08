@@ -11,6 +11,7 @@ import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
 import { FaSearch } from "react-icons/fa";
 import PaginationComponent from "../pagination";
 
+
 interface TicketType {
   id: number;
   employeeId: number;
