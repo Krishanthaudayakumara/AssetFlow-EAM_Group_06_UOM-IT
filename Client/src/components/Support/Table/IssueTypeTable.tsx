@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { Table, Form, InputGroup} from "react-bootstrap";
+import { Table, Form, InputGroup, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../../../css/Support/Support.css";
@@ -12,6 +12,8 @@ import EditIssueTypeForm from "../Forms/IssueType/EditIssueTypeForm";
 import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
 import DeleteError from "../ConfirmMessages/DeleteError";
 import PaginationComponent from "../pagination";
+import IssueTypeCardView from "../Card/IssueTypeCardView";
+
 interface issueType {
   id: number;
   name: string;
@@ -27,19 +29,21 @@ const IssueTypeTable = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
- 
+  const [cardViewActive, setCardViewActive] = useState(false);
 
-  const recordsPerPage = 4;
+  const recordsPerPage = 10;
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5087/Api/IssueType")
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5087/Api/IssueType");
         setIssues(response.data);
-      })
-      .catch((error) => {
+      } catch (error) {
         alert(error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleEditIssueClick = (issue: issueType) => {
@@ -65,7 +69,7 @@ const IssueTypeTable = () => {
       .catch((error) => {
         // Handle other errors
       });
-  };    
+  };
 
   const handleModalClose = () => {
     setSelectedIssue(null);
@@ -96,7 +100,7 @@ const IssueTypeTable = () => {
         setShowDeleteModal(false);
       });
   };
-  
+
   const resetErrorMessage = () => {
     setErrorMessage(null);
   };
@@ -106,12 +110,21 @@ const IssueTypeTable = () => {
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
+  const handleCardViewClick = () => {
+    setCardViewActive(!cardViewActive);
+  };
+  
 
   return (
     <div>
       <div className="row">
-        <div className="col-8">
+        <div className="col-6">
           <p className="table-heading">Issue Types</p>
+        </div>
+        <div className="col-2">
+          <Button onClick={handleCardViewClick}>
+            {cardViewActive ? "Table View" : "Card View"}
+          </Button>
         </div>
         <div className="col-1">
           <Form>
@@ -131,63 +144,68 @@ const IssueTypeTable = () => {
         errorMessage={errorMessage}
         onResetError={resetErrorMessage}
       />
-      <div className="box-shadow">
-        <Fragment>
-          <div>
-            <Table className="support-table">
-              <thead>
-                <tr style={{ color: "#482890" }}>
-                  <th style={{ width: "60px" }}></th>
-                  <th>Issue Type</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {issues
-                  .filter((issue) => {
-                    return search.toLowerCase() === ""
-                      ? issue
-                      : issue.name.toLowerCase().includes(search);
-                  })
-                  .slice(
-                    (currentPage - 1) * recordsPerPage,
-                    currentPage * recordsPerPage
-                  )
-                  .map((issue) => (
-                    <tr key={issue.id}>
-                      <td>{DefaultProfilePicture({ name: issue.name })}</td>
-                      <td                  
-                    >
-                      {issue.name}
-                    </td>
-                      <td>
-                        <FontAwesomeIcon
-                          icon={faPen}
-                          style={{
-                            color: "#482890",
-                            cursor: "pointer",
-                          }}
-                          title="Edit Issue Type"
-                          onClick={() => handleEditIssueClick(issue)}
-                        />
-                        &nbsp; &nbsp; &nbsp;
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          style={{
-                            color: "#FF615A",
-                            cursor: "pointer",
-                          }}
-                          title="Delete Issue Type"
-                          onClick={() => handleDeleteIssue(issue)}
-                        />
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </Table>
-          </div>
-        </Fragment>
-      </div>
+      {cardViewActive ? (
+        <IssueTypeCardView
+        issues={issues}
+        onEditIssue={handleEditIssueClick}
+        onDeleteIssue={handleDeleteIssue}
+      />
+      ) : (
+        <div className="box-shadow">
+          <Fragment>
+            <div>
+              <Table className="support-table">
+                <thead>
+                  <tr style={{ color: "#482890" }}>
+                    <th style={{ width: "60px" }}></th>
+                    <th>Issue Type</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {issues
+                    .filter((issue) => {
+                      return search.toLowerCase() === ""
+                        ? issue
+                        : issue.name.toLowerCase().includes(search);
+                    })
+                    .slice(
+                      (currentPage - 1) * recordsPerPage,
+                      currentPage * recordsPerPage
+                    )
+                    .map((issue) => (
+                      <tr key={issue.id}>
+                        <td>{DefaultProfilePicture({ name: issue.name })}</td>
+                        <td>{issue.name}</td>
+                        <td>
+                          <FontAwesomeIcon
+                            icon={faPen}
+                            style={{
+                              color: "#482890",
+                              cursor: "pointer",
+                            }}
+                            title="Edit Issue Type"
+                            onClick={() => handleEditIssueClick(issue)}
+                          />
+                          &nbsp; &nbsp; &nbsp;
+                          <FontAwesomeIcon
+                            icon={faTrash}
+                            style={{
+                              color: "#FF615A",
+                              cursor: "pointer",
+                            }}
+                            title="Delete Issue Type"
+                            onClick={() => handleDeleteIssue(issue)}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </Table>
+            </div>
+          </Fragment>
+        </div>
+      )}
       
       <EditIssueTypeForm
         show={showModal}
@@ -208,7 +226,7 @@ const IssueTypeTable = () => {
         deletingIssueName={deletingIssue?.name || ""}
       />
       <div className="pagination-wrapper">
-      <PaginationComponent
+        <PaginationComponent
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={handlePageChange}

@@ -6,8 +6,10 @@ import NewIssurTypeForm from "../../components/Support/Forms/IssueType/NewIssueT
 
 const Issues: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+
   return (
     <div className="container">
       <div className="row">
@@ -37,7 +39,7 @@ const Issues: React.FC = () => {
           <Modal.Title style={{ color: "white" }}>New Issue Type</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <NewIssurTypeForm />
+          <NewIssurTypeForm handleClose={handleClose} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -48,4 +50,5 @@ const Issues: React.FC = () => {
     </div>
   );
 };
+
 export default Issues;

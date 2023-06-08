@@ -7,7 +7,11 @@ interface FormData {
   name: string;
 }
 
-const NewIssueTypeForm = () => {
+interface Props {
+  handleClose: () => void;
+}
+
+const NewIssueTypeForm: React.FC<Props> = ({ handleClose }) => {
   const [formData, setFormData] = useState<FormData>({ name: "" });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -43,6 +47,7 @@ const NewIssueTypeForm = () => {
 
   const handleCloseSuccessModal = () => {
     setShowSuccessModal(false);
+    handleClose();
     window.location.reload();
   };
 
@@ -78,3 +83,4 @@ const NewIssueTypeForm = () => {
 };
 
 export default NewIssueTypeForm;
+

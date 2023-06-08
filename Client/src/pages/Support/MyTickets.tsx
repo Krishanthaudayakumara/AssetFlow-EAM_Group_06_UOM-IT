@@ -36,7 +36,7 @@ const MyTickets: React.FC = () => {
           <Modal.Title style={{ color: "white" }}>New Ticket</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <NewTicketForm />
+          
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

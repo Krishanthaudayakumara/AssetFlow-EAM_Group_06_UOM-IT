@@ -17,7 +17,11 @@ interface IssueTypeData {
   name: string;
 }
 
-const NewTicketForm = () => {
+interface NewTicketFormProps {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
   const [formData, setFormData] = useState<FormData>({
     employeeId: 0,
     email: "",
@@ -80,7 +84,7 @@ const NewTicketForm = () => {
 
   const handleCloseSuccessModal = () => {
     setShowSuccessModal(false);
-    window.location.reload();
+    setShowModal(false);
   };
 
   return (
@@ -142,22 +146,21 @@ const NewTicketForm = () => {
         </Button>
       </Form>
 
-      <Modal show={showSuccessModal} onHide={handleCloseSuccessModal} centered >
-        
+      <Modal show={showSuccessModal} onHide={handleCloseSuccessModal} centered>
         <Modal.Body style={{ backgroundColor: "green" }}>
           <div className="text-center">
             <FontAwesomeIcon icon={faCheck} className="success-icon" />
             <p className="success-message">
-              Your ticket has been submitted successfully.                           
+              Your ticket has been submitted successfully.
             </p>
-            <p className="success-message">             
-              We will reply as soon as possible             
+            <p className="success-message">
+              We will reply as soon as possible.
             </p>
           </div>
           <Button variant="secondary" onClick={handleCloseSuccessModal}>
             Close
           </Button>
-        </Modal.Body>       
+        </Modal.Body>
       </Modal>
     </>
   );

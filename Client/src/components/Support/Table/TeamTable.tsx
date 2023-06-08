@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { Form, InputGroup, Table } from "react-bootstrap";
+import { Form, InputGroup, Table, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faPen, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import {faHome,faPen,faTrash,faUser,} from "@fortawesome/free-solid-svg-icons";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import EditTeamForm from "../Forms/Team/EditTeamForm";
@@ -11,7 +11,8 @@ import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
 import PaginationComponent from "../pagination";
 import DeleteConfirmation from "../ConfirmMessages/DeleteConfirmation";
 import DeleteError from "../ConfirmMessages/DeleteError";
-import TeamToTicket from "./TeamToTicket"; // Import the TeamToTicket component
+import TeamToTicket from "./TeamToTicket";
+import TeamCardView from "../Card/TeamCardView";
 
 interface teamType {
   profileImage: string;
@@ -39,6 +40,7 @@ const TeamTable = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [showTeamToTicketTable, setShowTeamToTicketTable] = useState(false); // State to control rendering of TeamToTicket table
+  const [cardViewActive, setCardViewActive] = useState(false);
 
   const recordsPerPage = 4;
 
@@ -126,6 +128,9 @@ const TeamTable = () => {
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
+  const handleCardViewClick = () => {
+    setCardViewActive(!cardViewActive);
+  };
 
   return (
     <div>
@@ -134,8 +139,13 @@ const TeamTable = () => {
       ) : (
         <div>
           <div className="row">
-            <div className="col-8">
+            <div className="col-6">
               <p className="table-heading">Support Teams</p>
+            </div>
+            <div className="col-2">
+              <Button onClick={handleCardViewClick}>
+                {cardViewActive ? "Table View" : "Card View"}
+              </Button>
             </div>
             <div className="col-1">
               <Form>
@@ -155,75 +165,82 @@ const TeamTable = () => {
             errorMessage={errorMessage}
             onResetError={resetErrorMessage}
           />
-          <div className="box-shadow">
-            <Fragment>
-              <div>
-                <Table className="support-table">
-                  <thead>
-                    <tr style={{ color: "#482890" }}>
-                      <th></th>
-                      <th>Team Name</th>
-                      <th>Team Description</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {teams
-                      .filter((team) => {
-                        return search.toLowerCase() === ""
-                          ? team
-                          : team.name.toLowerCase().includes(search);
-                      })
-                      .slice(
-                        (currentPage - 1) * recordsPerPage,
-                        currentPage * recordsPerPage
-                      )
-                      .map((team) => (
-                        <tr key={team.id}>
-                          <td>
-                            <img
-                              src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
-                              alt="User profile"
-                              className="rounded-circle"
-                             
-                              style={{
-                                width: "45px",
-                                height: "45px",
-                                cursor: "pointer",
-                              }}
-                            />
-                          </td>
-                          <td style={{ cursor: "pointer" }}>{team.name}</td>
-                          <td>{team.description}</td>
-                          <td>
-                          <FontAwesomeIcon
-                              icon={faHome}
-                              style={{ cursor: "pointer" }}
-                              title="Team Tickets"
-                              onClick={() => handleTeamClick(team)}
-                            />
-                            &nbsp; &nbsp; &nbsp;
-                            <FontAwesomeIcon
-                              icon={faPen}
-                              style={{ color: "#482890", cursor: "pointer" }}
-                              title="Edit Team"
-                              onClick={() => handleEditTeamClick(team)}
-                            />
-                            &nbsp; &nbsp; &nbsp;
-                            <FontAwesomeIcon
-                              icon={faTrash}
-                              style={{ color: "#FF615A", cursor: "pointer" }}
-                              title="Delete Team"
-                              onClick={() => handleDeleteTeam(team)}
-                            />
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </Table>
-              </div>
-            </Fragment>
-          </div>
+          {cardViewActive ? (
+            <TeamCardView
+              teams={teams}
+              onEditIssue={handleEditTeamClick}
+              onDeleteIssue={handleDeleteTeam}
+            />
+          ) : (
+            <div className="box-shadow">
+              <Fragment>
+                <div>
+                  <Table className="support-table">
+                    <thead>
+                      <tr style={{ color: "#482890" }}>
+                        <th></th>
+                        <th>Team Name</th>
+                        <th>Team Description</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {teams
+                        .filter((team) => {
+                          return search.toLowerCase() === ""
+                            ? team
+                            : team.name.toLowerCase().includes(search);
+                        })
+                        .slice(
+                          (currentPage - 1) * recordsPerPage,
+                          currentPage * recordsPerPage
+                        )
+                        .map((team) => (
+                          <tr key={team.id}>
+                            <td>
+                              <img
+                                src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
+                                alt="User profile"
+                                className="rounded-circle"
+                                style={{
+                                  width: "45px",
+                                  height: "45px",
+                                  cursor: "pointer",
+                                }}
+                              />
+                            </td>
+                            <td style={{ cursor: "pointer" }}>{team.name}</td>
+                            <td>{team.description}</td>
+                            <td>
+                              <FontAwesomeIcon
+                                icon={faHome}
+                                style={{ cursor: "pointer" }}
+                                title="Team Tickets"
+                                onClick={() => handleTeamClick(team)}
+                              />
+                              &nbsp; &nbsp; &nbsp;
+                              <FontAwesomeIcon
+                                icon={faPen}
+                                style={{ color: "#482890", cursor: "pointer" }}
+                                title="Edit Team"
+                                onClick={() => handleEditTeamClick(team)}
+                              />
+                              &nbsp; &nbsp; &nbsp;
+                              <FontAwesomeIcon
+                                icon={faTrash}
+                                style={{ color: "#FF615A", cursor: "pointer" }}
+                                title="Delete Team"
+                                onClick={() => handleDeleteTeam(team)}
+                              />
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </Table>
+                </div>
+              </Fragment>
+            </div>
+          )}
           <EditTeamForm
             showModal={showModal}
             selectedTeam={selectedTeam}
