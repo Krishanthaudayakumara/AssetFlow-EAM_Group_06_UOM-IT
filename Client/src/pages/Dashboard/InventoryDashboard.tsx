@@ -65,20 +65,7 @@ const InventoryDashboard: React.FC = () => {
       });
 
     // Fetch category types with counts
-    axios
-      .get('http://localhost:5087/api/InventoryDashboard/category-types')
-      .then((response) => {
-        const categoryData = response.data;
-        setCategoryTypes(
-          categoryData.map((category: { categoryType: string }) => category.categoryType)
-        );
-        setCategoryTypeCounts(
-          categoryData.map((category: { count: number }) => category.count)
-        );
-      })
-      .catch((error) => {
-        console.error('Error fetching category types:', error);
-      });
+    
 
     // Fetch subcategory types with counts
     axios
@@ -108,6 +95,20 @@ const InventoryDashboard: React.FC = () => {
       })
       .catch((error) => {
         console.error('Error fetching subcategory types:', error);
+      });
+      axios
+      .get('http://localhost:5087/api/InventoryDashboard/category-types')
+      .then((response) => {
+        const categoryData = response.data;
+        setCategoryTypes(
+          categoryData.map((category: { categoryType: string }) => category.categoryType)
+        );
+        setCategoryTypeCounts(
+          categoryData.map((category: { count: number }) => category.count)
+        );
+      })
+      .catch((error) => {
+        console.error('Error fetching category types:', error);
       });
   }, []);
 
