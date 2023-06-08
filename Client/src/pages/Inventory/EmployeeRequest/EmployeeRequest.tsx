@@ -18,7 +18,6 @@ interface Asset {
   id: number;
   name: string;
   status: string;
-  
 }
 
 const EmployeeRequest: React.FC = () => {
@@ -66,7 +65,18 @@ const EmployeeRequest: React.FC = () => {
       const response = await axios.get(
         `http://localhost:5087/api/EmployeeRequest/assets/${subcategoryId}`
       );
-      setAssets(response.data);
+      const assetsData = response.data;
+      const uniqueAssets = [];
+      const assetNames = new Set();
+
+      for (const asset of assetsData) {
+        if (asset.status !== "Assign" && !assetNames.has(asset.name)) {
+          uniqueAssets.push(asset);
+          assetNames.add(asset.name);
+        }
+      }
+
+      setAssets(uniqueAssets);
       setSelectedSubCategory(
         subCategories.find((subCategory) => subCategory.id === subcategoryId) ||
           null
@@ -78,35 +88,35 @@ const EmployeeRequest: React.FC = () => {
 
   return (
     <div className="employee-request">
-    <div className="content">
-      <ul>
-        {categories.map((category) => (
-          <li key={category.id}>
-            <h4 onClick={() => fetchSubCategories(category.id)}>
-              {category.name}
-            </h4>
-            {selectedCategory?.id === category.id && (
-              <ul>
-                {subCategories.map((subCategory) => (
-                  <li key={subCategory.id}>
-                    <h5 onClick={() => fetchAssets(subCategory.id)}>
-                      {subCategory.name}
-                    </h5>
-                    {selectedSubCategory?.id === subCategory.id && (
-                      <ul>
-                        {assets.map((asset) => (
-                          <li key={asset.id}>{asset.name}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+      <div className="content">
+        <ul>
+          {categories.map((category) => (
+            <li key={category.id}>
+              <h4 onClick={() => fetchSubCategories(category.id)}>
+                {category.name}
+              </h4>
+              {selectedCategory?.id === category.id && (
+                <ul>
+                  {subCategories.map((subCategory) => (
+                    <li key={subCategory.id}>
+                      <h5 onClick={() => fetchAssets(subCategory.id)}>
+                        {subCategory.name}
+                      </h5>
+                      {selectedSubCategory?.id === subCategory.id && (
+                        <ul>
+                          {assets.map((asset) => (
+                            <li key={asset.id}>{asset.name}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="vertical-line" style={{ marginLeft: "20px" }}></div>
       <div className="content">
         {selectedSubCategory ? (
@@ -120,4 +130,3 @@ const EmployeeRequest: React.FC = () => {
 };
 
 export default EmployeeRequest;
-

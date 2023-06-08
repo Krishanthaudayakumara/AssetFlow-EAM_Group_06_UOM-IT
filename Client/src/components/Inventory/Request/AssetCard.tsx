@@ -59,16 +59,11 @@ const AssetCard: React.FC<CardComponentProps> = ({ assets }) => {
         <Card key={asset.id}>
           <Card.Body>
             <Card.Title>{asset.name}</Card.Title>
-            <Card.Text>{asset.status}</Card.Text>
-            {asset.status === 'Assigned' ? (
-              <Button variant="primary" disabled>
-                Request
-              </Button>
-            ) : (
+            <Card.Text>{asset.status}</Card.Text>                                
               <Button variant="primary" onClick={() => handleRequestClick(asset)}>
                 Request
               </Button>
-            )}
+           
           </Card.Body>
         </Card>
       ))}

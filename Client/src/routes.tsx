@@ -64,7 +64,7 @@ const RoutesConfig: React.FC = () => {
   }
   return (
     <Routes>
-      <Route path="/" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/" >
         <Route path="/" element={defaultDashboard} />
       </Route>
 
@@ -74,7 +74,7 @@ const RoutesConfig: React.FC = () => {
       </Route>
       <Route
         path="/FacilityDashboard"
-        element={<PrivateRoute allowedRoles="all" />}
+      
       >
         <Route path="/FacilityDashboard" element={<FacilityDashboard />} />
       </Route>
