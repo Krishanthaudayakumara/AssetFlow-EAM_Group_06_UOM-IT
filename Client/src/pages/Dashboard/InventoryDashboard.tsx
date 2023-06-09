@@ -64,22 +64,8 @@ const InventoryDashboard: React.FC = () => {
         console.error('Error fetching subcategory count:', error);
       });
 
-    // Fetch category types with counts
-    axios
-      .get('http://localhost:5087/api/InventoryDashboard/category-types')
-      .then((response) => {
-        const categoryData = response.data;
-        setCategoryTypes(
-          categoryData.map((category: { categoryType: string }) => category.categoryType)
-        );
-        setCategoryTypeCounts(
-          categoryData.map((category: { count: number }) => category.count)
-        );
-      })
-      .catch((error) => {
-        console.error('Error fetching category types:', error);
-      });
-
+    
+    
     // Fetch subcategory types with counts
     axios
       .get('http://localhost:5087/api/InventoryDashboard/subcategory-types')
@@ -109,6 +95,21 @@ const InventoryDashboard: React.FC = () => {
       .catch((error) => {
         console.error('Error fetching subcategory types:', error);
       });
+      axios
+      .get('http://localhost:5087/api/InventoryDashboard/category-types')
+      .then((response) => {
+        const categoryData = response.data;
+        setCategoryTypes(
+          categoryData.map((category: { categoryType: string }) => category.categoryType)
+        );
+        setCategoryTypeCounts(
+          categoryData.map((category: { count: number }) => category.count)
+        );
+      })
+      .catch((error) => {
+        console.error('Error fetching category types:', error);
+      });
+
   }, []);
 
   return (
@@ -135,7 +136,7 @@ const InventoryDashboard: React.FC = () => {
         y: {
           title: {
             display: true,
-            text: 'Count',
+            text: 'Asset Count',
           },
         },
       },
@@ -147,8 +148,8 @@ const InventoryDashboard: React.FC = () => {
               textAlign: 'center',
             }}
           ></h4>
-         <h4 style={{ margin: '0px 0 0 65px' }}>Categorey Count</h4>
-          <div  style={{ margin: '0px 2px 2px 200px', width: '500px', height: '300px', alignContent: 'center' }}>
+         <h4 style={{ margin: '0px 0 0 65px' }}>Categorey Types</h4>
+         <div  className="shadow p-2 mb-6 bg-white rounded" style={{ margin: '0px 2px 2px 300px', width: '300px', height: '300px', alignContent: 'center' }}>
             <PieChart
               data={{
                 labels: categoryType,
@@ -184,3 +185,8 @@ const InventoryDashboard: React.FC = () => {
 };
 
 export default InventoryDashboard;
+
+
+
+
+

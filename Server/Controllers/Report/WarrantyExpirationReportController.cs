@@ -16,41 +16,24 @@ namespace Server.Controllers.Report
         {
             _context = context;
         }
-
-        [HttpGet]
-        public IActionResult GetWarrantyExpirationReport()
+     
+          [HttpGet("warranty-expiration")]
+        public ActionResult<List<WarrantyExpirationReportDTO>> GetWarrantyExpirationReport()
         {
-
-            {
-                var assets = _context.Set<Asset>()
-                    .Include(a => a.Stock)
-                    .Where(a => a.WarrantyExpiration.Date <= DateTime.Today)
-                    .ToList();
-
-                var report = new List<WarrantyExpirationReportDTO>();
-
-                foreach (var asset in assets)
+            List<WarrantyExpirationReportDTO> report = _context.Assets
+                .Include(a => a.Stock.Supplier) // Include the Supplier for the Vendor
+                .Select(a => new WarrantyExpirationReportDTO
                 {
-                    var dto = new WarrantyExpirationReportDTO
-                    {
-                        AssetId = asset.Id,
-                        Barcode = asset.Barcode,
-                        Description = asset.Description,
-                        Vendor = asset.Stock.Supplier.Name,
-                        WarrantyExpiration = asset.WarrantyExpiration,
-                        Status = asset.Status,
-                        PurchasedDate = asset.Stock.ArrivalDate,
-                        Cost = asset.Stock.Cost,
-                        SupplierId = asset.Stock.SupplierId,
-                        Amount = asset.Stock.Quantity
-                    };
+                    AssetId = a.Id,
+                    Barcode = a.Barcode,
+                    Description = a.Description,
+                    WarrantyExpiration = a.WarrantyExpiration,
+                    Vendor = a.Stock.Supplier.Name
+                })
+                .ToList();
 
-                    report.Add(dto);
-                }
-
-                return Ok(report);
-            }
-
+            return report;
         }
+
     }
-}
+    }

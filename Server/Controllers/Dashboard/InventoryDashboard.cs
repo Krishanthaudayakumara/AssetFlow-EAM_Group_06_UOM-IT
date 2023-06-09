@@ -53,7 +53,7 @@ namespace Server.Controllers.Dashboard
                 .Select(c => new CategoryTypeDTO
                 {
                     CategoryType = c.Name,
-                    // Count = c.SubCategories.Count
+                 Count = c.SubCategories.Count
                 })
                 .ToList();
 
