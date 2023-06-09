@@ -35,5 +35,8 @@ namespace Server.Models
         public DateTime ArrivalDate { get; set; }
 
         public ICollection<Asset> Assets { get; set; }
+        
+        public int? SupplyChainId { get; set; } // Nullable foreign key
+        public SupplyChain? SupplyChain { get; set; } // Navigation property
     }
 }

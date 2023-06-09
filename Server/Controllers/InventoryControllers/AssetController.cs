@@ -200,5 +200,30 @@ namespace Server.Controllers
             var barcode = $"cat-{stockId}-ast-{assetCount}";
             return barcode;
         }
+
+        [HttpGet("summary")]
+        public async Task<ActionResult<IEnumerable<AssetSummaryDTO>>> GetAssetSummary()
+        {
+            var assetSummary = _context.Assets
+                .Where(a => !string.IsNullOrEmpty(a.Name))
+                .GroupBy(a => a.Name)
+                .AsEnumerable()
+                .Select(g => new AssetSummaryDTO
+                {
+                    AssetName = g.Key,
+                    TotalCount = g.Count(),
+                    StatusCounts = g.GroupBy(a => a.Status)
+                        .ToDictionary(g => g.Key, g => g.Count()),
+                    ConditionCounts = g.GroupBy(a => a.Condition)
+                        .ToDictionary(g => g.Key, g => g.Count()),
+                    ImageUrl = g.FirstOrDefault()?.ImageUrl ?? string.Empty
+                })
+                .ToList();
+
+            return Ok(assetSummary);
+        }
+
+
+
     }
 }

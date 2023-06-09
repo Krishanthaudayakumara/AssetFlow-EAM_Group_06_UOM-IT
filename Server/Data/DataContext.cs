@@ -46,8 +46,9 @@ namespace Server.Data
 
         public DbSet<UserNotification> UserNotifications { get; set; }
 
+        public DbSet<SupplyChain> SupplyChains { get; set; }
 
-
+        public DbSet<Order> Orders { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

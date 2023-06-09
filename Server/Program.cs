@@ -19,6 +19,9 @@ using System.IO;
 using Microsoft.AspNetCore.Http;
 using CloudinaryDotNet;
 using Server.Services;
+using Hangfire;
+using Hangfire.MemoryStorage;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +61,9 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailService, SmtpEmailService>();
 
+builder.Services.AddScoped<ISupplyChainService, SupplyChainService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -77,9 +83,10 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
 });
+builder.Services.AddHangfire(configuration => configuration.UseMemoryStorage());
 
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
 
 // Cloudinary Configuration
 var cloudinaryConfig = builder.Configuration.GetSection("Cloudinary");
@@ -113,14 +120,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseHttpsRedirection();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
+
+
 });
-
-app.UseHttpsRedirection();
-
-
-app.MapControllers();
 
 app.Run();

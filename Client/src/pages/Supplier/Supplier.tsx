@@ -4,54 +4,38 @@ import axios from "axios";
 import SupplierTable from "../../components/Supplier/SupplierTable";
 import AddSupplierModal from "../../components/Supplier/AddSupplierModal";
 import SupplierModal from "../../components/Supplier/SupplierModal";
-
 import { Supplier } from "../../types";
+import { fetchSuppliers, addSupplier, editSupplier, deleteSupplier } from "../../api/supplierApi";
 
 const SupplierPage: React.FC = () => {
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [selectedSupplier, setSelectedSupplier] = useState<Supplier | null>(
-    null
-  );
+  const [selectedSupplier, setSelectedSupplier] = useState<Supplier | null>(null);
 
   useEffect(() => {
-    fetchSuppliers();
+    fetchAllSuppliers();
   }, []);
 
-  const fetchSuppliers = () => {
-    axios
-      .get("http://localhost:5087/api/Suppliers")
-      .then((res) => {
-        const data = res.data;
-        const suppliers = data.map((supplier: any) => ({
-          id: supplier.id,
-          name: supplier.name,
-          address: supplier.address,
-          contactNumber: supplier.contactNumber,
-          email: supplier.email,
-          notes: supplier.notes,
-        }));
-        setSuppliers(suppliers);
-      })
+  const fetchAllSuppliers = () => {
+    fetchSuppliers()
+      .then((suppliers) => setSuppliers(suppliers))
       .catch((error) => console.error(error));
   };
 
   const handleAddSupplier = (supplier: Supplier) => {
-    axios
-      .post("http://localhost:5087/api/Suppliers", supplier)
+    addSupplier(supplier)
       .then(() => {
-        fetchSuppliers();
+        fetchAllSuppliers();
         setShowAddModal(false);
       })
       .catch((error) => console.error(error));
   };
 
   const handleEditSupplier = (supplier: Supplier) => {
-    axios
-      .put(`http://localhost:5087/api/Suppliers/${supplier.id}`, supplier)
+    editSupplier(supplier)
       .then(() => {
-        fetchSuppliers();
+        fetchAllSuppliers();
         setShowEditModal(false);
         setSelectedSupplier(null);
       })
@@ -60,10 +44,9 @@ const SupplierPage: React.FC = () => {
 
   const handleDeleteSupplier = (supplier: Supplier) => {
     if (window.confirm("Are you sure you want to delete this supplier?")) {
-      axios
-        .delete(`http://localhost:5087/api/Suppliers/${supplier.id}`)
+      deleteSupplier(supplier)
         .then(() => {
-          fetchSuppliers();
+          fetchAllSuppliers();
         })
         .catch((error) => console.error(error));
     }
