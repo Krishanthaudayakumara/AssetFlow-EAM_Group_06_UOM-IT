@@ -18,6 +18,7 @@ import TeamTable from "./TeamTable";
 interface Ticket {
   id: number;
   problem: string;
+  email: string;
   agentId: number;
   ticketStatus: string;
   teamId: number;
@@ -99,7 +100,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
   };
 
   const handleBackClick = () => {
-    //window.location.reload(); // Refresh the page
+    
     setShowTeamTable(true);
   };
 
@@ -197,120 +198,131 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
           <div style={{ textAlign: "center" }}>Already Submit Reply !!!</div>
         </Alert>
       )}
-    
-    {showTeamTable ? (
-  <TeamTable /> // Replace TeamTable with the component for rendering the team table
-) : (
 
-      <div >
-      <div className="row">
-        <div className="col-6">
-          <p className="table-heading">{getTeamName(teamId)}</p>
-        </div>
-        <div className="col-1">
-          <Button onClick={handleBackClick}>Back</Button>
-        </div>
-        <div className="col-1">
-          <Form>
-            <InputGroup style={{ width: "300px" }}>
-              <Form.Control
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Enter Agent Name"
-              />
-              <InputGroup.Text>
-                <FaSearch />
-              </InputGroup.Text>
-            </InputGroup>
-          </Form>
-        </div>
-      </div>
-      <div className="box-shadow">
-        <Fragment>
-          <div>
-            <Table className="support-table">
-              <thead>
-                <tr style={{ color: "#482890" }}>
-                  <th style={{ width: "60px" }}></th>
-                  <th>Problem</th>
-                  <th>Assign Agent</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tickets
-                  .filter((ticket) => {
-                    const agentName = getAgentName(ticket.agentId);
-                    return (
-                      search.toLowerCase() === "" ||
-                      agentName.toLowerCase().includes(search)
-                    );
-                  })
-                  .map((ticket) => (
-                    <tr key={ticket.id}>
-                      <td>{DefaultProfilePicture({ name: ticket.problem })}</td>
-                      <td>{ticket.problem}</td>
-                      <td>{getAgentName(ticket.agentId)}</td>
-                      <td>
-                        {ticket.ticketStatus ? (
-                          ticket.ticketStatus === "Opened" ? (
-                            <Badge className={"bg-info"}>Opened</Badge>
-                          ) : ticket.ticketStatus === "Solved" ? (
-                            <Badge className={"bg-success"}>Solved</Badge>
-                          ) : ticket.ticketStatus === "Pending" ? (
-                            <Badge className={"bg-warning"}>Pending</Badge>
-                          ) : ticket.ticketStatus === "Not Assign" ? (
-                            <Badge className={"bg-danger"}>Not Assign</Badge>
-                          ) : null
-                        ) : null}
-                      </td>
-
-                      <td>
-                        {ticket.ticketStatus === "Not Assign" ? (
-                          <FontAwesomeIcon
-                            icon={faUser}
-                            style={{ color: "#482890", cursor: "pointer" }}
-                            title="Assign Agent To Ticket"
-                            onClick={() => handleAssignClick(ticket)}
-                          />
-                        ) : ticket.ticketStatus === "Opened" ||
-                          ticket.ticketStatus === "Pending" ? (
-                          <>
-                            <FontAwesomeIcon
-                              icon={faUser}
-                              style={{ color: "#482890", cursor: "pointer" }}
-                              title="Assign Agent To Ticket"
-                              onClick={() => handleAssignClick(ticket)}
-                            />
-                            &nbsp; &nbsp; &nbsp;
-                            <FontAwesomeIcon
-                              icon={faComment}
-                              style={{ color: "#FF615A", cursor: "pointer" }}
-                              title="Reply To Ticket"
-                              onClick={() => {
-                                setSelectedTicketId(ticket.id);
-                                setShowReplyModal(true);
-                              }}
-                            />
-                          </>
-                        ) : ticket.ticketStatus === "Solved" ? (
-                          <FontAwesomeIcon
-                            icon={faEnvelope}
-                            style={{ color: "#FF615A", cursor: "pointer" }}
-                            title="Edit the Reply"
-                          />
-                        ) : null}
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </Table>
+      {showTeamTable ? (
+        <TeamTable /> // Replace TeamTable with the component for rendering the team table
+      ) : (
+        <div>
+          <div className="row">
+            <div className="col-6">
+              <p className="table-heading">{getTeamName(teamId)}</p>
+            </div>
+            <div className="col-1">
+              <Button onClick={handleBackClick}>Back</Button>
+            </div>
+            <div className="col-1">
+              <Form>
+                <InputGroup style={{ width: "300px" }}>
+                  <Form.Control
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Enter Agent Name"
+                  />
+                  <InputGroup.Text>
+                    <FaSearch />
+                  </InputGroup.Text>
+                </InputGroup>
+              </Form>
+            </div>
           </div>
-        </Fragment>
+          <div className="box-shadow">
+            <Fragment>
+              <div>
+                <Table className="support-table">
+                  <thead>
+                    <tr style={{ color: "#482890" }}>
+                      <th style={{ width: "60px" }}></th>
+                      <th>Problem</th>
+                      <th>Submit By</th>
+                      <th>Assign Agent</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tickets
+                      .filter((ticket) => {
+                        const agentName = getAgentName(ticket.agentId);
+                        return (
+                          search.toLowerCase() === "" ||
+                          agentName.toLowerCase().includes(search)
+                        );
+                      })
+                      .map((ticket) => (
+                        <tr key={ticket.id}>
+                          <td>
+                            {DefaultProfilePicture({ name: ticket.problem })}
+                          </td>
+                          <td>{ticket.problem}</td>
+                          <td>{ticket.email}</td>
+                          <td>{getAgentName(ticket.agentId)}</td>
+                          <td>
+                            {ticket.ticketStatus ? (
+                              ticket.ticketStatus === "Opened" ? (
+                                <Badge className={"bg-info"}>Opened</Badge>
+                              ) : ticket.ticketStatus === "Solved" ? (
+                                <Badge className={"bg-success"}>Solved</Badge>
+                              ) : ticket.ticketStatus === "Pending" ? (
+                                <Badge className={"bg-warning"}>Pending</Badge>
+                              ) : ticket.ticketStatus === "Not Assign" ? (
+                                <Badge className={"bg-danger"}>
+                                  Not Assign
+                                </Badge>
+                              ) : null
+                            ) : null}
+                          </td>
+
+                          <td>
+                            {ticket.ticketStatus === "Not Assign" ? (
+                              <FontAwesomeIcon
+                                icon={faUser}
+                                style={{ color: "#482890", cursor: "pointer" }}
+                                title="Assign Agent To Ticket"
+                                onClick={() => handleAssignClick(ticket)}
+                              />
+                            ) : ticket.ticketStatus === "Opened" ||
+                              ticket.ticketStatus === "Pending" ? (
+                              <>
+                                <FontAwesomeIcon
+                                  icon={faUser}
+                                  style={{
+                                    color: "#482890",
+                                    cursor: "pointer",
+                                  }}
+                                  title="Assign Agent To Ticket"
+                                  onClick={() => handleAssignClick(ticket)}
+                                />
+                                &nbsp; &nbsp; &nbsp;
+                                <FontAwesomeIcon
+                                  icon={faComment}
+                                  style={{
+                                    color: "#FF615A",
+                                    cursor: "pointer",
+                                  }}
+                                  title="Reply To Ticket"
+                                  onClick={() => {
+                                    setSelectedTicketId(ticket.id);
+                                    setShowReplyModal(true);
+                                  }}
+                                />
+                              </>
+                            ) : ticket.ticketStatus === "Solved" ? (
+                              <FontAwesomeIcon
+                                icon={faEnvelope}
+                                style={{ color: "#FF615A", cursor: "pointer" }}
+                                title="Edit the Reply"
+                              />
+                            ) : null}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </Table>
+              </div>
+            </Fragment>
+          </div>
         </div>
-      </div>
-)}
-     
+      )}
+
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header style={{ backgroundColor: "#482890" }}>
           <Modal.Title style={{ color: "white" }}>Assign To Agent</Modal.Title>
@@ -321,6 +333,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
             <select
               className="form-select"
               id="agent"
+              required
               onChange={(e) => setAssignedAgentId(Number(e.target.value))}
               value={assignedAgentId || ""}
             >
@@ -337,6 +350,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
             <select
               className="form-select"
               id="status"
+              required
               onChange={(e) => setSelectedStatus(e.target.value)}
               value={selectedStatus}
             >
@@ -368,7 +382,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      
+
       <Modal show={showReplyModal} onHide={handleCloseModal}>
         <Modal.Header style={{ backgroundColor: "#482890" }}>
           <Modal.Title style={{ color: "white" }}>Reply to Ticket</Modal.Title>
@@ -408,7 +422,6 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      
     </div>
   );
 };
