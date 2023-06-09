@@ -152,7 +152,7 @@ const TicketTable = () => {
                 <tr style={{ color: "#482890" }}>
                   <th style={{ width: "60px" }}></th>
                   <th>Problem</th>
-                  <th>Submit Date & Time</th>
+                  <th>Submit Date</th>
                   <th>Assign Agent</th>
                   <th>Status</th>
                   <th>Action</th>
@@ -172,8 +172,8 @@ const TicketTable = () => {
                   .map((ticket) => (
                     <tr key={ticket.id}>
                       <td>{DefaultProfilePicture({ name: ticket.problem })}</td>
-                      <td>{ticket.problem}</td>
-                      <td>{ticket.submitDate}</td>
+                      <td>{ticket.problem.length > 10 ? ticket.problem.slice(0, 20) + '...' : ticket.problem}</td>
+                      <td>{ticket.submitDate.split('T')[0]}</td>
                       <td>{getAgentName(ticket.agentId)}</td>
                       <td>
                         {ticket.ticketStatus === "Opened" ? (

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Button, Modal} from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import TicketTable from '../../components/Support/Table/TicketTable';
 import NewTicketForm from '../../components/Support/Forms/Ticket/NewTicketForm';
 
 const Tickets: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-    return(
-      <div className="container">
+
+  return (
+    <div className="container">
       <div className="row">
         <div className="col">
           <p className="page-heading">SUPPORT</p>
@@ -36,7 +38,7 @@ const Tickets: React.FC = () => {
           <Modal.Title style={{ color: "white" }}>New Ticket</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <NewTicketForm />
+          <NewTicketForm setShowModal={setShowModal} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -45,6 +47,7 @@ const Tickets: React.FC = () => {
         </Modal.Footer>
       </Modal>
     </div>
-    );
+  );
 };
+
 export default Tickets;

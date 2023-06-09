@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { Table,Badge,Form, InputGroup} from "react-bootstrap";
+import { Table,Badge,Form, InputGroup, Button} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,8 @@ import DeleteError from "../ConfirmMessages/DeleteError";
 import { FaSearch } from "react-icons/fa";
 import UpdateConfirmation from "../ConfirmMessages/UpdateConfirmation";
 import PaginationComponent from "../pagination";
+import AgentCardView from "../Card/AgentCardView";
+
 
 interface agentType {
   profileImage: string;
@@ -40,6 +42,7 @@ const AgentTable = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [cardViewActive, setCardViewActive] = useState(false);
 
   const recordsPerPage = 4;
 
@@ -123,12 +126,20 @@ const AgentTable = () => {
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
+  const handleCardViewClick = () => {
+    setCardViewActive(!cardViewActive);
+  };
 
   return (
     <div>
       <div className="row">
-        <div className="col-8">
+        <div className="col-6">
           <p className="table-heading">Support Agents</p>
+        </div>
+        <div className="col-2">
+          <Button onClick={handleCardViewClick}>
+            {cardViewActive ? "Table View" : "Card View"}
+          </Button>
         </div>
         <div className="col-1">
           <Form>
@@ -148,6 +159,13 @@ const AgentTable = () => {
         errorMessage={errorMessage}
         onResetError={resetErrorMessage}
       />
+       {cardViewActive ? (
+        <AgentCardView
+        agents={agents}
+        onEditIssue={handleEditAgentClick}
+        onDeleteIssue={handleDeleteAgent}
+      />
+      ) : (
       <div className="box-shadow">
         <Fragment>
           <div>
@@ -220,6 +238,7 @@ const AgentTable = () => {
           </div>
         </Fragment>
       </div>
+      )}
       <EditAgentForm
           showModal={showModal}
           selectedAgent={selectedAgent}
