@@ -1,0 +1,30 @@
+.category-card {
+    width: 18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  
+  .category-card img {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .category-card .card-body {
+    padding: 1rem;
+  }
+  
+  .category-card .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .category-card .card-text {
+    margin-bottom: 0.5rem;
+  }
+  
+  .category-card .btn {
+    margin-top: 0.5rem;
+  }
+  

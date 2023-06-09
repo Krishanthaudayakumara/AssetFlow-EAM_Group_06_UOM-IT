@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+#root {
+  height: 100vh !important;
+  font-family: "Inter", sans-serif;
+}
+
+.login-container {
+  height: 100% !important;
+  margin: 0 !important;
+  overflow: auto;
+  width: 100vw !important;
+  padding-right: 10vw !important;
+}
+
+.login-container a {
+  float: right;
+  color: #5a3092;
+}
+
+.login-container a:hover{
+    color: #ff615a;
+    transition: 200ms;
+}
+
+.login-container h1 {
+  margin: 0vw 7vw;
+  font-weight: bold;
+  color: #5a3092;
+}
+
+.submit-btn {
+  background-color: #5a3092 !important;
+  color: white;
+  padding: 10px 30px !important;
+  margin: 8px 6vw;
+  border: none;
+  border-color: #5a3092 !important;
+  border-radius: 400px !important;
+  cursor: pointer;
+  width: 180px;
+}
+
+.submit-btn:hover {
+  background-color: #ff615a !important;
+  border-color: #ff615a !important;
+  transition: 0.5s;
+}
+
+.logo {
+  width: 40vh;
+  height: 40vh;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.login-form input {
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.login-form label {
+  color: #5a3092;
+  font-weight: bold;
+}
+
+.login-left {
+  width: 450px;
+  margin-top: 50px;
+  margin-left: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  .login-left-col {
+    display: none;
+  }
+
+  .col-lg-4 {
+    padding-top: 20px;
+  }
+}
+
+.l-footer{
+    padding-top: 50px;
+}
+
+.social-icon{
+    font-size: 30px;
+    margin: 0px 10px 20px 10px;
+}
+
+
+.login-btn-icon{
+
+  font-size: 2.2rem;
+  margin-right: -2rem;
+  margin-left: 1rem;
+}
+
+.login-btn-icon:hover{
+  margin-left: 2rem;
+  transition: 200ms;
+}

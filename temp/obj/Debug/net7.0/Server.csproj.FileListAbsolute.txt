@@ -1,0 +1,278 @@
+<<<<<<< HEAD
+=======
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\appsettings.json
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.exe
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.deps.json
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.runtimeconfig.json
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.pdb
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.csproj.AssemblyReference.cache
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.AssemblyInfoInputs.cache
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.AssemblyInfo.cs
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.csproj.CoreCompileInputs.cache
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.Server.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.build.Server.props
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Server.props
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Server.props
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\scopedcss\bundle\Server.styles.css
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.csproj.CopyComplete
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\refint\Server.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.pdb
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.genruntimeconfig.cache
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\ref\Server.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Azure.Core.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Azure.Identity.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Humanizer.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Memory.Data.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Runtime.Caching.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Windows.Extensions.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\AutoMapper.Extensions.ExpressionMapping.dll
+C:\Users\janit\OneDrive\Documents\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+>>>>>>> janithmi
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\appsettings.json
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\appsettings.Development.json
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.exe
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.deps.json
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.runtimeconfig.json
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.pdb
+<<<<<<< HEAD
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Azure.Core.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Azure.Identity.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\EPPlus.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\EPPlus.Interfaces.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\EPPlus.System.Drawing.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Humanizer.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+=======
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\AutoMapper.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\AutoMapper.Extensions.ExpressionMapping.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Azure.Core.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Azure.Identity.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Humanizer.dll
+>>>>>>> janithmi
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+<<<<<<< HEAD
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+=======
+>>>>>>> janithmi
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+<<<<<<< HEAD
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IO.RecyclableMemoryStream.dll
+=======
+>>>>>>> janithmi
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.OpenApi.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.CodeDom.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Drawing.Common.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Memory.Data.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Runtime.Caching.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Security.Permissions.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Windows.Extensions.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+<<<<<<< HEAD
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
+=======
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+>>>>>>> janithmi
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.csproj.AssemblyReference.cache
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.GeneratedMSBuildEditorConfig.editorconfig
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.AssemblyInfoInputs.cache
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.AssemblyInfo.cs
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.csproj.CoreCompileInputs.cache
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.MvcApplicationPartsAssemblyInfo.cs
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.MvcApplicationPartsAssemblyInfo.cache
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.Server.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.build.Server.props
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Server.props
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Server.props
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets.pack.json
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets.build.json
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets.development.json
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\scopedcss\bundle\Server.styles.css
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.csproj.CopyComplete
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\refint\Server.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.pdb
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.genruntimeconfig.cache
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\ref\Server.dll
+<<<<<<< HEAD
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\appsettings.json
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.exe
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.deps.json
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.runtimeconfig.json
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Server.pdb
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Azure.Core.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Azure.Identity.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\EPPlus.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\EPPlus.Interfaces.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\EPPlus.System.Drawing.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Humanizer.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Memory.Data.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Runtime.Caching.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\System.Windows.Extensions.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.csproj.AssemblyReference.cache
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.AssemblyInfoInputs.cache
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.AssemblyInfo.cs
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.Server.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.build.Server.props
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Server.props
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Server.props
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\scopedcss\bundle\Server.styles.css
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.csproj.CopyComplete
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\refint\Server.dll
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.pdb
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.genruntimeconfig.cache
+C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\ref\Server.dll
+=======
+>>>>>>> janithmi
