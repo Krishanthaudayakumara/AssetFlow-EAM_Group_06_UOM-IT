@@ -17,6 +17,7 @@ const SubCategoryModal: React.FC<SubCategoryModalProps> = ({ show, onClose, onSa
   const [image, setImage] = useState<File | null>(null);
   const [categoryId, setCategoryId] = useState<number>(0);
   const [categories, setCategories] = useState<any[]>([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     fetchCategories();
@@ -32,6 +33,12 @@ const SubCategoryModal: React.FC<SubCategoryModalProps> = ({ show, onClose, onSa
   };
 
   const handleSave = () => {
+    if (!name || !image || categoryId === 0) {
+      setError('Please fill in all fields.');
+      return;
+    }
+
+    setError('');
     onSave({ name, image: image as File, categoryId });
     setName('');
     setImage(null);
@@ -79,6 +86,7 @@ const SubCategoryModal: React.FC<SubCategoryModalProps> = ({ show, onClose, onSa
               ))}
             </Form.Control>
           </Form.Group>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
         </Form>
       </Modal.Body>
       <Modal.Footer>

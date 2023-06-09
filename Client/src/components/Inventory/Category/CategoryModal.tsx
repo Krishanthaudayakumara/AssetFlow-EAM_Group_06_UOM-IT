@@ -19,8 +19,15 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
+  const [error, setError] = useState("");
 
   const handleSave = () => {
+    if (!name || !description || !image) {
+      setError("Please fill in all fields and select an image.");
+      return;
+    }
+
+    setError("");
     onSave({ name, description, image: image as File });
     setName("");
     setDescription("");
@@ -61,6 +68,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
               }}
             />
           </Form.Group>
+          {error && <p style={{ color: "red" }}>{error}</p>}
         </Form>
       </Modal.Body>
       <Modal.Footer>

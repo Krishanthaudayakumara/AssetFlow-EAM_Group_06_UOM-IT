@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Card, Button, Modal } from 'react-bootstrap';
 import '../../../css/Inventory/SubCategoryCard.css';
 
 interface SubCategoryCardProps {
@@ -12,10 +12,19 @@ interface SubCategoryCardProps {
 }
 
 const SubCategoryCard: React.FC<SubCategoryCardProps> = ({ subcategory, onDelete }) => {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
   const handleDeleteClick = () => {
-    if (window.confirm('Are you sure you want to delete this subcategory?')) {
-      onDelete(subcategory.id);
-    }
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmDelete = () => {
+    onDelete(subcategory.id);
+    setShowConfirmation(false);
+  };
+
+  const handleCloseConfirmation = () => {
+    setShowConfirmation(false);
   };
 
   return (
@@ -27,6 +36,23 @@ const SubCategoryCard: React.FC<SubCategoryCardProps> = ({ subcategory, onDelete
           Delete
         </Button>
       </Card.Body>
+
+      <Modal show={showConfirmation} onHide={handleCloseConfirmation}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this subcategory?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseConfirmation}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Card>
   );
 };
