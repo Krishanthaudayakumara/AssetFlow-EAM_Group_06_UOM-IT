@@ -225,6 +225,7 @@ const NewAgentForm = () => {
           value={formData.agentStatus}
           onChange={handleChange}
         >
+           <option value="Status">Select Status</option>
           <option value="Not Available">Not Available</option>
           <option value="Available">Available</option>
         </Form.Select>

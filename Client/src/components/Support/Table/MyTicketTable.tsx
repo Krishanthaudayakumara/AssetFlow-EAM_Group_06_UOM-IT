@@ -375,6 +375,7 @@ const MyTicketTable = () => {
                 value={feedbackRate}
                 onChange={(e) => setFeedbackRate(e.target.value)}
               >
+                <option value="Better">Select </option>
                 <option value="Better">Better</option>
                 <option value="Good">Good</option>
                 <option value="Worst">Worst</option>
