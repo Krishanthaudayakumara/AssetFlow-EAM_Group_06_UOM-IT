@@ -4,14 +4,17 @@ import FacilityBarChart from '../../components/Dashboard/FacilityBarChart';
 import '../../css/Home.css';
 import CardDashboard from '../../components/Dashboard/CardDashboard';
 import axios from 'axios';
-import LineChart from '../../components/Dashboard/LineChart';
+import PieChart from '../../components/Dashboard/PieChart';
+
 
 const FacilityDashboard: React.FC = () => {
   const [totalBuildings, setTotalBuildings] = useState(0);
   const [totalFacilityAssets, setFacilityAssets] = useState(0);
   const [totalWorkstations, setTotalWorkstations] = useState(0);
   const [assetStatusCounts, setAssetStatusCounts] = useState<number[]>([]);
-  const [lineChartData, setLineChartData] = useState<any>(null);
+  const [assignCount, setAssignCount] = useState(0);
+  const [notAssignCount, setNotAssignCount] = useState(0);
+ 
 
   useEffect(() => {
     axios
@@ -49,15 +52,24 @@ const FacilityDashboard: React.FC = () => {
       .catch((error) => {
         console.error(error);
       });
-
-    axios
-      .get('http://localhost:5087/FacilityDashboard/workstation-asset-count')
+      axios
+      .get('http://localhost:5087/FacilityDashboard')
       .then((response) => {
-        setLineChartData(response.data);
+        const assignData = response.data.find((item: any) => item.assignmentStatus === 'Assign');
+        const notAssignData = response.data.find((item: any) => item.assignmentStatus === 'Not Assign');
+
+        if (assignData) {
+          setAssignCount(assignData.count);
+        }
+
+        if (notAssignData) {
+          setNotAssignCount(notAssignData.count);
+        }
       })
       .catch((error) => {
         console.error(error);
       });
+   
   }, []);
 
  
@@ -77,6 +89,18 @@ const FacilityDashboard: React.FC = () => {
       },
     },
   }
+  const pieChartData = {
+    labels: ['Assign', 'Not Assign'],
+    datasets: [
+      {
+        label: 'Asset Status Counts',
+        data: [assignCount, notAssignCount],
+        backgroundColor: ['#482890', '#ff615a'],
+        borderColor: ['#482890', '#ff615a'],
+      },
+    ],
+  };
+
   return (
     <div>
       <Container>
@@ -86,70 +110,24 @@ const FacilityDashboard: React.FC = () => {
           <CardDashboard name="Total Facility Assets" count={totalFacilityAssets} />
           <CardDashboard name="Total workstation" count={totalWorkstations} />
         </div>
-        <h4 style={{ margin: '0px 0 0 65px' }}>Workstation Assignment</h4>
+        <h4 style={{ margin: '0px 0 0 65px' }}>Asset Assignment</h4>
         <div>
           <Row>
             <Col md={6}>
-              <div
-                className="shadow p-4 mb-6 bg-white rounded"
-                style={{
-                  paddingTop: '100px',
-                  height: '450px',
-                  margin: '0px 0 0 65px',
-                  width: '900px',
-                  alignContent: 'center',
-                }}
-              >
-                {lineChartData && (
-                  <LineChart
-                    Linedata={{
-                      labels: lineChartData.map((data: any) => data.workstationId),
-                      datasets: [
-                        {
-                          label: 'Not Assigned',
-                          data: lineChartData.map((data: any) => data.notAssignedCount),
-                          borderColor: '#482890',
-                          backgroundColor: '#482890',
-                        },
-                        {
-                          label: 'Assigned',
-                          data: lineChartData.map((data: any) => data.assignedCount),
-                          borderColor: '#ff615a',
-                          backgroundColor: '#ff615a',
-                        },
-                      ],
-                    }}
-                    Lineoptions={{
-                      responsive: true,
-                      plugins: {
-                        legend: {
-                          position: 'top',
-                          labels: {
-                            usePointStyle: true,
-                          },
-                        },
-                        title: {
-                          display: true,
-                          text: 'Workstation Assignment',
-                        },
-                      },
-                      scales: {
-                        x: {
-                          title: {
-                            display: true,
-                            text: 'Workstation ID',
-                          },
-                        },
-                        y: {
-                          title: {
-                            display: true,
-                            text: 'Count',
-                          },
-                        },
-                      },
-                    }}
-                  />
-                )}
+            <div  className="shadow p-2 mb-6 bg-white rounded" style={{ margin: '0px 2px 2px 300px', width: '300px', height: '300px', alignContent: 'center' }}>
+                   <PieChart
+      data={{
+      labels: ['Assign', 'Not Assign'],
+      datasets: [
+        {
+          label: 'Asset Status Counts',
+          data: [assignCount, notAssignCount],
+          backgroundColor: ['#482890', '#ff615a'],
+          borderColor: ['#482890', '#ff615a'],
+        },
+      ],
+    }}
+  />
               </div>
             </Col>
           </Row>

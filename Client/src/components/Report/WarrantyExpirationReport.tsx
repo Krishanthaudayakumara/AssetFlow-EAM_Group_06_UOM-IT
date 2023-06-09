@@ -9,11 +9,6 @@ interface WarrantyExpirationReportDTO {
   description: string;
   vendor: string;
   warrantyExpiration: string;
-  status: string;
-  purchasedDate: string;
-  cost: number;
-  supplierId: number;
-  amount: number;
 }
 
 interface WarrantyExpirationReportProps {
@@ -25,36 +20,31 @@ const WarrantyExpirationReport: React.FC<WarrantyExpirationReportProps> = ({ fro
   const [report, setReport] = useState<WarrantyExpirationReportDTO[]>([]);
 
   useEffect(() => {
-    axios
-      .get('http://localhost:5087/api/WarrantyExpirationReport')
-      .then((response) => {
-        const data = response.data.filter((item: WarrantyExpirationReportDTO) => {
-          if (fromDate && toDate) {
-            const from = new Date(fromDate);
-            const to = new Date(toDate);
+    
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5087/api/WarrantyExpirationReport/warranty-expiration');
+        const data = response.data;
+    
+        if (fromDate && toDate) {
+          const from = new Date(fromDate);
+          const to = new Date(toDate);
+    
+          const filteredData = data.filter((item: WarrantyExpirationReportDTO) => {
             const warrantyExpirationDate = new Date(item.warrantyExpiration);
-
-            return warrantyExpirationDate >= from && warrantyExpirationDate <= to;
-          } else if (fromDate) {
-            const from = new Date(fromDate);
-            const warrantyExpirationDate = new Date(item.warrantyExpiration);
-
-            return warrantyExpirationDate >= from;
-          } else if (toDate) {
-            const to = new Date(toDate);
-            const warrantyExpirationDate = new Date(item.warrantyExpiration);
-
-            return warrantyExpirationDate <= to;
-          } else {
-            return true;
-          }
-        });
-
-        setReport(data);
-      })
-      .catch((error) => {
+            return warrantyExpirationDate >= from && warrantyExpirationDate >= to;
+          });
+    
+          setReport(filteredData);
+        } else {
+          setReport(data);
+        }
+      } catch (error) {
         console.error('Error fetching warranty expiration report:', error);
-      });
+      }
+    };
+    
+    fetchData();
   }, [fromDate, toDate]);
 
   return (
@@ -68,11 +58,6 @@ const WarrantyExpirationReport: React.FC<WarrantyExpirationReportProps> = ({ fro
               <th>Description</th>
               <th>Vendor</th>
               <th>Warranty Expiration</th>
-              <th>Status</th>
-              <th>Purchased Date</th>
-              <th>Cost</th>
-              <th>Supplier ID</th>
-              <th>Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -83,11 +68,6 @@ const WarrantyExpirationReport: React.FC<WarrantyExpirationReportProps> = ({ fro
                 <td className="text-secondary">{item.description}</td>
                 <td className="text-secondary">{item.vendor}</td>
                 <td className="text-secondary">{item.warrantyExpiration}</td>
-                <td className="text-secondary">{item.status}</td>
-                <td className="text-secondary">{item.purchasedDate}</td>
-                <td className="text-secondary">{item.cost}</td>
-                <td className="text-secondary">{item.supplierId}</td>
-                <td className="text-secondary">{item.amount}</td>
               </tr>
             ))}
           </tbody>
@@ -95,6 +75,7 @@ const WarrantyExpirationReport: React.FC<WarrantyExpirationReportProps> = ({ fro
       </div>
     </Fragment>
   );
-}
+};
 
 export default WarrantyExpirationReport;
+

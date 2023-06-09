@@ -104,7 +104,7 @@ const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedRep
     <div>
       <div className="container">
         <div className="row">
-          <div className="col-9" style={{ padding: '0 0 0 450px' }}>
+          <div className="col-9" style={{ padding: '0 0 0 600px' }}>
             <Button
               variant="outline-primary"
               type="button"
@@ -115,7 +115,7 @@ const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedRep
               }}
               onClick={openModal}
             >
-              Export to Excel
+              Download
             </Button>
           </div>
           <div className="col-3" style={{ padding: '0 0 0 0' }}>
@@ -138,7 +138,7 @@ const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedRep
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Export to Excel</Modal.Title>
+          <Modal.Title>Download</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit}>

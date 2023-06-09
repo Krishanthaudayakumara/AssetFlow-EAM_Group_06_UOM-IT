@@ -37,9 +37,9 @@ const TicketReport = () => {
         >
           <thead>
             <tr style={{ color: '#482890' }}>
-              <th></th>
+             
               <th>Ticket Id</th>
-              <th>Ticket CreatedByEmployeeFirstName</th>
+              <th>Ticket CreatedBy</th>
               <th>Problem</th>
               <th>Reply</th>
               <th>Agent FirstName</th>
@@ -49,7 +49,7 @@ const TicketReport = () => {
           <tbody>
             {TicketReports.map((TicketReport) => (
               <tr key={TicketReport.id}>
-                <td className="text-secondary">{TicketReport.id}</td>
+              
                 <td className="text-secondary">{TicketReport.ticketId}</td>
                 <td className="text-secondary">
                   {TicketReport.createdByEmployeeFirstName}
