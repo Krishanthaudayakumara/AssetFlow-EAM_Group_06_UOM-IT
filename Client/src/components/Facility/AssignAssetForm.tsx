@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import Form from "react-bootstrap/Form";
 import DatePicker from "react-datepicker";
-import { useState, useEffect, ChangeEvent } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
 
 type AssignAssetFormProps = {
@@ -12,16 +11,16 @@ type AssignAssetFormProps = {
 interface SubcategoryOption {
   assetId: number;
   subCategoryType: string;
-  facilityAssetId:number;
+  facilityAssetId: number;
 }
 
 function AssignAssetForm(props: AssignAssetFormProps) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const [subCategory, setSubCategory] = useState<SubcategoryOption[]>([]);
-
   const [assetIds, setAssetIds] = useState<number[]>([]);
   const [selectedAssetId, setSelectedAssetId] = useState<number>();
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchSubCategoryAndAsset = async () => {
@@ -92,7 +91,7 @@ function AssignAssetForm(props: AssignAssetFormProps) {
         updateData
       );
 
-      alert("Facility Asset updated successfully!");
+      setShowModal(true);
 
       // Optionally, you can reset the form fields or perform any other actions after successful update
     } catch (error) {
@@ -101,11 +100,13 @@ function AssignAssetForm(props: AssignAssetFormProps) {
     }
   };
 
-   
-
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <>
+      <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="workstationId">
         <Form.Label>Workstation Id</Form.Label>
         <Form.Control type="text" value={props.id} readOnly />
@@ -146,11 +147,25 @@ function AssignAssetForm(props: AssignAssetFormProps) {
         />
       </Form.Group>
 
-      <Button variant="success" type="submit">
-        Assign
-      </Button>
-    </Form>
+        <Button variant="success" type="submit">
+          Assign
+        </Button>
+      </Form>
+
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Facility Asset updated successfully!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
+
 
 export default AssignAssetForm;

@@ -17,6 +17,7 @@ interface FacilityAssetData {
 
 function FacilityAssetTable() {
   const [facilityData, setFacilityData] = useState<FacilityAssetData[]>([]);
+  
    
  
 
@@ -40,6 +41,8 @@ function FacilityAssetTable() {
 
     fetchFacilityAssetData();
   }, []);
+
+  
 
   return (
     <div style={{ margin: "4rem" }}>
@@ -86,7 +89,7 @@ function FacilityAssetTable() {
                     <td>{item.workstationId}</td>
                     
                     <td>
-                      <FaTrashAlt style={{ color: " #ff615a " }} />
+                      
                       <FaPen
                         style={{ color: " #482890", marginLeft: "10px" }}
                       />
@@ -107,4 +110,5 @@ function FacilityAssetTable() {
     </div>
   );
 }
+
 export default FacilityAssetTable;

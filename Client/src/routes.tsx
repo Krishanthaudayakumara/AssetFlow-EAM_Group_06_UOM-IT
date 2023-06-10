@@ -43,6 +43,9 @@ import CategoryDetailPage from "./pages/Inventory/Category/CategoryDetailPage";
 import AssetPage from "./pages/Inventory/Asset/AssetPage";
 import StockBarcodesPage from "./pages/Inventory/Stock/StockBarcodesPage";
 import EmployeeRequest from "./pages/Inventory/EmployeeRequest/EmployeeRequest";
+import ExternalEmployeeTask from "./pages/Facility/ExternalEmployeeTask";
+import CleaningStaff from "./pages/Facility/CleaningStaff";
+
 
 const RoutesConfig: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -226,6 +229,14 @@ const RoutesConfig: React.FC = () => {
 
       <Route path="/AssignAsset" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/AssignAsset" element={<AssignAsset />} />
+      </Route>
+      
+      <Route path="/ExternalEmployeeTask" element={<PrivateRoute allowedRoles="all" />}>
+        <Route path="/ExternalEmployeeTask" element={<ExternalEmployeeTask />} />
+      </Route>
+
+      <Route path="/CleaningStaff" element={<PrivateRoute allowedRoles="all" />}>
+        <Route path="/CleaningStaff" element={<CleaningStaff />} />
       </Route>
     </Routes>
   );

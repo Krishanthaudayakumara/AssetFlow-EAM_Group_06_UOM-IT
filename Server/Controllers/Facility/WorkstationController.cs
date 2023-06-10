@@ -22,36 +22,46 @@ namespace Server.Controllers.Facility
             _context = context;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddWorkstation([FromBody] WorkstationToInsert workstationToInsert)
-        {
-            if (workstationToInsert is null)
-            {
-                return BadRequest();
-            }
-            var wti = new Workstation
-            {
-                WorkstationName = workstationToInsert.WorkstationName,
-                Floor = workstationToInsert.Floor,
-                BuildingId = workstationToInsert.BuildingId
+      [HttpPost]
+public async Task<IActionResult> AddWorkstation([FromBody] WorkstationToInsert workstationToInsert)
+{
+    if (workstationToInsert is null)
+    {
+        return BadRequest();
+    }
+    
+    // Check if a workstation with the same name, building, and floor already exists
+    bool workstationExists = await _context.Workstations
+        .AnyAsync(w => w.WorkstationName == workstationToInsert.WorkstationName &&
+                       w.BuildingId == workstationToInsert.BuildingId &&
+                       w.Floor == workstationToInsert.Floor);
 
+    if (workstationExists)
+    {
+        return Conflict("A workstation with the same name already exists in the same building and floor.");
+    }
 
-            };
-            try
-            {
-                await _context.Workstations.AddAsync(wti);
-                await _context.SaveChangesAsync();
-            }
-            catch (System.Exception ex)
-            {
-                Console.Write(ex.Message);
-                return StatusCode(500);
+    var wti = new Workstation
+    {
+        WorkstationName = workstationToInsert.WorkstationName,
+        Floor = workstationToInsert.Floor,
+        BuildingId = workstationToInsert.BuildingId
+    };
 
-            }
-            return Ok(wti);
+    try
+    {
+        await _context.Workstations.AddAsync(wti);
+        await _context.SaveChangesAsync();
+    }
+    catch (System.Exception ex)
+    {
+        Console.Write(ex.Message);
+        return StatusCode(500);
+    }
+    
+    return Ok(wti);
+}
 
-
-        }
 
 
 
@@ -108,7 +118,7 @@ namespace Server.Controllers.Facility
 
 
 
-        public async Task<IActionResult> UpdateWorkstation(int id, WorkstationToInsert WorkstationToUpdate)
+        public async Task<IActionResult> UpdateWorkstation(int id,  WorkstationToUpdate workstationToUpdate)
         {
             var updateWorkstation = await _context.Workstations.FirstOrDefaultAsync(x => x.Id == id);
             if (updateWorkstation is null)
@@ -116,7 +126,7 @@ namespace Server.Controllers.Facility
                 return NotFound();
             }
 
-            updateWorkstation.WorkstationName = WorkstationToUpdate.WorkstationName;
+            updateWorkstation.WorkstationName = workstationToUpdate.WorkstationName;
 
 
             await _context.SaveChangesAsync();

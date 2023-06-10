@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System;
+using Server.Models.Facility;
 
 namespace Server.Models
 {
@@ -18,5 +19,6 @@ namespace Server.Models
         public string? JobTitle { get; set; }
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
+         public ICollection<AssignTask> AssignTasks { get; set; }
     }
 }

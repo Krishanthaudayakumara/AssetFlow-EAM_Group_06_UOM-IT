@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Server.Models.Support;
+using Server.Models.Facility;
 using Server.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -39,6 +40,8 @@ namespace Server.Data
         public DbSet<Workstation> Workstations { get; set; }
 
         public DbSet<Building> Buildings { get; set; }
+        public DbSet<AssignTask> AssignTasks { get; set; }
+
 
         public DbSet<GeneratedReport> GeneratedReports { get; set; }
 

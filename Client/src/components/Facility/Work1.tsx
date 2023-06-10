@@ -29,8 +29,11 @@ export default function Work1() {
   const [selectedBuildingId, setSelectedBuildingId] = useState<number | null>(null);
   const [selectedFloor, setSelectedFloor] = useState<number | null>(null);
 
-  const handleClose = () => setShow(false);
-
+  const handleClose = () => {
+    setShow(false);
+    window.location.reload();
+  };
+  
   const handleAddWorkstation = () => {
     setModalTitle("Add Workstation");
     setModalBody(<Workstationform />);

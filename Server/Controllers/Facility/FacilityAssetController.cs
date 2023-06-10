@@ -82,7 +82,8 @@ namespace Server.Controllers
                         {
                             AssetId = asset.Asset.Id,
                             Description = asset.Asset.Description,
-                            Vendor = asset.Asset.Stock.Supplier.Name,
+                            AssetName=asset.Asset.Name,
+                           
                             SubCategoryType = asset.Asset.Stock.SubCategory.Name,
                             CategoryType = asset.Asset.Stock.SubCategory.Category.Name,
                             FacilityAssetId = asset.Id
@@ -133,6 +134,28 @@ namespace Server.Controllers
         
         return Ok(updateFacAsset);
         }
+
+
+        [HttpPut("update/{id}")]
+
+        public async Task <IActionResult> UpdateFacilityAssetConditionStatus(int id,FacilityStatusToUpdate facilityStatusToUpdate){
+        var updateFacStatus= await _context.FacilityAssets .FirstOrDefaultAsync(x => x.Id==id);
+        if(updateFacStatus is null){
+            return NotFound();
+        }
+
+        updateFacStatus.AssetConditionStatus=facilityStatusToUpdate.AssetConditionStatus;
+      
+        
+        
+        await _context.SaveChangesAsync();
+        
+
+        
+        return Ok(updateFacStatus);
+        }
+
+      
 
 
 
