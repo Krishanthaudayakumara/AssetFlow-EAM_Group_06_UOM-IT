@@ -8,6 +8,7 @@ import UserAccessLogPage from "./pages/User/UserAccessLogPage";
 import StockPage from "./pages/Inventory/Stock/StockPage";
 import SubCategoryPage from "./pages/Inventory/Category/SubCategoryPage";
 import CategoryPage from "./pages/Inventory/Category/CategoryPage";
+import AssignPage from "./pages/Inventory/Assign/AssignPage";
 
 import AssignAsset from "./pages/Facility/AssignAsset";
 import BuildingFloor from "./pages/Facility/BuildingFloor";
@@ -22,6 +23,8 @@ import Employee from "./pages/Employee/Employee";
 import Department from "./pages/Department/Department";
 import Calendar from "./pages/General/Calendar";
 import Supplier from "./pages/Supplier/Supplier";
+
+import RequestTable from "./components/Inventory/Assign/RequestTable";
 
 import FacilityAsset from "./pages/Facility/FacilityAsset";
 import FacilityStock from "./pages/Facility/FacilityStock";
@@ -162,13 +165,23 @@ const RoutesConfig: React.FC = () => {
         <Route path="/Issues" element={<Issues />} />
       </Route>
 
-      <Route path="/MyTickets" element={<PrivateRoute allowedRoles="all" />}>
-        <Route path="/MyTickets" element={<MyTickets />} />
+      <Route path="/Issues" element={<PrivateRoute allowedRoles="all" />}>
+        <Route path="/Issues" element={<Issues />} />
       </Route>
+
+      <Route path="/RequestTable" element={<PrivateRoute allowedRoles="all" />}>
+        <Route path="/RequestTable" element={<RequestTable />} />
+      </Route>
+
+
 
       {/* Pages */}
       <Route path="/Category" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/Category" element={<CategoryPage />} />
+      </Route>
+
+      <Route path="/Assign" element={<PrivateRoute allowedRoles="all" />}>
+        <Route path="/Assign" element={<AssignPage />} />
       </Route>
 
       <Route path="/SubCategory" element={<PrivateRoute allowedRoles="all" />}>

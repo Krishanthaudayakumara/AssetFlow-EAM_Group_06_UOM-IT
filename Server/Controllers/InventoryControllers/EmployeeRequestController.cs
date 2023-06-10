@@ -20,6 +20,32 @@ namespace Server.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetEmployeeRequest()
+        {
+            var employeeRequests = await _context.EmployeeRequests.ToListAsync();
+
+            if (employeeRequests is null)
+            {
+                return NotFound();
+            }
+
+            foreach (var employeeRequest in employeeRequests)
+            {
+                var EmployeeRequestToReturn = new EmployeeRequestToReturn
+                {
+                    Id = employeeRequest.Id,
+                    EmployeeId = employeeRequest.EmployeeId,
+                    AssetId = employeeRequest.AssetId,
+                    IsAccepted =employeeRequest.IsAccepted
+                };
+            }
+
+            return Ok(employeeRequests);
+        }
+
+
+
         [HttpGet("categories")]
         public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetCategories()
         {
@@ -62,6 +88,42 @@ namespace Server.Controllers
 
             return Ok(assets);
         }
+
+
+
+
+
+      [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateEmployeeRequest(int id, [FromBody] EmployeeRequestToUpdate employeeRequestToUpdate)
+        {
+            var UpdateEmployeeRequest = await _context.EmployeeRequests.FirstOrDefaultAsync(x => x.Id == id);
+            if (UpdateEmployeeRequest is null)
+            {
+                return NotFound();
+            }
+                // UpdateEmployeeRequest.IsAccepted = employeeRequestToUpdate.IsAccepted;
+                // UpdateEmployeeRequest.EmployeeId = employeeRequestToUpdate.EmployeeId;
+                UpdateEmployeeRequest.IsAccepted = employeeRequestToUpdate.IsAccepted;
+                
+
+            try
+            {
+                _context.Update(UpdateEmployeeRequest);
+                await _context.SaveChangesAsync();
+            }
+            catch (System.Exception ex)
+            {
+
+                Console.Write(ex.Message);
+                return StatusCode(500);
+
+            }
+            return Ok();
+        }
+
+
+
+
         [HttpPost]
         public async Task<IActionResult> CreateEmployeeRequest(EmployeeRequestDTO employeeRequestDto)
         {
