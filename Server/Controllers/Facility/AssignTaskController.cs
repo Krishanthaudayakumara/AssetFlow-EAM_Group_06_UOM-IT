@@ -28,7 +28,7 @@ namespace Server.Controllers.Facility
             var ati = new AssignTask{
                 TaskType= assignTaskToInsert.TaskType,
                 TaskStatus="NotAssign",
-                BuildingId=1
+                BuildingId=1007
                               
                 
             };

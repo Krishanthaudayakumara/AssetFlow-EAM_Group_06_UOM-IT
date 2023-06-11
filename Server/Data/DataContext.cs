@@ -70,6 +70,15 @@ namespace Server.Data
 
             });
 
+            //Facility
+               modelBuilder.Entity<Workstation>(entity =>
+            {
+                entity.HasOne(a => a.Building)
+                    .WithMany(e => e.Workstations)
+                    .HasForeignKey(a => a.BuildingId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
 
             //IT Support
             modelBuilder.Entity<Team>(entity =>

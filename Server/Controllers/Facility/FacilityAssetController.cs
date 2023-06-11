@@ -125,7 +125,7 @@ namespace Server.Controllers
 
         updateFacAsset.AssignedDate=FacilityAssetToUpdate.AssignedDate;
         updateFacAsset.WorkstationId=FacilityAssetToUpdate.WorkstationId;
-        updateFacAsset.AssignStatus="Assigned";
+        updateFacAsset.AssignStatus="Assign";
         
         
         await _context.SaveChangesAsync();

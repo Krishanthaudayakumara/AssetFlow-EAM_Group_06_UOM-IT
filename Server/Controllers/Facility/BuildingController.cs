@@ -1,6 +1,7 @@
 
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs;
@@ -28,7 +29,7 @@ public async Task<IActionResult> AddBuilding([FromBody]BuildingToInsert building
 
     // Check if building with the same name, floor number, and address already exists
     bool buildingExists = await _context.Buildings
-       .AnyAsync(b =>
+    .AnyAsync(b =>
         b.BuildingName == buildingToInsert.BuildingName &&
         b.FloorNo == buildingToInsert.FloorNo &&
         b.Address == buildingToInsert.Address);
@@ -96,9 +97,22 @@ public async Task<IActionResult> AddBuilding([FromBody]BuildingToInsert building
             return NotFound();
         }
 
-        _context.Buildings.Remove(deleteBuilding);
-        await _context.SaveChangesAsync();
-        
+          try
+            {
+                _context.Buildings.Remove(deleteBuilding);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is SqlException sqlEx && sqlEx.Number == 547)
+                {
+                    return Conflict("Unable to delete the building as it is being used by a another table.");
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
         
         return NoContent();
