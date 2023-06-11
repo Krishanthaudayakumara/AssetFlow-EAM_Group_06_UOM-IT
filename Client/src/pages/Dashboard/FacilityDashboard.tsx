@@ -104,17 +104,17 @@ const FacilityDashboard: React.FC = () => {
   return (
     <div>
       <Container>
-        <h1 style={{ margin: '0px 0 0 65px' }}>Facility Summary</h1>
+        <h2 style={{ margin: '0px 0 0 65px' }}>Facility Summary</h2>
         <div className="row mb-3" style={{ margin: '0px 0 0 65px' }}>
           <CardDashboard name="Total Buildings" count={totalBuildings} />
           <CardDashboard name="Total Facility Assets" count={totalFacilityAssets} />
           <CardDashboard name="Total workstation" count={totalWorkstations} />
         </div>
-        <h4 style={{ margin: '0px 0 0 65px' }}>Asset Assignment</h4>
+        <h2 style={{ margin: '0px 0 0 65px' }}>Asset Assignment</h2>
         <div>
           <Row>
             <Col md={6}>
-            <div  className="shadow p-2 mb-6 bg-white rounded" style={{ margin: '0px 2px 2px 300px', width: '300px', height: '300px', alignContent: 'center' }}>
+            <div  className="shadow p-2 mb-6 bg-white rounded" style={{ margin: '0px 2px 2px 300px', width: '500px', height: '350px', alignContent: 'center' }}>
                    <PieChart
       data={{
       labels: ['Assign', 'Not Assign'],
@@ -132,7 +132,7 @@ const FacilityDashboard: React.FC = () => {
             </Col>
           </Row>
         </div>
-        <h4 style={{ margin: '0px 0 0 65px' }}>Asset Status</h4>
+        <h2 style={{ margin: '0px 0 0 65px' }}>Asset Status</h2>
         <div
           className="shadow p-3 mb-5 bg-white rounded"
           style={{ margin: '0px 2px 2px 65px' }}

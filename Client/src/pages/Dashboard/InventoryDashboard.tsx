@@ -116,13 +116,13 @@ const InventoryDashboard: React.FC = () => {
     <div>
       <Container>
         <div>
-          <h1 style={{ margin: '0px 0 0 65px' }}>Inventory Dashboard</h1>
+          <h2 style={{ margin: '0px 0 0 65px' }}>Inventory Dashboard</h2>
           <div className="row mb-6" style={{ margin: '0px 0 0 65px' }}>
             <CardDashboard name="Total assets" count={assetCount} />
             <CardDashboard name="Total Categories" count={categoryCount} />
             <CardDashboard name="Total Subcategories" count={subCategoryCount} />
           </div>
-          <h4 style={{ margin: '0px 0 0 65px' }}>SubCategorey Count</h4>
+          <h2 style={{ margin: '0px 0 0 65px' }}>SubCategorey Count</h2>
           <div className="shadow p-3 mb-5 bg-white rounded" style={{ margin: '0px 2px 2px 65px' }}>
             <InventoryBarchart data={subcategoryTypeData}  options={{
       ...options,
@@ -142,14 +142,9 @@ const InventoryDashboard: React.FC = () => {
       },
     }} />
           </div>
-          <h4
-            className="second"
-            style={{
-              textAlign: 'center',
-            }}
-          ></h4>
-         <h4 style={{ margin: '0px 0 0 65px' }}>Categorey Types</h4>
-         <div  className="shadow p-2 mb-6 bg-white rounded" style={{ margin: '0px 2px 2px 300px', width: '300px', height: '300px', alignContent: 'center' }}>
+         
+         <h2 style={{ margin: '0px 0 0 65px' }}>Categorey Types</h2>
+         <div  className="shadow p-4 mb-7 bg-white rounded" style={{ margin: '0px 2px 2px 300px', width: '500px', height: '350px', alignContent: 'center' }}>
             <PieChart
               data={{
                 labels: categoryType,
