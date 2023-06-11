@@ -428,6 +428,9 @@ namespace Server.Migrations
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("JobTitle")
                         .HasColumnType("nvarchar(max)");
 
@@ -552,6 +555,34 @@ namespace Server.Migrations
                     b.ToTable("Notifications");
                 });
 
+            modelBuilder.Entity("Server.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SupplyChainId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SupplyChainId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("Server.Models.Stock", b =>
                 {
                     b.Property<int>("Id")
@@ -590,6 +621,9 @@ namespace Server.Migrations
                     b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SupplyChainId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -597,6 +631,8 @@ namespace Server.Migrations
                     b.HasIndex("SubCategoryId");
 
                     b.HasIndex("SupplierId");
+
+                    b.HasIndex("SupplyChainId");
 
                     b.ToTable("Stocks");
                 });
@@ -658,6 +694,43 @@ namespace Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Suppliers");
+                });
+
+            modelBuilder.Entity("Server.Models.SupplyChain", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AssetName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LowQuantityThreshold")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("SupplyChains");
                 });
 
             modelBuilder.Entity("Server.Models.Support.Agent", b =>
@@ -1143,6 +1216,17 @@ namespace Server.Migrations
                     b.Navigation("Workstation");
                 });
 
+            modelBuilder.Entity("Server.Models.Order", b =>
+                {
+                    b.HasOne("Server.Models.SupplyChain", "SupplyChain")
+                        .WithMany()
+                        .HasForeignKey("SupplyChainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SupplyChain");
+                });
+
             modelBuilder.Entity("Server.Models.Stock", b =>
                 {
                     b.HasOne("Server.Models.Category", "Category")
@@ -1163,11 +1247,17 @@ namespace Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Server.Models.SupplyChain", "SupplyChain")
+                        .WithMany()
+                        .HasForeignKey("SupplyChainId");
+
                     b.Navigation("Category");
 
                     b.Navigation("SubCategory");
 
                     b.Navigation("Supplier");
+
+                    b.Navigation("SupplyChain");
                 });
 
             modelBuilder.Entity("Server.Models.SubCategory", b =>
@@ -1179,6 +1269,25 @@ namespace Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Server.Models.SupplyChain", b =>
+                {
+                    b.HasOne("Server.Models.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SubCategory");
+
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("Server.Models.Support.Agent", b =>

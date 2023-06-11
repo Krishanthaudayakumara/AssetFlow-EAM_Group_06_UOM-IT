@@ -10,7 +10,7 @@
   margin: 0 !important;
   overflow: auto;
   width: 100vw !important;
-  padding-right: 10vw !important;
+  /* padding-right: 10vw !important; */
 }
 
 .login-container a {
@@ -18,15 +18,17 @@
   color: #5a3092;
 }
 
-.login-container a:hover{
-    color: #ff615a;
-    transition: 200ms;
+.login-container a:hover {
+  color: #ff615a;
+  transition: 200ms;
 }
 
 .login-container h1 {
   margin: 0vw 7vw;
   font-weight: bold;
+  font-size: 2vw;
   color: #5a3092;
+  margin-bottom: 3%;
 }
 
 .submit-btn {
@@ -48,17 +50,21 @@
 }
 
 .logo {
-  width: 40vh;
-  height: 40vh;
+  width: 30vh;
   border-radius: 50%;
   margin: 0 auto;
   display: block;
   margin-bottom: 10px;
 }
 
-.login-form input {
+input.form-control {
   height: 50px;
   margin-bottom: 20px;
+}
+
+.form-check-input:checked{
+  background-color: #ff615a;
+  border-color: #d65b55;
 }
 
 .login-form label {
@@ -66,10 +72,24 @@
   font-weight: bold;
 }
 
+@keyframes wave {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .login-left {
-  width: 450px;
-  margin-top: 50px;
-  margin-left: 200px;
+  width: 350px;
+  margin-block: 50px;
+  margin-left: 120px;
+  animation: wave 5s infinite;
+
 }
 
 @media screen and (max-width: 768px) {
@@ -82,24 +102,36 @@
   }
 }
 
-.l-footer{
-    padding-top: 50px;
+.l-footer {
+  padding-top: 50px;
 }
 
-.social-icon{
-    font-size: 30px;
-    margin: 0px 10px 20px 10px;
+.social-icon {
+  font-size: 30px;
+  margin: 0px 10px 20px 10px;
 }
 
-
-.login-btn-icon{
-
+.login-btn-icon {
   font-size: 2.2rem;
   margin-right: -2rem;
   margin-left: 1rem;
 }
 
-.login-btn-icon:hover{
+.login-btn-icon:hover {
   margin-left: 2rem;
   transition: 200ms;
+}
+
+.login-card-back {
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(102, 102, 102, 0.2);
+  margin: 2.5% 8%;
+  box-shadow: 1px 0px 13px 1px rgba(0,0,0,0.65);
+  -webkit-box-shadow: 1px 0px 13px 1px rgba(0,0,0,0.65);
+  -moz-box-shadow: 1px 0px 13px 1px rgba(0,0,0,0.65);
+  border-radius: 0%;
+}
+
+.login-card{
+  margin-top: 3%
 }

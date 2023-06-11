@@ -18,5 +18,6 @@ namespace Server.Models
         public string? JobTitle { get; set; }
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
+        public bool IsDeleted { get; internal set; }
     }
 }

@@ -13,14 +13,3 @@ code {
 }
 
 
-.dark-theme h1, .dark-theme h2,.dark-theme h3, .dark-theme h4, .dark-theme h5, .dark-theme h6, .dark-theme p ,.dark-theme a, .dark-theme .nav-link{
-  /* background-color: #23043d !important;
-  color: white !important; */
-  color:#e7e7e7 !important;
-}
-
-.dark-theme {
-  background-color: rgb(38, 30, 43) !important;
-
-}
-

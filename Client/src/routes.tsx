@@ -44,6 +44,9 @@ import AssetPage from "./pages/Inventory/Asset/AssetPage";
 import StockBarcodesPage from "./pages/Inventory/Stock/StockBarcodesPage";
 import EmployeeRequest from "./pages/Inventory/EmployeeRequest/EmployeeRequest";
 import SupplyChainPage from "./pages/Supplier/SupplyChain";
+import OrderPage from "./pages/Supplier/OrderPage";
+import ExternalWorkersPage from "./pages/Employee/ExternalWorkersPage";
+import NotificationCenter from "./pages/Notification/NotificationCenter";
 
 const RoutesConfig: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -135,6 +138,13 @@ const RoutesConfig: React.FC = () => {
         <Route path="/deleted-employee" element={<DeletedEmployeePage />} />
       </Route>
 
+      <Route
+        path="/externel-worker"
+        element={<PrivateRoute allowedRoles="all" />}
+      >
+        <Route path="/externel-worker" element={<ExternalWorkersPage />} />
+      </Route>
+
       <Route path="/department" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/department" element={<Department />} />
       </Route>
@@ -150,6 +160,21 @@ const RoutesConfig: React.FC = () => {
       <Route path="/supply-chain" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/supply-chain" element={<SupplyChainPage />} />
       </Route>
+
+      <Route
+        path="/supply-orders"
+        element={<PrivateRoute allowedRoles="all" />}
+      >
+        <Route path="/supply-orders" element={<OrderPage />} />
+      </Route>
+
+      <Route
+        path="/notifications"
+        element={<PrivateRoute allowedRoles="all" />}
+      >
+        <Route path="/notifications" element={<NotificationCenter />} />
+      </Route>
+
 
       <Route path="/Tickets" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/Tickets" element={<Tickets />} />

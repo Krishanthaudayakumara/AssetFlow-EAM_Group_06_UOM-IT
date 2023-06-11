@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Chamudi\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {}
+    "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Chamudi\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {
+    "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Chamudi\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+        "projectUniqueName": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\Users\\Chamudi\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
-        "packagesPath": "C:\\Users\\Chamudi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Chamudi\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
+        "projectPath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+        "packagesPath": "C:\\Users\\Krishantha\\.nuget\\packages\\",
+        "outputPath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Chamudi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Krishantha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -57,6 +59,14 @@
             "Google.Cloud.Storage.V1": {
               "target": "Package",
               "version": "[4.6.0, )"
+            },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.8.2, )"
+            },
+            "Hangfire.MemoryStorage": {
+              "target": "Package",
+              "version": "[1.7.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",

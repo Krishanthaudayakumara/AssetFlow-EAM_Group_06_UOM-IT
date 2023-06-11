@@ -119,3 +119,15 @@ export interface DeleteAsset {
   id: number;
   name: string;
 }
+
+export interface ExternalWorker {
+  id: number;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  phoneNumber: string;
+  dateOfBirth: string;
+  hireDate: string;
+  jobTitle: string;
+  departmentId: number;
+}

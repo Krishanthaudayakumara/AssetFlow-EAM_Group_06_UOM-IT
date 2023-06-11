@@ -51,7 +51,11 @@ const SubCategoryPage: React.FC = () => {
   return (
     <Container>
       <h1>Subcategories</h1>
-      <Button variant="primary" onClick={() => setShowModal(true)}>
+      <Button
+        variant="primary"
+        className="btn-purple"
+        onClick={() => setShowModal(true)}
+      >
         Add Subcategory
       </Button>
       <Row>

@@ -40,7 +40,13 @@ const items = [
   { label: "Users", link: "/user", icon: FaUsers },
   { label: "Employees", link: "/employee", icon: FaUserTie },
   { label: "Departments", link: "/department", icon: FaSuitcase },
-  { label: "Suppliers", link: "/supplier", icon: FaShippingFast },
+  { label: "Supply", link: "/supplier", icon: FaShippingFast,
+  dropdownItems: [
+    { label: "Suppliers", link: "/supplier" },
+    { label: "Supply Orders", link: "/supply-orders" },
+    { label: "Supply Chain", link: "/supply-chain" },
+   
+  ], },
   {
     label: "Support",
     icon: FaComments,
@@ -54,7 +60,7 @@ const items = [
       { label: "IT Dashboard", link: "/ITDashboard" },
     ],
   },
-  { label: "Calendar", link: "/calendar", icon: FaCalendarAlt },
+  { label: "Notification Center", link: "/Notifications", icon: FaCalendarAlt },
 ];
 
 interface SidebarProps {

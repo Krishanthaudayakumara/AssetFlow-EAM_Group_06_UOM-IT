@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import axios from "axios";
 
 import DepartmentTable from "../../components/Department/DepartmentTable";
 import AddDepartmentModal from "../../components/Department/AddDepartmentModal";
 import DepartmentModal from "../../components/Department/DepartmentModal";
 
 import { Department } from "../../types";
+import {
+  fetchDepartments,
+  addDepartment,
+  editDepartment,
+  deleteDepartment,
+} from "../../api/departmentApi";
 
 const DepartmentPage: React.FC = () => {
   const [departments, setDepartments] = useState<Department[]>([]);
@@ -17,54 +22,25 @@ const DepartmentPage: React.FC = () => {
   );
 
   useEffect(() => {
-    fetchDepartments();
+    fetchDepartments().then((departments) => {
+      setDepartments(departments);
+    });
   }, []);
-
-  const fetchDepartments = () => {
-    axios
-      .get("http://localhost:5087/api/Departments")
-      .then((res) => {
-        const data = res.data;
-        const departments = data.map((department: any) => ({
-          id: department.id,
-          name: department.name,
-          description: department.description,
-        }));
-        setDepartments(departments);
-      })
-      .catch((error) => console.error(error));
-  };
+  
 
   const handleAddDepartment = (department: Department) => {
-    axios
-      .post("http://localhost:5087/api/Departments", department)
-      .then(() => {
-        fetchDepartments();
-        setShowAddModal(false);
-      })
-      .catch((error) => console.error(error));
+    addDepartment(department, fetchDepartments);
+    setShowAddModal(false);
   };
 
   const handleEditDepartment = (department: Department) => {
-    axios
-      .put(`http://localhost:5087/api/Departments/${department.id}`, department)
-      .then(() => {
-        fetchDepartments();
-        setShowEditModal(false);
-        setSelectedDepartment(null);
-      })
-      .catch((error) => console.error(error));
+    editDepartment(department, fetchDepartments);
+    setShowEditModal(false);
+    setSelectedDepartment(null);
   };
 
   const handleDeleteDepartment = (department: Department) => {
-    if (window.confirm("Are you sure you want to delete this department?")) {
-      axios
-        .delete(`http://localhost:5087/api/Departments/${department.id}`)
-        .then(() => {
-          fetchDepartments();
-        })
-        .catch((error) => console.error(error));
-    }
+    deleteDepartment(department, fetchDepartments);
   };
 
   return (
