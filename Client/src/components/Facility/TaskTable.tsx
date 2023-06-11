@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Table, Button, Modal, Form } from 'react-bootstrap';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Table, Button, Modal, Form } from "react-bootstrap";
+import axios from "axios";
 import { FaTrashAlt, FaPen } from "react-icons/fa";
 
 interface TaskTypeData {
@@ -14,6 +14,12 @@ function TaskTable() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [taskTypeInput, setTaskTypeInput] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] =useState(false);
+    
+  const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
+  const [editedTaskType, setEditedTaskType] = useState("");
+  const[showEditModal,setShowEditModal]=useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -25,7 +31,7 @@ function TaskTable() {
 
   const handleAddTask = async () => {
     // Check if the task type already exists in the list
-    const taskExists = task.some(t => t.taskType === taskTypeInput);
+    const taskExists = task.some((t) => t.taskType === taskTypeInput);
     if (taskExists) {
       setShowAlert(true);
       return;
@@ -42,12 +48,17 @@ function TaskTable() {
       setTaskTypeInput("");
       handleCloseModal();
       setShowSuccessModal(true);
-    } catch (error) {
-      alert(error);
+    } catch (error: any) {
+      console.error(error);
+      if (error.response && error.response.status === 409) {
+        setErrorMessage("Already has Added this task.");
+      }
     }
   };
 
-  const handleTaskTypeInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTaskTypeInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setTaskTypeInput(e.target.value);
   };
 
@@ -67,6 +78,72 @@ function TaskTable() {
     fetchTaskData();
   }, []);
 
+  const handleOpenDeleteConfirmationModal = (taskId: number) => {
+    setSelectedTaskId(taskId);
+    setShowDeleteConfirmationModal(true);
+  };
+
+  const handleCloseDeleteConfirmationModal = () => {
+    setSelectedTaskId(null);
+    setShowDeleteConfirmationModal(false);
+  };
+
+  const handleDeleteTask = (id: number) => {
+    handleOpenDeleteConfirmationModal(id);
+  };
+
+  const confirmDeleteTask = async () => {
+    if (selectedTaskId) {
+      try {
+        await axios.delete(
+          `http://localhost:5087/api/AssignTask/delete-asset-by-id/${selectedTaskId}`
+        );
+        const updatedTask = task.filter((t) => t.id !== selectedTaskId);
+        setTask(updatedTask);
+        handleCloseDeleteConfirmationModal();
+      } catch (error) {
+        alert(error);
+      }
+    }
+  };
+
+  const handleEditTask = (id: number) => {
+    const selectedTask = task.find((t) => t.id === id);
+    if (selectedTask) {
+      setEditedTaskType(selectedTask.taskType);
+      setSelectedTaskId(id);
+      setShowEditModal(true);
+    }
+  };
+  
+  
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+    setEditedTaskType("");
+    setSelectedTaskId(null);
+  };
+  
+
+  const handleUpdateTask = async () => {
+    try {
+      await axios.put(
+        `http://localhost:5087/api/AssignTask/TaskType/${selectedTaskId}`,
+        {
+          taskType: editedTaskType,
+        }
+      );
+      const updatedTask = task.map((t) =>
+        t.id === selectedTaskId ? { ...t, taskType: editedTaskType } : t
+      );
+      setTask(updatedTask);
+      handleCloseEditModal();
+    } catch (error) {
+      alert(error);
+    }
+  };
+  
+  
+
   return (
     <div style={{ margin: "4rem" }}>
       <Button
@@ -83,13 +160,27 @@ function TaskTable() {
         Add Task
       </Button>
 
-      <div className="shadow p-2 mb- bg-white rounded" style={{ width: "800px" }}>
-        <Table className="table w-100 small text-center" hover align="center" style={{ fontSize: "14px", width: "500px" }}>
+      <div
+        className="shadow p-2 mb- bg-white rounded"
+        style={{ width: "800px" }}
+      >
+        
+        <Table
+          className="table w-100 small text-center"
+          hover
+          align="center"
+          style={{ fontSize: "14px", width: "500px" }}
+        >
           <thead>
             <tr style={{ color: "#482890" }}>
-              <th><input type="checkbox" style={{ boxShadow: "0 2px 4px rgba(128, 128, 128, 0.5)" }} /></th>
+              <th>
+                <input
+                  type="checkbox"
+                  style={{ boxShadow: "0 2px 4px rgba(128, 128, 128, 0.5)" }}
+                />
+              </th>
               <th>Task type</th>
-              <th>Action</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -98,12 +189,22 @@ function TaskTable() {
                 return (
                   <tr key={t.id} style={{ textAlign: "center" }}>
                     <td>
-                      <input type="checkbox" style={{ boxShadow: "0 2px 4px rgba(128, 128, 128, 0.5)" }} />
+                      <input
+                        type="checkbox"
+                        style={{
+                          boxShadow: "0 2px 4px rgba(128, 128, 128, 0.5)",
+                        }}
+                      />
                     </td>
                     <td>{t.taskType}</td>
                     <td>
-                      <FaTrashAlt style={{ color: "#ff615a" }} />
-                      <FaPen style={{ color: "#482890", marginLeft: "10px" }} />
+                      <FaTrashAlt
+                        style={{ color: "#ff615a" }}
+                        onClick={() => handleOpenDeleteConfirmationModal(t.id)}
+                      />
+                      <FaPen style={{ color: "#482890", marginLeft: "10px" }}
+                       onClick={() => handleEditTask(t.id)}
+                       />
                     </td>
                   </tr>
                 );
@@ -125,7 +226,11 @@ function TaskTable() {
           <Form>
             <Form.Group controlId="taskType">
               <Form.Label>Task type</Form.Label>
-              <Form.Control type="text" value={taskTypeInput} onChange={handleTaskTypeInputChange} />
+              <Form.Control
+                type="text"
+                value={editedTaskType}
+                onChange={handleTaskTypeInputChange}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -143,9 +248,7 @@ function TaskTable() {
         <Modal.Header closeButton>
           <Modal.Title>Success</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          Task added successfully!
-        </Modal.Body>
+        <Modal.Body>Task added successfully!</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseSuccessModal}>
             Close
@@ -158,6 +261,59 @@ function TaskTable() {
           Task type already exists!
         </div>
       )}
+
+      <Modal
+        show={showDeleteConfirmationModal}
+        onHide={handleCloseDeleteConfirmationModal}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this task?</Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={handleCloseDeleteConfirmationModal}
+          >
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={confirmDeleteTask}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal
+  show={showEditModal}
+  onHide={handleCloseEditModal}
+>
+  <Modal.Header closeButton>
+    <Modal.Title>Edit Task</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <Form>
+      <Form.Group controlId="editedTaskType">
+        <Form.Label>Task type</Form.Label>
+        <Form.Control
+          type="text"
+          value={editedTaskType}
+          onChange={(e) => setEditedTaskType(e.target.value)}
+        />
+      </Form.Group>
+    </Form>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={handleCloseEditModal}>
+      Close
+    </Button>
+    <Button variant="primary" onClick={handleUpdateTask}>
+      Update
+    </Button>
+  </Modal.Footer>
+</Modal>
+
+
+   
     </div>
   );
 }

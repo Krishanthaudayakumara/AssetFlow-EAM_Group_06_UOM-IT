@@ -4,7 +4,7 @@ import "../../css/Facilitycss/workstationcard.css";
 import { FaMouse } from "react-icons/fa";
 import { FaKeyboard } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Alert } from "react-bootstrap";
 import { IoAdd } from "react-icons/io5";
 import AssetCard from "./AssetCard";
 import AssignAssetForm from "./AssignAssetForm";
@@ -25,9 +25,7 @@ export default function WorkstationCard(props: WorkstationProp) {
   const [updateWorkstationName, setUpdateWorkstationName] = useState("");
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showUpdateSuccessModal, setShowUpdateSuccessModal] = useState(false);
-
-
-
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     fetchSubcategoryCount();
@@ -51,6 +49,7 @@ export default function WorkstationCard(props: WorkstationProp) {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
   const handleDeleteWorkstation = async () => {
     setShowConfirmModal(true);
   };
@@ -60,22 +59,24 @@ export default function WorkstationCard(props: WorkstationProp) {
       await axios.delete(
         `http://localhost:5087/api/Workstation/delete-asset-by-id/${props.id}`
       );
-      
+
       setShowConfirmModal(false);
       setShowSuccessModal(true);
-
-          
-
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.response && error.response.status === 409) {
+        setErrorMessage(error.response.data);
+      } else {
+        // Handle other errors
+      }
     } finally {
       setShowConfirmModal(false);
     }
   };
+
   const handleCloseConfirmModal = () => {
     setShowConfirmModal(false);
-
   };
+
   const handleCloseSuccessModal = () => {
     setShowSuccessModal(false);
     window.location.reload();
@@ -86,7 +87,9 @@ export default function WorkstationCard(props: WorkstationProp) {
     setShowUpdateModal(true);
   };
 
-  const handleUpdateWorkstationNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpdateWorkstationNameChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setUpdateWorkstationName(e.target.value);
   };
 
@@ -99,23 +102,23 @@ export default function WorkstationCard(props: WorkstationProp) {
       // Close the update modal and refresh the page
       setShowUpdateModal(false);
       setShowUpdateSuccessModal(true);
-
-      
     } catch (error) {
       console.log(error);
     }
   };
+
   const handleCloseUpdateSuccessModal = () => {
     setShowUpdateSuccessModal(false);
     // Reload the page or perform any other desired action
     window.location.reload();
   };
-  
-  
-  
 
   return (
     <div className="col-4 card-container">
+      
+      {errorMessage && (
+          <div className="alert alert-danger">{errorMessage}</div>
+        )}
       <div className="ws-card">
         <h6 className="workstation">{props.workstationName}</h6>
 
@@ -131,9 +134,11 @@ export default function WorkstationCard(props: WorkstationProp) {
             style={{ width: "30px", height: "30px" }}
             onClick={handleIconClick}
           />
-           <FaTrashAlt onClick={handleDeleteWorkstation}/>
-           <FaPen onClick={handleUpdateWorkstation}/>
+          <FaTrashAlt onClick={handleDeleteWorkstation} />
+          <FaPen onClick={handleUpdateWorkstation} />
         </div>
+        
+      
 
         <Modal show={showModal} onHide={handleCloseModal}>
           <Modal.Header closeButton>
@@ -164,13 +169,14 @@ export default function WorkstationCard(props: WorkstationProp) {
             </Button>
           </Modal.Footer>
         </Modal>
+
+       
+       
         <Modal show={showSuccessModal} onHide={handleCloseSuccessModal}>
           <Modal.Header closeButton>
             <Modal.Title>Success</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            Workstation deleted successfully!
-          </Modal.Body>
+          <Modal.Body>Workstation deleted successfully!</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleCloseSuccessModal}>
               Close
@@ -179,40 +185,39 @@ export default function WorkstationCard(props: WorkstationProp) {
         </Modal>
 
         <Modal show={showUpdateModal} onHide={() => setShowUpdateModal(false)}>
-  <Modal.Header closeButton>
-    <Modal.Title>Update Workstation</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    <label htmlFor="updateWorkstationName">Workstation Name:</label>
-    <input
-      type="text"
-      id="updateWorkstationName"
-      value={updateWorkstationName}
-      onChange={handleUpdateWorkstationNameChange}
-    />
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={() => setShowUpdateModal(false)}>
-      Cancel
-    </Button>
-    <Button variant="primary" onClick={handleUpdateWorkstationNameSubmit}>
-      Update
-    </Button>
-  </Modal.Footer>
-</Modal>
-<Modal show={showUpdateSuccessModal} onHide={handleCloseUpdateSuccessModal}>
-  <Modal.Header closeButton>
-    <Modal.Title>Success</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    Workstation name updated successfully!
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={handleCloseSuccessModal}>
-      Close
-    </Button>
-  </Modal.Footer>
-</Modal>
+          <Modal.Header closeButton>
+            <Modal.Title>Update Workstation</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <label htmlFor="updateWorkstationName">Workstation Name:</label>
+            <input
+              type="text"
+              id="updateWorkstationName"
+              value={updateWorkstationName}
+              onChange={handleUpdateWorkstationNameChange}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowUpdateModal(false)}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={handleUpdateWorkstationNameSubmit}>
+              Update
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Modal show={showUpdateSuccessModal} onHide={handleCloseUpdateSuccessModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Success</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Workstation name updated successfully!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseSuccessModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
       </div>
     </div>
   );

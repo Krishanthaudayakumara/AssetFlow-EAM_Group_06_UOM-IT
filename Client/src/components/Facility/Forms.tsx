@@ -57,6 +57,9 @@ function Forms() {
   return (
     <>
       <Form onSubmit={handleSubmit}>
+      {errorMessage && (
+          <div className="alert alert-danger">{errorMessage}</div>
+        )}
         <Form.Group controlId="buildingName">
           <Form.Label>Building Name</Form.Label>
           <Form.Control
@@ -69,7 +72,7 @@ function Forms() {
         </Form.Group>
 
         <Form.Group controlId="floorNo">
-          <Form.Label>Floor Number</Form.Label>
+          <Form.Label>Floor Count</Form.Label>
           <Form.Control
             type="number"
             name="floorNo"

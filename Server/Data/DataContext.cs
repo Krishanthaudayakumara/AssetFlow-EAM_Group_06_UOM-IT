@@ -79,6 +79,14 @@ namespace Server.Data
                     .OnDelete(DeleteBehavior.Restrict);
             });
 
+              modelBuilder.Entity<FacilityAsset>(entity =>
+            {
+                entity.HasOne(a => a.Workstation)
+                    .WithMany(e => e.FacilityAssets)
+                    .HasForeignKey(a => a.WorkstationId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
 
             //IT Support
             modelBuilder.Entity<Team>(entity =>

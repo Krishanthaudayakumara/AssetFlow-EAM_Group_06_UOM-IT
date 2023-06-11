@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import { useState } from "react";
 import { FaTrashAlt, FaPen } from "react-icons/fa";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Badge } from "react-bootstrap";
 import axios from "axios";
 
 interface FacilityAssetData {
@@ -71,8 +71,16 @@ function FacilityAssetTable() {
 
   return (
     <div style={{ margin: "4rem" }}>
-      <div className="shadow p-2 mb- bg-white rounded" style={{ width: "950px" }}>
-        <Table className="table w-100 small text-center" hover align="center" style={{ fontSize: "14px", width: "500px" }}>
+      <div
+        className="shadow p-2 mb- bg-white rounded"
+        style={{ width: "950px" }}
+      >
+        <Table
+          className="table w-100 small text-center"
+          hover
+          align="center"
+          style={{ fontSize: "14px", width: "500px" }}
+        >
           <thead>
             <tr style={{ color: "#482890" }}>
               <th>FacilityAsset id</th>
@@ -94,12 +102,22 @@ function FacilityAssetTable() {
                     <td>{item.assetId}</td>
                     <td>{item.assetConditionStatus}</td>
                     <td>{item.receivedDate}</td>
-                    <td>{item.assignStatus}</td>
+                    <td>
+                      {item.assignStatus === "Assign" ? (
+                        <Badge bg="success">Assign</Badge>
+                      ) : (
+                        <Badge bg="danger">Not Assigned</Badge>
+                      )}
+                    </td>
                     <td>{item.assignedDate}</td>
                     <td>{item.workstationId}</td>
                     <td>
                       <FaPen
-                        style={{ color: " #482890", marginLeft: "10px", cursor: "pointer" }}
+                        style={{
+                          color: " #482890",
+                          marginLeft: "10px",
+                          cursor: "pointer",
+                        }}
                         onClick={() => handleEditAssetCondition(item.id)}
                       />
                     </td>

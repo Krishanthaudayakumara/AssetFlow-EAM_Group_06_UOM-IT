@@ -1,6 +1,7 @@
 
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs;
@@ -105,10 +106,22 @@ public async Task<IActionResult> AddWorkstation([FromBody] WorkstationToInsert w
                 return NotFound();
             }
 
-            _context.Workstations.Remove(deleteWorkstation);
-            await _context.SaveChangesAsync();
-
-
+             try
+            {
+                _context.Workstations.Remove(deleteWorkstation);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is SqlException sqlEx && sqlEx.Number == 547)
+                {
+                    return Conflict("unable to delete as it is  used by anothe table.");
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return NoContent();
 
