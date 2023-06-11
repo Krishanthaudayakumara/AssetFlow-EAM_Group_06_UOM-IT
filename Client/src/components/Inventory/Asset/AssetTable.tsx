@@ -98,15 +98,21 @@ const AssetTable: React.FC<AssetTableProps> = ({
                 </a>
               </td>
               <td>{asset.stock.name}</td>
-              <td>{asset.status}</td>
-              <td>{asset.condition}</td>
+              <td><select>
+                    <option>in stock</option>
+                    <option>in stock</option>
+                </select>
+                </td>
+              <td><select>
+                    <option>Good</option>
+                    <option>Broken</option>
+                </select>
+                </td>
               <td>{asset.warrantyExpiration}</td>
               <td>{asset.stock.arrivalDate}</td>
               <td>{asset.stock.supplierName}</td>
               <td>
-                <Button variant="primary" onClick={() => onEdit(asset)}>
-                  <BsPencilSquare /> Edit
-                </Button>{" "}
+                
                 <Button variant="danger" onClick={() => onDelete(asset)}>
                   <BsTrash /> Delete
                 </Button>
