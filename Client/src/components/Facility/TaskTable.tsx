@@ -227,10 +227,10 @@ function TaskTable() {
             <Form.Group controlId="taskType">
               <Form.Label>Task type</Form.Label>
               <Form.Control
-                type="text"
-                value={editedTaskType}
-                onChange={handleTaskTypeInputChange}
-              />
+  type="text"
+  value={taskTypeInput}
+  onChange={handleTaskTypeInputChange}
+/>
             </Form.Group>
           </Form>
         </Modal.Body>
