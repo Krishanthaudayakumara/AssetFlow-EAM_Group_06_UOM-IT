@@ -108,6 +108,11 @@ const UserForm: React.FC<Props> = ({ user = {}, onSubmit }) => {
         >
           <option value={UserRole.Employee}>Employee</option>
           <option value={UserRole.Admin}>Admin</option>
+          <option value={UserRole.Manager}>Manager</option>
+          <option value={UserRole.FacilityManager}>Facility Manager</option>
+          <option value={UserRole.InentoryManager}>Inventory Manager</option>
+          <option value={UserRole.SupportManager}>Support Manager</option>
+          <option value={UserRole.Agent}>Agent</option>
         </Form.Control>
       </Form.Group>
     </Form>

@@ -49,6 +49,7 @@ import ExternalWorkersPage from "./pages/Employee/ExternalWorkersPage";
 import NotificationCenter from "./pages/Notification/NotificationCenter";
 import ExternalEmployeeTask from "./pages/Facility/ExternalEmployeeTask";
 import CleaningStaff from "./pages/Facility/CleaningStaff";
+import { UserRole } from "./enum";
 
 
 const RoutesConfig: React.FC = () => {
@@ -71,37 +72,45 @@ const RoutesConfig: React.FC = () => {
   } else {
     defaultDashboard = <Login />;
   }
+
+  const Management:string[]= ["manager", "admin", "facilityManager", "inventoryManager", "supportManager" ];
+  const Facility:string[]= ["manager", "admin", "facilityManager"];
+  const Inventory:string[]= ["manager", "admin", "inventoryManager"];
+  const SupportManager:string[]= ["manager", "admin", "supportManager"];
+  const AgentTeam:string[]= ["manager", "admin","supportManager","agent"];
+  const ManagerOnly:string[]= ["manager", "admin"];
+  const Admin:string[]= ["admin"];
   return (
     <Routes>
       <Route path="/" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/" element={defaultDashboard} />
       </Route>
 
-      <Route path="Report" element={<PrivateRoute allowedRoles="all" />}>
-        "
+      <Route path="Report" element={<PrivateRoute allowedRoles={Management} />}>
+      
         <Route path="/Report" element={<Report />} />
       </Route>
       <Route
         path="/FacilityDashboard"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Facility} />}
       >
         <Route path="/FacilityDashboard" element={<FacilityDashboard />} />
       </Route>
 
       <Route
         path="/InventoryDashboard"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Inventory} />}
       >
         <Route path="/InventoryDashboard" element={<InventoryDashboard />} />
       </Route>
 
-      <Route path="/ITDashboard" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/ITDashboard" element={<PrivateRoute allowedRoles={SupportManager} />}>
         <Route path="/ITDashboard" element={<ITDashboard />} />
       </Route>
 
       <Route
         path="/ReportHistory"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Management} />}
       >
         <Route path="/ReportHistory" element={<ReportHistory />} />
       </Route>
@@ -109,20 +118,20 @@ const RoutesConfig: React.FC = () => {
       <Route path="/profile" element={<PrivateRoute allowedRoles="all" />}>
         <Route path="/profile" element={<ProfilePage />} />
       </Route>
-      <Route path="/user" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/user" element={<PrivateRoute allowedRoles={Admin} />}>
         <Route path="/user" element={<User />} />
       </Route>
 
       <Route
         path="/deleted-users"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Admin} />}
       >
         <Route path="/deleted-users" element={<DeletedUsersPage />} />
       </Route>
 
       <Route
         path="/users/:userId/access-log"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Admin} />}
       >
         <Route
           path="/users/:userId/access-log"
@@ -130,25 +139,25 @@ const RoutesConfig: React.FC = () => {
         />
       </Route>
 
-      <Route path="/employee" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/employee" element={<PrivateRoute allowedRoles={ManagerOnly} />}>
         <Route path="/employee" element={<Employee />} />
       </Route>
 
       <Route
         path="/deleted-employee"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={ManagerOnly} />}
       >
         <Route path="/deleted-employee" element={<DeletedEmployeePage />} />
       </Route>
 
       <Route
         path="/externel-worker"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Facility} />}
       >
         <Route path="/externel-worker" element={<ExternalWorkersPage />} />
       </Route>
 
-      <Route path="/department" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/department" element={<PrivateRoute allowedRoles={ManagerOnly} />}>
         <Route path="/department" element={<Department />} />
       </Route>
 
@@ -156,42 +165,42 @@ const RoutesConfig: React.FC = () => {
         <Route path="/calendar" element={<Calendar />} />
       </Route>
 
-      <Route path="/supplier" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/supplier" element={<PrivateRoute allowedRoles={Inventory} />}>
         <Route path="/supplier" element={<Supplier />} />
       </Route>
 
-      <Route path="/supply-chain" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/supply-chain" element={<PrivateRoute allowedRoles={Inventory} />}>
         <Route path="/supply-chain" element={<SupplyChainPage />} />
       </Route>
 
       <Route
         path="/supply-orders"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Inventory}/>}
       >
         <Route path="/supply-orders" element={<OrderPage />} />
       </Route>
 
       <Route
         path="/notifications"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={ManagerOnly}/>}
       >
         <Route path="/notifications" element={<NotificationCenter />} />
       </Route>
 
 
-      <Route path="/Tickets" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Tickets" element={<PrivateRoute allowedRoles={AgentTeam} />}>
         <Route path="/Tickets" element={<Tickets />} />
       </Route>
 
-      <Route path="/Agents" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Agents" element={<PrivateRoute allowedRoles={SupportManager} />}>
         <Route path="/Agents" element={<Agents />} />
       </Route>
 
-      <Route path="/Teams" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Teams" element={<PrivateRoute allowedRoles={AgentTeam} />}>
         <Route path="/Teams" element={<Teams />} />
       </Route>
 
-      <Route path="/Issues" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Issues" element={<PrivateRoute allowedRoles={SupportManager} />}>
         <Route path="/Issues" element={<Issues />} />
       </Route>
 
@@ -200,31 +209,31 @@ const RoutesConfig: React.FC = () => {
       </Route>
 
       {/* Pages */}
-      <Route path="/Category" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Category" element={<PrivateRoute allowedRoles={Inventory} />}>
         <Route path="/Category" element={<CategoryPage />} />
       </Route>
 
-      <Route path="/SubCategory" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/SubCategory" element={<PrivateRoute allowedRoles={Inventory} />}>
         <Route path="/SubCategory" element={<SubCategoryPage />} />
       </Route>
 
-      <Route path="/Stock" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Stock" element={<PrivateRoute allowedRoles={Inventory} />}>
         <Route path="/Stock" element={<StockPage />} />
       </Route>
 
-      <Route path="/Asset" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/Asset" element={<PrivateRoute allowedRoles={Inventory} />}>
         <Route path="/Asset" element={<AssetPage />} />
       </Route>
 
       <Route
         path="/categories/:id"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Inventory} />}
       >
         <Route path="/categories/:id" element={<CategoryDetailPage />} />
       </Route>
       <Route
         path="/stock/:id/barcodes"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Inventory} />}
       >
         <Route path="/stock/:id/barcodes" element={<StockBarcodesPage />} />
       </Route>
@@ -238,36 +247,36 @@ const RoutesConfig: React.FC = () => {
 
       <Route
         path="/BuildingFloor"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Facility} />}
       >
         <Route path="/BuildingFloor" element={<BuildingFloor />} />
       </Route>
-      <Route path="/AssignAsset" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/AssignAsset" element={<PrivateRoute allowedRoles={Facility} />}>
         <Route path="/AssignAsset" element={<AssignAsset />} />
       </Route>
       <Route
         path="/FacilityAsset"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Facility} />}
       >
         <Route path="/FacilityAsset" element={<FacilityAsset />} />
       </Route>
 
       <Route
         path="/FacilityStock"
-        element={<PrivateRoute allowedRoles="all" />}
+        element={<PrivateRoute allowedRoles={Facility} />}
       >
         <Route path="/FacilityStock" element={<FacilityStock />} />
       </Route>
 
-      <Route path="/AssignAsset" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/AssignAsset" element={<PrivateRoute allowedRoles={Facility} />}>
         <Route path="/AssignAsset" element={<AssignAsset />} />
       </Route>
       
-      <Route path="/ExternalEmployeeTask" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/ExternalEmployeeTask" element={<PrivateRoute allowedRoles={Facility} />}>
         <Route path="/ExternalEmployeeTask" element={<ExternalEmployeeTask />} />
       </Route>
 
-      <Route path="/CleaningStaff" element={<PrivateRoute allowedRoles="all" />}>
+      <Route path="/CleaningStaff" element={<PrivateRoute allowedRoles={Facility}/>}>
         <Route path="/CleaningStaff" element={<CleaningStaff />} />
       </Route>
     </Routes>

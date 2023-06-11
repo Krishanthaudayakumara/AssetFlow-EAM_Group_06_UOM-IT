@@ -78,15 +78,18 @@ const Login: React.FC = () => {
         backgroundSize: "cover",
       }}
     >
-      <Card className="login-card-back">
+      <Card className="login-card-back"  style={{
+        backgroundImage: `url(/img/grey-background.jpg)`,
+        backgroundRepeat: "no-repeat",
+      }}>
         <Card.Body>
           <Row className="justify-content-center">
-            <Col lg={7} className="login-left-col">
+            <Col lg={6} className="login-left-col">
               <Image src={"/img/login-left.png"} className="login-left" />
               <h1>Efficient Asset Management Equals Success...</h1>
             </Col>
 
-            <Col lg={4}>
+            <Col lg={5}>
               <Card className="login-card">
                 <Card.Body>
                   <Form className="login-form" onSubmit={handleSubmit}>
@@ -104,6 +107,7 @@ const Login: React.FC = () => {
                         placeholder="Enter Username"
                         value={username}
                         onChange={(event) => setUsername(event.target.value)}
+                        className="login-form-control"
                       />
                     </Form.Group>
 
@@ -114,6 +118,8 @@ const Login: React.FC = () => {
                         placeholder="Password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
+                        className="login-form-control"
+
                       />
                     </Form.Group>
 

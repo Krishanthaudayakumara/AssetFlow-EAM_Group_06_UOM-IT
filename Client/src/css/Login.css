@@ -57,12 +57,12 @@
   margin-bottom: 10px;
 }
 
-input.form-control {
+input.login-form-control {
   height: 50px;
   margin-bottom: 20px;
 }
 
-.form-check-input:checked{
+.form-check-input:checked {
   background-color: #ff615a;
   border-color: #d65b55;
 }
@@ -89,7 +89,6 @@ input.form-control {
   margin-block: 50px;
   margin-left: 120px;
   animation: wave 5s infinite;
-
 }
 
 @media screen and (max-width: 768px) {
@@ -123,15 +122,20 @@ input.form-control {
 }
 
 .login-card-back {
-  background-color: white;
   box-shadow: 0px 0px 10px rgba(102, 102, 102, 0.2);
   margin: 2.5% 8%;
-  box-shadow: 1px 0px 13px 1px rgba(0,0,0,0.65);
-  -webkit-box-shadow: 1px 0px 13px 1px rgba(0,0,0,0.65);
-  -moz-box-shadow: 1px 0px 13px 1px rgba(0,0,0,0.65);
+  box-shadow: 1px 0px 13px 1px rgba(0, 0, 0, 0.65);
+  -webkit-box-shadow: 1px 0px 13px 1px rgba(0, 0, 0, 0.65);
+  -moz-box-shadow: 1px 0px 13px 1px rgba(0, 0, 0, 0.65);
   border-radius: 0%;
 }
 
-.login-card{
-  margin-top: 3%
+.login-card {
+  margin-top: 3%;
+  padding: 1% 4%;
+  -webkit-box-shadow: 1px 2px 17px -6px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 2px 17px -6px rgba(0,0,0,0.75);
+box-shadow: 1px 2px 17px -6px rgba(0,0,0,0.75);
+
+  
 }

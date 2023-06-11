@@ -70,7 +70,7 @@ namespace Server.Controllers
             var emailTemplatePath = Path.Combine(Directory.GetCurrentDirectory(), "EmailTemplates/WelcomeEmailTemplate.html");
             var emailTemplate = await System.IO.File.ReadAllTextAsync(emailTemplatePath);
 
-            var emailContent = emailTemplate.Replace("{{Email}}", model.Email).Replace("{{Password}}", model.Password);
+            var emailContent = emailTemplate.Replace("{{Email}}", model.Username).Replace("{{Password}}", model.Password);
 
             // Send the HTML email
             await _emailService.SendEmailAsync(user.Email, "Welcome to Assetflow", emailContent, true);
