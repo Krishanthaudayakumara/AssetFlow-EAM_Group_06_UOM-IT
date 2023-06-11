@@ -154,9 +154,8 @@ export default function Work1() {
           <div className="col-3 text-center ">
             <button
               type="button"
-              className="btn btn-primary mt-4"
-              style={{ backgroundColor: " #ff615a",borderColor:"#ff615a " 
-               }}
+              className="btn-orange"
+             style={{marginTop:"3 0px"}}
 
               onClick={handleAddWorkstation}
               data-toggle="modal"

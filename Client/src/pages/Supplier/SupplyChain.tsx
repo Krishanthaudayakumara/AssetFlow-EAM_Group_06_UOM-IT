@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Container, Button } from 'react-bootstrap';
-import CreateSupplyChainModal from '../../components/SupplyChain/CreateSupplyChainModal';
-import SupplyChainList from '../../components/SupplyChain/SupplyChainList';
-import { createSupplyChain } from '../../api/supplyChainApi';
+import React, { useState } from "react";
+import { Container, Button, Col, Row } from "react-bootstrap";
+import CreateSupplyChainModal from "../../components/SupplyChain/CreateSupplyChainModal";
+import SupplyChainList from "../../components/SupplyChain/SupplyChainList";
+import { createSupplyChain } from "../../api/supplyChainApi";
 
 type SupplyChainData = {
   supplierId: number;
@@ -21,19 +21,30 @@ const SupplyChainPage: React.FC = () => {
       await createSupplyChain(supplyChainData);
       setShowModal(false);
       // Handle success
-      console.log('Supply chain created successfully');
+      console.log("Supply chain created successfully");
     } catch (error) {
       // Handle error
-      console.error('Error creating supply chain:', error);
+      console.error("Error creating supply chain:", error);
     }
   };
 
   return (
     <Container>
-      <h1>Supply Chains</h1>
-      <Button variant="primary" onClick={() => setShowModal(true)}>
-        Create Supply Chain
-      </Button>
+      <Row>
+        <Col>
+          <h2 className="page-heading">SUPPLY CHAINS</h2>
+        </Col>
+        <Col md={4}>
+          <Button
+            className="btn-purple"
+            variant="primary"
+            onClick={() => setShowModal(true)}
+          >
+            Create Supply Chain
+          </Button>
+        </Col>
+      </Row>
+
       <SupplyChainList />
       <CreateSupplyChainModal
         show={showModal}

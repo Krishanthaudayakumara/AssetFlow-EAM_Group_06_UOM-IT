@@ -73,9 +73,8 @@ const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateC
 
   return (
     <Form className="form-horizontal" role="form">
-      <Row>
-        <div className="row">
-          <div className="col-md-8" style={{ margin: '5px 100px 0 0' }}>
+       <div className="row">
+          <div className="col-md-5" style={{ margin: '5px 20px 0 50px' }}>
             <label>Department Name:</label>
             <Form.Select
               aria-label="Default select example"
@@ -87,11 +86,8 @@ const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateC
               <option value="Inventory">Inventory</option>
             </Form.Select>
           </div>
-        </div>
-      </Row>
-      <Row>
-        <div className="row">
-          <div className="col-md-8" style={{ margin: '5px 100px 0 0' }}>
+       
+          <div className="col-md-5" style={{ margin: '5px 10px 0 0' }}>
             <label>Report Type:</label>
             <Form.Select
               aria-label="Default select example"
@@ -102,10 +98,8 @@ const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateC
             </Form.Select>
           </div>
         </div>
-      </Row>
-      <Row>
         <div className="row">
-          <div className="col-md-8" style={{ margin: '5px 100px 0 0' }}>
+          <div className="col-md-5" style={{ margin: '5px 20px 0 50px' }}>
             <Form.Group controlId="fromDate">
               <Form.Label>From Date</Form.Label>
               <Form.Control
@@ -116,11 +110,8 @@ const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateC
               />
             </Form.Group>
           </div>
-        </div>
-      </Row>
-      <Row>
-        <div className="row">
-          <div className="col-md-8" style={{ margin: '5px 100px 0 0' }}>
+       
+          <div className="col-md-5" style={{ margin: '5px 10px 0 0' }}>
             <Form.Group controlId="toDate">
               <Form.Label>To Date</Form.Label>
               <Form.Control
@@ -132,10 +123,9 @@ const ReportFilter: React.FC<ReportFilterProps> = ({ onReportTypeChange, onDateC
             </Form.Group>
           </div>
         </div>
-      </Row>
     </Form>
   )
 }
 
-export default ReportFilter
+export default ReportFilter;
 

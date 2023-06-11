@@ -54,3 +54,17 @@
     background-color: white !important;
     color: #ff615a !important;
 }
+
+.btn-l-orange{
+    background-color: white !important;
+    color: #ff615a !important;
+    border: 1px solid #ff615a !important;
+    border-radius: 5px !important;
+    padding: 10px 20px;
+    margin: 10px;
+    /* font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px; */
+    transition: all 0.3s ease 0s;
+}

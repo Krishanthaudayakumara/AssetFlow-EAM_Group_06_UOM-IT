@@ -88,7 +88,7 @@ const CategoryPage: React.FC = () => {
           <h2 className="table-page-heading">CATEGORIES</h2>
         </Col>
         <Col md={3}>
-          <Button variant="primary" onClick={() => setShowModal(true)}>
+          <Button className="btn-purple" variant="primary" onClick={() => setShowModal(true)}>
             Add Category
           </Button>
         </Col>

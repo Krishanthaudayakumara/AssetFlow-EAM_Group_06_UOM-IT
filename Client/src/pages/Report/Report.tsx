@@ -59,7 +59,7 @@ const Report: React.FC = () => {
       <h2  className="table-page-heading">REPORTS</h2>
         <div
           className="shadow p-3 mb-4 bg-white rounded"
-          style={{ margin: '0 0 0 65px' }}
+          style={{ margin: '20px 0 0 35px' }}
         >
            <ReportFilter
           onReportTypeChange={handleReportTypeChange}

@@ -56,7 +56,7 @@ const SubCategoryPage: React.FC = () => {
           <h2 className="table-page-heading">SUBCATEGORIES</h2>
         </Col>
         <Col md={3}>
-          <Button variant="primary" onClick={() => setShowModal(true)}>
+          <Button className="btn-purple" variant="primary" onClick={() => setShowModal(true)}>
             {" "}
             Add Subcategory
           </Button>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import OrderTable from "../../components/SupplyChain/OrderTable";
 import { checkAndCreateOrder } from "../../api/orderApi";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Col, Row } from "react-bootstrap";
 
 const OrderPage: React.FC = () => {
   const [successModalVisible, setSuccessModalVisible] = useState(false);
@@ -18,10 +18,17 @@ const OrderPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Order Page</h1>
-      <Button onClick={handleCheckAndCreateOrder}>
+      <Row>
+        <Col>
+        <h2 className="page-heading">SUPPLY ORDERS</h2>
+        </Col>
+        <Col md={4}>
+        <Button className="btn-purple" onClick={handleCheckAndCreateOrder}>
         Check and Create Order
       </Button>
+        </Col>
+      </Row>
+
 
       <OrderTable />
 
