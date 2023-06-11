@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./../../css/Table.css";
 
 import { Table } from "react-bootstrap";
 
@@ -40,10 +41,8 @@ function FacilityAssetStock() {
         style={{ width: "800px" }}
       >
         <Table
-          className="table w-100 small text-center"
-          hover
-          align="center"
-          style={{ fontSize: "14px", width: "500px" }}
+          className="table"
+          
         >
           <thead>
             <tr style={{ color: "#482890" }}>

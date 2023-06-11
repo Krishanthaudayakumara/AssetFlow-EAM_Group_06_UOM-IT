@@ -4,6 +4,7 @@ import axios from "axios";
 import SupplierTable from "../../components/Supplier/SupplierTable";
 import AddSupplierModal from "../../components/Supplier/AddSupplierModal";
 import SupplierModal from "../../components/Supplier/SupplierModal";
+import "./../../css/Table.css";
 
 import { Supplier } from "../../types";
 
@@ -73,6 +74,9 @@ const SupplierPage: React.FC = () => {
     <Container>
       <Row>
         <Col>
+          <h2 className="page-heading">SUPPLIERS</h2>
+        </Col>
+        <Col md={3}>
           <Button
             variant="primary"
             onClick={() => setShowAddModal(true)}
@@ -93,16 +97,16 @@ const SupplierPage: React.FC = () => {
               onSubmit={handleEditSupplier}
             />
           )}
-          <SupplierTable
-            suppliers={suppliers}
-            onEdit={(supplier) => {
-              setSelectedSupplier(supplier);
-              setShowEditModal(true);
-            }}
-            onDelete={handleDeleteSupplier}
-          />
         </Col>
       </Row>
+      <SupplierTable
+        suppliers={suppliers}
+        onEdit={(supplier) => {
+          setSelectedSupplier(supplier);
+          setShowEditModal(true);
+        }}
+        onDelete={handleDeleteSupplier}
+      />
     </Container>
   );
 };

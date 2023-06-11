@@ -206,14 +206,14 @@ const MyTicketTable = () => {
       )}
       <div className="row">
         <div className="col-8">
-          <p className="table-heading">My Tickets</p>
+         
         </div>
         <div className="col-1">
           <Form>
             <InputGroup style={{ width: "300px" }}>
               <Form.Control
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search Ticket"
+                placeholder="Search Ticket by problem"
               />
               <InputGroup.Text>
                 <FaSearch />

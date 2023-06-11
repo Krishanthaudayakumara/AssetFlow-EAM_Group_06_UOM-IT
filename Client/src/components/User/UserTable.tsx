@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button, FormControl, Col, Row, Spinner } from "react-bootstrap";
 import { User } from "../../types";
+import "./../../css/Table.css";
 import {
   BsPencilSquare,
   BsTrash,
@@ -11,6 +12,8 @@ import {
   BsSearch,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   users: User[];
@@ -204,11 +207,7 @@ const UserTable: React.FC<Props> = ({
               </div>
             </Col>
           </Row>
-          <Table
-            striped
-            className="table w-100 small table-borderless table-responsive align-middle align-left"
-            hover
-          >
+          <Table className="table">
             <thead>
               <tr>
                 <th></th>
@@ -226,11 +225,11 @@ const UserTable: React.FC<Props> = ({
                   <th>Restore</th>
                 ) : (
                   <>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Actions</th>
+                    
                   </>
                 )}
-                <th>Access Log</th>
+                
               </tr>
             </thead>
             <tbody>
@@ -251,31 +250,34 @@ const UserTable: React.FC<Props> = ({
                     <td>
                       <Button
                         variant="outline-success"
-                        onClick={() => handleRestoreClick(user)}
+                        
                         className="btn-purple"
                       >
-                        <BsArrowRepeat />
+                        <BsArrowRepeat onClick={() => handleRestoreClick(user)}/>
                       </Button>
                     </td>
                   ) : (
                     <>
                       <td>
-                        <Button
-                          variant="outline-primary"
+                        <FontAwesomeIcon
+                          icon={faPen}
+                          style={{
+                            color: "#482890",
+                            cursor: "pointer",
+                          }}
+                          title="Edit User"
                           onClick={() => handleEditClick(user)}
-                          className="btn-l-purple"
-                        >
-                          <BsPencilSquare />
-                        </Button>
-                      </td>
-                      <td>
-                        <Button
-                          variant="outline-danger"
+                        />
+                     &nbsp; &nbsp; &nbsp;
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          style={{
+                            color: "#FF615A",
+                            cursor: "pointer",
+                          }}
+                          title="Delete User"
                           onClick={() => handleDeleteClick(user)}
-                          className="btn-orange"
-                        >
-                          <BsTrash />
-                        </Button>
+                        />
                       </td>
                     </>
                   )}

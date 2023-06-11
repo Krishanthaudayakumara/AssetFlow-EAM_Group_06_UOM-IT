@@ -6,7 +6,7 @@ import '../../css/Home.css';
 import CardDashboard from '../../components/Dashboard/CardDashboard';
 import PieChart from '../../components/Dashboard/PieChart';
 import InventoryBarchart from '../../components/Dashboard/InventoryBarchart';
-
+import "./../../css/Table.css";
 const options = {
   title: {
     display: true,
@@ -115,7 +115,7 @@ const InventoryDashboard: React.FC = () => {
     <div>
       <Container>
         <div>
-          <h1 style={{ margin: '0px 0 0 65px' }}>Inventory Dashboard</h1>
+          <h2  className="table-page-heading">INVENTORY DASHBOARD</h2>
           <div className="row mb-6" style={{ margin: '0px 0 0 65px' }}>
             <CardDashboard name="Total assets" count={assetCount} />
             <CardDashboard name="Total Categories" count={categoryCount} />

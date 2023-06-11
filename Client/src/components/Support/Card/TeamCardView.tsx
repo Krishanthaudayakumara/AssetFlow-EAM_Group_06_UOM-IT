@@ -11,19 +11,37 @@ interface teamType {
 
 interface TeamCardViewProps {
   teams: teamType[];
+  search: string;
+  currentPage: number;
+  recordsPerPage: number;
   onEditIssue: (agent: teamType) => void;
   onDeleteIssue: (agent: teamType) => void;
+  onTeamClick: (agent: teamType) => void;
 }
 
 const TeamCardView = ({
   teams,
+  search,
+  currentPage,
+  recordsPerPage,
   onEditIssue,
   onDeleteIssue,
+  onTeamClick,
 }: TeamCardViewProps) => {
   return (
     <div className="card-view-wrapper">
     <div className="agent-card-container">
-      {teams.map((team) => (
+      {teams
+      .filter((team) => {
+        return search.toLowerCase() === ""
+          ? team
+          : team.name.toLowerCase().includes(search);
+      })
+      .slice(
+        (currentPage - 1) * recordsPerPage,
+        currentPage * recordsPerPage
+      )
+      .map((team) => (
         <Card key={team.id} className="agent-card">
             
           <Card.Img
@@ -31,7 +49,8 @@ const TeamCardView = ({
             src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
             alt="User profile"
             className=" agent-image"
-            onClick={() => onEditIssue(team)}
+            onClick={() => onTeamClick(team)}
+            style={{ cursor: "pointer" }}
           />
           <Card.Body>
             <Card.Title className="agent-name">

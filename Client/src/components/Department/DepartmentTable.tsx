@@ -4,6 +4,9 @@ import React from "react";
 import { Department } from "../../types";
 import { Table, Button } from "react-bootstrap";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "./../../css/Table.css";
 
 interface Props {
   departments: Department[];
@@ -17,15 +20,8 @@ const DepartmentTable: React.FC<Props> = ({
   onDelete,
 }) => {
   return (
-    <div
-        className="table-container shadow p-3 bg-white rounded"
-      >
-    <Table
-      striped
-      className="table w-100 small table-borderless table-responsiv align-middle align-left"
-      hover
-    >
-      
+    <div className="table-box-shadow">
+      <Table className="table">
         <thead>
           <tr>
             <th>ID</th>
@@ -41,27 +37,31 @@ const DepartmentTable: React.FC<Props> = ({
               <td>{department.name}</td>
               <td>{department.description}</td>
               <td>
-                <Button
-                  variant="outline-primary"
+                <FontAwesomeIcon
+                  icon={faPen}
+                  style={{
+                    color: "#482890",
+                    cursor: "pointer",
+                  }}
+                  title="Edit Issue Type"
                   onClick={() => onEdit(department)}
-                  className="btn-l-purple"
-                >
-                  <BsPencilSquare />
-                </Button>{" "}
-                <Button
-                  variant="outline-danger"
+                />
+                &nbsp; &nbsp; &nbsp;
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  style={{
+                    color: "#FF615A",
+                    cursor: "pointer",
+                  }}
+                  title="Delete Issue Type"
                   onClick={() => onDelete(department)}
-                  className="btn-orange"
-                >
-                  <BsTrash />
-                </Button>
+                />
               </td>
             </tr>
           ))}
         </tbody>
-    </Table>
+      </Table>
     </div>
-
   );
 };
 

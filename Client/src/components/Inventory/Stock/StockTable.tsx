@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getStock, deleteStock } from '../../../api/stockApi';
-import { Table, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { getStock, deleteStock } from "../../../api/stockApi";
+import { Table, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBarcode, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 interface Stock {
   id: number;
@@ -34,7 +36,7 @@ const StockTable = () => {
       const response = await getStock();
       setStocks(response.data);
     } catch (error) {
-      console.error('Error fetching stocks:', error);
+      console.error("Error fetching stocks:", error);
     }
   };
 
@@ -43,7 +45,7 @@ const StockTable = () => {
       await deleteStock(stockId);
       fetchStocks();
     } catch (error) {
-      console.error('Error deleting stock:', error);
+      console.error("Error deleting stock:", error);
     }
   };
 
@@ -69,7 +71,11 @@ const StockTable = () => {
           <tr key={stock.id}>
             <td>{stock.id}</td>
             <td>
-              <img src={stock.imageUrl} alt={stock.name} style={{ height: '100px' }} />
+              <img
+                src={stock.imageUrl}
+                alt={stock.name}
+                style={{ height: "100px" }}
+              />
             </td>
             <td>{stock.name}</td>
             <td>{stock.description}</td>
@@ -80,14 +86,27 @@ const StockTable = () => {
             <td>{stock.arrivalDate}</td>
             <td>{stock.quantity}</td>
             <td>
-              <Button variant="danger" onClick={() => handleDeleteStock(stock.id)}>
-                Delete
-              </Button>
+              <FontAwesomeIcon icon={faBarcode} />
               <Link to={`/stock/${stock.id}/barcodes`}>
-                <Button variant="primary">
-                  <i className="bi bi-barcode"></i> Barcodes
-                </Button>
+                <FontAwesomeIcon
+                  style={{
+                    color: "#482890",
+                    cursor: "pointer",
+                  }}
+                  icon={faBarcode}
+                  title="View Barcodes"
+                />
               </Link>
+              &nbsp; &nbsp; &nbsp;
+              <FontAwesomeIcon
+                icon={faTrash}
+                style={{
+                  color: "#FF615A",
+                  cursor: "pointer",
+                }}
+                title="Delete Stock"
+                onClick={() => handleDeleteStock(stock.id)}
+              />
             </td>
           </tr>
         ))}

@@ -5,6 +5,7 @@ import AssetEditModal from '../../../components/Inventory/Asset/AssetEditModal';
 import AssetDeleteModal from '../../../components/Inventory/Asset/AssetDeleteModal';
 import AssetAPI from '../../../api/assetApi';
 import { Asset, EditAsset, DeleteAsset } from '../../../types';
+import "../../../css/Table.css";
 
 const AssetPage = () => {
   const [assets, setAssets] = useState<Asset[]>([]);
@@ -66,7 +67,7 @@ const AssetPage = () => {
 
   return (
     <Container>
-      <h1>Asset Management</h1>
+      <h2 className="table-page-heading">INVENTORY</h2>
       <AssetTable
         assets={assets}
         onEdit={handleEditAsset}

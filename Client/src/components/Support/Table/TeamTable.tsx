@@ -2,7 +2,12 @@ import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { Form, InputGroup, Table, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faHome,faPen,faTrash,faUser,} from "@fortawesome/free-solid-svg-icons";
+import {
+  faHome,
+  faPen,
+  faTrash,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import EditTeamForm from "../Forms/Team/EditTeamForm";
@@ -39,10 +44,10 @@ const TeamTable = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [showTeamToTicketTable, setShowTeamToTicketTable] = useState(false); 
+  const [showTeamToTicketTable, setShowTeamToTicketTable] = useState(false);
   const [cardViewActive, setCardViewActive] = useState(false);
 
-  const recordsPerPage = 4;
+  const recordsPerPage = 6;
 
   useEffect(() => {
     const fetchIssues = async () => {
@@ -65,7 +70,7 @@ const TeamTable = () => {
 
   const handleTeamClick = (team: teamType) => {
     setSelectedTeam(team);
-    setShowTeamToTicketTable(true); 
+    setShowTeamToTicketTable(true);
   };
   const handleEditTeamClick = (team: teamType) => {
     setSelectedTeam(team);
@@ -135,12 +140,12 @@ const TeamTable = () => {
   return (
     <div>
       {showTeamToTicketTable ? (
-        <TeamToTicket teamId={selectedTeam?.id ?? 0} /> 
+        <TeamToTicket teamId={selectedTeam?.id ?? 0} />
       ) : (
         <div>
           <div className="row">
             <div className="col-6">
-              <p className="table-heading">Support Teams</p>
+              
             </div>
             <div className="col-2">
               <Button onClick={handleCardViewClick}>
@@ -152,7 +157,7 @@ const TeamTable = () => {
                 <InputGroup style={{ width: "300px" }}>
                   <Form.Control
                     onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Search Support Team"
+                    placeholder="Search Support Team by name"
                   />
                   <InputGroup.Text>
                     <FaSearch />
@@ -168,8 +173,12 @@ const TeamTable = () => {
           {cardViewActive ? (
             <TeamCardView
               teams={teams}
+              search={search}
+              currentPage={currentPage}
+              recordsPerPage={recordsPerPage}
               onEditIssue={handleEditTeamClick}
               onDeleteIssue={handleDeleteTeam}
+              onTeamClick={handleTeamClick}
             />
           ) : (
             <div className="box-shadow">

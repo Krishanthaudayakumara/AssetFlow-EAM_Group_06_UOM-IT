@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaTrashAlt, FaPen } from "react-icons/fa";
 import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
+import "./../../css/Table.css";
 
 interface FacilityAssetData {
   id: number;
@@ -12,24 +13,17 @@ interface FacilityAssetData {
   assignedDate: string;
   receivedDate: string;
   assignStatus: string;
-  workstationId:number;
+  workstationId: number;
 }
 
 function FacilityAssetTable() {
   const [facilityData, setFacilityData] = useState<FacilityAssetData[]>([]);
-   
- 
 
   useEffect(() => {
     const fetchFacilityAssetData = async () => {
       try {
         const response = await axios.get<FacilityAssetData[]>(
-        "http://localhost:5087/api/FacilityAsset/GetAllFacilityAssets"
-        
-
-          
-          
-          
+          "http://localhost:5087/api/FacilityAsset/GetAllFacilityAssets"
         );
         console.log(response);
         setFacilityData(response.data);
@@ -43,17 +37,11 @@ function FacilityAssetTable() {
 
   return (
     <div style={{ margin: "4rem" }}>
-      
       <div
         className="shadow p-2 mb- bg-white rounded"
-        style={{ width: "950px" }}
+        style={{ width: "850px" }}
       >
-        <Table
-          className="table w-100 small text-center"
-          hover
-          align="center"
-          style={{ fontSize: "14px", width: "500px" }}
-        >
+        <Table className="table">
           <thead>
             <tr style={{ color: "#482890" }}>
               <th>FacilityAsset id</th>
@@ -64,7 +52,6 @@ function FacilityAssetTable() {
               <th>Assign Status</th>
               <th>Assigned date</th>
               <th>workstationId</th>
-            
 
               <th>Action</th>
             </tr>
@@ -73,10 +60,7 @@ function FacilityAssetTable() {
             {facilityData && facilityData.length > 0 ? (
               facilityData.map((item) => {
                 return (
-                  <tr
-                    key={item.id}
-                    style={{ textAlign: "center" }}
-                  >
+                  <tr key={item.id} style={{ textAlign: "center" }}>
                     <td>{item.id}</td>
                     <td>{item.assetId}</td>
                     <td>{item.assetConditionStatus}</td>
@@ -84,7 +68,7 @@ function FacilityAssetTable() {
                     <td>{item.assignStatus}</td>
                     <td>{item.assignedDate}</td>
                     <td>{item.workstationId}</td>
-                    
+
                     <td>
                       <FaTrashAlt style={{ color: " #ff615a " }} />
                       <FaPen
@@ -102,8 +86,6 @@ function FacilityAssetTable() {
           </tbody>
         </Table>
       </div>
-
-     
     </div>
   );
 }

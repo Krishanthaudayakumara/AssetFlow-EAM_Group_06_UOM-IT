@@ -5,6 +5,7 @@ import LineChart from '../../components/Dashboard/LineChart'
 import '../../css/Home.css'
 import CardDashboard from '../../components/Dashboard/CardDashboard'
 import TicketBarChart from '../../components/Dashboard/TicketBarChart'
+import "./../../css/Table.css";
 interface TicketCount {
   month: string
   count: number
@@ -154,7 +155,7 @@ const ITDashboard = () => {
   return (
     <div>
       <Container>
-        <h4 style={{ margin: '0px 0 0 65px' }}>IT Summary</h4>
+      <h2  className="table-page-heading">IT DASHBOARD</h2>
         <div className="row mb-6" style={{ margin: '0px 0 0 65px' }}>
         {/* code for CardDashboard component */}
           <CardDashboard name="Available Agents" count={availableAgentCount} />

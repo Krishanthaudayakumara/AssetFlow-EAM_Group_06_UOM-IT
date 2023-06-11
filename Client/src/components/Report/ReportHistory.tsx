@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Table, Modal } from 'react-bootstrap';
 import axios from 'axios';
+import "./../../css/Table.css";
 
 interface GeneratedReport {
   id: number;
@@ -56,7 +57,7 @@ const ReportHistory = () => {
 
   return (
     <Fragment>
-      <h4 style={{ margin: '30px 0 0 65px' }}>Report History</h4>
+      <h2  className="table-page-heading">REPORT HISTORY</h2>
       <div
         className="shadow p-3 bg-white rounded"
         style={{ margin: '30px 0 0 65px' }}

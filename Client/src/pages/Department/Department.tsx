@@ -5,6 +5,7 @@ import axios from "axios";
 import DepartmentTable from "../../components/Department/DepartmentTable";
 import AddDepartmentModal from "../../components/Department/AddDepartmentModal";
 import DepartmentModal from "../../components/Department/DepartmentModal";
+import "./../../css/Table.css";
 
 import { Department } from "../../types";
 
@@ -12,9 +13,8 @@ const DepartmentPage: React.FC = () => {
   const [departments, setDepartments] = useState<Department[]>([]);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [selectedDepartment, setSelectedDepartment] = useState<Department | null>(
-    null
-  );
+  const [selectedDepartment, setSelectedDepartment] =
+    useState<Department | null>(null);
 
   useEffect(() => {
     fetchDepartments();
@@ -71,7 +71,14 @@ const DepartmentPage: React.FC = () => {
     <Container>
       <Row>
         <Col>
-          <Button variant="primary" onClick={() => setShowAddModal(true)} className="btn-purple">
+          <h2 className="page-heading">DEPARTMENTS</h2>
+        </Col>
+        <Col md={3}>
+          <Button
+            variant="primary"
+            onClick={() => setShowAddModal(true)}
+            className="btn-purple"
+          >
             Add Department
           </Button>
           <AddDepartmentModal
@@ -87,16 +94,16 @@ const DepartmentPage: React.FC = () => {
               onSubmit={handleEditDepartment}
             />
           )}
-          <DepartmentTable
-            departments={departments}
-            onEdit={(department) => {
-              setSelectedDepartment(department);
-              setShowEditModal(true);
-            }}
-            onDelete={handleDeleteDepartment}
-          />
         </Col>
       </Row>
+      <DepartmentTable
+        departments={departments}
+        onEdit={(department) => {
+          setSelectedDepartment(department);
+          setShowEditModal(true);
+        }}
+        onDelete={handleDeleteDepartment}
+      />
     </Container>
   );
 };

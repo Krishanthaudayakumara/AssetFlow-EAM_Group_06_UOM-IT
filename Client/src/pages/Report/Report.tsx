@@ -8,6 +8,7 @@ import TicketReport from '../../components/Report/TicketReport'
 import BuildingReport from '../../components/Report/BuildingReport';
 import AssetAssignmentReport from '../../components/Report/AssetAssignmentReport';
 import WarrantyExpirationReport from '../../components/Report/WarrantyExpirationReport';
+import "./../../css/Table.css";
 
 const Report: React.FC = () => {
   const [selectedReportType, setSelectedReportType] = useState<string>('')
@@ -55,7 +56,7 @@ const Report: React.FC = () => {
   return (
     <Container>
       <div>
-        <h1 style={{ margin: '0px 0 20px 65px' }}>Reports</h1>
+      <h2  className="table-page-heading">REPORTS</h2>
         <div
           className="shadow p-3 mb-4 bg-white rounded"
           style={{ margin: '0 0 0 65px' }}

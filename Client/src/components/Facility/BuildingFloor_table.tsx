@@ -4,6 +4,9 @@ import { FaTrashAlt, FaPen } from "react-icons/fa";
 import axios from "axios";
 import { Modal, Button } from "react-bootstrap";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "./../../css/Table.css";
 
 interface BuildingData {
   id: string;
@@ -166,99 +169,104 @@ function BuildingFloorTable() {
           <Container>
             <Form>
               <InputGroup>
-              <Form.Control onChange={(e)=>setSearch(e.target.value)}
-              placeholder="Search"
-              />
-
-              
+                <Form.Control
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search"
+                />
               </InputGroup>
             </Form>
-          <Table
-            className="table w-100 small text-center"
-            hover
-            align="center"
-            style={{ fontSize: "14px", width: "500px" }}
-          >
-            <thead>
-              <tr style={{ color: "#482890" }}>
-                <th>building Name</th>
-                <th colSpan={1}>floor No</th>
-                <th>Address</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {buildingData && buildingData.length > 0 ? (
-                buildingData.filter((a)=>{
-                  return search.toLowerCase()=== '' ? a:a.buildingName.
-                  toLowerCase().includes(search)
-                }).map((a) => {
-                  return (
-                    <tr key={a.id} style={{ textAlign: "center" }}>
-                      <td>
-                        {editing && editData.id === a.id ? (
-                          <input
-                            type="text"
-                            name="buildingName"
-                            value={editData.buildingName}
-                            onChange={handleInputChange}
-                          />
-                        ) : (
-                          a.buildingName
-                        )}
-                      </td>
-                      <td>
-                        {editing && editData.id === a.id ? (
-                          <input
-                            type="number"
-                            name="floorNo"
-                            value={editData.floorNo}
-                            onChange={handleInputChange}
-                          />
-                        ) : (
-                          a.floorNo
-                        )}
-                      </td>
-                      <td>
-                        {editing && editData.id === a.id ? (
-                          <input
-                            type="text"
-                            name="address"
-                            value={editData.address}
-                            onChange={handleInputChange}
-                          />
-                        ) : (
-                          a.address
-                        )}
-                      </td>
-
-                      <td>
-                        <FaTrashAlt
-                          style={{ color: " #ff615a " }}
-                          onClick={() => handleDelete(a.id)}
-                        />
-                        {editing && editData.id === a.id ? (
-                          <>
-                            <button onClick={handleSave}>Save</button>
-                            <button onClick={handleCancel}>Cancel</button>
-                          </>
-                        ) : (
-                          <FaPen
-                            style={{ color: " #482890", marginLeft: "10px" }}
-                            onClick={() => handleEdit(a)}
-                          />
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })
-              ) : (
-                <tr>
-                  <td colSpan={5}>No data available</td>
+            <Table className="table">
+              <thead>
+                <tr style={{ color: "#482890" }}>
+                  <th>building Name</th>
+                  <th colSpan={1}>floor No</th>
+                  <th>Address</th>
+                  <th>Action</th>
                 </tr>
-              )}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {buildingData && buildingData.length > 0 ? (
+                  buildingData
+                    .filter((a) => {
+                      return search.toLowerCase() === ""
+                        ? a
+                        : a.buildingName.toLowerCase().includes(search);
+                    })
+                    .map((a) => {
+                      return (
+                        <tr key={a.id} style={{ textAlign: "center" }}>
+                          <td>
+                            {editing && editData.id === a.id ? (
+                              <input
+                                type="text"
+                                name="buildingName"
+                                value={editData.buildingName}
+                                onChange={handleInputChange}
+                              />
+                            ) : (
+                              a.buildingName
+                            )}
+                          </td>
+                          <td>
+                            {editing && editData.id === a.id ? (
+                              <input
+                                type="number"
+                                name="floorNo"
+                                value={editData.floorNo}
+                                onChange={handleInputChange}
+                              />
+                            ) : (
+                              a.floorNo
+                            )}
+                          </td>
+                          <td>
+                            {editing && editData.id === a.id ? (
+                              <input
+                                type="text"
+                                name="address"
+                                value={editData.address}
+                                onChange={handleInputChange}
+                              />
+                            ) : (
+                              a.address
+                            )}
+                          </td>
+
+                          <td>
+                            {editing && editData.id === a.id ? (
+                              <>
+                                <button onClick={handleSave}>Save</button>
+                                <button onClick={handleCancel}>Cancel</button>
+                              </>
+                            ) : (
+                              <FontAwesomeIcon
+                                icon={faPen}
+                                style={{
+                                  color: "#482890",
+                                  cursor: "pointer",
+                                }}
+                                onClick={() => handleEdit(a)}
+                              />
+                            )}&nbsp; &nbsp; &nbsp;
+                            <FontAwesomeIcon
+                              icon={faTrash}
+                              style={{
+                                color: "#FF615A",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => handleDelete(a.id)}
+                            />
+                          </td>
+                        </tr>
+                      );
+                    })
+                ) : (
+                  <tr>
+                    <td colSpan={5}>No data available</td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
           </Container>
         </div>
       </div>

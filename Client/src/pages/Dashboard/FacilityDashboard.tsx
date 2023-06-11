@@ -5,6 +5,7 @@ import '../../css/Home.css';
 import CardDashboard from '../../components/Dashboard/CardDashboard';
 import axios from 'axios';
 import LineChart from '../../components/Dashboard/LineChart';
+import "./../../css/Table.css";
 
 const FacilityDashboard: React.FC = () => {
   const [totalBuildings, setTotalBuildings] = useState(0);
@@ -80,7 +81,7 @@ const FacilityDashboard: React.FC = () => {
   return (
     <div>
       <Container>
-        <h1 style={{ margin: '0px 0 0 65px' }}>Facility Summary</h1>
+      <h2  className="table-page-heading">FACILITY DASHBOARD</h2>
         <div className="row mb-3" style={{ margin: '0px 0 0 65px' }}>
           <CardDashboard name="Total Buildings" count={totalBuildings} />
           <CardDashboard name="Total Facility Assets" count={totalFacilityAssets} />

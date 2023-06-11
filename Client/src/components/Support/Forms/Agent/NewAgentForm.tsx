@@ -127,7 +127,7 @@ const NewAgentForm = () => {
     const contactRegex = /^[A-Za-z\s]{2,20}$/; // Regex to match a characters
     const isValid = contactRegex.test(formData.firstName && formData.lastName);
     if (!isValid) {
-      setNameError("Input should only contain English letters and limit to 50 characters");
+      setNameError("Input should only contain English letters and limit to 20 characters");
     } else {
       setNameError("");
     }

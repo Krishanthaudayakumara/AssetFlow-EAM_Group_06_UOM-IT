@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../../css/Inventory/Request.css";
 import SubCategoryCard from "../../../components/Inventory/Request/SubCategoryCard";
 import AssetCard from "../../../components/Inventory/Request/AssetCard";
+import "../../../css/Table.css";
 
 interface Category {
   id: number;
@@ -87,6 +88,8 @@ const EmployeeRequest: React.FC = () => {
   };
 
   return (
+    <div>
+      <h2 className="table-page-heading">EMPLOYEE REQUEST</h2>
     <div className="employee-request">
       <div className="content">
         <ul>
@@ -125,6 +128,7 @@ const EmployeeRequest: React.FC = () => {
           selectedCategory && <SubCategoryCard subCategories={subCategories} />
         )}
       </div>
+    </div>
     </div>
   );
 };

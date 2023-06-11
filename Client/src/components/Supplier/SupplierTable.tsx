@@ -2,6 +2,9 @@ import React from "react";
 import { Table, Button } from "react-bootstrap";
 import { Supplier } from "../../types";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
+import "./../../css/Table.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   suppliers: Supplier[];
@@ -11,12 +14,8 @@ interface Props {
 
 const SupplierTable: React.FC<Props> = ({ suppliers, onEdit, onDelete }) => {
   return (
-    <div className="table-container shadow p-3 bg-white rounded">
-      <Table
-        striped
-        className="table w-100 small table-borderless table-responsiv align-middle align-left"
-        hover
-      >
+    <div className="table-box-shadow">
+      <Table className="table">
         {" "}
         <thead>
           <tr>
@@ -26,8 +25,7 @@ const SupplierTable: React.FC<Props> = ({ suppliers, onEdit, onDelete }) => {
             <th>Contact Number</th>
             <th>Email</th>
             <th>Notes</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -40,22 +38,25 @@ const SupplierTable: React.FC<Props> = ({ suppliers, onEdit, onDelete }) => {
               <td>{supplier.email}</td>
               <td>{supplier.notes}</td>
               <td>
-                <Button
-                  className="btn-l-purple"
-                  variant="outline-primary"
+                <FontAwesomeIcon
+                  icon={faPen}
+                  style={{
+                    color: "#482890",
+                    cursor: "pointer",
+                  }}
+                  title="Edit Supplier"
                   onClick={() => onEdit(supplier)}
-                >
-                  <BsPencilSquare />
-                </Button>{" "}
-              </td>
-              <td>
-                <Button
-                  className="btn-orange"
-                  variant="outline-danger"
+                />
+                &nbsp; &nbsp; &nbsp;
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  style={{
+                    color: "#FF615A",
+                    cursor: "pointer",
+                  }}
+                  title="Delete Issue Type"
                   onClick={() => onDelete(supplier)}
-                >
-                  <BsTrash />
-                </Button>
+                />
               </td>
             </tr>
           ))}

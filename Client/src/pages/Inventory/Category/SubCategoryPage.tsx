@@ -7,6 +7,7 @@ import {
   createSubCategory,
 } from "../../../api/subCategoryApi";
 import SubCategoryModal from "../../../components/Inventory/Category/SubCategoryModal";
+import "../../../css/Table.css";
 
 const SubCategoryPage: React.FC = () => {
   const [subcategories, setSubcategories] = useState([]);
@@ -50,10 +51,17 @@ const SubCategoryPage: React.FC = () => {
 
   return (
     <Container>
-      <h1>Subcategories</h1>
-      <Button variant="primary" onClick={() => setShowModal(true)}>
-        Add Subcategory
-      </Button>
+      <Row>
+        <Col>
+          <h2 className="table-page-heading">SUBCATEGORIES</h2>
+        </Col>
+        <Col md={3}>
+          <Button variant="primary" onClick={() => setShowModal(true)}>
+            {" "}
+            Add Subcategory
+          </Button>
+        </Col>
+      </Row>
       <Row>
         {subcategories.map((subcategory: any) => (
           <Col key={subcategory.id} md={4}>

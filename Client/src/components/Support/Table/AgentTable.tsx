@@ -143,7 +143,7 @@ const AgentTable = () => {
         <div>
           <div className="row">
             <div className="col-6">
-              <p className="table-heading">Support Agents</p>
+              
             </div>
             <div className="col-2">
               <Button onClick={handleCardViewClick}>
