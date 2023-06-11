@@ -8,13 +8,13 @@ import {
   Image,
   Alert,
   Card,
+  Spinner,
 } from "react-bootstrap";
-import "../../css/Login.css"; // import background image CSS file
+import "../../css/Login.css";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import { login } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
-
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -26,6 +26,11 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+
     if (error) {
       const timer = setTimeout(() => {
         setError("");
@@ -37,34 +42,17 @@ const Login: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
+      setIsLoading(true);
       const data = await login(username, password);
       setIsValid(true);
-      localStorage.setItem("token", data.token); // store the token in local storage
-      navigate("/"); // redirect to home page
+      localStorage.setItem("token", data.token);
+      navigate("/");
+      window.location.reload();
     } catch (e: any) {
       setIsValid(false);
-      setError(e.message); // set the error message to display in the component
-    }
-  };
-
-  const handleDeleteUser = async () => {
-    const userId = "123"; // replace with the actual user ID
-    try {
-      const response = await fetch(
-        `http://localhost:5087/api/auth/users/${userId}`,
-        {
-          method: "DELETE",
-          headers: {
-            accept: "application/json",
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      // handle successful deletion
-    } catch (error) {
-      console.error(error);
-      // handle error
+      setError(e.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -78,10 +66,13 @@ const Login: React.FC = () => {
         backgroundSize: "cover",
       }}
     >
-      <Card className="login-card-back"  style={{
-        backgroundImage: `url(/img/grey-background.jpg)`,
-        backgroundRepeat: "no-repeat",
-      }}>
+      <Card
+        className="login-card-back"
+        style={{
+          backgroundImage: `url(/img/grey-background.jpg)`,
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <Card.Body>
           <Row className="justify-content-center">
             <Col lg={6} className="login-left-col">
@@ -106,7 +97,9 @@ const Login: React.FC = () => {
                         type="text"
                         placeholder="Enter Username"
                         value={username}
-                        onChange={(event) => setUsername(event.target.value)}
+                        onChange={(event) =>
+                          setUsername(event.target.value)
+                        }
                         className="login-form-control"
                       />
                     </Form.Group>
@@ -117,9 +110,10 @@ const Login: React.FC = () => {
                         type="password"
                         placeholder="Password"
                         value={password}
-                        onChange={(event) => setPassword(event.target.value)}
+                        onChange={(event) =>
+                          setPassword(event.target.value)
+                        }
                         className="login-form-control"
-
                       />
                     </Form.Group>
 
@@ -127,10 +121,6 @@ const Login: React.FC = () => {
                       <Form.Check
                         type="checkbox"
                         label="Remember me"
-                        // checked={rememberMe}
-                        // onChange={(event) =>
-                        //   setRememberMe(event.target.checked)
-                        // }
                       />
                     </Form.Group>
 
@@ -139,47 +129,30 @@ const Login: React.FC = () => {
                       type="submit"
                       className="submit-btn"
                     >
-                      Login <BsArrowRightCircle className="login-btn-icon" />
+                      {isLoading ? (
+                        <>
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                          Loading...
+                        </>
+                      ) : (
+                        <>
+                          Login{" "}
+                          <BsArrowRightCircle className="login-btn-icon" />
+                        </>
+                      )}
                     </Button>
                     <a href="">Forgot Password</a>
-
-                    {isLoading && <p>Loading...</p>}
-
-                    {/* {isValid === true && <p>Invalid User</p>} */}
                   </Form>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
-
-          {/* <Row className="l-footer">
-            <Col>
-              <div className="d-flex justify-content-start">
-                <ul className="footer-links list-unstyled d-flex">
-                  <li className="mr-3">
-                    <a href="/terms-and-conditions">Terms &amp; Conditions</a>
-                  </li>
-                  {" | "}
-                  <li>
-                    <a href="/documentation">Documentation</a>
-                  </li>
-                </ul>
-              </div>
-            </Col>
-            <Col>
-              <div className="d-flex justify-content-end">
-                <a href="https://www.facebook.com" className="social-icon mr-2">
-                  <FaFacebookF />
-                </a>
-                <a href="https://www.twitter.com" className="social-icon mr-2">
-                  <FaTwitter />
-                </a>
-                <a href="https://www.linkedin.com" className="social-icon">
-                  <FaLinkedinIn />
-                </a>
-              </div>
-            </Col>
-          </Row> */}
         </Card.Body>
       </Card>{" "}
     </Container>
