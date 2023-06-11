@@ -179,6 +179,26 @@ namespace Server.Controllers
             return NoContent();
         }
 
+
+       [HttpPut("status/{id}")]
+        public async Task<IActionResult> UpdateAsset(int id, AssetToUpdatesc assetToUpdatesc)
+        {
+            var asset = await _context.Assets.FindAsync(id);
+
+            if (asset == null)
+            {
+                return NotFound();
+            }
+            
+                    asset.Status=assetToUpdatesc.Status;
+                    asset.Condition=assetToUpdatesc.Condition;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsset(int id)
         {

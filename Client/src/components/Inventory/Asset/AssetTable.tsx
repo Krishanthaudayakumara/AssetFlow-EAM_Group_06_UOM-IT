@@ -50,6 +50,9 @@ const AssetTable: React.FC<AssetTableProps> = ({
   }, [searchQuery, assets]);
 
   return (
+
+
+    
     <div>
       <input
         type="text"
@@ -112,7 +115,11 @@ const AssetTable: React.FC<AssetTableProps> = ({
           ))}
         </tbody>
       </Table>
+      
     </div>
+
+
+
   );
 };
 

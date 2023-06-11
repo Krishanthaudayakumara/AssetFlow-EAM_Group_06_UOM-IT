@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import AssetTable from '../../../components/Inventory/Asset/AssetTable';
-import AssetEditModal from '../../../components/Inventory/Asset/AssetEditModal';
 import AssetDeleteModal from '../../../components/Inventory/Asset/AssetDeleteModal';
 import AssetAPI from '../../../api/assetApi';
 import { Asset, EditAsset, DeleteAsset } from '../../../types';
@@ -72,12 +71,7 @@ const AssetPage = () => {
         onEdit={handleEditAsset}
         onDelete={handleDeleteAsset}
       />
-      <AssetEditModal
-        show={showEditModal}
-        asset={selectedAsset}
-        onUpdate={handleAssetUpdate}
-        onClose={handleCloseModals}
-      />
+    
       <AssetDeleteModal
         show={showDeleteModal}
         asset={selectedAsset}

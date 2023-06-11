@@ -1,14 +1,13 @@
-// StockModal.jsx
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { createStock } from '../../../api/stockApi';
-import { Modal, Form, Button } from 'react-bootstrap';
+import { Modal, Form, Button, Alert } from 'react-bootstrap';
 
 const StockModal = () => {
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    categoryId: 0,
+    categoryId: '',
     subCategoryId: 0,
     supplierId: 0,
     quantity: 0,
@@ -16,8 +15,72 @@ const StockModal = () => {
     arrivalDate: '',
     image: null as File | null,
   });
+  const [error, setError] = useState('');
+ 
 
-  const handleClose = () => setShow(false);
+   const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
+   const [subCategories, setSubCategories] = useState<{ id: number; name: string }[]>([]);
+   const [suppliers, setSuppliers] =  useState<{ id: number; name: string }[]>([]);
+ 
+
+
+
+
+  useEffect(() => {
+    // Fetch categories when the component mounts
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      // Make an API call to fetch the categories
+      const response = await fetch('http://localhost:5087/api/Category');
+      const data = await response.json();
+      setCategories(data);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
+
+
+  useEffect(() => {
+    // Fetch subcategories when the component mounts
+    fetchSubCategories();
+  }, []);
+  
+  const fetchSubCategories = async () => {
+    try {
+      // Make an API call to fetch the subcategories
+      const response = await fetch('http://localhost:5087/api/SubCategory');
+      const data = await response.json();
+      setSubCategories(data);
+    } catch (error) {
+      console.error('Error fetching subcategories:', error);
+    }
+  };
+
+
+  useEffect(() => {
+    fetchSuppliers();
+  }, []);
+  
+  const fetchSuppliers = async () => {
+    try {
+      const response = await fetch('http://localhost:5087/api/Suppliers');
+      const data = await response.json();
+      setSuppliers(data);
+    } catch (error) {
+      console.error('Error fetching suppliers:', error);
+    }
+  };
+  
+  
+
+  const handleClose = () => {
+    setShow(false);
+    setError('');
+  };
+
   const handleShow = () => setShow(true);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -56,7 +119,7 @@ const StockModal = () => {
       setFormData({
         name: '',
         description: '',
-        categoryId: 0,
+        categoryId: '',
         subCategoryId: 0,
         supplierId: 0,
         quantity: 0,
@@ -67,7 +130,10 @@ const StockModal = () => {
       handleClose();
     } catch (error) {
       console.error('Error creating stock:', error);
+      setError('An error occurred while creating the stock.');
     }
+
+    window.location.reload();
   };
 
   return (
@@ -81,6 +147,7 @@ const StockModal = () => {
           <Modal.Title>Create Stock</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Label>Name:</Form.Label>
@@ -93,19 +160,42 @@ const StockModal = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Category ID:</Form.Label>
-              <Form.Control type="number" id="categoryId" name="categoryId" value={formData.categoryId} onChange={handleChange} required />
+              <Form.Label>Category :</Form.Label>
+              <Form.Control as="select" id="categoryId" name="categoryId" value={formData.categoryId} onChange={handleChange} required>
+                <option value="">Select a category</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                   {category.name}
+                  </option>
+                ))}
+              </Form.Control>
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Subcategory ID:</Form.Label>
-              <Form.Control type="number" id="subCategoryId" name="subCategoryId" value={formData.subCategoryId} onChange={handleChange} required />
-            </Form.Group>
+  <Form.Label>Subcategory ID:</Form.Label>
+  <Form.Control as="select" id="subCategoryId" name="subCategoryId" value={formData.subCategoryId} onChange={handleChange} required>
+    <option value="">Select a subcategory</option>
+    {subCategories.map((subcategory) => (
+      <option key={subcategory.id} value={subcategory.id}>
+        {subcategory.name}
+      </option>
+    ))}
+  </Form.Control>
+</Form.Group>
 
-            <Form.Group>
-              <Form.Label>Supplier ID:</Form.Label>
-              <Form.Control type="number" id="supplierId" name="supplierId" value={formData.supplierId} onChange={handleChange} required />
-            </Form.Group>
+
+<Form.Group>
+  <Form.Label>Supplier ID:</Form.Label>
+  <Form.Control as="select" id="supplierId" name="supplierId" value={formData.supplierId} onChange={handleChange} required>
+    <option value="">Select a supplier</option>
+    {suppliers.map((supplier) => (
+      <option key={supplier.id} value={supplier.id}>
+        {supplier.name}
+      </option>
+    ))}
+  </Form.Control>
+</Form.Group>
+
 
             <Form.Group>
               <Form.Label>Quantity:</Form.Label>
