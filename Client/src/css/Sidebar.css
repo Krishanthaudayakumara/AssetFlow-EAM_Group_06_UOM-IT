@@ -98,14 +98,3 @@
   padding-bottom: 4px !important;
  }
 
- .dark-theme .sidenav.dropdown-item{
-  background-color: #343a40 !important;
-  color: white !important;
- }
-
- .dark-theme .sidenav.dropdown-item:hover{
-  background-color: rgb(72, 40, 144) !important;
-  color: white !important;
- }
-
- 
