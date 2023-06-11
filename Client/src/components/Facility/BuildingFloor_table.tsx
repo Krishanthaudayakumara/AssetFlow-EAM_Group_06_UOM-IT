@@ -4,6 +4,9 @@ import { FaTrashAlt, FaPen } from "react-icons/fa";
 import axios from "axios";
 import { Modal, Button } from "react-bootstrap";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "./../../css/Table.css";
 
 interface BuildingData {
   id: string;
@@ -167,16 +170,11 @@ function BuildingFloorTable() {
                 />
               </InputGroup>
             </Form>
-            <Table
-              className="table w-100 small text-center"
-              hover
-              align="center"
-              style={{ fontSize: "14px", width: "500px" }}
-            >
+            <Table className="table">
               <thead>
                 <tr style={{ color: "#482890" }}>
                   <th>Building Name</th>
-                  <th colSpan={1}>Floor Count</th>
+                  <th colSpan={1}>floor No</th>
                   <th>Address</th>
                   <th>Actions</th>
                 </tr>
@@ -230,24 +228,29 @@ function BuildingFloorTable() {
                           </td>
 
                           <td>
-                            <FaTrashAlt
-                              style={{ color: "#ff615a" }}
-                              onClick={() => handleDelete(a.id)}
-                            />
                             {editing && editData.id === a.id ? (
                               <>
                                 <button onClick={handleSave}>Save</button>
                                 <button onClick={handleCancel}>Cancel</button>
                               </>
                             ) : (
-                              <FaPen
+                              <FontAwesomeIcon
+                                icon={faPen}
                                 style={{
                                   color: "#482890",
-                                  marginLeft: "10px",
+                                  cursor: "pointer",
                                 }}
                                 onClick={() => handleEdit(a)}
                               />
-                            )}
+                            )}&nbsp; &nbsp; &nbsp;
+                            <FontAwesomeIcon
+                              icon={faTrash}
+                              style={{
+                                color: "#FF615A",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => handleDelete(a.id)}
+                            />
                           </td>
                         </tr>
                       );

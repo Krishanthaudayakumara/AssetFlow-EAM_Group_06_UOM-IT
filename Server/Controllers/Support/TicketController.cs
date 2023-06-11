@@ -54,6 +54,7 @@ namespace Server.Controllers.Support
 
             return NotFound();
         }
+
         [HttpGet("api/tickets/{id}/reply")]
         public async Task<IActionResult> GetTicketReply(int id)
         {
@@ -72,6 +73,26 @@ namespace Server.Controllers.Support
             }
 
             return Ok(ticket.Reply);
+        }
+
+        [HttpGet("api/agents/{id}/ticket")]
+        public async Task<IActionResult> GetAgentTicket(int id)
+        {
+            var agent = await _context.Agents
+                .Include(t => t.Tickets)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (agent == null)
+            {
+                return NotFound(); // Ticket with the given ID was not found
+            }
+
+            if (agent.Tickets == null)
+            {
+                return NotFound(); // Ticket has no associated reply
+            }
+
+            return Ok(agent.Tickets);
         }
         [HttpPost]
         public async Task<IActionResult> AddTicket([FromBody] TicketToInsert ticketToInsert)

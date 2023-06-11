@@ -5,6 +5,7 @@ import WorkstationCard from "./WorkstationCard";
 import "../../css/Facilitycss/Workstation.css";
 import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
+import "./../../css/Table.css";
 
 interface WorkstationData {
   id: number;
@@ -111,6 +112,7 @@ export default function Work1() {
 
   return (
     <div  >
+      <h2  className="table-page-heading">ASSIGN ASSET</h2>
       <div className="container mt-4"  >
         <div className="row align-items-center justify-content-center">
           <div className={selectedBuildingId !== null ? "col-3" : "col-4"}>

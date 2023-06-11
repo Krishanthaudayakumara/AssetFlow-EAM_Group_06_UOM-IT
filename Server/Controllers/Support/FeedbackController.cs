@@ -24,6 +24,27 @@ namespace Server.Controllers.Support
             return Ok(allFeedback);
         }
 
+        [HttpGet("api/tickets/{id}/feedback")]
+        public async Task<IActionResult> GetTicketFeedback(int id)
+        {
+            var ticket = await _context.Tickets
+                .Include(t => t.Feedback)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (ticket == null)
+            {
+                return NotFound(); // Ticket with the given ID was not found
+            }
+
+            if (ticket.Feedback == null)
+            {
+                return NotFound(); // Ticket has no associated reply
+            }
+
+            return Ok(ticket.Feedback);
+        }
+
+
 
         [HttpPost]
         public async Task<IActionResult> AddFeedback([FromBody] FeedbackToInsert feedbackToInsert)
@@ -37,11 +58,11 @@ namespace Server.Controllers.Support
             {
                 Rating = feedbackToInsert.Rating,
                 Comment = feedbackToInsert.Comment,
-                TicketId = feedbackToInsert.TicketId,  
-                CreatedDate = DateTime.UtcNow,             
-                
+                TicketId = feedbackToInsert.TicketId,
+                CreatedDate = DateTime.UtcNow,
+
             };
-             try
+            try
             {
                 await _context.Feedbacks.AddAsync(feedback);
                 await _context.SaveChangesAsync();
@@ -54,6 +75,6 @@ namespace Server.Controllers.Support
             }
             return Ok(feedback);
         }
-        
-        }
+
     }
+}

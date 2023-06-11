@@ -8,7 +8,7 @@ import "../../../../css/Support/Support.css";
 interface FormData {
   employeeId: number;
   email: string;
-  issueTypeId: number; // Changed from string to number
+  issueTypeId: number; 
   problem: string;
 }
 
@@ -25,7 +25,7 @@ const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
   const [formData, setFormData] = useState<FormData>({
     employeeId: 0,
     email: "",
-    issueTypeId: 0, // Changed initial value to 0
+    issueTypeId: 0, 
     problem: "",
   });
   const [issueTypes, setIssueTypes] = useState<IssueTypeData[]>([]);
@@ -72,7 +72,7 @@ const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
   };
 
   const validateEmail = (): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex to match email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
     const isValid = emailRegex.test(formData.email);
     if (!isValid) {
       setEmailError("Invalid email address");
@@ -85,6 +85,7 @@ const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
   const handleCloseSuccessModal = () => {
     setShowSuccessModal(false);
     setShowModal(false);
+    window.location.reload();
   };
 
   return (

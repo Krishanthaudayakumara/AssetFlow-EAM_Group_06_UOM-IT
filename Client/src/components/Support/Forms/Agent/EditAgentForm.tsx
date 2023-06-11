@@ -144,6 +144,9 @@ const EditAgentForm: React.FC<EditAgentFormProps> = ({
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={handleUpdateAgent}>Update</Button>
+            <Button variant="secondary" onClick={handleModalClose}>
+            Close
+          </Button>
           </Modal.Footer>
         </>
       )}

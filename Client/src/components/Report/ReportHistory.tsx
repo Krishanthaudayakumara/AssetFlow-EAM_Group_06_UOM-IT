@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Table, Modal } from 'react-bootstrap';
 import axios from 'axios';
+import "./../../css/Table.css";
 
 interface GeneratedReport {
   id: number;
@@ -68,8 +69,11 @@ const ReportHistory = () => {
 
   return (
     <Fragment>
-      <h4 style={{ margin: '30px 0 0 65px' }}>Report History</h4>
-      <div className="shadow p-3 bg-white rounded" style={{ margin: '30px 0 0 65px' }}>
+      <h2  className="table-page-heading">REPORT HISTORY</h2>
+      <div
+        className="shadow p-3 bg-white rounded"
+        style={{ margin: '30px 0 0 65px' }}
+      >
         <input
           type="text"
           placeholder="Search by report name..."
@@ -77,7 +81,11 @@ const ReportHistory = () => {
           onChange={handleSearch}
           style={{margin: '30px 0 0 650px' }}
         />
-        <Table className="table w-100 small table-borderless table-responsive align-middle align-left" hover style={{ fontSize: '13px' }}>
+        <Table
+          className="table w-100 small table-borderless table-responsive align-middle align-left"
+          hover
+          style={{ fontSize: '13px' }}
+        >
           <thead>
             <tr style={{ color: '#482890' }}>
               <th>ID</th>

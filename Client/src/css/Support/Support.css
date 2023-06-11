@@ -1,11 +1,11 @@
 .page-heading{
   margin: 0 0 0 70px;
-  color: #482890;
+  color: #613faf;
   font-size: 22px;
   font-weight: bold;
 }
-
-.table-heading{
+/* Not Use */
+.table-heading{ 
   margin: 0 0 30px 70px;
   color: #482890;
   font-size: 18px;
@@ -104,6 +104,8 @@
   margin-left: 70px; /* Adjust the left margin value as needed */
   align-items: center;
   text-align: center;
+  width: 380px;
+  height: 150px;
 }
 
 @media (max-width: 768px) {
@@ -189,17 +191,19 @@
 
 .agent-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 10px;
 }
 
 .edit-button,
 .delete-button {
-  padding: 5px 10px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   color: #fff;
   cursor: pointer;
+  font-weight: bold;
+  margin: 0 5px;
 }
 
 .edit-button {
@@ -220,3 +224,4 @@
     margin-bottom: 20px;
   }
 }
+

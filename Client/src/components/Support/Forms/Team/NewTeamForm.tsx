@@ -26,6 +26,7 @@ const NewTeamForm = () => {
   const [issueTypes, setIssueTypes] = useState<IssueTypeData[]>([]);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [nameError, setNameError] = useState<string>("");
 
   useEffect(() => {
     const fetchIssueTypes = async () => {
@@ -91,18 +92,28 @@ const NewTeamForm = () => {
     window.location.reload();
   };
 
+  const validateTeamName = (): boolean => {
+    const contactRegex = /^[A-Za-z\s]{2,20}$/; // Regex to match a characters
+    const isValid = contactRegex.test(formData.name);
+    if (!isValid) {
+      setNameError("Input should only contain English letters and limit to 50 characters");
+    } else {
+      setNameError("");
+    }
+    return isValid;
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group>      
+      <Form.Group>    
+      <label>Profile Picture ( jpeg , png , gif )</label>  
         <Form.Control
           type="file"
           placeholder="Image"
           name="image"
           required
           onChange={handleChange}
-          accept="image/jpeg, image/png, image/gif"
-        />
-        <label>( jpeg , png , gif )</label>
+          accept="image/jpeg, image/png, image/gif"/>       
       </Form.Group>
       <br />
       <Form.Group>

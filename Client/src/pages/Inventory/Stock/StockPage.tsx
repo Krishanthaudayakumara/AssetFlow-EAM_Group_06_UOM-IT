@@ -1,10 +1,11 @@
 // StockPage.jsx
-import React, { useState } from 'react';
-import StockTable from '../../../components/Inventory/Stock/StockTable';
-import StockModal from '../../../components/Inventory/Stock/StockModal';
-import { Button } from 'react-bootstrap';
-import { Stock } from '../../../types';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from "react";
+import StockTable from "../../../components/Inventory/Stock/StockTable";
+import StockModal from "../../../components/Inventory/Stock/StockModal";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Stock } from "../../../types";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../../../css/Table.css";
 
 const StockPage: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -21,10 +22,18 @@ const StockPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Stock Page</h1>
-      <StockModal />
-
-      <StockTable />
+      <Container>
+        <Row>
+          <Col>
+            <h2 className="table-page-heading">STOCK</h2>
+          </Col>
+          <Col md={3}>
+            <StockModal />
+          </Col>
+        </Row>
+        <div className="table-box-shadow"></div>
+        <StockTable />
+      </Container>
     </div>
   );
 };

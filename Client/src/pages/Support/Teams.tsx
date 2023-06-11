@@ -13,7 +13,7 @@ const Teams: React.FC = () => {
     <div className="container">
       <div className="row">
         <div className="col">
-          <p className="page-heading">SUPPORT</p>
+          <h2 className="page-heading">SUPPORT TEAMS</h2>
         </div>
         <div className="col-3" style={{ padding: "0 0 0 70px" }}>
           <button

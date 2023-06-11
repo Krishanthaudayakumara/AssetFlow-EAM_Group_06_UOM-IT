@@ -31,7 +31,7 @@ const IssueTypeTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [cardViewActive, setCardViewActive] = useState(false);
 
-  const recordsPerPage = 10;
+  const recordsPerPage = 6;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -113,13 +113,12 @@ const IssueTypeTable = () => {
   const handleCardViewClick = () => {
     setCardViewActive(!cardViewActive);
   };
-  
 
   return (
     <div>
       <div className="row">
         <div className="col-6">
-          <p className="table-heading">Issue Types</p>
+         
         </div>
         <div className="col-2">
           <Button onClick={handleCardViewClick}>
@@ -146,10 +145,13 @@ const IssueTypeTable = () => {
       />
       {cardViewActive ? (
         <IssueTypeCardView
-        issues={issues}
-        onEditIssue={handleEditIssueClick}
-        onDeleteIssue={handleDeleteIssue}
-      />
+          issues={issues}
+          search={search}
+          currentPage={currentPage}
+          recordsPerPage={recordsPerPage}
+          onEditIssue={handleEditIssueClick}
+          onDeleteIssue={handleDeleteIssue}
+        />
       ) : (
         <div className="box-shadow">
           <Fragment>
@@ -206,7 +208,7 @@ const IssueTypeTable = () => {
           </Fragment>
         </div>
       )}
-      
+
       <EditIssueTypeForm
         show={showModal}
         onClose={handleModalClose}

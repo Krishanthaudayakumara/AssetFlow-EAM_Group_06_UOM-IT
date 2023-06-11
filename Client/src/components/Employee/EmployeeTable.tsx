@@ -4,6 +4,9 @@ import React from "react";
 import { Table, Button } from "react-bootstrap";
 import { Employee } from "../../types";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "./../../css/Table.css";
 
 interface Props {
   employees: Employee[];
@@ -14,11 +17,7 @@ interface Props {
 const EmployeeTable: React.FC<Props> = ({ employees, onEdit, onDelete }) => {
   return (
     <div className="table-container shadow p-3 bg-white rounded">
-      <Table
-        striped
-        className="table w-100 small table-borderless table-responsiv align-middle align-left"
-        hover
-      >
+      <Table className="table">
         {" "}
         <thead>
           <tr>
@@ -30,8 +29,7 @@ const EmployeeTable: React.FC<Props> = ({ employees, onEdit, onDelete }) => {
             <th>Job Title</th>
             <th>Department</th>
             <th>User</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -46,22 +44,25 @@ const EmployeeTable: React.FC<Props> = ({ employees, onEdit, onDelete }) => {
               <td>{employee.department}</td>
               <td>{employee.user}</td>
               <td>
-                <Button
-                  variant="outline-primary"
+                <FontAwesomeIcon
+                  icon={faPen}
+                  style={{
+                    color: "#482890",
+                    cursor: "pointer",
+                  }}
+                  title="Edit Emploee"
                   onClick={() => onEdit(employee)}
-                  className="btn-l-purple"
-                >
-                  <BsPencilSquare />
-                </Button>{" "}
-              </td>
-              <td>
-                <Button
-                  variant="outline-danger"
+                />
+                &nbsp; &nbsp; &nbsp;
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  style={{
+                    color: "#FF615A",
+                    cursor: "pointer",
+                  }}
+                  title="Delete Employee"
                   onClick={() => onDelete(employee)}
-                  className="btn-orange"
-                >
-                  <BsTrash />
-                </Button>
+                />
               </td>
             </tr>
           ))}

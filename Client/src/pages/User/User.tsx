@@ -8,6 +8,7 @@ import UserModal from "../../components/User/UserModal";
 import AddUserModal from "../../components/User/AddUserModal";
 import UserDeleteModal from "../../components/User/UserDeleteModal";
 import {BsTrash} from "react-icons/bs";
+import "./../../css/Table.css";
 
 const UserPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -92,9 +93,9 @@ const UserPage: React.FC = () => {
     <Container fluid>
       <Row>
         <Col>
-          <h2 className="text-center mb-4">User Management</h2>
+          <h2 className="table-page-heading">USER MANAGEMENT</h2>
         </Col>
-      </Row>
+     <Col>
       <Row className="mb-3">
         <Col>
           <Button
@@ -128,6 +129,8 @@ const UserPage: React.FC = () => {
           }> <BsTrash/> Trash
           </a>
         </Col>
+      </Row>
+      </Col>
       </Row>
       <Row>
         <Col>

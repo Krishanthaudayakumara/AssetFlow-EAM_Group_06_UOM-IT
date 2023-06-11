@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaTrashAlt, FaPen } from "react-icons/fa";
 import { Button, Modal, Form, Badge } from "react-bootstrap";
 import axios from "axios";
+import "./../../css/Table.css";
 
 interface FacilityAssetData {
   id: number;
@@ -73,14 +74,9 @@ function FacilityAssetTable() {
     <div style={{ margin: "4rem" }}>
       <div
         className="shadow p-2 mb- bg-white rounded"
-        style={{ width: "950px" }}
+        style={{ width: "850px" }}
       >
-        <Table
-          className="table w-100 small text-center"
-          hover
-          align="center"
-          style={{ fontSize: "14px", width: "500px" }}
-        >
+        <Table className="table">
           <thead>
             <tr style={{ color: "#482890" }}>
               <th>FacilityAsset id</th>
@@ -90,6 +86,7 @@ function FacilityAssetTable() {
               <th>Assign Status</th>
               <th>Assigned date</th>
               <th>workstationId</th>
+
               <th>Action</th>
             </tr>
           </thead>
@@ -111,6 +108,7 @@ function FacilityAssetTable() {
                     </td>
                     <td>{item.assignedDate}</td>
                     <td>{item.workstationId}</td>
+
                     <td>
                       <FaPen
                         style={{

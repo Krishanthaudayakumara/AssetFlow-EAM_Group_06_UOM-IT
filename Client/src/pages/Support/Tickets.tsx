@@ -13,7 +13,7 @@ const Tickets: React.FC = () => {
     <div className="container">
       <div className="row">
         <div className="col">
-          <p className="page-heading">SUPPORT</p>
+          <p className="page-heading">SUPPORT TICKETS</p>
         </div>
         <div className="col-3" style={{ padding: "0 0 0 70px" }}>
           <button

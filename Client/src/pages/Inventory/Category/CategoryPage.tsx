@@ -9,6 +9,7 @@ import {
   deleteCategory,
 } from "../../../api/categoryApi";
 import { useNavigate } from "react-router";
+import "../../../css/Table.css";
 
 const CategoryPage: React.FC = () => {
   const history = useNavigate();
@@ -82,14 +83,16 @@ const CategoryPage: React.FC = () => {
 
   return (
     <Container>
-      <h1>Categories</h1>
-      <Button
-        variant="primary"
-        className="btn-purple"
-        onClick={() => setShowModal(true)}
-      >
-        Add Category
-      </Button>
+      <Row>
+        <Col>
+          <h2 className="table-page-heading">CATEGORIES</h2>
+        </Col>
+        <Col md={3}>
+          <Button variant="primary" onClick={() => setShowModal(true)}>
+            Add Category
+          </Button>
+        </Col>
+      </Row>
       <Row>
         {categories.map((category: any) => (
           <Col key={category.id} md={4}>

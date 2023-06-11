@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Modal } from "react-bootstrap";
 import RequestForm from "./RequestForm";
+import "./../../css/Table.css";
 
 import { Table } from "react-bootstrap";
 
@@ -91,7 +92,11 @@ function FacilityAssetStock() {
       </Modal>
 
       <div className="shadow p-2 mb- bg-white rounded" style={{ width: "800px" }}>
-        <Table className="table w-100 small text-center" hover align="center" style={{ fontSize: "14px", width: "500px" }}>
+      
+        <Table
+          className="table"
+          
+        >
           <thead>
             <tr style={{ color: "#482890" }}>
               <th>FacilityAsset id</th>

@@ -30,8 +30,10 @@ const EmployeePage: React.FC = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [error, setError] = useState<string | null>(null); // Error state
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); // Delete confirmation state
-  const [employeeToDelete, setEmployeeToDelete] = useState<Employee | null>(null); // Employee to delete state
-  
+  const [employeeToDelete, setEmployeeToDelete] = useState<Employee | null>(
+    null
+  ); // Employee to delete state
+
   const timeout = 4000; // Timeout for error alert
 
   const uploadFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,20 +128,23 @@ const EmployeePage: React.FC = () => {
       .catch((error: AxiosError<any>) => {
         console.error(error);
         const errorResponse = error.response?.data;
-  
+
         if (errorResponse && typeof errorResponse === "object") {
-          const errorMessages = Object.values(errorResponse.errors || {}).join(", ");
-          setError(errorMessages || "An error occurred while adding the employee.");
+          const errorMessages = Object.values(errorResponse.errors || {}).join(
+            ", "
+          );
+          setError(
+            errorMessages || "An error occurred while adding the employee."
+          );
         } else {
           setError("An error occurred while adding the employee.");
         }
-  
+
         setTimeout(() => {
           setError(null);
         }, timeout);
       });
   };
-  
 
   const handleEditEmployee = (employee: Employee) => {
     axios
@@ -218,11 +223,9 @@ const EmployeePage: React.FC = () => {
     <Container>
       <Row>
         <Col>
-          {error && ( // Display error alert if error message exists
-            <Alert variant="danger" onClose={() => setError(null)} dismissible>
-              {error}
-            </Alert>
-          )}
+          <h2 className="page-heading">EMPLOYEES</h2>
+        </Col>
+        <Col md={3}>
           <Button
             variant="primary"
             onClick={() => setShowAddModal(true)}
@@ -230,6 +233,15 @@ const EmployeePage: React.FC = () => {
           >
             Add Employee
           </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          {error && ( // Display error alert if error message exists
+            <Alert variant="danger" onClose={() => setError(null)} dismissible>
+              {error}
+            </Alert>
+          )}
 
           <Button
             variant="primary"
@@ -255,9 +267,13 @@ const EmployeePage: React.FC = () => {
             Download Sample Excel
           </Button>
 
-          <a href="/deleted-employee" className="btn-purple"  style={
-            { textDecoration:"none"}
-          }> <BsTrash/> Trash
+          <a
+            href="/deleted-employee"
+            className="btn-purple"
+            style={{ textDecoration: "none" }}
+          >
+            {" "}
+            <BsTrash /> Trash
           </a>
 
           <Modal
