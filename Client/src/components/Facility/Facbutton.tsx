@@ -29,8 +29,7 @@ const Facbutton: React.FC = () => {
                 <Col md={8}>
                 <div className='buttn'>
                     
-                    <Button  variant="outline-primary"type="button" className='import-btn'>ImportFacility</Button>
-                    <Button variant ="outlinr-primary" type ="button"className='button2'>export Excel</Button>
+                    
                     <Button className='button3'  onClick ={handleShow}data-toggle='modal'>+NewBuilding</Button>
                     
                          

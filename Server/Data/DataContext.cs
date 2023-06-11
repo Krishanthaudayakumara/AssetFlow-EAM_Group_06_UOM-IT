@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Server.Models.Support;
+using Server.Models.Facility;
 using Server.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -39,6 +40,8 @@ namespace Server.Data
         public DbSet<Workstation> Workstations { get; set; }
 
         public DbSet<Building> Buildings { get; set; }
+        public DbSet<AssignTask> AssignTasks { get; set; }
+
 
         public DbSet<GeneratedReport> GeneratedReports { get; set; }
 
@@ -66,6 +69,23 @@ namespace Server.Data
                     .OnDelete(DeleteBehavior.Cascade);
 
 
+            });
+
+            //Facility
+               modelBuilder.Entity<Workstation>(entity =>
+            {
+                entity.HasOne(a => a.Building)
+                    .WithMany(e => e.Workstations)
+                    .HasForeignKey(a => a.BuildingId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+              modelBuilder.Entity<FacilityAsset>(entity =>
+            {
+                entity.HasOne(a => a.Workstation)
+                    .WithMany(e => e.FacilityAssets)
+                    .HasForeignKey(a => a.WorkstationId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
 

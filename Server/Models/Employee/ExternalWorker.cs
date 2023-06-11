@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System;
+using Server.Models.Facility;
 
 namespace Server.Models
 {
@@ -19,5 +20,6 @@ namespace Server.Models
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
         public bool IsDeleted { get; internal set; }
+         public ICollection<AssignTask> AssignTasks { get; set; }
     }
 }

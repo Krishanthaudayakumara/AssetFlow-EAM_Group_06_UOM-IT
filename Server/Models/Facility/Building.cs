@@ -1,3 +1,5 @@
+using Server.Models.Facility;
+
 namespace Server.Models
 {
     public class Building
@@ -7,6 +9,9 @@ namespace Server.Models
         public string Address{ get; set; }
         public int FloorNo{get; set;}
         public ICollection<Workstation> Workstations{get; set;}
+
+        public ICollection<AssignTask> AssignTasks { get; set; }
+
 
         
     }

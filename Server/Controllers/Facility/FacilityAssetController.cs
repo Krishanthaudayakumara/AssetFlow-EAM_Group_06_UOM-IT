@@ -82,7 +82,8 @@ namespace Server.Controllers
                         {
                             AssetId = asset.Asset.Id,
                             Description = asset.Asset.Description,
-                            Vendor = asset.Asset.Stock.Supplier.Name,
+                            AssetName=asset.Asset.Name,
+                           
                             SubCategoryType = asset.Asset.Stock.SubCategory.Name,
                             CategoryType = asset.Asset.Stock.SubCategory.Category.Name,
                             FacilityAssetId = asset.Id
@@ -111,28 +112,50 @@ namespace Server.Controllers
             return Ok(allFacilityAssets);
         }
 
+[HttpPut("{id}")]
+public async Task<IActionResult> UpdateFacilityAsset(int id, FacilityToUpdate FacilityAssetToUpdate)
+{
+    var updateFacAsset = await _context.FacilityAssets.FirstOrDefaultAsync(x => x.Id == id);
+    if (updateFacAsset is null)
+    {
+        return NotFound();
+    }
 
- [HttpPut("{id}")]
+    if (updateFacAsset.WorkstationId != null)
+    {
+        return Conflict("WorkstationId has already been assigned for this FacilityAsset.");
+    }
 
-     
+    updateFacAsset.AssignedDate = FacilityAssetToUpdate.AssignedDate;
+    updateFacAsset.WorkstationId = FacilityAssetToUpdate.WorkstationId;
+    updateFacAsset.AssignStatus = "Assign";
 
-        public async Task <IActionResult> UpdateFacilityAsset(int id,FacilityToUpdate FacilityAssetToUpdate){
-        var updateFacAsset= await _context.FacilityAssets .FirstOrDefaultAsync(x => x.Id==id);
-        if(updateFacAsset is null){
+    await _context.SaveChangesAsync();
+
+    return Ok(updateFacAsset);
+}
+
+
+        [HttpPut("update/{id}")]
+
+        public async Task <IActionResult> UpdateFacilityAssetConditionStatus(int id,FacilityStatusToUpdate facilityStatusToUpdate){
+        var updateFacStatus= await _context.FacilityAssets .FirstOrDefaultAsync(x => x.Id==id);
+        if(updateFacStatus is null){
             return NotFound();
         }
 
-        updateFacAsset.AssignedDate=FacilityAssetToUpdate.AssignedDate;
-        updateFacAsset.WorkstationId=FacilityAssetToUpdate.WorkstationId;
-        updateFacAsset.AssignStatus="Assigned";
+        updateFacStatus.AssetConditionStatus=facilityStatusToUpdate.AssetConditionStatus;
+      
         
         
         await _context.SaveChangesAsync();
         
 
         
-        return Ok(updateFacAsset);
+        return Ok(updateFacStatus);
         }
+
+      
 
 
 

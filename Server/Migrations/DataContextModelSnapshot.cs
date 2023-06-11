@@ -452,6 +452,39 @@ namespace Server.Migrations
                     b.ToTable("ExternalWorkers");
                 });
 
+            modelBuilder.Entity("Server.Models.Facility.AssignTask", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ExternalWorkerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("TaskDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TaskStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaskType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BuildingId");
+
+                    b.HasIndex("ExternalWorkerId");
+
+                    b.ToTable("AssignTasks");
+                });
+
             modelBuilder.Entity("Server.Models.FacilityAsset", b =>
                 {
                     b.Property<int>("Id")
@@ -1199,6 +1232,23 @@ namespace Server.Migrations
                     b.Navigation("Department");
                 });
 
+            modelBuilder.Entity("Server.Models.Facility.AssignTask", b =>
+                {
+                    b.HasOne("Server.Models.Building", "Building")
+                        .WithMany("AssignTasks")
+                        .HasForeignKey("BuildingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.ExternalWorker", "ExternalWorker")
+                        .WithMany("AssignTasks")
+                        .HasForeignKey("ExternalWorkerId");
+
+                    b.Navigation("Building");
+
+                    b.Navigation("ExternalWorker");
+                });
+
             modelBuilder.Entity("Server.Models.FacilityAsset", b =>
                 {
                     b.HasOne("Server.Models.Asset", "Asset")
@@ -1209,7 +1259,8 @@ namespace Server.Migrations
 
                     b.HasOne("Server.Models.Workstation", "Workstation")
                         .WithMany("FacilityAssets")
-                        .HasForeignKey("WorkstationId");
+                        .HasForeignKey("WorkstationId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Asset");
 
@@ -1383,7 +1434,7 @@ namespace Server.Migrations
                     b.HasOne("Server.Models.Building", "Building")
                         .WithMany("Workstations")
                         .HasForeignKey("BuildingId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Building");
@@ -1397,6 +1448,8 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Building", b =>
                 {
+                    b.Navigation("AssignTasks");
+
                     b.Navigation("Workstations");
                 });
 
@@ -1412,6 +1465,11 @@ namespace Server.Migrations
                     b.Navigation("Tickets");
 
                     b.Navigation("employeeRequests");
+                });
+
+            modelBuilder.Entity("Server.Models.ExternalWorker", b =>
+                {
+                    b.Navigation("AssignTasks");
                 });
 
             modelBuilder.Entity("Server.Models.Notification", b =>

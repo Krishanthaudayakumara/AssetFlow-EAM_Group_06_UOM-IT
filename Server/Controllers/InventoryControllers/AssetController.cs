@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.DTOs;
 using Server.Models;
+using Server.Models.Inventory;
 using Server.Services;
 using System;
 using System.Collections.Generic;
@@ -135,6 +136,9 @@ namespace Server.Controllers
             return CreatedAtAction("GetAsset", new { id = asset.Id }, asset);
         }
 
+        
+
+
         [HttpPut("{id}")]
         public async Task<IActionResult> EditAsset(int id, [FromForm] AssetDTO assetDTO)
         {
@@ -225,5 +229,54 @@ namespace Server.Controllers
 
 
 
+        [HttpPost("request")]
+public async Task<IActionResult> RequestAssets(RequestAssetsDto requestDto)
+{
+    // Retrieve the subcategory
+    var subCategory = await _context.SubCategories
+        .FirstOrDefaultAsync(s => s.Id == requestDto.SubCategoryId);
+
+    if (subCategory == null)
+    {
+        return BadRequest("Invalid subcategory");
     }
+
+    // Retrieve the stock
+    var stock = await _context.Stocks
+        .Include(s => s.Assets)
+        .FirstOrDefaultAsync(s => s.SubCategoryId == subCategory.Id);
+
+    if (stock == null)
+    {
+        return BadRequest("No stock available for the selected subcategory");
+    }
+
+    // Check if the requested count is available
+    if (stock.Quantity < requestDto.Count)
+    {
+        return BadRequest("Insufficient stock available");
+    }
+
+    // Get the first N available assets
+    var availableAssets = stock.Assets
+        .Where(a => a.Status == "In Stock" && a.Status != "Issued")
+        .Take(requestDto.Count);
+
+    // Update the asset status to "Issued"
+    foreach (var asset in availableAssets)
+    {
+        asset.Status = "Issued";
+    }
+
+    await _context.SaveChangesAsync();
+
+    return Ok("Assets issued successfully");
+}
+
+
+
+    }
+
+
+    
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import FacilityAssetTable from "../../components/Facility/FacilityAsset_table";
-import FacilityAssetForm from "../../components/Facility/FacilityAssetForm";
+
 
 const FacilityAsset: React.FC = () => {
     return (
@@ -15,7 +15,7 @@ const FacilityAsset: React.FC = () => {
       >
         Facility Asset
       </h3>
-        <FacilityAssetForm/>
+       
         < FacilityAssetTable/>
            
       </div>

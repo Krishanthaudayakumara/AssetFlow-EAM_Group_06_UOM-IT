@@ -9,6 +9,7 @@ namespace Server.DTOs.Report
     public DateTime? AssignedDate { get; set; }
     public DateTime? ReceivedDate { get; set; }
     public string BuildingName { get; set; }
-    public int FloorNo { get; set; }
+    public int? FloorNo { get; set; }
+
     }
 }
