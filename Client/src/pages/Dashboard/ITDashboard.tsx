@@ -154,7 +154,7 @@ const ITDashboard = () => {
   return (
     <div>
       <Container>
-        <h4 style={{ margin: '0px 0 0 65px' }}>IT Summary</h4>
+        <h2 style={{ margin: '0px 0 0 65px' }}>IT Summary</h2>
         <div className="row mb-6" style={{ margin: '0px 0 0 65px' }}>
         {/* code for CardDashboard component */}
           <CardDashboard name="Available Agents" count={availableAgentCount} />
@@ -165,7 +165,7 @@ const ITDashboard = () => {
           />
         </div>
 
-        <h4 style={{ margin: '0px 0 0 65px' }}>Monthly Ticket Count</h4>
+        <h2 style={{ margin: '0px 0 0 65px' }}>Monthly Ticket Count</h2>
         <div>
           <Row>
             <Col md={6}>
@@ -187,7 +187,7 @@ const ITDashboard = () => {
         </div>
 
         {/* code for TicketBarChart component */}
-        <h4 style={{ margin: '0px 0 0 65px' }}>Ticket Satisfaction</h4>
+        <h2 style={{ margin: '0px 0 0 65px' }}>Ticket Satisfaction</h2>
         <div style={{ margin: '0px 0 0 65px' }}>
           <TicketBarChart
             data={{

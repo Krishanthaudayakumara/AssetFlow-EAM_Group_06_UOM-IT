@@ -127,7 +127,7 @@ const Dashboard: React.FC = () => {
       <Container>
         {/* code for Card component */}
         <div className="row mb-3" style={{ margin: '0px 0 0 0px' }}>
-          <Card name="Available users" quantity={availableEmployeeCount} icon={faUser} />
+          <Card name="Available Employees" quantity={availableEmployeeCount} icon={faUser} />
           <Card name="Available Agents" quantity={availableAgentCount} icon={faBox} />
           <Card name="Total Workstation" quantity={totalWorkstations} icon={faWarehouse} />
           <Card name="Total Facility Assets" quantity={totalFacilityAssets} icon={faTicket} />
@@ -148,6 +148,7 @@ const Dashboard: React.FC = () => {
                   alignContent: 'center',
                 }}
               >
+                <h2>SubCategory Types</h2>
                 {/* code for LineChart component */}
                 {subcategoryTypes.length > 0 && (
                   <LineChart
@@ -197,9 +198,10 @@ const Dashboard: React.FC = () => {
                 className="shadow p-2 mb-5 bg-white rounded"
                 style={{
                   height: '470px',
-                  alignContent: 'center',
+                  
                 }}
               >
+                <h2>Asset  Status</h2>
                 {/* code for PieChart component */}
                 {facilityStatusData && (
                   <PieChart
@@ -230,6 +232,7 @@ const Dashboard: React.FC = () => {
           style={{ margin: '0px 2px 2px 0px' }}
         >
           {/* code for BarChart component */}
+          <h2>Ticket Feedback Status</h2>
           <FeedBackBarChart
             data={{
               labels: ['Good', 'Better', 'Worst'],

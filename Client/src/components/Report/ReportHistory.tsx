@@ -17,6 +17,8 @@ const ReportHistory = () => {
   const [generatedReports, setGeneratedReports] = useState<GeneratedReport[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedReportId, setSelectedReportId] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredReports, setFilteredReports] = useState<GeneratedReport[]>([]);
 
   useEffect(() => {
     axios
@@ -29,14 +31,21 @@ const ReportHistory = () => {
       });
   }, []);
 
+  useEffect(() => {
+    const filtered = generatedReports.filter((report) =>
+      report.reportName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredReports(filtered);
+  }, [generatedReports, searchQuery]);
+
   const handleDelete = (id: number) => {
     setSelectedReportId(id);
     setShowModal(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
-  }
+  };
 
   const handleConfirmDelete = () => {
     if (selectedReportId) {
@@ -46,26 +55,29 @@ const ReportHistory = () => {
           console.log(response);
           setGeneratedReports(generatedReports.filter((report) => report.id !== selectedReportId));
           setShowModal(false);
-        
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  }
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
 
   return (
     <Fragment>
       <h4 style={{ margin: '30px 0 0 65px' }}>Report History</h4>
-      <div
-        className="shadow p-3 bg-white rounded"
-        style={{ margin: '30px 0 0 65px' }}
-      >
-        <Table
-          className="table w-100 small table-borderless table-responsive align-middle align-left"
-          hover
-          style={{ fontSize: '13px' }}
-        >
+      <div className="shadow p-3 bg-white rounded" style={{ margin: '30px 0 0 65px' }}>
+        <input
+          type="text"
+          placeholder="Search by report name..."
+          value={searchQuery}
+          onChange={handleSearch}
+          style={{margin: '30px 0 0 650px' }}
+        />
+        <Table className="table w-100 small table-borderless table-responsive align-middle align-left" hover style={{ fontSize: '13px' }}>
           <thead>
             <tr style={{ color: '#482890' }}>
               <th>ID</th>
@@ -79,7 +91,7 @@ const ReportHistory = () => {
             </tr>
           </thead>
           <tbody>
-            {generatedReports.map((report) => (
+            {filteredReports.map((report) => (
               <tr key={report.id}>
                 <td>{report.id}</td>
                 <td>{report.date}</td>
@@ -89,11 +101,7 @@ const ReportHistory = () => {
                 <td>{report.generatedBy}</td>
                 <td>{report.note}</td>
                 <td>
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={() => handleDelete(report.id)}
-                  >
+                  <Button variant="danger" size="sm" onClick={() => handleDelete(report.id)}>
                     Delete
                   </Button>{' '}
                 </td>
@@ -103,13 +111,11 @@ const ReportHistory = () => {
         </Table>
       </div>
 
-      <Modal show={showModal} onHide={handleCloseModal} >
+      <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-        Are you sure you want to delete this report?
-        </Modal.Body>
+        <Modal.Body>Are you sure you want to delete this report?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
             Cancel
@@ -124,3 +130,4 @@ const ReportHistory = () => {
 }
 
 export default ReportHistory;
+
