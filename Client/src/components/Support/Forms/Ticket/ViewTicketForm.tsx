@@ -36,6 +36,14 @@ interface ReplyType {
   ticketId: number;
 }
 
+interface FeedbackType{
+  id: number;
+  rating: string;
+  comment: string;
+  createDate: string;
+  ticketId: number;
+}
+
 interface ViewTicketFormProps {
   showModal: boolean;
   selectedTicket: ticketType | null;
@@ -56,6 +64,7 @@ const ViewTicketForm: React.FC<ViewTicketFormProps> = ({
   setSelectedTicket,
 }) => {
   const [reply, setReply] = useState<ReplyType | null>(null);
+  const [feedback, setFeedback] = useState<FeedbackType | null>(null);
 
   useEffect(() => {
     const fetchReply = async () => {
@@ -71,6 +80,23 @@ const ViewTicketForm: React.FC<ViewTicketFormProps> = ({
 
     if (selectedTicket) {
       fetchReply();
+    }
+  }, [selectedTicket]);
+
+  useEffect(() => {
+    const fetchFeedback = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5087/Api/Feedback/api/tickets/${selectedTicket?.id}/feedback`
+        );
+        setFeedback(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (selectedTicket) {
+      fetchFeedback();
     }
   }, [selectedTicket]);
 
@@ -136,7 +162,19 @@ const ViewTicketForm: React.FC<ViewTicketFormProps> = ({
               <div className="detail">
                 <span>Reply Date:</span>
                 {reply?.replyDate || "N/A"}
-              </div>
+              </div><br/>
+              <div className="detail">
+                <span>Rate:</span>
+                {feedback?.rating || "N/A"}
+              </div><br/>
+              <div className="detail">
+                <span>Comment:</span>
+                {feedback?.comment || "N/A"}
+              </div><br/>
+              <div className="detail">
+                <span>Create Date:</span>
+                {feedback?.createDate || "N/A"}
+              </div><br/>
             </div>
           </Modal.Body>
           <Modal.Footer></Modal.Footer>

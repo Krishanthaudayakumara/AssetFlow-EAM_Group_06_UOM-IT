@@ -39,7 +39,7 @@ const TeamTable = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [showTeamToTicketTable, setShowTeamToTicketTable] = useState(false); // State to control rendering of TeamToTicket table
+  const [showTeamToTicketTable, setShowTeamToTicketTable] = useState(false); 
   const [cardViewActive, setCardViewActive] = useState(false);
 
   const recordsPerPage = 4;
@@ -65,7 +65,7 @@ const TeamTable = () => {
 
   const handleTeamClick = (team: teamType) => {
     setSelectedTeam(team);
-    setShowTeamToTicketTable(true); // Show the TeamToTicket table
+    setShowTeamToTicketTable(true); 
   };
   const handleEditTeamClick = (team: teamType) => {
     setSelectedTeam(team);
@@ -135,7 +135,7 @@ const TeamTable = () => {
   return (
     <div>
       {showTeamToTicketTable ? (
-        <TeamToTicket teamId={selectedTeam?.id ?? 0} /> // Use nullish coalescing operator to provide a default value
+        <TeamToTicket teamId={selectedTeam?.id ?? 0} /> 
       ) : (
         <div>
           <div className="row">

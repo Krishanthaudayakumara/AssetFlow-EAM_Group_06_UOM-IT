@@ -15,11 +15,14 @@ const NewIssueTypeForm: React.FC<Props> = ({ handleClose }) => {
   const [formData, setFormData] = useState<FormData>({ name: "" });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [issueError, setIssueError] = useState<string>("");
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => { //Issue Type Post Method
     event.preventDefault();
     setErrorMessage(null);
-
+    if (!validateIssueType()) {
+      return;
+    }
     try {
       const response = await axios.post(
         "http://localhost:5087/Api/IssueType",
@@ -36,6 +39,17 @@ const NewIssueTypeForm: React.FC<Props> = ({ handleClose }) => {
         alert("Not added!");
       }
     }
+  };
+
+  const validateIssueType = (): boolean => {
+    const contactRegex = /^[A-Za-z\s]{5,50}$/; // Regex to match a characters
+    const isValid = contactRegex.test(formData.name);
+    if (!isValid) {
+      setIssueError("Input should only contain English letters and limit between 5 & 50");
+    } else {
+      setIssueError("");
+    }
+    return isValid;
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,11 +71,15 @@ const NewIssueTypeForm: React.FC<Props> = ({ handleClose }) => {
         <Form.Label>Issue Type</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter the Issue Type *"
+          placeholder="Only English letters between 5 & 50 *"
           required
           name="name"
           onChange={handleChange}
+          value={formData.name}
         />
+         {issueError && (
+          <Form.Text className="text-danger">{issueError}</Form.Text>
+        )}
         {errorMessage && (
           <Alert variant="danger" className="mt-2">
             {errorMessage}

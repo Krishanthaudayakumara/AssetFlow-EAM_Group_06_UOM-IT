@@ -31,6 +31,7 @@ const TeamCardView = ({
             src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
             alt="User profile"
             className=" agent-image"
+            onClick={() => onEditIssue(team)}
           />
           <Card.Body>
             <Card.Title className="agent-name">

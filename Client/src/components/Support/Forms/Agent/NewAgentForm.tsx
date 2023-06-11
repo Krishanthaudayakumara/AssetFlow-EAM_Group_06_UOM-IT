@@ -32,6 +32,7 @@ const NewAgentForm = () => {
   const [teams, setTeams] = useState<TeamData[]>([]);
   const [contactError, setContactError] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
+  const [nameError, setNameError] = useState<string>("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -46,7 +47,7 @@ const NewAgentForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrorMessage(null);
-    if (!validateContact() || !validateEmail()) {
+    if (!validateContact() || !validateEmail() || !validateIssueType()) {
       return;
     }
     try {
@@ -73,7 +74,6 @@ const NewAgentForm = () => {
       );
       console.log(response.data);
       setShowSuccessModal(true);
-     
     } catch (error) {
       console.log(error);
       const axiosError = error as AxiosError;
@@ -122,11 +122,22 @@ const NewAgentForm = () => {
     }
     return isValid;
   };
+
+  const validateIssueType = (): boolean => {
+    const contactRegex = /^[A-Za-z\s]{2,20}$/; // Regex to match a characters
+    const isValid = contactRegex.test(formData.firstName && formData.lastName);
+    if (!isValid) {
+      setNameError("Input should only contain English letters and limit to 50 characters");
+    } else {
+      setNameError("");
+    }
+    return isValid;
+  };
+
   const handleCloseSuccessModal = () => {
     setShowSuccessModal(false);
     window.location.reload();
   };
-
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -137,13 +148,13 @@ const NewAgentForm = () => {
           required
           onChange={handleChange}
         />
-        <label>( jpeg, png, gif )</label>
+        <label>( Only jpeg, png, gif )</label>
       </Form.Group>
       <br />
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Agent First Name *"
+          placeholder="Agent First Name ( 20 characters only )*"
           required
           name="firstName"
           value={formData.firstName}
@@ -154,7 +165,7 @@ const NewAgentForm = () => {
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Agent Last Name *"
+          placeholder="Agent Last Name ( 20 characters only )*"
           required
           name="lastName"
           value={formData.lastName}
@@ -165,13 +176,12 @@ const NewAgentForm = () => {
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Valid Contact *"
+          placeholder="Valid Contact ( 10 digits only ) *"
           required
           name="contact"
           value={formData.contact}
           onChange={handleChange}
         />
-        <label>(10 digits only)</label>
         {contactError && (
           <Form.Text className="text-danger">{contactError}</Form.Text>
         )}
@@ -191,7 +201,7 @@ const NewAgentForm = () => {
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Valid Email *"
+          placeholder="Valid Email( example@gmail.com ) *"
           required
           name="email"
           value={formData.email}
@@ -205,6 +215,7 @@ const NewAgentForm = () => {
       <Form.Group>
         <Form.Select
           aria-label="Default select example"
+          required
           name="teamId"
           value={formData.teamId}
           onChange={handleChange}
@@ -221,11 +232,12 @@ const NewAgentForm = () => {
       <Form.Group>
         <Form.Select
           aria-label="Default select example"
+          required
           name="agentStatus"
           value={formData.agentStatus}
           onChange={handleChange}
         >
-           <option value="Status">Select Status</option>
+          <option value="">Select Status</option>
           <option value="Not Available">Not Available</option>
           <option value="Available">Available</option>
         </Form.Select>
@@ -249,4 +261,3 @@ const NewAgentForm = () => {
 };
 
 export default NewAgentForm;
-
