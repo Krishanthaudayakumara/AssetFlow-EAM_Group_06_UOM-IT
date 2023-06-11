@@ -49,6 +49,7 @@ import ExternalWorkersPage from "./pages/Employee/ExternalWorkersPage";
 import NotificationCenter from "./pages/Notification/NotificationCenter";
 import ExternalEmployeeTask from "./pages/Facility/ExternalEmployeeTask";
 import CleaningStaff from "./pages/Facility/CleaningStaff";
+import Assign from "./pages/Dashboard/Assign";
 
 
 const RoutesConfig: React.FC = () => {
@@ -237,13 +238,20 @@ const RoutesConfig: React.FC = () => {
       </Route>
 
       <Route
+        path="/EmployeeRequest"
+        element={<PrivateRoute allowedRoles="all" />}
+      >
+        <Route path="/EmployeeRequest" element={<EmployeeRequest />} />
+      </Route>
+
+      <Route
         path="/BuildingFloor"
         element={<PrivateRoute allowedRoles="all" />}
       >
         <Route path="/BuildingFloor" element={<BuildingFloor />} />
       </Route>
-      <Route path="/AssignAsset" element={<PrivateRoute allowedRoles="all" />}>
-        <Route path="/AssignAsset" element={<AssignAsset />} />
+      <Route path="/Assign" element={<PrivateRoute allowedRoles="all" />}>
+        <Route path="/Assign" element={<Assign />} />
       </Route>
       <Route
         path="/FacilityAsset"

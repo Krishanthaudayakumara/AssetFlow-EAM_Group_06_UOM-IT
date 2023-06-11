@@ -3,6 +3,7 @@
 import { UserRole } from "./enum";
 
 export interface Employee {
+  name: any;
   id: number;
   firstName: string;
   lastName: string;

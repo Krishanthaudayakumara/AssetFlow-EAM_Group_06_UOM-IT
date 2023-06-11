@@ -30,6 +30,7 @@ const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
   });
   const [issueTypes, setIssueTypes] = useState<IssueTypeData[]>([]);
   const [emailError, setEmailError] = useState<string>("");
+  const [problemError, setProblemError] = useState<string>("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   useEffect(() => {
@@ -46,7 +47,9 @@ const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    if (!validateProblem() || !validateEmail()) {
+      return;
+    }
     try {
       const response = await axios.post(
         "http://localhost:5087/Api/Ticket",
@@ -78,6 +81,18 @@ const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
       setEmailError("Invalid email address");
     } else {
       setEmailError("");
+    }
+    return isValid;
+  };
+  const validateProblem = (): boolean => {
+    const contactRegex = /^[A-Za-z\s]{0,100}$/; // Regex to match a characters
+    const isValid = contactRegex.test(formData.problem );
+    if (!isValid) {
+      setProblemError(
+        "Input should only contain English letters and limit to 100 characters"
+      );
+    } else {
+      setProblemError("");
     }
     return isValid;
   };
@@ -140,6 +155,9 @@ const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
             rows={3}
             onChange={handleChange}
           />
+           {problemError && (
+            <Form.Text className="text-danger">{problemError}</Form.Text>
+          )}
         </Form.Group>
         <br />
         <Button variant="success" type="submit">

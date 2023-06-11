@@ -20,6 +20,30 @@ namespace Server.Controllers
             _context = context;
         }
 
+           [HttpGet]
+        public async Task<IActionResult> GetEmployeeRequest()
+        {
+            var employeeRequests = await _context.EmployeeRequests.ToListAsync();
+
+            if (employeeRequests is null)
+            {
+                return NotFound();
+            }
+
+            foreach (var employeeRequest in employeeRequests)
+            {
+                var EmployeeRequestToReturn = new EmployeeRequestToReturn
+                {
+                    Id = employeeRequest.Id,
+                    EmployeeId = employeeRequest.EmployeeId,
+                    AssetId = employeeRequest.AssetId,
+                    IsAccepted =employeeRequest.IsAccepted
+                };
+            }
+
+            return Ok(employeeRequests);
+        }
+
         [HttpGet("categories")]
         public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetCategories()
         {

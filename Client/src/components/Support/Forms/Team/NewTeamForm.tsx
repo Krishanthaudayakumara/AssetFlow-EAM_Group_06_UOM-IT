@@ -27,6 +27,7 @@ const NewTeamForm = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [nameError, setNameError] = useState<string>("");
+  const [desError, setDesError] = useState<string>("");
 
   useEffect(() => {
     const fetchIssueTypes = async () => {
@@ -39,6 +40,10 @@ const NewTeamForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrorMessage(null);
+
+    if (!validateTeamName() || !validateDescrption()) {
+      return;
+    }
 
     try {
       const formDataWithImage = new FormData();
@@ -93,27 +98,42 @@ const NewTeamForm = () => {
   };
 
   const validateTeamName = (): boolean => {
-    const contactRegex = /^[A-Za-z\s]{2,20}$/; // Regex to match a characters
+    const contactRegex = /^[A-Za-z\s]{0,20}$/; // Regex to match a characters
     const isValid = contactRegex.test(formData.name);
     if (!isValid) {
-      setNameError("Input should only contain English letters and limit to 50 characters");
+      setNameError(
+        "Team Name should only contain English letters and limit to 20 characters"
+      );
     } else {
       setNameError("");
+    }
+    return isValid;
+  };
+  const validateDescrption = (): boolean => {
+    const contactRegex = /^[A-Za-z\s]{0,50}$/; // Regex to match a characters
+    const isValid = contactRegex.test(formData.description);
+    if (!isValid) {
+      setDesError(
+        "Description should only contain English letters and limit to 50 characters"
+      );
+    } else {
+      setDesError("");
     }
     return isValid;
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group>    
-      <label>Profile Picture ( jpeg , png , gif )</label>  
+      <Form.Group>
+        <label>Profile Picture ( jpeg , png , gif )</label>
         <Form.Control
           type="file"
           placeholder="Image"
           name="image"
           required
           onChange={handleChange}
-          accept="image/jpeg, image/png, image/gif"/>       
+          accept="image/jpeg, image/png, image/gif"
+        />
       </Form.Group>
       <br />
       <Form.Group>
@@ -126,6 +146,9 @@ const NewTeamForm = () => {
           value={formData.name}
           onChange={handleChange}
         />{" "}
+          {nameError && (
+          <Form.Text className="text-danger">{nameError}</Form.Text>
+        )}
       </Form.Group>
       <br />
       <Form.Group>
@@ -138,6 +161,9 @@ const NewTeamForm = () => {
           value={formData.description}
           onChange={handleChange}
         />{" "}
+        {desError && (
+          <Form.Text className="text-danger">{desError}</Form.Text>
+        )}
       </Form.Group>
       <br />
       <Form.Group>
