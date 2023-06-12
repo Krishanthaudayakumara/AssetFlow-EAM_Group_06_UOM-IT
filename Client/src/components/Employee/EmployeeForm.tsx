@@ -1,9 +1,10 @@
 // EmployeeForm.tsx
 
-import React, { useState } from "react";
-import { Employee } from "../../types";
+import React, { useEffect, useState } from "react";
+import { Department, Employee } from "../../types";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import { FiEye, FiEyeOff, FiKey } from "react-icons/fi";
+import { fetchDepartments } from "../../api/departmentApi";
 
 interface Props {
   employee: Partial<Employee>;
@@ -13,6 +14,18 @@ interface Props {
 const EmployeeForm: React.FC<Props> = ({ employee, onChange }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [generatedPassword, setGeneratedPassword] = useState("");
+  const [departments, setDepartments] = useState<Department[]>([]);
+
+  useEffect(() => {
+    loadDepartments();
+  }, []);
+
+  const loadDepartments = () => {
+    fetchDepartments()
+      .then((data) => setDepartments(data))
+      .catch((error) => console.error(error));
+  };
+
 
   const generatePassword = () => {
     const length = 12; // Minimum password length
@@ -147,15 +160,22 @@ const EmployeeForm: React.FC<Props> = ({ employee, onChange }) => {
         />
       </Form.Group>
       <Form.Group>
-        <Form.Label htmlFor="departmentId">Department ID:</Form.Label>
+        <Form.Label htmlFor="departmentId">Department:</Form.Label>
         <Form.Control
-          type="number"
+          as="select"
           id="departmentId"
           name="departmentId"
           value={employee.departmentId || ""}
           onChange={onChange}
           required
-        />
+        >
+          <option value="">Select Department</option>
+          {departments.map((department) => (
+            <option key={department.id} value={department.id}>
+              {department.name}
+            </option>
+          ))}
+        </Form.Control>
       </Form.Group>
       <Form.Group>
         <Form.Label htmlFor="userName">Username:</Form.Label>

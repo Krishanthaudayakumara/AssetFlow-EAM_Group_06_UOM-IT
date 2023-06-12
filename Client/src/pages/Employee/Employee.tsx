@@ -229,7 +229,7 @@ const EmployeePage: React.FC = () => {
           <Button
             variant="primary"
             onClick={() => setShowAddModal(true)}
-            className="btn-l-purple"
+            className="btn-purple"
           >
             Add Employee
           </Button>
@@ -243,14 +243,22 @@ const EmployeePage: React.FC = () => {
             </Alert>
           )}
 
+          <a
+            href="/deleted-employee"
+            className="btn-l-orange"
+            style={{ textDecoration: "none" }}
+          >
+            {" "}
+            <BsTrash /> Trash
+          </a>
+
           <Button
             variant="primary"
-            onClick={() => setShowUploadModal(true)}
-            className="btn-l-purple"
+            onClick={() => downloadSample()}
+            className="btn-orange"
           >
-            Upload Excel
+            Download Sample Excel
           </Button>
-
           <Button
             variant="primary"
             onClick={() => downloadExcel()}
@@ -261,20 +269,11 @@ const EmployeePage: React.FC = () => {
 
           <Button
             variant="primary"
-            onClick={() => downloadSample()}
-            className="btn-orange"
+            onClick={() => setShowUploadModal(true)}
+            className="btn-l-purple"
           >
-            Download Sample Excel
+            Upload Excel
           </Button>
-
-          <a
-            href="/deleted-employee"
-            className="btn-purple"
-            style={{ textDecoration: "none" }}
-          >
-            {" "}
-            <BsTrash /> Trash
-          </a>
 
           <Modal
             show={showUploadModal}

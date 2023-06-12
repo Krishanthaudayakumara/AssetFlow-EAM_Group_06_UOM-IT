@@ -1,8 +1,6 @@
-// AddDepartmentModal.tsx
-
 import React, { useState } from "react";
 import { Department } from "../../types";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Spinner } from "react-bootstrap";
 import DepartmentForm from "./DepartmentForm";
 
 interface Props {
@@ -17,6 +15,7 @@ const AddDepartmentModal: React.FC<Props> = ({
   onSubmit,
 }) => {
   const [newDepartment, setNewDepartment] = useState<Partial<Department>>({});
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -46,9 +45,15 @@ const AddDepartmentModal: React.FC<Props> = ({
         <Button className="btn-l-purple" onClick={onHide}>
           Close
         </Button>
-        <Button className="btn-orange" onClick={handleSubmit}>
-          Add Department
-        </Button>
+        {loading ? (
+          <Button className="btn-orange" disabled>
+            <Spinner animation="border" size="sm" /> Adding Department...
+          </Button>
+        ) : (
+          <Button className="btn-orange" onClick={handleSubmit}>
+            Add Department
+          </Button>
+        )}
       </Modal.Footer>
     </Modal>
   );

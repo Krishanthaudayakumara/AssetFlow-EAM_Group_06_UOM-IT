@@ -68,3 +68,8 @@
     letter-spacing: 1px; */
     transition: all 0.3s ease 0s;
 }
+
+.btn-l-orange:hover {
+    background-color: #ff615a !important;
+    color: white !important;
+}
