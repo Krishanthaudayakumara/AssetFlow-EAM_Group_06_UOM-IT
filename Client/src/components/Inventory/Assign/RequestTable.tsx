@@ -11,6 +11,18 @@ interface EmployeeRequest {
   acceptedDateTime: string;
 }
 
+interface Employee {
+  id: number;
+  firstName: string;
+  // Add other employee properties if necessary
+}
+
+interface Asset {
+  id: number;
+  name: string;
+  // Add other asset properties if necessary
+}
+
 const EmployeeRequestTable: React.FC = () => {
   const [employeeRequests, setEmployeeRequests] = useState<EmployeeRequest[]>(
     []
@@ -18,20 +30,38 @@ const EmployeeRequestTable: React.FC = () => {
   const [acceptedRequests, setAcceptedRequests] = useState<EmployeeRequest[]>(
     []
   );
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [assets, setAssets] = useState<Asset[]>([]);
 
   useEffect(() => {
     fetchEmployeeRequests();
   }, []);
 
+  useEffect(() => {
+    fetchAssets();
+  }, []);
+
   const fetchEmployeeRequests = async () => {
     try {
-      const response = await axios.get<EmployeeRequest[]>(
-        "http://localhost:5087/api/EmployeeRequest"
-      );
-      setEmployeeRequests(response.data);
+      const [requestsResponse, employeesResponse] = await Promise.all([
+        axios.get<EmployeeRequest[]>("http://localhost:5087/api/EmployeeRequest"),
+        axios.get<Employee[]>("http://localhost:5087/api/Employee"),
+      ]);
+
+      setEmployeeRequests(requestsResponse.data);
       setAcceptedRequests(
-        response.data.filter((request) => request.isAccepted)
+        requestsResponse.data.filter((request) => request.isAccepted)
       );
+      setEmployees(employeesResponse.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchAssets = async () => {
+    try {
+      const response = await axios.get<Asset[]>("http://localhost:5087/api/Asset");
+      setAssets(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -70,63 +100,78 @@ const EmployeeRequestTable: React.FC = () => {
     return new Date(dateTime).toLocaleString();
   };
 
+  const getAssetName = (assetId: number) => {
+    const asset = assets.find((a) => a.id === assetId);
+    return asset ? asset.name : "";
+  };
+
   return (
     <div>
       <h2 className="table-page-heading">EMPLOYEE REQUESTS</h2>
       <div className="table-box-shadow">
-      <Table className="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Employee ID</th>
-            <th>Asset ID</th>
-            <th>Is Accepted</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employeeRequests.map((request) => (
-            <tr key={request.id}>
-              <td>{request.id}</td>
-              <td>{request.employeeId}</td>
-              <td>{request.assetId}</td>
-              <td>
-                <button
-                  className={`btn ${
-                    request.isAccepted ? "btn-success" : "btn-danger"
-                  }`}
-                  onClick={() => handleToggleAcceptance(request.id)}
-                >
-                  {request.isAccepted ? "Accepted" : "Not Accepted"}
-                </button>
-              </td>
+        <Table className="table">
+          <thead>
+            <tr>
+              
+              <th>Employee First Name</th>
+              <th>Asset Name</th>
+              <th>Is Accepted</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {employeeRequests.map((request) => {
+              const employee = employees.find((e) => e.id === request.employeeId);
+              const firstName = employee ? employee.firstName : "";
+              const assetName = getAssetName(request.assetId);
+              return (
+                <tr key={request.id}>
+                 
+                  <td>{firstName}</td>
+                  <td>{assetName}</td>
+                  <td>
+                    <button
+                      className={`btn ${
+                        request.isAccepted ? "btn-success" : "btn-danger"
+                      }`}
+                      onClick={() => handleToggleAcceptance(request.id)}
+                    >
+                      {request.isAccepted ? "Accepted" : "Not Accepted"}
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
       </div>
 
       <h2 className="table-page-heading">ACCEPTED REQUESTS</h2>
       <div className="table-box-shadow">
-      <Table className="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Employee ID</th>
-            <th>Asset ID</th>
-            <th>Accepted Date and Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {acceptedRequests.map((request) => (
-            <tr key={request.id}>
-              <td>{request.id}</td>
-              <td>{request.employeeId}</td>
-              <td>{request.assetId}</td>
-              <td>{formatLocalDateTime(request.acceptedDateTime)}</td>
+        <Table className="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Employee First Name</th>
+              <th>Asset Name</th>
+              <th>Accepted Date and Time</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {acceptedRequests.map((request) => {
+              const employee = employees.find((e) => e.id === request.employeeId);
+              const firstName = employee ? employee.firstName : "";
+              const assetName = getAssetName(request.assetId);
+              return (
+                <tr key={request.id}>
+                  <td>{request.id}</td>
+                  <td>{firstName}</td>
+                  <td>{assetName}</td>
+                  <td>{formatLocalDateTime(request.acceptedDateTime)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
       </div>
     </div>
   );
