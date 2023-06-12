@@ -39,7 +39,7 @@ namespace Server.Controllers.Facility
             {
                 TaskType = assignTaskToInsert.TaskType,
                 TaskStatus = assignTaskToInsert.TaskStatus,
-                BuildingId = assignTaskToInsert.BuildingId
+                
             };
 
             try

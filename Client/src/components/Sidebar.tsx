@@ -33,7 +33,8 @@ const items = [
       { label: "Facility Dashboard", link: "/FacilityDashboard" },
       { label: "Assign Asset", link: "/AssignAsset" },
       
-      { label: "Building 2", link: "/facility/building2" },
+      { label: "External Employee Task", link: "/ExternalEmployeeTask" },
+      { label: "Assigment of External Employee", link: "/CleaningStaff" },
     ],
   },
   { label: "Reports", link: "/report", icon: FaFileAlt },

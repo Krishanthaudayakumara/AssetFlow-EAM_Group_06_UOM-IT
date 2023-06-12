@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Modal } from "react-bootstrap";
+import { Table, Button, Modal, Alert } from "react-bootstrap";
 import axios from "axios";
 import AddTaskForm from "./AssignStaffForm";
 import Badge from "react-bootstrap/Badge";
@@ -37,6 +37,7 @@ function AssigningCleaningStaff() {
   );
   const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
 
   useEffect(() => {
@@ -64,7 +65,7 @@ function AssigningCleaningStaff() {
     const fetchExternalWorkers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5087/api/ExternalWorker"
+          "http://localhost:5087/api/ExternalWorkers?includeDeleted=false"
         );
         const data = response.data;
         setExternalWorkers(data);
@@ -102,6 +103,7 @@ function AssigningCleaningStaff() {
           }
         );
         // Task status updated successfully, perform any necessary updates to the UI
+        setShowSuccessMessage(true); // Show success message
       }
     } catch (error) {
       console.error("Error updating task status:", error);
@@ -110,9 +112,15 @@ function AssigningCleaningStaff() {
       setShowConfirmationModal(false);
     }
   };
+  
+
   const handleCheckCircleClick = (taskId: number) => {
     setSelectedTaskId(taskId);
     setShowConfirmationModal(true);
+  };
+
+  const handleCloseSuccessMessage = () => {
+    setShowSuccessMessage(false);
   };
 
   return (
@@ -158,25 +166,23 @@ function AssigningCleaningStaff() {
                 <td>{getFullName(task.externalWorkerId)}</td>
                 <td>{task.taskDate}</td>
                 <td>
-                  {task.taskStatus === "NotAssign" ? (
+                  {task.taskStatus === "in progress" ? (
                     <Badge bg="danger" text="white">
                       {task.taskStatus}
                     </Badge>
-                  ) : task.taskStatus === "InProgress" ? (
-                    <Badge bg="warning" text="white">
-                      {task.taskStatus}
-                    </Badge>
-                  ) : (
+                  ) 
+                   : (
                     <Badge bg="success" text="white">
                       {task.taskStatus}
                     </Badge>
                   )}
                 </td>
-                <td>  <FiCheckCircle
-                        style={{ color: " #482890", marginLeft: "10px", cursor: "pointer" }}
-                        onClick={() => handleCheckCircleClick(task.id)}
-                       
-                      /></td>
+                <td>  
+                  <FiCheckCircle
+                    style={{ color: " #482890", marginLeft: "10px", cursor: "pointer" }}
+                    onClick={() => handleCheckCircleClick(task.id)}
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
@@ -209,6 +215,18 @@ function AssigningCleaningStaff() {
           </Button>
           <Button variant="primary" onClick={handleTaskStatusUpdate}>
             Confirm
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showSuccessMessage} onHide={handleCloseSuccessMessage}>
+        <Modal.Header closeButton>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>The task status has been updated successfully.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleCloseSuccessMessage}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

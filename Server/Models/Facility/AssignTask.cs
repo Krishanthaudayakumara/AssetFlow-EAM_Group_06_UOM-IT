@@ -13,8 +13,8 @@ namespace Server.Models.Facility
          public string? TaskStatus { get; set; }
          public int? ExternalWorkerId { get; set; }
         public ExternalWorker? ExternalWorker { get; set; }
-        public int BuildingId { get; set; } // Foreign key
-        public Building Building { get; set; } // Navigation property
+        public int ?BuildingId { get; set; } // Foreign key
+        public Building ?Building { get; set; } // Navigation property
          
         
     }

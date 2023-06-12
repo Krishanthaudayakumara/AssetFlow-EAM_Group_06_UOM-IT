@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-import { useState } from "react";
 import { FaTrashAlt, FaPen } from "react-icons/fa";
 import { Button, Modal, Form, Badge } from "react-bootstrap";
 import axios from "axios";
@@ -14,6 +13,7 @@ interface FacilityAssetData {
   receivedDate: string;
   assignStatus: string;
   workstationId: number;
+  workstationName: string; // Add workstationName property
 }
 
 function FacilityAssetTable() {
@@ -40,6 +40,32 @@ function FacilityAssetTable() {
 
     fetchFacilityAssetData();
   }, []);
+
+  const fetchWorkstationName = async (workstationId: number) => {
+    try {
+      const response = await axios.get<{ workstationName: string }>(
+        `http://localhost:5087/api/Workstation/${workstationId}`
+      );
+      return response.data.workstationName;
+    } catch (error) {
+      console.log(error);
+      return "";
+    }
+  };
+
+  useEffect(() => {
+    const updateFacilityData = async () => {
+      const updatedData = await Promise.all(
+        facilityData.map(async (item) => {
+          const workstationName = await fetchWorkstationName(item.workstationId);
+          return { ...item, workstationName };
+        })
+      );
+      setFacilityData(updatedData);
+    };
+
+    updateFacilityData();
+  }, [facilityData]);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -85,8 +111,7 @@ function FacilityAssetTable() {
               <th>Received date</th>
               <th>Assign Status</th>
               <th>Assigned date</th>
-              <th>workstationId</th>
-
+              <th>Workstation Name</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -107,8 +132,7 @@ function FacilityAssetTable() {
                       )}
                     </td>
                     <td>{item.assignedDate}</td>
-                    <td>{item.workstationId}</td>
-
+                    <td>{item.workstationName}</td>
                     <td>
                       <FaPen
                         style={{
@@ -186,6 +210,7 @@ function FacilityAssetTable() {
         </Modal.Footer>
       </Modal>
     </div>
+  
   );
 }
 

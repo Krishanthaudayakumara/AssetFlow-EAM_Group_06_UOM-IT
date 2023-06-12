@@ -123,7 +123,7 @@ public async Task<IActionResult> UpdateFacilityAsset(int id, FacilityToUpdate Fa
 
     if (updateFacAsset.WorkstationId != null)
     {
-        return Conflict("WorkstationId has already been assigned for this FacilityAsset.");
+        return Conflict("This Asset already assign to a workstation");
     }
 
     updateFacAsset.AssignedDate = FacilityAssetToUpdate.AssignedDate;

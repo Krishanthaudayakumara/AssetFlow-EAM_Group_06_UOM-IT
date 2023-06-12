@@ -62,7 +62,7 @@ function AddTaskForm() {
   useEffect(() => {
     const fetchExternalEmployees = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/api/ExternalWorker");
+        const response = await axios.get("http://localhost:5087/api/ExternalWorkers?includeDeleted=false");
         const data = response.data;
         setExternalEmployees(data);
       } catch (error) {
@@ -132,15 +132,9 @@ function AddTaskForm() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleOpenModal}>
-        Assign Task
-      </Button>
+    
 
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Assign Task</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+     
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="task">
               <Form.Label>Task:</Form.Label>
@@ -187,7 +181,7 @@ function AddTaskForm() {
               <Form.Label>Status:</Form.Label>
               <Form.Select value={selectedStatus} onChange={handleStatusChange}>
                 <option value="inProgress">In Progress</option>
-                <option value="completed">Completed</option>
+                <option value="completed">Not Assign</option>
               </Form.Select>
             </Form.Group>
 
@@ -195,13 +189,7 @@ function AddTaskForm() {
               Submit
             </Button>
           </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+     
     </>
   );
 }
