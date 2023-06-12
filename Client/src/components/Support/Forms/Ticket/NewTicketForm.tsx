@@ -119,7 +119,7 @@ const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
         <Form.Group>
           <Form.Control
             type="text"
-            placeholder="Enter your valid Email *"
+            placeholder="Enter your valid Email *( example@gmail.com )"
             required
             name="email"
             onChange={handleChange}
@@ -149,7 +149,7 @@ const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
         <Form.Group>
           <Form.Control
             as="textarea"
-            placeholder="Problem *"
+            placeholder="Problem ( 100 characters only )*"
             required
             name="problem"
             rows={3}
