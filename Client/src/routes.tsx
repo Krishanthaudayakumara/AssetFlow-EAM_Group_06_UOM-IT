@@ -61,14 +61,21 @@ const RoutesConfig: React.FC = () => {
     const decodedToken: any = jwtDecode(token);
     const userRole = decodedToken.role;
 
-    if (userRole === "FacManager") {
+    if (userRole === "admin") {
+      defaultDashboard = <Dashboard />;
+    } 
+    if (userRole === "manager") {
+      defaultDashboard = <Dashboard />;
+    } 
+
+    else if (userRole === "facilityManager") {
       defaultDashboard = <FacilityDashboard />;
-    } else if (userRole === "ItManager") {
+    } else if (userRole === "supportManager") {
       defaultDashboard = <ITDashboard />;
-    } else if (userRole === "InvManager") {
+    } else if (userRole === "inventoryManager") {
       defaultDashboard = <InventoryDashboard />;
     } else {
-      defaultDashboard = <Dashboard />;
+      defaultDashboard = <></>;
     }
   } else {
     defaultDashboard = <Login />;
