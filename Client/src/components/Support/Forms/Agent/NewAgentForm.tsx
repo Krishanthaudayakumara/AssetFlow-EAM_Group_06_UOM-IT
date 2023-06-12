@@ -47,7 +47,7 @@ const NewAgentForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrorMessage(null);
-    if (!validateContact() || !validateEmail() || !validateIssueType()) {
+    if (!validateContact() || !validateEmail() || !validateAgentName()) {
       return;
     }
     try {
@@ -123,11 +123,13 @@ const NewAgentForm = () => {
     return isValid;
   };
 
-  const validateIssueType = (): boolean => {
-    const contactRegex = /^[A-Za-z\s]{2,20}$/; // Regex to match a characters
+  const validateAgentName = (): boolean => {
+    const contactRegex = /^[A-Za-z\s]{0,20}$/; // Regex to match a characters
     const isValid = contactRegex.test(formData.firstName && formData.lastName);
     if (!isValid) {
-      setNameError("Input should only contain English letters and limit to 20 characters");
+      setNameError(
+        "Input should only contain English letters and limit to 20 characters"
+      );
     } else {
       setNameError("");
     }
@@ -160,6 +162,9 @@ const NewAgentForm = () => {
           value={formData.firstName}
           onChange={handleChange}
         />
+        {nameError && (
+          <Form.Text className="text-danger">{nameError}</Form.Text>
+        )}
       </Form.Group>
       <br />
       <Form.Group>
@@ -171,6 +176,9 @@ const NewAgentForm = () => {
           value={formData.lastName}
           onChange={handleChange}
         />
+        {nameError && (
+          <Form.Text className="text-danger">{nameError}</Form.Text>
+        )}
       </Form.Group>
       <br />
       <Form.Group>

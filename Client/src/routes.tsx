@@ -50,6 +50,7 @@ import NotificationCenter from "./pages/Notification/NotificationCenter";
 import ExternalEmployeeTask from "./pages/Facility/ExternalEmployeeTask";
 import CleaningStaff from "./pages/Facility/CleaningStaff";
 import { UserRole } from "./enum";
+import Assign from "./pages/Dashboard/Assign";
 
 
 const RoutesConfig: React.FC = () => {
@@ -246,13 +247,25 @@ const RoutesConfig: React.FC = () => {
       </Route>
 
       <Route
+        path="/EmployeeRequest"
+        element={<PrivateRoute allowedRoles="all" />}
+      >
+        <Route path="/EmployeeRequest" element={<EmployeeRequest />} />
+      </Route>
+
+      <Route
         path="/BuildingFloor"
         element={<PrivateRoute allowedRoles={Facility} />}
       >
         <Route path="/BuildingFloor" element={<BuildingFloor />} />
       </Route>
+      
       <Route path="/AssignAsset" element={<PrivateRoute allowedRoles={Facility} />}>
+       
         <Route path="/AssignAsset" element={<AssignAsset />} />
+        </Route>
+      <Route path="/Assign" element={<PrivateRoute allowedRoles={Inventory} />}>
+        <Route path="/Assign" element={<Assign />} />
       </Route>
       <Route
         path="/FacilityAsset"
