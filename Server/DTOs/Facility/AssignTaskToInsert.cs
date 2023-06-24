@@ -9,7 +9,7 @@ namespace Server.DTOs.Facility
 {
     public class AssignTaskToInsert
     {
-        public int BuildingId { get; set; }
+     
         public string TaskType { get; set; }
         public string TaskStatus { get; set; }
     }

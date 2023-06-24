@@ -1,11 +1,40 @@
 import React, { useState } from "react";
-import { Nav, Navbar, NavbarBrand, NavItem, NavLink, Dropdown, Row, Col } from "react-bootstrap";
-import { FaAngleDown, FaThLarge, FaBox, FaBuilding, FaFileAlt, FaUsers, FaShippingFast, FaComments, FaCalendarAlt, FaAngleLeft, FaAngleRight, FaUserTie, FaSuitcase } from "react-icons/fa";
+import {
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavItem,
+  NavLink,
+  Dropdown,
+  Row,
+  Col,
+} from "react-bootstrap";
+import {
+  FaAngleDown,
+  FaThLarge,
+  FaBox,
+  FaBuilding,
+  FaFileAlt,
+  FaUsers,
+  FaShippingFast,
+  FaComments,
+  FaCalendarAlt,
+  FaAngleLeft,
+  FaAngleRight,
+  FaUserTie,
+  FaSuitcase,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import "../css/Sidebar.css"; // import background image CSS file
 
-const Management: string[] = ["manager", "admin", "facilityManager", "inventoryManager", "supportManager"];
+const Management: string[] = [
+  "manager",
+  "admin",
+  "facilityManager",
+  "inventoryManager",
+  "supportManager",
+];
 const Facility: string[] = ["manager", "admin", "facilityManager"];
 const Inventory: string[] = ["manager", "admin", "inventoryManager"];
 const SupportManager: string[] = ["manager", "admin", "supportManager"];
@@ -24,9 +53,17 @@ const items = [
       { label: "SubCategory", link: "/SubCategory", allowedRoles: Inventory },
       { label: "Stock", link: "/Stock", allowedRoles: Inventory },
       { label: "Asset", link: "/Asset", allowedRoles: Inventory },
-      { label: "Employee Request", link: "/EmployeeRequest", allowedRoles: Inventory },
+      {
+        label: "Employee Request",
+        link: "/EmployeeRequest",
+        allowedRoles: Inventory,
+      },
       { label: "Assign", link: "/Assign", allowedRoles: Inventory },
-      { label: "Inventory Dashboard", link: "/InventoryDashboard", allowedRoles: Inventory },
+      {
+        label: "Inventory Dashboard",
+        link: "/InventoryDashboard",
+        allowedRoles: Inventory,
+      },
       { label: "Item", link: "/inventory/building2", allowedRoles: Inventory },
     ],
   },
@@ -36,21 +73,66 @@ const items = [
     link: "/facility",
     dropdownItems: [
       { label: "Building", link: "/BuildingFloor", allowedRoles: Facility },
-      { label: "Facility Stock", link: "/FacilityStock", allowedRoles: Facility },
-      { label: "Facility Asset", link: "/FacilityAsset", allowedRoles: Facility },
-      { label: "Facility Dashboard", link: "/FacilityDashboard", allowedRoles: Facility },
+      {
+        label: "Facility Stock",
+        link: "/FacilityStock",
+        allowedRoles: Facility,
+      },
+      {
+        label: "Facility Asset",
+        link: "/FacilityAsset",
+        allowedRoles: Facility,
+      },
+      {
+        label: "Facility Dashboard",
+        link: "/FacilityDashboard",
+        allowedRoles: Facility,
+      },
       { label: "Assign Asset", link: "/AssignAsset", allowedRoles: Facility },
-      { label: "Building 2", link: "/facility/building2", allowedRoles: Facility },
+
+      {
+        label: "External Employee Task",
+        link: "/ExternalEmployeeTask",
+        allowedRoles: Facility,
+      },
+      {
+        label: "Assigment of External Employee",
+        link: "/CleaningStaff",
+        allowedRoles: Facility,
+      },
     ],
   },
-  { label: "Reports", link: "/report", icon: FaFileAlt, allowedRoles: Management },
+  {
+    label: "Reports",
+    link: "/report",
+    icon: FaFileAlt,
+    allowedRoles: Management,
+  },
   { label: "Users", link: "/user", icon: FaUsers, allowedRoles: Admin },
-  { label: "Employees", link: "/employee", icon: FaUserTie, allowedRoles: ManagerOnly },
-  { label: "Departments", link: "/department", icon: FaSuitcase, allowedRoles: ManagerOnly },
-  { label: "Supply", link: "/supplier", icon: FaShippingFast, allowedRoles: Inventory,
+  {
+    label: "Employees",
+    link: "/employee",
+    icon: FaUserTie,
+    allowedRoles: ManagerOnly,
+  },
+  {
+    label: "Departments",
+    link: "/department",
+    icon: FaSuitcase,
+    allowedRoles: ManagerOnly,
+  },
+  {
+    label: "Supply",
+    link: "/supplier",
+    icon: FaShippingFast,
+    allowedRoles: Inventory,
     dropdownItems: [
       { label: "Suppliers", link: "/supplier", allowedRoles: Inventory },
-      { label: "Supply Orders", link: "/supply-orders", allowedRoles: Inventory },
+      {
+        label: "Supply Orders",
+        link: "/supply-orders",
+        allowedRoles: Inventory,
+      },
       { label: "Supply Chain", link: "/supply-chain", allowedRoles: Inventory },
     ],
   },
@@ -64,10 +146,19 @@ const items = [
       { label: "Agents", link: "/Agents", allowedRoles: SupportManager },
       { label: "Issues", link: "/Issues", allowedRoles: SupportManager },
       { label: "My Tickets", link: "/MyTickets", allowedRoles: "all" },
-      { label: "IT Dashboard", link: "/ITDashboard", allowedRoles: SupportManager },
+      {
+        label: "IT Dashboard",
+        link: "/ITDashboard",
+        allowedRoles: SupportManager,
+      },
     ],
   },
-  { label: "Notification Center", link: "/Notifications", icon: FaCalendarAlt, allowedRoles: Management },
+  {
+    label: "Notification Center",
+    link: "/Notifications",
+    icon: FaCalendarAlt,
+    allowedRoles: Management,
+  },
 ];
 
 interface SidebarProps {
@@ -90,8 +181,10 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
   const collapseSideBar = (collapsed: boolean) => {
     const sidebarCol = document.getElementsByClassName("sidebar-col")[0];
-    const comp_sidebar_col = document.getElementsByClassName("comp-sidebar-col")[0];
-    const comp_collapse_col = document.getElementsByClassName("comp-collapse-col")[0];
+    const comp_sidebar_col =
+      document.getElementsByClassName("comp-sidebar-col")[0];
+    const comp_collapse_col =
+      document.getElementsByClassName("comp-collapse-col")[0];
     const contentCol = document.getElementsByClassName("content-col")[0];
     if (collapsed) {
       sidebarCol.className = "sidebar-col col-3";
@@ -123,7 +216,11 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   return (
     <Row>
       <Col md={10} className="comp-sidebar-col">
-        <Navbar bg={props.theme === "dark" ? "dark" : "light"} expand="lg" className="sidebar">
+        <Navbar
+          bg={props.theme === "dark" ? "dark" : "light"}
+          expand="lg"
+          className="sidebar"
+        >
           <div className="sidebar-logo">
             <img
               className="logo-img"
@@ -145,14 +242,24 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                           collapsed || isMobile()
                             ? "side-link-collapsed"
                             : "side-link"
-                        } nav-link ${props.active === item.link ? "active" : ""}`}
+                        } nav-link ${
+                          props.active === item.link ? "active" : ""
+                        }`}
                         onClick={() => toggle(item.label)}
                       >
-                        <item.icon fontSize="1.2em" className="side-item mr-2" />
-                        <span className={collapsed || isMobile() ? "hidden" : ""}>
+                        <item.icon
+                          fontSize="1.2em"
+                          className="side-item mr-2"
+                        />
+                        <span
+                          className={collapsed || isMobile() ? "hidden" : ""}
+                        >
                           {item.label}
                         </span>
-                        <FaAngleDown className="dropdown-icon" style={{ float: "right" }} />
+                        <FaAngleDown
+                          className="dropdown-icon"
+                          style={{ float: "right" }}
+                        />
                       </div>
                       {openKey === item.label && (
                         <div className="dropdown-collection">
@@ -182,11 +289,18 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                           collapsed || isMobile()
                             ? "side-link-collapsed"
                             : "side-link"
-                        } nav-link ${props.active === item.link ? "active" : ""}`}
+                        } nav-link ${
+                          props.active === item.link ? "active" : ""
+                        }`}
                         to={item.link}
                       >
-                        <item.icon fontSize="1.2em" className="side-item mr-2" />
-                        <span className={collapsed || isMobile() ? "hidden" : ""}>
+                        <item.icon
+                          fontSize="1.2em"
+                          className="side-item mr-2"
+                        />
+                        <span
+                          className={collapsed || isMobile() ? "hidden" : ""}
+                        >
                           {item.label}
                         </span>
                       </Link>

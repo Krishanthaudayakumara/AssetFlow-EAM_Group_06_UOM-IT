@@ -6,19 +6,29 @@ import { FaTrashAlt, FaPen } from "react-icons/fa";
 interface TaskTypeData {
   taskType: string;
   id: number;
+  taskStatus:string;
+}
+
+interface BuildingData {
+  id: number;
+  buildingName: string;
+  // Add other properties if needed
 }
 
 function TaskTable() {
   const [task, setTask] = useState<TaskTypeData[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [taskStatus,setTaskStatus]=useState("")
   const [taskTypeInput, setTaskTypeInput] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-  const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] =useState(false);
-    
+  const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] =
+    useState(false);
+  const [buildingNames, setBuildingNames] = useState<BuildingData[]>([]);
+  const [selectedBuildingName, setSelectedBuildingName] = useState("");
   const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
   const [editedTaskType, setEditedTaskType] = useState("");
-  const[showEditModal,setShowEditModal]=useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleCloseModal = () => {
@@ -36,12 +46,13 @@ function TaskTable() {
       setShowAlert(true);
       return;
     }
-
+  
     try {
       const response = await axios.post<TaskTypeData>(
         "http://localhost:5087/api/AssignTask",
         {
           taskType: taskTypeInput,
+          taskStatus: "Not Assign", // Include taskStatus in the payload
         }
       );
       setTask([...task, response.data]);
@@ -55,13 +66,7 @@ function TaskTable() {
       }
     }
   };
-
-  const handleTaskTypeInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setTaskTypeInput(e.target.value);
-  };
-
+  
   // Fetch task data on component mount
   useEffect(() => {
     const fetchTaskData = async () => {
@@ -115,14 +120,12 @@ function TaskTable() {
       setShowEditModal(true);
     }
   };
-  
-  
+
   const handleCloseEditModal = () => {
     setShowEditModal(false);
     setEditedTaskType("");
     setSelectedTaskId(null);
   };
-  
 
   const handleUpdateTask = async () => {
     try {
@@ -130,6 +133,7 @@ function TaskTable() {
         `http://localhost:5087/api/AssignTask/TaskType/${selectedTaskId}`,
         {
           taskType: editedTaskType,
+          
         }
       );
       const updatedTask = task.map((t) =>
@@ -142,7 +146,13 @@ function TaskTable() {
     }
   };
   
-  
+const handleTaskTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setTaskTypeInput(event.target.value);
+};
+
+const handleTaskStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setTaskStatus(event.target.value);
+};
 
   return (
     <div style={{ margin: "4rem" }}>
@@ -164,7 +174,6 @@ function TaskTable() {
         className="shadow p-2 mb- bg-white rounded"
         style={{ width: "800px" }}
       >
-        
         <Table
           className="table w-100 small text-center"
           hover
@@ -180,6 +189,7 @@ function TaskTable() {
                 />
               </th>
               <th>Task type</th>
+              <th>Task Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -197,14 +207,16 @@ function TaskTable() {
                       />
                     </td>
                     <td>{t.taskType}</td>
+                    <td>{t.taskStatus}</td>
                     <td>
                       <FaTrashAlt
                         style={{ color: "#ff615a" }}
                         onClick={() => handleOpenDeleteConfirmationModal(t.id)}
                       />
-                      <FaPen style={{ color: "#482890", marginLeft: "10px" }}
-                       onClick={() => handleEditTask(t.id)}
-                       />
+                      <FaPen
+                        style={{ color: "#482890", marginLeft: "10px" }}
+                        onClick={() => handleEditTask(t.id)}
+                      />
                     </td>
                   </tr>
                 );
@@ -227,10 +239,18 @@ function TaskTable() {
             <Form.Group controlId="taskType">
               <Form.Label>Task type</Form.Label>
               <Form.Control
-  type="text"
-  value={taskTypeInput}
-  onChange={handleTaskTypeInputChange}
-/>
+                type="text"
+                value={taskTypeInput}
+                onChange={handleTaskTypeChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="taskStatus">
+              <Form.Label>Task Status</Form.Label>
+              <Form.Control
+                type="text"
+                value="Not Assign"
+                onChange={handleTaskStatusChange}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -283,37 +303,31 @@ function TaskTable() {
         </Modal.Footer>
       </Modal>
 
-      <Modal
-  show={showEditModal}
-  onHide={handleCloseEditModal}
->
-  <Modal.Header closeButton>
-    <Modal.Title>Edit Task</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    <Form>
-      <Form.Group controlId="editedTaskType">
-        <Form.Label>Task type</Form.Label>
-        <Form.Control
-          type="text"
-          value={editedTaskType}
-          onChange={(e) => setEditedTaskType(e.target.value)}
-        />
-      </Form.Group>
-    </Form>
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={handleCloseEditModal}>
-      Close
-    </Button>
-    <Button variant="primary" onClick={handleUpdateTask}>
-      Update
-    </Button>
-  </Modal.Footer>
-</Modal>
-
-
-   
+      <Modal show={showEditModal} onHide={handleCloseEditModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Task</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="editedTaskType">
+              <Form.Label>Task type</Form.Label>
+              <Form.Control
+                type="text"
+                value={editedTaskType}
+                onChange={(e) => setEditedTaskType(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseEditModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleUpdateTask}>
+            Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

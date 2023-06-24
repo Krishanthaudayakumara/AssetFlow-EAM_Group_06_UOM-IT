@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import Form from "react-bootstrap/Form";
 import DatePicker from "react-datepicker";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal ,Alert} from "react-bootstrap";
 import axios from "axios";
 
 type AssignAssetFormProps = {
@@ -21,6 +21,8 @@ function AssignAssetForm(props: AssignAssetFormProps) {
   const [assetIds, setAssetIds] = useState<number[]>([]);
   const [selectedAssetId, setSelectedAssetId] = useState<number>();
   const [showModal, setShowModal] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     const fetchSubCategoryAndAsset = async () => {
@@ -94,9 +96,13 @@ function AssignAssetForm(props: AssignAssetFormProps) {
       setShowModal(true);
 
       // Optionally, you can reset the form fields or perform any other actions after successful update
-    } catch (error) {
-      alert("An error occurred while updating the Facility Asset.");
-      console.error(error);
+    } catch (error: any) {
+      if (error.response && error.response.status === 409) {
+        setAlertMessage("This Asset already assign to a workstation");
+      } else {
+        setAlertMessage("An error occurred. Please try again.");
+      }
+      setShowAlert(true);
     }
   };
 
@@ -107,6 +113,11 @@ function AssignAssetForm(props: AssignAssetFormProps) {
   return (
     <>
       <Form onSubmit={handleSubmit}>
+      {showAlert && (
+  <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
+    {alertMessage}
+  </Alert>
+)}
       <Form.Group className="mb-3" controlId="workstationId">
         <Form.Label>Workstation Id</Form.Label>
         <Form.Control type="text" value={props.id} readOnly />
