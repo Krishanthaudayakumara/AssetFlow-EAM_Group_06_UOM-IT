@@ -14,13 +14,13 @@ const Facbutton: React.FC = () => {
   };
   return (
     <div>
-      <Button className="button3" onClick={handleShow} data-toggle="modal">
-        +NewBuilding
+      <Button className="btn btn-outline-light" style={{ backgroundColor: "#FF615A" }} onClick={handleShow} data-toggle="modal">
+        + New Building
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header>
-          <Modal.Title>Add building</Modal.Title>
+        <Modal.Header style={{ backgroundColor: "#482890" }}>
+          <Modal.Title style={{ color: "white" }}>Add building</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Forms />

@@ -70,26 +70,14 @@ function FacilityAssetStock() {
 
   return (
     <div style={{ margin: "5rem" }}>
-      <Button variant="secondary" onClick={openModal}>
+      <div style={{ display: "flex", justifyContent: "flex-end",  marginBottom: "30px", marginTop: "-100px"  }}>
+      <Button className="btn btn-outline-light" style={{ backgroundColor: "#FF615A" }} onClick={openModal}>
         Request
       </Button>
-      <Button variant="secondary" onClick={handleClick} disabled={isLoading}>
+      <Button className="btn btn-outline-light" style={{ backgroundColor: "#482890" }} onClick={handleClick} disabled={isLoading}>
       {isLoading ? 'Loading...' : 'Accept'}
     </Button>
-      <Modal show={showModal} onHide={closeModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Request Form</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <RequestForm />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
-            Close
-          </Button>
-         
-        </Modal.Footer>
-      </Modal>
+    </div>
 
       <div className="shadow p-2 mb- bg-white rounded" style={{ width: "800px" }}>
       
@@ -129,6 +117,20 @@ function FacilityAssetStock() {
           </tbody>
         </Table>
       </div>
+      <Modal show={showModal} onHide={closeModal}>
+        <Modal.Header closeButton style={{ backgroundColor: "#482890" }}>
+          <Modal.Title style={{ color: "white" }}>Request Form</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <RequestForm />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeModal}>
+            Close
+          </Button>
+         
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
