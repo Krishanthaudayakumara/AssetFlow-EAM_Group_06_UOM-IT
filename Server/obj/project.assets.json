@@ -5903,19 +5903,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
+    "C:\\Users\\Krishantha\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj",
+      "projectUniqueName": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\server\\Server.csproj",
-      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS\\Dropbox\\My PC (LAPTOP-RCG9KJN8)\\Documents\\GitHub\\AssetFlow-EAM_Group_06_UOM-IT\\server\\obj\\",
+      "projectPath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\Krishantha\\.nuget\\packages\\",
+      "outputPath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Krishantha\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
