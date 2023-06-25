@@ -138,13 +138,13 @@ const StockModal = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Add Stock
+      <Button className="btn btn-outline-light"  style={{ backgroundColor: "#FF615A" }} onClick={handleShow}>
+        + Add New Stock
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Create Stock</Modal.Title>
+        <Modal.Header closeButton style={{ backgroundColor: "#482890" }}>
+          <Modal.Title style={{ color: "white" }}>Create Stock</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {error && <Alert variant="danger">{error}</Alert>}

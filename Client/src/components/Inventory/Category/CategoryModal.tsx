@@ -29,8 +29,8 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
 
   return (
     <Modal show={show} onHide={onClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Add Category</Modal.Title>
+      <Modal.Header closeButton style={{ backgroundColor: "#482890" }}>
+        <Modal.Title style={{ color: "white" }}>Add Category</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>

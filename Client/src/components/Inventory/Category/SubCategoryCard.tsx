@@ -23,7 +23,7 @@ const SubCategoryCard: React.FC<SubCategoryCardProps> = ({ subcategory, onDelete
       <Card.Img variant="top" src={subcategory.imageUrl} />
       <Card.Body>
         <Card.Title>{subcategory.name}</Card.Title>
-        <Button variant="danger" onClick={handleDeleteClick}>
+        <Button className="btn btn-outline-light" style={{ backgroundColor: "#FF615A" }} onClick={handleDeleteClick}>
           Delete
         </Button>
       </Card.Body>

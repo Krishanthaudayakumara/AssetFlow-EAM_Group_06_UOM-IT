@@ -40,8 +40,8 @@ const SubCategoryModal: React.FC<SubCategoryModalProps> = ({ show, onClose, onSa
 
   return (
     <Modal show={show} onHide={onClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Add Subcategory</Modal.Title>
+      <Modal.Header closeButton style={{ backgroundColor: "#482890" }}>
+        <Modal.Title style={{ color: "white" }}>Add Subcategory</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>

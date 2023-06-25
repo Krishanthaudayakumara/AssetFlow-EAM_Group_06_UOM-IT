@@ -28,10 +28,11 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
         <Card.Body>
           <Card.Title>{category.name}</Card.Title>
           <Card.Text>{category.description}</Card.Text>
-          <Button variant="primary" onClick={() => onEdit(category.id)}>
+          <Button className="btn btn-outline-light" style={{ backgroundColor: "#482890" }} onClick={() => onEdit(category.id)}>
             Edit
           </Button>
-          <Button variant="danger" onClick={() => onDelete(category.id)}>
+          &nbsp;&nbsp;
+          <Button className="btn btn-outline-light" style={{ backgroundColor: "#FF615A" }} onClick={() => onDelete(category.id)}>
             Delete
           </Button>
         </Card.Body>
