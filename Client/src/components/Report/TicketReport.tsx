@@ -16,7 +16,7 @@ const TicketReport = () => {
   const [TicketReports, setTicketReports] = useState<Ticket[]>([])
   useEffect(() => {
     axios
-      .get('http://localhost:5087/api/SupportTicket')
+      .get('https://assetflow.azurewebsites.net/api/SupportTicket')
       .then((response) => {
         setTicketReports(response.data)
       })

@@ -70,7 +70,7 @@ const ViewTicketForm: React.FC<ViewTicketFormProps> = ({
     const fetchReply = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5087/Api/Ticket/api/tickets/${selectedTicket?.id}/reply`
+          `https://assetflow.azurewebsites.net/Api/Ticket/api/tickets/${selectedTicket?.id}/reply`
         );
         setReply(response.data);
       } catch (error) {
@@ -87,7 +87,7 @@ const ViewTicketForm: React.FC<ViewTicketFormProps> = ({
     const fetchFeedback = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5087/Api/Feedback/api/tickets/${selectedTicket?.id}/feedback`
+          `https://assetflow.azurewebsites.net/Api/Feedback/api/tickets/${selectedTicket?.id}/feedback`
         );
         setFeedback(response.data);
       } catch (error) {

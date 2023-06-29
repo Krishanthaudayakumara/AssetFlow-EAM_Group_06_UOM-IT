@@ -91,7 +91,7 @@ const ReportButton: React.FC<ReportButtonProps> = ({ departmentName, selectedRep
     }
     setShowModal(false);
     try {
-      const response = await axios.post('http://localhost:5087/api/GeneratedReport', formData);
+      const response = await axios.post('https://assetflow.azurewebsites.net/api/GeneratedReport', formData);
       console.log(response.data);
       // Show success modal
       setShowSuccessModal(true);

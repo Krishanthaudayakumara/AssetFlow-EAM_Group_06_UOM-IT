@@ -50,7 +50,7 @@ const AgentCardView = ({
             <Card key={agent.id} className="agent-card">
               <Card.Img
                 variant="top"
-                src={`http://localhost:5087/ProfileImages/${agent.profileImage}`}
+                src={`https://assetflow.azurewebsites.net/ProfileImages/${agent.profileImage}`}
                 alt="User profile"
                 className=" agent-image"
                 onClick={() => onAgentClick(agent)}

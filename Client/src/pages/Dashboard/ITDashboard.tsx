@@ -25,7 +25,7 @@ const ITDashboard = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5087/ITDashboard/monthly-ticket-counts')
+      .get('https://assetflow.azurewebsites.net/ITDashboard/monthly-ticket-counts')
       .then((response) => {
         setTicketCounts(response.data)
       })
@@ -33,7 +33,7 @@ const ITDashboard = () => {
         console.error(error)
       })
     axios
-      .get('http://localhost:5087/ITDashboard/available-agent-count')
+      .get('https://assetflow.azurewebsites.net/ITDashboard/available-agent-count')
       .then((response) => {
         setAvailableAgentCount(response.data.availableAgentCount)
       })
@@ -41,7 +41,7 @@ const ITDashboard = () => {
         console.error(error)
       })
     axios
-      .get('http://localhost:5087/ITDashboard/solved-ticket-count')
+      .get('https://assetflow.azurewebsites.net/ITDashboard/solved-ticket-count')
       .then((response) => {
         setSolvedTicketCount(response.data.solvedTicketCount)
       })
@@ -49,7 +49,7 @@ const ITDashboard = () => {
         console.error(error)
       })
     axios
-      .get('http://localhost:5087/ITDashboard/avg-response-time')
+      .get('https://assetflow.azurewebsites.net/ITDashboard/avg-response-time')
       .then((response) => {
         setAverageResponseTime(response.data)
       })
@@ -58,7 +58,7 @@ const ITDashboard = () => {
       })
 
     axios
-      .get('http://localhost:5087/ITDashboard')
+      .get('https://assetflow.azurewebsites.net/ITDashboard')
       .then((response: AxiosResponse) => {
         setTicketSatisfaction(response.data)
       })

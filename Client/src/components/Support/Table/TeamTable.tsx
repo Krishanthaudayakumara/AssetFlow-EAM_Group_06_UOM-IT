@@ -51,7 +51,7 @@ const TeamTable = () => {
 
   useEffect(() => {
     const fetchIssues = async () => {
-      const response = await axios.get("http://localhost:5087/Api/IssueType");
+      const response = await axios.get("https://assetflow.azurewebsites.net/Api/IssueType");
       setIssues(response.data);
     };
     fetchIssues();
@@ -59,7 +59,7 @@ const TeamTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5087/Api/Team")
+      .get("https://assetflow.azurewebsites.net/Api/Team")
       .then((response) => {
         setTeams(response.data);
       })
@@ -79,7 +79,7 @@ const TeamTable = () => {
 
   const handleUpdateTeam = () => {
     axios
-      .put(`http://localhost:5087/Api/Team/${selectedTeam?.id}`, selectedTeam)
+      .put(`https://assetflow.azurewebsites.net/Api/Team/${selectedTeam?.id}`, selectedTeam)
       .then((response) => {
         setTeams(
           teams.map((team) =>
@@ -106,7 +106,7 @@ const TeamTable = () => {
 
   const confirmDeleteTeam = () => {
     axios
-      .delete(`http://localhost:5087/Api/Team/${deletingTeam?.id}`)
+      .delete(`https://assetflow.azurewebsites.net/Api/Team/${deletingTeam?.id}`)
       .then((response) => {
         setTeams(teams.filter((item) => item.id !== deletingTeam?.id));
       })
@@ -208,7 +208,7 @@ const TeamTable = () => {
                           <tr key={team.id}>
                             <td>
                               <img
-                                src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
+                                src={`https://assetflow.azurewebsites.net/ProfileImages/${team.profileImage}`}
                                 alt="User profile"
                                 className="rounded-circle"
                                 style={{

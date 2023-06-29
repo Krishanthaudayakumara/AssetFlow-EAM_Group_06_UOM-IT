@@ -232,3 +232,8 @@ C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Gro
 C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.pdb
 C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\Server.genruntimeconfig.cache
 C:\Users\ASUS\Dropbox\My PC (LAPTOP-RCG9KJN8)\Documents\GitHub\AssetFlow-EAM_Group_06_UOM-IT\Server\obj\Debug\net7.0\ref\Server.dll
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\publish\web.config
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\publish\appsettings.Development.json
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\publish\appsettings.json
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\publish\Server.deps.json
+D:\Github\AssetFlow-EAM_Group_06_UOM-IT\Server\bin\Debug\net7.0\publish\Server.runtimeconfig.json

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../css/User/profile.css";
 
-const API_URL = "http://localhost:5087/api/auth";
+const API_URL = "https://assetflow.azurewebsites.net/api/auth";
 
 interface UserProfile {
   user: {

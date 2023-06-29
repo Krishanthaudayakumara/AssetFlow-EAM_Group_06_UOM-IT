@@ -32,7 +32,7 @@ const AgentToTicket: React.FC<Props> = ({ agentId }) => {
     const fetchTickets = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5087/Api/Ticket/api/agents/${agentId}/ticket`
+          `https://assetflow.azurewebsites.net/Api/Ticket/api/agents/${agentId}/ticket`
         );
         setTickets(response.data);
       } catch (error) {
@@ -47,7 +47,7 @@ const AgentToTicket: React.FC<Props> = ({ agentId }) => {
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/Api/Agent");
+        const response = await axios.get("https://assetflow.azurewebsites.net/Api/Agent");
         setAgents(response.data);
       } catch (error) {
         console.log(error);

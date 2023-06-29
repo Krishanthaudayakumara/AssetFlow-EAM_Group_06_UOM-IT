@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5087/api/orders';
+const BASE_URL = 'https://assetflow.azurewebsites.net/api/orders';
 
 export const checkAndCreateOrder = async () => {
     try {

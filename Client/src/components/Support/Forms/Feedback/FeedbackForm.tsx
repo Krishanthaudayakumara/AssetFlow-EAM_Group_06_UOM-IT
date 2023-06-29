@@ -18,7 +18,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ ticketId, onClose }) => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:5087/Api/Feedback", {
+      const response = await axios.post("https://assetflow.azurewebsites.net/Api/Feedback", {
         condition,
         comment,
         ticketId: ticketId || undefined,

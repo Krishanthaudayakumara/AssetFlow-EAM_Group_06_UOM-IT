@@ -36,7 +36,7 @@ const StockModal = () => {
   const fetchCategories = async () => {
     try {
       // Make an API call to fetch the categories
-      const response = await fetch("http://localhost:5087/api/Category");
+      const response = await fetch("https://assetflow.azurewebsites.net/api/Category");
       const data = await response.json();
       setCategories(data);
     } catch (error) {
@@ -52,7 +52,7 @@ const StockModal = () => {
   const fetchSubCategories = async () => {
     try {
       // Make an API call to fetch the subcategories
-      const response = await fetch("http://localhost:5087/api/SubCategory");
+      const response = await fetch("https://assetflow.azurewebsites.net/api/SubCategory");
       const data = await response.json();
       setSubCategories(data);
     } catch (error) {
@@ -66,7 +66,7 @@ const StockModal = () => {
 
   const fetchSuppliers = async () => {
     try {
-      const response = await fetch("http://localhost:5087/api/Suppliers");
+      const response = await fetch("https://assetflow.azurewebsites.net/api/Suppliers");
       const data = await response.json();
       setSuppliers(data);
     } catch (error) {

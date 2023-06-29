@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5087/api/Category';
+const BASE_URL = 'https://assetflow.azurewebsites.net/api/Category';
 
 export const getCategories = () => {
   return axios.get(BASE_URL);

@@ -23,7 +23,7 @@ const ReportHistory = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5087/api/GeneratedReport')
+      .get('https://assetflow.azurewebsites.net/api/GeneratedReport')
       .then((response) => {
         setGeneratedReports(response.data);
       })
@@ -51,7 +51,7 @@ const ReportHistory = () => {
   const handleConfirmDelete = () => {
     if (selectedReportId) {
       axios
-        .delete(`http://localhost:5087/api/GeneratedReport/${selectedReportId}`)
+        .delete(`https://assetflow.azurewebsites.net/api/GeneratedReport/${selectedReportId}`)
         .then((response) => {
           console.log(response);
           setGeneratedReports(generatedReports.filter((report) => report.id !== selectedReportId));

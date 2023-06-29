@@ -34,7 +34,7 @@ function AddTaskForm() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/api/AssignTask");
+        const response = await axios.get("https://assetflow.azurewebsites.net/api/AssignTask");
         const data = response.data;
         setTasks(data);
       } catch (error) {
@@ -48,7 +48,7 @@ function AddTaskForm() {
   useEffect(() => {
     const fetchBuildingNames = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/api/Building");
+        const response = await axios.get("https://assetflow.azurewebsites.net/api/Building");
         const data = response.data;
         setBuildingNames(data);
       } catch (error) {
@@ -62,7 +62,7 @@ function AddTaskForm() {
   useEffect(() => {
     const fetchExternalEmployees = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/api/ExternalWorker");
+        const response = await axios.get("https://assetflow.azurewebsites.net/api/ExternalWorker");
         const data = response.data;
         setExternalEmployees(data);
       } catch (error) {
@@ -110,7 +110,7 @@ function AddTaskForm() {
     };
 
     try {
-      const response = await axios.put(`http://localhost:5087/api/AssignTask/${selectedTaskId}`, data);
+      const response = await axios.put(`https://assetflow.azurewebsites.net/api/AssignTask/${selectedTaskId}`, data);
       if (response.status === 200) {
         alert("Task updated successfully!");
         handleCloseModal();

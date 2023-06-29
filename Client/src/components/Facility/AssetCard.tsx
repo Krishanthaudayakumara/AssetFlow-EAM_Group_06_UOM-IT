@@ -26,7 +26,7 @@ function AssetCard({ workstationId, subcategoryCount }: AssetCardProps) {
   const fetchSubCategoryCounts = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5087/api/Workstation/GetItemCountPerSubCategory/${workstationId}`
+        `https://assetflow.azurewebsites.net/api/Workstation/GetItemCountPerSubCategory/${workstationId}`
       );
       setSubCategoryCounts(response.data);
     } catch (error) {

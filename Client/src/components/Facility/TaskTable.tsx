@@ -39,7 +39,7 @@ function TaskTable() {
 
     try {
       const response = await axios.post<TaskTypeData>(
-        "http://localhost:5087/api/AssignTask",
+        "https://assetflow.azurewebsites.net/api/AssignTask",
         {
           taskType: taskTypeInput,
         }
@@ -67,7 +67,7 @@ function TaskTable() {
     const fetchTaskData = async () => {
       try {
         const response = await axios.get<TaskTypeData[]>(
-          "http://localhost:5087/api/AssignTask"
+          "https://assetflow.azurewebsites.net/api/AssignTask"
         );
         setTask(response.data);
       } catch (error) {
@@ -96,7 +96,7 @@ function TaskTable() {
     if (selectedTaskId) {
       try {
         await axios.delete(
-          `http://localhost:5087/api/AssignTask/delete-asset-by-id/${selectedTaskId}`
+          `https://assetflow.azurewebsites.net/api/AssignTask/delete-asset-by-id/${selectedTaskId}`
         );
         const updatedTask = task.filter((t) => t.id !== selectedTaskId);
         setTask(updatedTask);
@@ -127,7 +127,7 @@ function TaskTable() {
   const handleUpdateTask = async () => {
     try {
       await axios.put(
-        `http://localhost:5087/api/AssignTask/TaskType/${selectedTaskId}`,
+        `https://assetflow.azurewebsites.net/api/AssignTask/TaskType/${selectedTaskId}`,
         {
           taskType: editedTaskType,
         }

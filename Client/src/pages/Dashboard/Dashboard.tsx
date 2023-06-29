@@ -52,7 +52,7 @@ const Dashboard: React.FC = () => {
   const [subcategoryTypes, setSubcategoryTypes] = useState<SubCategoryTypeDTO[]>([]);
   useEffect(() => {
     axios
-      .get('http://localhost:5087/MainDashboard/availableEmployeeCount')
+      .get('https://assetflow.azurewebsites.net/MainDashboard/availableEmployeeCount')
       .then((response) => {
         setAvailableEmployeeCount(response.data.availableEmployeeCount);
       })
@@ -61,7 +61,7 @@ const Dashboard: React.FC = () => {
       });
 
     axios
-      .get('http://localhost:5087/ITDashboard/available-agent-count')
+      .get('https://assetflow.azurewebsites.net/ITDashboard/available-agent-count')
       .then((response) => {
         setAvailableAgentCount(response.data.availableAgentCount);
       })
@@ -70,7 +70,7 @@ const Dashboard: React.FC = () => {
       });
 
     axios
-      .get('http://localhost:5087/FacilityDashboard/total-workstations')
+      .get('https://assetflow.azurewebsites.net/FacilityDashboard/total-workstations')
       .then((response) => {
         setTotalWorkstations(response.data.totalWorkstations);
       })
@@ -79,7 +79,7 @@ const Dashboard: React.FC = () => {
       });
 
     axios
-      .get('http://localhost:5087/FacilityDashboard/total-facility-assets')
+      .get('https://assetflow.azurewebsites.net/FacilityDashboard/total-facility-assets')
       .then((response) => {
         setFacilityAssets(response.data.totalFacilityAssets);
       })
@@ -88,7 +88,7 @@ const Dashboard: React.FC = () => {
       });
 
     axios
-      .get('http://localhost:5087/MainDashboard/employee-table')
+      .get('https://assetflow.azurewebsites.net/MainDashboard/employee-table')
       .then((response) => {
         setEmployeeData(response.data);
       })
@@ -97,7 +97,7 @@ const Dashboard: React.FC = () => {
       });
 
     axios
-      .get('http://localhost:5087/MainDashboard/chartFeedback')
+      .get('https://assetflow.azurewebsites.net/MainDashboard/chartFeedback')
       .then((response) => {
         setFeedbackChartData(response.data);
       })
@@ -105,7 +105,7 @@ const Dashboard: React.FC = () => {
         console.error(error);
       });
       axios
-      .get('http://localhost:5087/FacilityDashboard/asset-status')
+      .get('https://assetflow.azurewebsites.net/FacilityDashboard/asset-status')
       .then((response) => {
         setFacilityStatusData(response.data);
       })
@@ -113,7 +113,7 @@ const Dashboard: React.FC = () => {
         console.error(error);
       });
       axios
-      .get('http://localhost:5087/MainDashboard/subcategory-types')
+      .get('https://assetflow.azurewebsites.net/MainDashboard/subcategory-types')
       .then((response) => {
         setSubcategoryTypes(response.data);
       })

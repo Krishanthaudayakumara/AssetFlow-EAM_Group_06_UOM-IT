@@ -27,7 +27,7 @@ const NotificationCenter: React.FC = () => {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5087/api/Notifications"
+          "https://assetflow.azurewebsites.net/api/Notifications"
         );
         setNotifications(response.data);
       } catch (error) {
@@ -58,7 +58,7 @@ const NotificationCenter: React.FC = () => {
   const deleteNotification = async (id: number) => {
     try {
       // Perform deletion API request
-      await axios.delete(`http://localhost:5087/api/Notifications/${id}`);
+      await axios.delete(`https://assetflow.azurewebsites.net/api/Notifications/${id}`);
       setNotifications(
         notifications.filter((notification) => notification.id !== id)
       );

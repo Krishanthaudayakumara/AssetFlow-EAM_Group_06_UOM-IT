@@ -48,7 +48,7 @@ const MyNavbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
         const token = localStorage.getItem("token");
         const decodedToken: any = jwtDecode(token as string);
 
-        let apiUrl = `http://localhost:5087/api/Notifications/UserNotifications/${decodedToken.unique_name}`;
+        let apiUrl = `https://assetflow.azurewebsites.net/api/Notifications/UserNotifications/${decodedToken.unique_name}`;
 
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -72,7 +72,7 @@ const MyNavbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
       const token = localStorage.getItem("token");
       const decodedToken: any = jwtDecode(token as string);
 
-      let apiUrl = `http://localhost:5087/api/Notifications/MarkAsRead?username=${decodedToken.unique_name}&notificationId=${notificationId}`;
+      let apiUrl = `https://assetflow.azurewebsites.net/api/Notifications/MarkAsRead?username=${decodedToken.unique_name}&notificationId=${notificationId}`;
 
       await fetch(apiUrl, {
         method: "PUT",

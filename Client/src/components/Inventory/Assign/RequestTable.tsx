@@ -44,8 +44,8 @@ const EmployeeRequestTable: React.FC = () => {
   const fetchEmployeeRequests = async () => {
     try {
       const [requestsResponse, employeesResponse] = await Promise.all([
-        axios.get<EmployeeRequest[]>("http://localhost:5087/api/EmployeeRequest"),
-        axios.get<Employee[]>("http://localhost:5087/api/Employee"),
+        axios.get<EmployeeRequest[]>("https://assetflow.azurewebsites.net/api/EmployeeRequest"),
+        axios.get<Employee[]>("https://assetflow.azurewebsites.net/api/Employee"),
       ]);
 
       setEmployeeRequests(requestsResponse.data);
@@ -60,7 +60,7 @@ const EmployeeRequestTable: React.FC = () => {
 
   const fetchAssets = async () => {
     try {
-      const response = await axios.get<Asset[]>("http://localhost:5087/api/Asset");
+      const response = await axios.get<Asset[]>("https://assetflow.azurewebsites.net/api/Asset");
       setAssets(response.data);
     } catch (error) {
       console.log(error);
@@ -88,7 +88,7 @@ const EmployeeRequestTable: React.FC = () => {
         return request;
       });
       setEmployeeRequests(updatedRequests);
-      await axios.put(`http://localhost:5087/api/EmployeeRequest/${id}`, {
+      await axios.put(`https://assetflow.azurewebsites.net/api/EmployeeRequest/${id}`, {
         isAccepted: updatedRequests.find((r) => r.id === id)?.isAccepted,
       });
     } catch (error) {

@@ -28,7 +28,7 @@ const AssetAssignmentReport: React.FC<AssetAssignmentReportProps> = ({ fromDate,
 
   const fetchAssetAssignmentReports = async () => {
     try {
-      const response = await axios.get('http://localhost:5087/api/AssetAssignmentReport/asset-assignment-report', {
+      const response = await axios.get('https://assetflow.azurewebsites.net/api/AssetAssignmentReport/asset-assignment-report', {
         params: {
           fromDate: fromDate,
           toDate: toDate,

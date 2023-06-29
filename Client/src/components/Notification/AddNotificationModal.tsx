@@ -40,7 +40,7 @@ interface AddNotificationModalProps {
       formData.append("Image", imageFile);
 
       const response = await axios.post(
-        "http://localhost:5087/api/Notifications",
+        "https://assetflow.azurewebsites.net/api/Notifications",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

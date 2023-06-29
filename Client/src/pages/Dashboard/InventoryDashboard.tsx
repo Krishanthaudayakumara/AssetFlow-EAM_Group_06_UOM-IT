@@ -36,7 +36,7 @@ const InventoryDashboard: React.FC = () => {
   useEffect(() => {
     // Fetch asset count
     axios
-      .get('http://localhost:5087/api/InventoryDashboard/inventory-asset-count')
+      .get('https://assetflow.azurewebsites.net/api/InventoryDashboard/inventory-asset-count')
       .then((response) => {
         setAssetCount(response.data.totalCount);
       })
@@ -46,7 +46,7 @@ const InventoryDashboard: React.FC = () => {
 
     // Fetch category count
     axios
-      .get('http://localhost:5087/api/InventoryDashboard/category-count')
+      .get('https://assetflow.azurewebsites.net/api/InventoryDashboard/category-count')
       .then((response) => {
         setCategoryCount(response.data.totalCategoreyCount);
       })
@@ -56,7 +56,7 @@ const InventoryDashboard: React.FC = () => {
 
     // Fetch subcategory count
     axios
-      .get('http://localhost:5087/api/InventoryDashboard/subcategory-count')
+      .get('https://assetflow.azurewebsites.net/api/InventoryDashboard/subcategory-count')
       .then((response) => {
         setSubCategoryCount(response.data.totalSubCategoryCount);
       })
@@ -68,7 +68,7 @@ const InventoryDashboard: React.FC = () => {
     
     // Fetch subcategory types with counts
     axios
-      .get('http://localhost:5087/api/InventoryDashboard/subcategory-types')
+      .get('https://assetflow.azurewebsites.net/api/InventoryDashboard/subcategory-types')
       .then((response) => {
         const subcategoryData = response.data;
         setCategoryTypes(
@@ -96,7 +96,7 @@ const InventoryDashboard: React.FC = () => {
         console.error('Error fetching subcategory types:', error);
       });
       axios
-      .get('http://localhost:5087/api/InventoryDashboard/category-types')
+      .get('https://assetflow.azurewebsites.net/api/InventoryDashboard/category-types')
       .then((response) => {
         const categoryData = response.data;
         setCategoryTypes(

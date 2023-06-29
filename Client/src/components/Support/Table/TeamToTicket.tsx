@@ -53,7 +53,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
     const fetchTickets = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5087/Api/Ticket/team/${teamId}`
+          `https://assetflow.azurewebsites.net/Api/Ticket/team/${teamId}`
         );
         setTickets(response.data);
       } catch (error) {
@@ -69,7 +69,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/Api/Agent");
+        const response = await axios.get("https://assetflow.azurewebsites.net/Api/Agent");
         setAgents(response.data);
       } catch (error) {
         console.log(error);
@@ -78,7 +78,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
 
     const fetchTeams = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/Api/Team");
+        const response = await axios.get("https://assetflow.azurewebsites.net/Api/Team");
         setTeams(response.data);
       } catch (error) {
         console.log(error);
@@ -120,7 +120,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
     if (selectedTicket && assignedAgentId !== null && selectedStatus) {
       try {
         await axios.put(
-          `http://localhost:5087/Api/Ticket/${selectedTicket.id}`,
+          `https://assetflow.azurewebsites.net/Api/Ticket/${selectedTicket.id}`,
           {
             agentId: assignedAgentId,
             ticketStatus: selectedStatus,
@@ -128,7 +128,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
         );
         // Refresh tickets after successful update
         const response = await axios.get(
-          `http://localhost:5087/Api/Ticket/team/${teamId}`
+          `https://assetflow.azurewebsites.net/Api/Ticket/team/${teamId}`
         );
         setTickets(response.data);
         handleModalClose();
@@ -152,7 +152,7 @@ const TeamToTicket: React.FC<Props> = ({ teamId }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5087/Api/Reply",
+        "https://assetflow.azurewebsites.net/Api/Reply",
         replyToInsert
       );
       console.log(response.data);

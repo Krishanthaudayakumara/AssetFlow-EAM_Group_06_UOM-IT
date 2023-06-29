@@ -1,7 +1,7 @@
 // api.ts
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5087/api/SupplyChain';
+const API_URL = 'https://assetflow.azurewebsites.net/api/SupplyChain';
 
 export const createSupplyChain = async (supplyChainData: any) => {
   try {

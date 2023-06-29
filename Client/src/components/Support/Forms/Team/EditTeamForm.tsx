@@ -37,7 +37,7 @@ const EditTeamForm: React.FC<EditTeamFormProps> = ({
             <Modal.Title>
               <div style={{ margin: "20px 180px" }}>
                 <img
-                  src={`http://localhost:5087/ProfileImages/${selectedTeam.profileImage}`}
+                  src={`https://assetflow.azurewebsites.net/ProfileImages/${selectedTeam.profileImage}`}
                   alt="User profile"
                   className="rounded-circle"
                   style={{ width: "100px", height: "100px" }}

@@ -29,7 +29,7 @@ function Forms() {
   
     try {
       const response = await axios.post(
-        "http://localhost:5087/api/Building",
+        "https://assetflow.azurewebsites.net/api/Building",
         formData
       );
       console.log("form data", formData);

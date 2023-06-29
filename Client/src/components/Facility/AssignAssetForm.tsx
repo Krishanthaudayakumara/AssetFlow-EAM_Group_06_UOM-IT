@@ -26,7 +26,7 @@ function AssignAssetForm(props: AssignAssetFormProps) {
     const fetchSubCategoryAndAsset = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5087/api/FacilityAsset"
+          "https://assetflow.azurewebsites.net/api/FacilityAsset"
         );
 
         const data = response.data;
@@ -87,7 +87,7 @@ function AssignAssetForm(props: AssignAssetFormProps) {
       };
 
       await axios.put(
-        `http://localhost:5087/api/FacilityAsset/${selectedFacilityAsset.facilityAssetId}`,
+        `https://assetflow.azurewebsites.net/api/FacilityAsset/${selectedFacilityAsset.facilityAssetId}`,
         updateData
       );
 

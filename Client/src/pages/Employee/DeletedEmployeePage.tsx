@@ -13,7 +13,7 @@ const DeletedEmployeePage: React.FC = () => {
 
   const fetchDeletedEmployees = () => {
     axios
-      .get("http://localhost:5087/api/Employee/deleted")
+      .get("https://assetflow.azurewebsites.net/api/Employee/deleted")
       .then((res) => {
         setDeletedEmployees(res.data);
       })
@@ -25,7 +25,7 @@ const DeletedEmployeePage: React.FC = () => {
 
   const restoreEmployee = (employee: Employee) => {
     axios
-      .put(`http://localhost:5087/api/Employee/restore/${employee.id}`)
+      .put(`https://assetflow.azurewebsites.net/api/Employee/restore/${employee.id}`)
       .then(() => {
         fetchDeletedEmployees();
       })
@@ -38,7 +38,7 @@ const DeletedEmployeePage: React.FC = () => {
   const permanentlyDeleteEmployee = (employee: Employee) => {
     if (window.confirm("Are you sure you want to permanently delete this employee?")) {
       axios
-        .delete(`http://localhost:5087/api/Employee/${employee.id}/permanently`)
+        .delete(`https://assetflow.azurewebsites.net/api/Employee/${employee.id}/permanently`)
         .then(() => {
           fetchDeletedEmployees();
         })

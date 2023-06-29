@@ -43,7 +43,7 @@ const EditAgentForm: React.FC<EditAgentFormProps> = ({
             <Modal.Title>
               <div style={{ margin: "20px 180px" }}>
                 <img
-                  src={`http://localhost:5087/ProfileImages/${selectedAgent.profileImage}`}
+                  src={`https://assetflow.azurewebsites.net/ProfileImages/${selectedAgent.profileImage}`}
                   alt="User profile"
                   className="rounded-circle"
                   style={{ width: "100px", height: "100px" }}

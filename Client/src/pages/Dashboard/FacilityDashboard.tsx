@@ -20,7 +20,7 @@ const FacilityDashboard: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5087/FacilityDashboard/total-buildings')
+      .get('https://assetflow.azurewebsites.net/FacilityDashboard/total-buildings')
       .then((response) => {
         setTotalBuildings(response.data.totalBuildings);
       })
@@ -29,7 +29,7 @@ const FacilityDashboard: React.FC = () => {
       });
 
     axios
-      .get('http://localhost:5087/FacilityDashboard/total-facility-assets')
+      .get('https://assetflow.azurewebsites.net/FacilityDashboard/total-facility-assets')
       .then((response) => {
         setFacilityAssets(response.data.totalFacilityAssets);
       })
@@ -38,7 +38,7 @@ const FacilityDashboard: React.FC = () => {
       });
 
     axios
-      .get('http://localhost:5087/FacilityDashboard/total-workstations')
+      .get('https://assetflow.azurewebsites.net/FacilityDashboard/total-workstations')
       .then((response) => {
         setTotalWorkstations(response.data.totalWorkstations);
       })
@@ -47,7 +47,7 @@ const FacilityDashboard: React.FC = () => {
       });
 
     axios
-      .get('http://localhost:5087/FacilityDashboard/asset-status')
+      .get('https://assetflow.azurewebsites.net/FacilityDashboard/asset-status')
       .then((response) => {
         setAssetStatusCounts(response.data);
       })
@@ -55,7 +55,7 @@ const FacilityDashboard: React.FC = () => {
         console.error(error);
       });
       axios
-      .get('http://localhost:5087/FacilityDashboard')
+      .get('https://assetflow.azurewebsites.net/FacilityDashboard')
       .then((response) => {
         const assignData = response.data.find((item: any) => item.assignmentStatus === 'Assign');
         const notAssignData = response.data.find((item: any) => item.assignmentStatus === 'Not Assign');

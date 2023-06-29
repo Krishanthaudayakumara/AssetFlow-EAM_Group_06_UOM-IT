@@ -29,7 +29,7 @@ function FacilityAssetStock() {
   useEffect(() => {
     const fetchFacilityAssetStockData = async () => {
       try {
-        const response = await axios.get<FacilityStockData[]>("http://localhost:5087/api/FacilityAsset");
+        const response = await axios.get<FacilityStockData[]>("https://assetflow.azurewebsites.net/api/FacilityAsset");
         setFacilityStockData(response.data);
       } catch (error) {
         alert(error);
@@ -53,7 +53,7 @@ function FacilityAssetStock() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5087/api/FacilityAsset');
+      const response = await axios.post('https://assetflow.azurewebsites.net/api/FacilityAsset');
      
       if (response.data === true) {
         console.log('Facility created successfully!');

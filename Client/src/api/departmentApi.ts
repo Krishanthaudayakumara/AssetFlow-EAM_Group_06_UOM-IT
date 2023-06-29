@@ -10,7 +10,7 @@ interface Department {
 
 const fetchDepartments = (): Promise<Department[]> => {
   return axios
-    .get<Department[]>("http://localhost:5087/api/Departments")
+    .get<Department[]>("https://assetflow.azurewebsites.net/api/Departments")
     .then((res) => {
       const data = res.data;
       const departments = data.map((department) => ({
@@ -28,7 +28,7 @@ const fetchDepartments = (): Promise<Department[]> => {
 
 const addDepartment = (department: Department): Promise<void> => {
   return axios
-    .post("http://localhost:5087/api/Departments", department)
+    .post("https://assetflow.azurewebsites.net/api/Departments", department)
     .then(() => {
       // Do nothing, as the departments will be refetched separately
     })
@@ -40,7 +40,7 @@ const addDepartment = (department: Department): Promise<void> => {
 
 const editDepartment = (department: Department, fetchDepartments: () => void): Promise<void> => {
   return axios
-    .put(`http://localhost:5087/api/Departments/${department.id}`, department)
+    .put(`https://assetflow.azurewebsites.net/api/Departments/${department.id}`, department)
     .then(() => {
       // Do nothing, as the departments will be refetched separately
     })
@@ -53,7 +53,7 @@ const editDepartment = (department: Department, fetchDepartments: () => void): P
 const deleteDepartment = (department: Department, fetchDepartments: () => void): Promise<void> => {
   if (window.confirm("Are you sure you want to delete this department?")) {
     return axios
-      .delete(`http://localhost:5087/api/Departments/${department.id}`)
+      .delete(`https://assetflow.azurewebsites.net/api/Departments/${department.id}`)
       .then(() => {
         // Do nothing, as the departments will be refetched separately
       })

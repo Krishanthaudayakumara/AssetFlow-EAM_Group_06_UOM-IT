@@ -20,7 +20,7 @@ function RequestForm() {
     try {
       // Send a POST request to the API endpoint using axios
       const response = await axios.post(
-        "http://localhost:5087/api/Asset/request",
+        "https://assetflow.azurewebsites.net/api/Asset/request",
         formData
       );
 

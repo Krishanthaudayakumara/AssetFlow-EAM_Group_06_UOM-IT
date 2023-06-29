@@ -44,7 +44,7 @@ export default function Work1() {
   useEffect(() => {
     const fetchWorkstationData = async () => {
       try {
-        const response = await axios.get<WorkstationData[]>("http://localhost:5087/api/Workstation");
+        const response = await axios.get<WorkstationData[]>("https://assetflow.azurewebsites.net/api/Workstation");
         setWorkArr(response.data);
       } catch (error) {
         alert(error);
@@ -53,7 +53,7 @@ export default function Work1() {
 
     const fetchBuildingData = async () => {
       try {
-        const response = await axios.get<BuildingData[]>("http://localhost:5087/api/Building");
+        const response = await axios.get<BuildingData[]>("https://assetflow.azurewebsites.net/api/Building");
         setBuildings(response.data);
       } catch (error) {
         alert(error);

@@ -28,7 +28,7 @@ function FacilityAssetTable() {
     const fetchFacilityAssetData = async () => {
       try {
         const response = await axios.get<FacilityAssetData[]>(
-          "http://localhost:5087/api/FacilityAsset/GetAllFacilityAssets"
+          "https://assetflow.azurewebsites.net/api/FacilityAsset/GetAllFacilityAssets"
         );
         console.log(response);
         setFacilityData(response.data);
@@ -53,7 +53,7 @@ function FacilityAssetTable() {
     if (selectedAssetId && selectedStatus) {
       try {
         await axios.put(
-          `http://localhost:5087/api/FacilityAsset/update/${selectedAssetId}`,
+          `https://assetflow.azurewebsites.net/api/FacilityAsset/update/${selectedAssetId}`,
           { assetConditionStatus: selectedStatus }
         );
         setSuccess(true);

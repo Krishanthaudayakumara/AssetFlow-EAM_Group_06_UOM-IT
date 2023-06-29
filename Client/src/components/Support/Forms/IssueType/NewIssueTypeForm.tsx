@@ -25,7 +25,7 @@ const NewIssueTypeForm: React.FC<Props> = ({ handleClose }) => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:5087/Api/IssueType",
+        "https://assetflow.azurewebsites.net/Api/IssueType",
         formData
       );
       console.log(response.data);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5087/api/ExternalWorkers';
+const API_BASE_URL = 'https://assetflow.azurewebsites.net/api/ExternalWorkers';
 
 export const getExternalWorkers = (includeDeleted: boolean) => {
   return axios.get(`${API_BASE_URL}?includeDeleted=${includeDeleted}`, {

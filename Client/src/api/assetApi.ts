@@ -34,7 +34,7 @@ interface EditAsset {
   }
 
 
-const BASE_URL = 'http://localhost:5087/api/Asset';
+const BASE_URL = 'https://assetflow.azurewebsites.net/api/Asset';
 
 
 const AssetAPI = {

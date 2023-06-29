@@ -36,7 +36,7 @@ const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
   useEffect(() => {
     const fetchIssueTypes = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/Api/IssueType");
+        const response = await axios.get("https://assetflow.azurewebsites.net/Api/IssueType");
         setIssueTypes(response.data);
       } catch (error) {
         console.log(error);
@@ -52,7 +52,7 @@ const NewTicketForm: React.FC<NewTicketFormProps> = ({ setShowModal }) => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:5087/Api/Ticket",
+        "https://assetflow.azurewebsites.net/Api/Ticket",
         formData
       );
       console.log(response.data);

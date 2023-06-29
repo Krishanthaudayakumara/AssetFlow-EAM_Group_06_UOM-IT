@@ -31,7 +31,7 @@ const NewTeamForm = () => {
 
   useEffect(() => {
     const fetchIssueTypes = async () => {
-      const response = await axios.get("http://localhost:5087/Api/IssueType");
+      const response = await axios.get("https://assetflow.azurewebsites.net/Api/IssueType");
       setIssueTypes(response.data);
     };
     fetchIssueTypes();
@@ -55,7 +55,7 @@ const NewTeamForm = () => {
         formDataWithImage.append("profileImage", formData.image);
       }
       const response = await axios.post(
-        "http://localhost:5087/Api/Team",
+        "https://assetflow.azurewebsites.net/Api/Team",
         formDataWithImage,
         {
           headers: {

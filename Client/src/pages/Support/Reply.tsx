@@ -29,7 +29,7 @@ const [agents, setAgents] = useState<any[]>([]);
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await axios.get(`http://localhost:5087/Api/Ticket/team/${teamId}`);
+        const response = await axios.get(`https://assetflow.azurewebsites.net/Api/Ticket/team/${teamId}`);
         setTickets(response.data);
       } catch (error) {
         console.log(error);
@@ -44,7 +44,7 @@ const [agents, setAgents] = useState<any[]>([]);
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/Api/Agent");
+        const response = await axios.get("https://assetflow.azurewebsites.net/Api/Agent");
         setAgents(response.data);
       } catch (error) {
         console.log(error);

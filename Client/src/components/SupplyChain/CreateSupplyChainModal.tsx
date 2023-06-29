@@ -64,7 +64,7 @@ const CreateSupplyChainModal: React.FC<CreateSupplyChainModalProps> = ({
   const fetchAvailableAssetNames = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5087/api/Asset/summary"
+        "https://assetflow.azurewebsites.net/api/Asset/summary"
       );
       const responseData = response.data;
       const assetNames = responseData.map((asset: any) => asset.assetName);

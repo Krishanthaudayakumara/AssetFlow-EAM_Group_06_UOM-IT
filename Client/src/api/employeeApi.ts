@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Employee } from "../types";
 
-const API_URL = "http://localhost:5087/api/Employee";
+const API_URL = "https://assetflow.azurewebsites.net/api/Employee";
 
 export const getEmployees = async (): Promise<Employee[]> => {
   try {

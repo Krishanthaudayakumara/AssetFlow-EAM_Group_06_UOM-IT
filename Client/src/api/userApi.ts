@@ -1,7 +1,7 @@
 import axios from "axios";
 import { User } from "../types";
 
-const API_URL = "http://localhost:5087/api/auth";
+const API_URL = "https://assetflow.azurewebsites.net/api/auth";
 
 const getToken = (): string | null => localStorage.getItem("token");
 

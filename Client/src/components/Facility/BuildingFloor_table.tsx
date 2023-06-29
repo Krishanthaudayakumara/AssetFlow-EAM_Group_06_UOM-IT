@@ -35,7 +35,7 @@ function BuildingFloorTable() {
     const fetchBuildingData = async () => {
       try {
         const response = await axios.get<BuildingData[]>(
-          "http://localhost:5087/api/Building"
+          "https://assetflow.azurewebsites.net/api/Building"
         );
         setBuildingData(response.data);
       } catch (error) {
@@ -65,7 +65,7 @@ function BuildingFloorTable() {
 
   const handleSave = () => {
     axios
-      .put(`http://localhost:5087/api/Building/${editData?.id}`, editData)
+      .put(`https://assetflow.azurewebsites.net/api/Building/${editData?.id}`, editData)
       .then(() => {
         setBuildingData((prevState) =>
           prevState.map((row) => {
@@ -95,7 +95,7 @@ function BuildingFloorTable() {
   const handleConfirmDelete = () => {
     axios
       .delete(
-        `http://localhost:5087/api/Building/delete-asset-by-id/${deleteId}`
+        `https://assetflow.azurewebsites.net/api/Building/delete-asset-by-id/${deleteId}`
       )
       .then((response) => {
         setBuildingData((prevState) =>

@@ -38,7 +38,7 @@ const AssetCard: React.FC<CardComponentProps> = ({ assets }) => {
           EmployeeId: employeeId,
           AssetId: selectedAsset.id
         };
-        const response = await axios.post('http://localhost:5087/api/EmployeeRequest', employeeRequestDto);
+        const response = await axios.post('https://assetflow.azurewebsites.net/api/EmployeeRequest', employeeRequestDto);
         // Handle successful response, e.g., show success message or update state
         console.log(response.data);
       } catch (error) {

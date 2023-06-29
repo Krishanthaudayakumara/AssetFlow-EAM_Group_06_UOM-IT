@@ -38,7 +38,7 @@ const NewAgentForm = () => {
 
   useEffect(() => {
     const fetchTeams = async () => {
-      const response = await axios.get("http://localhost:5087/Api/Team");
+      const response = await axios.get("https://assetflow.azurewebsites.net/Api/Team");
       setTeams(response.data);
     };
     fetchTeams();
@@ -64,7 +64,7 @@ const NewAgentForm = () => {
         formDataWithImage.append("profileImage", formData.image);
       }
       const response = await axios.post(
-        "http://localhost:5087/Api/Agent",
+        "https://assetflow.azurewebsites.net/Api/Agent",
         formDataWithImage,
         {
           headers: {

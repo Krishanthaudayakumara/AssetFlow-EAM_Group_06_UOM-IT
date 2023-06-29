@@ -25,7 +25,7 @@ const BuildingReport: React.FC<BuildingReportProps> = ({  }) => {
 
   const fetchBuildingReports = async () => {
     try {
-      const response = await axios.get('http://localhost:5087/api/BuildingInventoryReport/building-inventory-report');
+      const response = await axios.get('https://assetflow.azurewebsites.net/api/BuildingInventoryReport/building-inventory-report');
       setBuildingReports(response.data);
     } catch (error) {
       console.log(error);

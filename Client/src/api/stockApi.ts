@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:5087/api/Stock';
+const baseUrl = 'https://assetflow.azurewebsites.net/api/Stock';
 
 export const getStock = () => {
   return axios.get(baseUrl);

@@ -37,7 +37,7 @@ function FacilityAssetForm() {
     e.preventDefault();
     try {
       console.log("form data", formData);
-      const response = await axios.post("http://localhost:5087/api/FacilityAsset/FacilityAsset", formData);
+      const response = await axios.post("https://assetflow.azurewebsites.net/api/FacilityAsset/FacilityAsset", formData);
 
       console.log(response.data);
       setFormData({

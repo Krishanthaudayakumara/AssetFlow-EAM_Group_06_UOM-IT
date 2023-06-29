@@ -49,7 +49,7 @@ const AgentTable = () => {
 
   useEffect(() => {
     const fetchTeams = async () => {
-      const response = await axios.get("http://localhost:5087/Api/Team");
+      const response = await axios.get("https://assetflow.azurewebsites.net/Api/Team");
       setTeams(response.data);
     };
     fetchTeams();
@@ -57,7 +57,7 @@ const AgentTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5087/Api/Agent")
+      .get("https://assetflow.azurewebsites.net/Api/Agent")
       .then((response) => {
         setAgents(response.data);
       })
@@ -78,7 +78,7 @@ const AgentTable = () => {
   const handleUpdateAgent = () => {
     axios
       .put(
-        `http://localhost:5087/Api/Agent/${selectedAgent?.id}`,
+        `https://assetflow.azurewebsites.net/Api/Agent/${selectedAgent?.id}`,
         selectedAgent
       )
       .then((response) => {
@@ -102,7 +102,7 @@ const AgentTable = () => {
 
   const confirmDeleteAgent = () => {
     axios
-      .delete(`http://localhost:5087/Api/Agent/${deletingAgent?.id}`)
+      .delete(`https://assetflow.azurewebsites.net/Api/Agent/${deletingAgent?.id}`)
       .then((response) => {
         setAgents(agents.filter((item) => item.id !== deletingAgent?.id));
       })
@@ -208,7 +208,7 @@ const AgentTable = () => {
                           <tr key={agent.id}>
                             <td>
                               <img
-                                src={`http://localhost:5087/ProfileImages/${agent.profileImage}`}
+                                src={`https://assetflow.azurewebsites.net/ProfileImages/${agent.profileImage}`}
                                 alt="User profile"
                                 className="rounded-circle"
                                 style={{

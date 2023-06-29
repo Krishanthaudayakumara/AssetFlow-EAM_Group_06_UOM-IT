@@ -23,7 +23,7 @@ const WarrantyExpirationReport: React.FC<WarrantyExpirationReportProps> = ({ fro
     
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5087/api/WarrantyExpirationReport/warranty-expiration');
+        const response = await axios.get('https://assetflow.azurewebsites.net/api/WarrantyExpirationReport/warranty-expiration');
         const data = response.data;
     
         if (fromDate && toDate) {

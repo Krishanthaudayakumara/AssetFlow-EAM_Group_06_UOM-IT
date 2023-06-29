@@ -23,7 +23,7 @@ const AgentReport: React.FC<AgentReportProps> = ({ fromDate, toDate }) => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5087/api/SupportAgentReport')
+      .get('https://assetflow.azurewebsites.net/api/SupportAgentReport')
       .then((response) => {
         const data = response.data.filter((agent: Agent) => {
           const agentJoinDate = new Date(agent.joinDate);

@@ -38,7 +38,7 @@ const EmployeeRequest: React.FC = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5087/api/EmployeeRequest/categories"
+        "https://assetflow.azurewebsites.net/api/EmployeeRequest/categories"
       );
       setCategories(response.data);
     } catch (error) {
@@ -49,7 +49,7 @@ const EmployeeRequest: React.FC = () => {
   const fetchSubCategories = async (categoryId: number) => {
     try {
       const response = await axios.get(
-        `http://localhost:5087/api/EmployeeRequest/subcategories/${categoryId}`
+        `https://assetflow.azurewebsites.net/api/EmployeeRequest/subcategories/${categoryId}`
       );
       setSubCategories(response.data);
       setSelectedCategory(
@@ -64,7 +64,7 @@ const EmployeeRequest: React.FC = () => {
   const fetchAssets = async (subcategoryId: number) => {
     try {
       const response = await axios.get(
-        `http://localhost:5087/api/EmployeeRequest/assets/${subcategoryId}`
+        `https://assetflow.azurewebsites.net/api/EmployeeRequest/assets/${subcategoryId}`
       );
       const assetsData = response.data;
       const uniqueAssets = [];

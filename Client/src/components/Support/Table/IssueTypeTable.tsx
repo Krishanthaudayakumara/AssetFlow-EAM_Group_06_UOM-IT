@@ -36,7 +36,7 @@ const IssueTypeTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/Api/IssueType");
+        const response = await axios.get("https://assetflow.azurewebsites.net/Api/IssueType");
         setIssues(response.data);
       } catch (error) {
         alert(error);
@@ -54,7 +54,7 @@ const IssueTypeTable = () => {
   const handleUpdateIssue = () => {
     axios
       .put(
-        `http://localhost:5087/Api/IssueType/${selectedIssue?.id}`,
+        `https://assetflow.azurewebsites.net/Api/IssueType/${selectedIssue?.id}`,
         selectedIssue
       )
       .then((response) => {
@@ -83,7 +83,7 @@ const IssueTypeTable = () => {
 
   const confirmDeleteIssue = () => {
     axios
-      .delete(`http://localhost:5087/Api/IssueType/${deletingIssue?.id}`)
+      .delete(`https://assetflow.azurewebsites.net/Api/IssueType/${deletingIssue?.id}`)
       .then((response) => {
         setIssues(issues.filter((item) => item.id !== deletingIssue?.id));
       })

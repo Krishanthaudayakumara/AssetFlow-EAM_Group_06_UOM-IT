@@ -24,7 +24,7 @@ function WorkstationForm() {
   useEffect(() => {
     const fetchBuildingNames = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/api/Building");
+        const response = await axios.get("https://assetflow.azurewebsites.net/api/Building");
         const data = response.data;
         setBuildingName(data);
       } catch (error) {
@@ -97,7 +97,7 @@ function WorkstationForm() {
 
     try {
       // Check if the workstation name already exists on the server
-      const response = await axios.get("http://localhost:5087/api/Workstation", {
+      const response = await axios.get("https://assetflow.azurewebsites.net/api/Workstation", {
         params: {
           buildingId: selectedBuildingName,
           floor: floornum,
@@ -113,7 +113,7 @@ function WorkstationForm() {
 
       // If workstation name doesn't exist, add it to the server
       const addWorkstationResponse = await axios.post(
-        "http://localhost:5087/api/Workstation",
+        "https://assetflow.azurewebsites.net/api/Workstation",
         {
           workstationName: workstationName,
           floor: parseInt(floornum),

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Supplier } from "../types";
 
-const BASE_URL = "http://localhost:5087/api/Suppliers";
+const BASE_URL = "https://assetflow.azurewebsites.net/api/Suppliers";
 
 export const fetchSuppliers = async (): Promise<Supplier[]> => {
   try {

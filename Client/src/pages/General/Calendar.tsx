@@ -7,7 +7,7 @@ const Calendar = () => {
   
     useEffect(() => {
       // Fetch events from backend and set to state
-      const fetchedEvents = fetch('http://localhost:5087/api/Events')
+      const fetchedEvents = fetch('https://assetflow.azurewebsites.net/api/Events')
         .then(response => response.json())
         .then(data => setEvents(data));
     }, []);

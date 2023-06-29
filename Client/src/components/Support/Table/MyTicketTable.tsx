@@ -59,7 +59,7 @@ const MyTicketTable = () => {
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/Api/Agent");
+        const response = await axios.get("https://assetflow.azurewebsites.net/Api/Agent");
         setAgents(response.data);
       } catch (error) {
         console.log(error);
@@ -70,7 +70,7 @@ const MyTicketTable = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/Api/Employee");
+        const response = await axios.get("https://assetflow.azurewebsites.net/Api/Employee");
         setEmployees(response.data);
       } catch (error) {
         console.log(error);
@@ -81,7 +81,7 @@ const MyTicketTable = () => {
   useEffect(() => {
     const fetchIssueTypes = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/Api/IssueType");
+        const response = await axios.get("https://assetflow.azurewebsites.net/Api/IssueType");
         setIssueTypes(response.data);
       } catch (error) {
         console.log(error);
@@ -93,7 +93,7 @@ const MyTicketTable = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await axios.get("http://localhost:5087/Api/Ticket");
+        const response = await axios.get("https://assetflow.azurewebsites.net/Api/Ticket");
         setTickets(response.data);
       } catch (error) {
         console.log(error);
@@ -126,7 +126,7 @@ const MyTicketTable = () => {
 
   const confirmDeleteTicket = () => {
     axios
-      .delete(`http://localhost:5087/Api/Ticket/${deletingTicket?.id}`)
+      .delete(`https://assetflow.azurewebsites.net/Api/Ticket/${deletingTicket?.id}`)
       .then((response) => {
         setTickets(tickets.filter((item) => item.id !== deletingTicket?.id));
       })
@@ -153,7 +153,7 @@ const MyTicketTable = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5087/Api/Feedback",
+        "https://assetflow.azurewebsites.net/Api/Feedback",
         feedbackToInsert
       );
       console.log(response.data);

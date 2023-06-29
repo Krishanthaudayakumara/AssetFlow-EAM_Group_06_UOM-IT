@@ -43,13 +43,13 @@ function AssigningCleaningStaff() {
     const fetchTasks = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5087/api/AssignTask"
+          "https://assetflow.azurewebsites.net/api/AssignTask"
         );
         const data = response.data;
         const updatedTasks = await Promise.all(
           data.map(async (task: AssignTaskData) => {
             const buildingResponse = await axios.get(
-              `http://localhost:5087/api/Building/${task.buildingId}`
+              `https://assetflow.azurewebsites.net/api/Building/${task.buildingId}`
             );
             const buildingData: BuildingData = buildingResponse.data;
             return { ...task, buildingName: buildingData.buildingName };
@@ -64,7 +64,7 @@ function AssigningCleaningStaff() {
     const fetchExternalWorkers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5087/api/ExternalWorker"
+          "https://assetflow.azurewebsites.net/api/ExternalWorker"
         );
         const data = response.data;
         setExternalWorkers(data);
@@ -96,7 +96,7 @@ function AssigningCleaningStaff() {
     try {
       if (selectedTaskId) {
         await axios.put(
-          `http://localhost:5087/api/AssignTask/Task/${selectedTaskId}`,
+          `https://assetflow.azurewebsites.net/api/AssignTask/Task/${selectedTaskId}`,
           {
             taskStatus: "Completed"
           }

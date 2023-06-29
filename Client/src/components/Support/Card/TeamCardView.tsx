@@ -46,7 +46,7 @@ const TeamCardView = ({
             
           <Card.Img
             variant="top"
-            src={`http://localhost:5087/ProfileImages/${team.profileImage}`}
+            src={`https://assetflow.azurewebsites.net/ProfileImages/${team.profileImage}`}
             alt="User profile"
             className=" agent-image"
             onClick={() => onTeamClick(team)}

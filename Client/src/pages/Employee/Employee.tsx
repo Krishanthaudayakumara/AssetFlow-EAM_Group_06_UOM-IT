@@ -45,7 +45,7 @@ const EmployeePage: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5087/api/Employee/upload",
+        "https://assetflow.azurewebsites.net/api/Employee/upload",
         formData
       );
       console.log(response.data); // Employees uploaded successfully
@@ -63,7 +63,7 @@ const EmployeePage: React.FC = () => {
   const downloadSample = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5087/api/Employee/download/sample",
+        "https://assetflow.azurewebsites.net/api/Employee/download/sample",
         {
           responseType: "blob",
         }
@@ -89,7 +89,7 @@ const EmployeePage: React.FC = () => {
 
   const fetchEmployees = () => {
     axios
-      .get("http://localhost:5087/api/Employee")
+      .get("https://assetflow.azurewebsites.net/api/Employee")
       .then((res) => {
         const data = res.data;
         const employees = data.map((employee: any) => ({
@@ -120,7 +120,7 @@ const EmployeePage: React.FC = () => {
 
   const handleAddEmployee = (employee: Employee) => {
     axios
-      .post("http://localhost:5087/api/Employee", employee)
+      .post("https://assetflow.azurewebsites.net/api/Employee", employee)
       .then(() => {
         fetchEmployees();
         setShowAddModal(false);
@@ -148,7 +148,7 @@ const EmployeePage: React.FC = () => {
 
   const handleEditEmployee = (employee: Employee) => {
     axios
-      .put(`http://localhost:5087/api/Employee/${employee.id}`, employee)
+      .put(`https://assetflow.azurewebsites.net/api/Employee/${employee.id}`, employee)
       .then(() => {
         fetchEmployees();
         setShowEditModal(false);
@@ -176,7 +176,7 @@ const EmployeePage: React.FC = () => {
   const confirmDeleteEmployee = () => {
     if (employeeToDelete) {
       axios
-        .delete(`http://localhost:5087/api/Employee/${employeeToDelete.id}`)
+        .delete(`https://assetflow.azurewebsites.net/api/Employee/${employeeToDelete.id}`)
         .then(() => {
           fetchEmployees();
           setShowDeleteConfirmation(false);
@@ -198,7 +198,7 @@ const EmployeePage: React.FC = () => {
 
   const downloadExcel = () => {
     axios({
-      url: "http://localhost:5087/api/Employee/export",
+      url: "https://assetflow.azurewebsites.net/api/Employee/export",
       method: "GET",
       responseType: "blob",
     })

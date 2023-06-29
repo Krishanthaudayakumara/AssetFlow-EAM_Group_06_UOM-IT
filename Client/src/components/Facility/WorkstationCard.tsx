@@ -34,7 +34,7 @@ export default function WorkstationCard(props: WorkstationProp) {
   const fetchSubcategoryCount = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5087/api/Workstation/GetSubCategoryCount/${props.id}`
+        `https://assetflow.azurewebsites.net/api/Workstation/GetSubCategoryCount/${props.id}`
       );
       setSubcategoryCount(response.data);
     } catch (error) {
@@ -57,7 +57,7 @@ export default function WorkstationCard(props: WorkstationProp) {
   const handleConfirmDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:5087/api/Workstation/delete-asset-by-id/${props.id}`
+        `https://assetflow.azurewebsites.net/api/Workstation/delete-asset-by-id/${props.id}`
       );
 
       setShowConfirmModal(false);
@@ -96,7 +96,7 @@ export default function WorkstationCard(props: WorkstationProp) {
   const handleUpdateWorkstationNameSubmit = async () => {
     try {
       await axios.put(
-        `http://localhost:5087/api/Workstation/${props.id}`,
+        `https://assetflow.azurewebsites.net/api/Workstation/${props.id}`,
         { workstationName: updateWorkstationName }
       );
       // Close the update modal and refresh the page
