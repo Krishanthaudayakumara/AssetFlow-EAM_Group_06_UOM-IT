@@ -14,20 +14,20 @@ namespace Server.Services
             {
                 Host = "smtp.office365.com", // Your SMTP server
                 Port = 587, // Your SMTP port
-                Credentials = new NetworkCredential("assetflow.me@outlook.com", "#StingPirates11"),
+                Credentials = new NetworkCredential("email", "password"),
                 EnableSsl = true
             };
         }
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            var mailMessage = new MailMessage("assetflow.me@outlook.com", email, subject, message);
+            var mailMessage = new MailMessage("email", email, subject, message);
             await _smtpClient.SendMailAsync(mailMessage);
         }
 
         public async Task SendEmailAsync(string email, string subject, string message, bool isHtml)
         {
-            var mailMessage = new MailMessage("assetflow.me@outlook.com", email, subject, message)
+            var mailMessage = new MailMessage("email", email, subject, message)
             {
                 IsBodyHtml = isHtml
             };
