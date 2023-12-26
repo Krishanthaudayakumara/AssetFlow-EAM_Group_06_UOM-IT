@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {}
+    "C:\\Users\\udaya\\Documents\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {}
   },
   "projects": {
-    "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {
+    "C:\\Users\\udaya\\Documents\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+        "projectUniqueName": "C:\\Users\\udaya\\Documents\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
-        "packagesPath": "C:\\Users\\Krishantha\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
+        "projectPath": "C:\\Users\\udaya\\Documents\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\Server.csproj",
+        "packagesPath": "C:\\Users\\udaya\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\udaya\\Documents\\Github\\AssetFlow-EAM_Group_06_UOM-IT\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Krishantha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\udaya\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -118,6 +118,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[7.0.14, 7.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -126,7 +144,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.107\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
